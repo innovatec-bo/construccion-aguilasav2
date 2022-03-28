@@ -248,61 +248,85 @@ return [
         //     'can'  => 'manage-blog',
         // ],
         [
-            'text'        => 'pages',
+            'text'        => 'Home',
             'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'icon'        => 'fas fa-fw fa-home',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text'        => 'Dashboard',
+            'url'         => 'admin/pages',
+            'icon'        => 'fas fa-fw fa-tachometer',
         ],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
+            'text'        => 'Workflow',
+            'url'         => 'admin/pages',
+            'icon'        => 'fas fa-fw fa-table',
         ],
+        [
+            'text'        => 'Habilitar linea de procesos',
+            'url'         => 'admin/pages',
+            'icon'        => 'fas fa-fw fa-table',
+        ],
+        [
+            'text'        => 'Cerrar mes',
+            'url'         => 'admin/pages',
+            'icon'        => 'fas fa-fw fa-table',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'url'         => 'admin/pages',
+                    'icon'        => 'fas fa-fw fa-table',
+                ]       
+            ]
+        ],
+        [
+            'text'        => 'Asignacion de fiscales',
+            'url'         => 'admin/pages',
+            'icon'        => 'fas fa-fw fa-table',
+        ],
+        [
+            'text'        => 'Observaciones externas',
+            'url'         => 'admin/pages',
+            'icon'        => 'fas fa-fw fa-table',
+        ],
+        [
+            'text'        => 'Plan de trabajo',
+            'url'         => 'admin/pages',
+            'icon'        => 'fas fa-fw fa-table',
+        ],
+        [
+            'text'        => 'Usuarios',
+            'icon'        => 'fas fa-fw fa-table',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'url'         => 'admin/pages',
+                    'icon'        => 'fas fa-fw fa-table',
+                ]       
+            ]
+        ],
+        [
+            'text'        => 'Proyectos',
+            'icon'        => 'fas fa-fw fa-table',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'url'         => 'admin/pages',
+                    'icon'        => 'fas fa-fw fa-table',
+                ],
+                [
+                    'text'        => 'Mapa',
+                    'url'         => 'admin/pages',
+                    'icon'        => 'fas fa-fw fa-table',
+                ],
+                [
+                    'text'        => 'Crear proyecto',
+                    'url'         => 'admin/pages',
+                    'icon'        => 'fas fa-fw fa-table',
+                ]       
+            ]
+        ],
+        
         ['header' => 'labels'],
         [
             'text'       => 'important',
