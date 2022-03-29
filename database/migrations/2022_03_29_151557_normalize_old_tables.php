@@ -78,6 +78,14 @@ class NormalizeOldTables extends Migration
      */
     public function up()
     {
+        Schema::table('bui_building_structures', function (Blueprint $table) {
+            $table->smallInteger('deleted_bus')->nullable()->change();
+        });
+
+        Schema::table('sec_executive_summary_log', function (Blueprint $table) {
+            $table->smallInteger('deleted_esl')->nullable()->change();
+        });
+
         foreach ($this->_oldTables as $oldTable) 
         {
             Schema::table($oldTable, function(Blueprint $table) {
