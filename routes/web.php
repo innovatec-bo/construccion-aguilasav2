@@ -12,4 +12,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
 
-Auth::routes(['register' => false]);
+Auth::routes();
