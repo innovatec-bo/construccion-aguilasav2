@@ -17,10 +17,10 @@
     <form action="{{ $register_url }}" method="post">
         @csrf
 
-        {{-- Name field --}}
+        {{-- First Name field --}}
         <div class="input-group mb-3">
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                   value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
+            <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror"
+                   value="{{ old('first_name') }}" placeholder="{{ __('adminlte::adminlte.first_name') }}" autofocus>
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -28,12 +28,31 @@
                 </div>
             </div>
 
-            @error('name')
+            @error('first_name')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
         </div>
+
+        {{-- Last Name field --}}
+        <div class="input-group mb-3">
+            <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror"
+                value="{{ old('last_name') }}" placeholder="{{ __('adminlte::adminlte.last_name') }}" autofocus>
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('last_name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        
 
         {{-- Email field --}}
         <div class="input-group mb-3">

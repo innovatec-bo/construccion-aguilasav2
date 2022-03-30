@@ -3,6 +3,8 @@
 return [
 
     'full_name'                   => 'Full name',
+    'first_name'                   => 'Nombre',
+    'last_name'                   => 'Apellido',
     'email'                       => 'Email',
     'password'                    => 'Password',
     'retype_password'             => 'Retype password',

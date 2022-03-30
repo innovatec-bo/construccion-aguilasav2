@@ -10,14 +10,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::resource('users','UserController')->names('users');
 });
 
-
-
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes(['register' => false]);
