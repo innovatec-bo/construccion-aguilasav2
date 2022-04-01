@@ -4,9 +4,16 @@
             <form wire:submit.prevent="save()">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nombre completo</label>
-                        <input type="text" class="form-control" placeholder="Nombre completo" wire:model="name">
-                        @error('name')
+                        <label for="firstName">Nombre</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="Nombre" wire:model="firstName">
+                        @error('firstName')
+                            <span class="text-danger small"> {{$message}} </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Apellido</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="Apellido" wire:model="lastName">
+                        @error('lastName')
                             <span class="text-danger small"> {{$message}} </span>
                         @enderror
                     </div>
@@ -29,11 +36,11 @@
                     <div class="form-group">
                         @foreach ($roles as $role)
                             <div class="form-check">
-                                <input class="form-check-input" id="radio-{{$role->id}}" type="radio" value="{{$role->id}}" name="role" wire:model="roleId">
-                                <label class="form-check-label" for="radio-{{$role->id}}">{{$role->name}}</label>
+                                <input class="form-check-input" id="checkbox-{{$role->id}}" type="checkbox" value="{{$role->name}}" wire:model="selectedRoles.{{$role->id}}">
+                                <label class="form-check-label" for="checkbox-{{$role->id}}">{{$role->name}}</label>
                             </div>    
                         @endforeach
-                        @error('roleId')
+                        @error('selectedRoles.*')
                             <span class="text-danger small"> {{$message}} </span>
                         @enderror
                     </div>

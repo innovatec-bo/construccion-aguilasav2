@@ -9,11 +9,12 @@ use Spatie\Permission\Models\Role;
 class UserCreate extends Component
 {
     public 
-        $name,
+        $firstName,
+        $lastName,
         $email,
         $password,
         $roles,
-        $roleId;
+        $selectedRoles;
 
 
     public function mount()
@@ -34,24 +35,32 @@ class UserCreate extends Component
     public function rules()
     {
         return [
-            'name' => 'required',
+            'firstName' => 'required',
+            'lastName' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'roleId' => 'required'
+            'selectedRoles.*' => 'required|exists:roles,name'
         ];
     }
 
     public function save()
     {
         $this->validate();
+		$oldPasswordSystem = password_hash($this->password, PASSWORD_BCRYPT, ['cost' => 10]);
         $data = [
-            'name' => $this->name,
+            'first_name' => $this->firstName,
+            'last_name' => $this->lastName,
+            'firstname_usr' => $this->firstName,
+            'lastname_usr' => $this->lastName,
             'email' => $this->email,
-            'password' => bcrypt($this->password)
+            'email_usr' => $this->email,
+            'password' => bcrypt($this->password),
+            'password_usr' => $oldPasswordSystem
         ];
-        $role = Role::find($this->roleId);
+
+        $this->selectedRoles = array_values(array_filter($this->selectedRoles));
         $user = User::create($data);
-        $user->assignRole($role->name);
+        $user->syncRoles($this->selectedRoles);
         return redirect()->route('admin.users.index');
     }
 }

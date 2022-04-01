@@ -12,6 +12,7 @@
                             <th style="width: 10px">ID</th>
                             <th>Nombre completo</th>
                             <th>Correo</th>
+                            <th>Roles</th>
                             <th style="width: 130px">Opciones</th>
                         </tr>
                     </thead>
@@ -21,6 +22,11 @@
                                 <td>{{$user->id_usr}}</td>
                                 <td>{{$user->full_name}}</td>
                                 <td>{{$user->email}}</td>
+                                <td>
+                                    @foreach ($user->getRoleNames() as $role)
+                                        <span class="badge bg-primary">{{$role}}</span>
+                                    @endforeach
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='{{route('admin.users.edit', $user)}}'"><i class="fas fa-pen"></i></button>
                                     <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('admin.users.show', $user)}}'"><i class="fas fa-eye"></i></button>
