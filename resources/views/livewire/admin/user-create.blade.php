@@ -34,9 +34,9 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        @foreach ($roles as $role)
+                        @foreach ($roles as $index => $role)
                             <div class="form-check">
-                                <input class="form-check-input" id="checkbox-{{$role->id}}" type="checkbox" value="{{$role->name}}" wire:model="selectedRoles.{{$role->id}}">
+                                <input class="form-check-input" id="checkbox-{{$role->id}}" type="checkbox" value="{{$role->name}}" wire:model="selectedRoles.{{$index}}">
                                 <label class="form-check-label" for="checkbox-{{$role->id}}">{{$role->name}}</label>
                             </div>    
                         @endforeach

@@ -37,7 +37,7 @@ class UserCreate extends Component
         return [
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:sec_users,email',
             'password' => 'required',
             'selectedRoles.*' => 'required|exists:roles,name'
         ];
