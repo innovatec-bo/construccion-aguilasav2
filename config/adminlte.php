@@ -248,8 +248,8 @@ return [
         //     'can'  => 'manage-blog',
         // ],
         [
-            'text'        => 'Home',
-            'url'         => 'admin/pages',
+            'text'        => 'Inicio',
+            'route'       => 'admin.home.index',
             'icon'        => 'fas fa-fw fa-home',
         ],
         [
@@ -276,6 +276,7 @@ return [
                     'text'        => 'Lista',
                     'url'         => 'admin/pages',
                     'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'ml-4',
                 ]       
             ]
         ],
@@ -300,8 +301,15 @@ return [
             'submenu'     => [
                 [
                     'text'        => 'Lista',
-                    'url'         => 'admin/pages',
+                    'route'       => 'admin.users.index',
                     'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'ml-4',
+                ],
+                [
+                    'text'        => 'Crear',
+                    'route'       => 'admin.users.create',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'ml-4',
                 ]       
             ]
         ],
@@ -313,20 +321,58 @@ return [
                     'text'        => 'Lista',
                     'url'         => 'admin/pages',
                     'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'ml-4',
                 ],
                 [
                     'text'        => 'Mapa',
                     'url'         => 'admin/pages',
                     'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'ml-4',
                 ],
                 [
-                    'text'        => 'Crear proyecto',
+                    'text'        => 'Crear',
                     'url'         => 'admin/pages',
-                    'icon'        => 'fas fa-fw fa-table',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'ml-4',
                 ]       
             ]
         ],
-        
+        [
+            'text'        => 'Permisos',
+            'icon'        => 'fas fa-fw fa-table',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'route'       => 'admin.permissions.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'ml-4',
+                ],
+                [
+                    'text'        => 'Crear',
+                    'route'       => 'admin.permissions.create',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'ml-4',
+                ]       
+            ]
+        ],
+        [
+            'text'        => 'Roles',
+            'icon'        => 'fas fa-fw fa-table',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'route'       => 'admin.roles.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'ml-4',
+                ],
+                [
+                    'text'        => 'Crear',
+                    'route'       => 'admin.roles.create',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'ml-4',
+                ]       
+            ]
+        ],
         ['header' => 'labels'],
         [
             'text'       => 'important',
@@ -497,5 +543,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

@@ -8,6 +8,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
 
     //Users
     Route::resource('users','UserController')->names('users');
+
+    //Permissions
+    Route::resource('permissions','PermissionController')->names('permissions');
+
+    //Roles
+    Route::resource('roles','RoleController')->names('roles');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
