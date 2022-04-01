@@ -15,7 +15,7 @@ class Project extends Model
     protected $primaryKey = "id_pro";
 
     const CREATED_AT = 'createdon_pro';
-    // const UPDATED_AT = 'editedon_pro';
+    const UPDATED_AT = 'editedon_pro';
 
     // protected $casts = [
     //     'createdon_pro' => 'datetime'
