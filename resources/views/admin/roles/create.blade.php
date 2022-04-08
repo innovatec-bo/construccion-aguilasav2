@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Nuevo Permiso')
+@section('title', 'Nuevo rol')
 
 @section('content_header')
-    <h1>Nuevo Permiso</h1>
+    <h1>Nuevo Rol</h1>
 @stop
 
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card card-primary">
-            <form method="post" action="{{route('admin.permissions.store')}}">
+            <form method="post" action="{{route('admin.roles.store')}}">
                 @csrf
                 @method('post')
                 <div class="card-body">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="{{route('admin.permissions.index')}}" class="btn btn-secondary">Cancelar</a>
+                    <a href="{{route('admin.roles.index')}}" class="btn btn-secondary">Cancelar</a>
                 </div>
             </form>
         </div>

@@ -1,22 +1,22 @@
 @extends('adminlte::page')
 
-@section('title', 'Nuevo Permiso')
+@section('title', 'Editar rol')
 
 @section('content_header')
-    <h1>Nuevo Permiso</h1>
+    <h1>Editar rol</h1>
 @stop
 
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card card-primary">
-            <form method="post" action="{{route('admin.permissions.store')}}">
+            <form method="post" action="{{route('admin.roles.update', $role)}}">
                 @csrf
-                @method('post')
+                @method('patch')
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" id="name" class="form-control" placeholder="Nombre" name="name">
+                        <input type="text" id="name" class="form-control" placeholder="Nombre" name="name" value="{{$role->name}}">
                         @error('name')
                             <span class="text-danger small"> {{$message}} </span>
                         @enderror
@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="{{route('admin.permissions.index')}}" class="btn btn-secondary">Cancelar</a>
+                    <a href="{{route('admin.roles.index')}}" class="btn btn-secondary">Cancelar</a>
                 </div>
             </form>
         </div>

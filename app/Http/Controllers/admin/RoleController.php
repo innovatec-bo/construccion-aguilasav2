@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -14,7 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.roles.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create');
     }
 
     /**
@@ -35,7 +36,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required','unique:roles,name']
+        ]);
+        Role::create([
+            'name' => $request->name,
+            'guard_name' => 'web'
+        ]);
+
+        return redirect()->route('admin.roles.index')->with('successMessage','Rol agregado exitosamente.');
     }
 
     /**
@@ -55,9 +64,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        return view('admin.roles.edit', compact('role'));
     }
 
     /**
@@ -67,9 +76,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required','unique:roles,name,'.$role->id]
+        ]);
+        $role->name = $request->name;
+        $role->save();
+
+        return redirect()->route('admin.roles.index')->with('successMessage','Rol editado exitosamente.');
     }
 
     /**
