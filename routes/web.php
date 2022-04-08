@@ -14,6 +14,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
 
     //Roles
     Route::resource('roles','RoleController')->names('roles');
+
+    //Projects
+    Route::post('projects/update-manpower/{project}','ProjectController@updateManpower')->name('projects.update-manpower');
+    Route::get('projects/rectify-manpower','ProjectController@rectifyManpower')->name('projects.rectify-manpower');
+    Route::resource('projects','ProjectController')->names('projects');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');

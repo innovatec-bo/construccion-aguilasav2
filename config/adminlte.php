@@ -232,16 +232,16 @@ return [
         //     'text'         => 'search',
         //     'topnav_right' => true,
         // ],
-        // [
-        //     'type'         => 'fullscreen-widget',
-        //     'topnav_right' => true,
-        // ],
+        [
+            'type'         => 'fullscreen-widget',
+            'topnav_right' => true,
+        ],
 
         // Sidebar items:
-        // [
-        //     'type' => 'sidebar-menu-search',
-        //     'text' => 'search',
-        // ],
+        [
+            'type' => 'sidebar-menu-search',
+            'text' => 'Buscar menu',
+        ],
         // [
         //     'text' => 'blog',
         //     'url'  => 'admin/blog',
@@ -334,7 +334,14 @@ return [
                     'url'         => 'admin/pages',
                     'icon'        => 'fas fa-fw fa-plus',
                     'shift' => 'ml-4',
-                ]       
+                ],
+                [
+                    'text'        => 'Rectificar Mano de obra',
+                    'route'       => 'admin.projects.rectify-manpower',
+                    'icon'        => 'fas fa-fw fa-edit',
+                    'shift' => 'ml-4',
+                ]
+
             ]
         ],
         [
@@ -511,6 +518,16 @@ return [
                 ],
             ],
         ],
+        'bsCustomFileInput' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bs-custom-file-input/bs-custom-file-input.min.js',
+                ]
+            ],
+        ]
     ],
 
     /*
