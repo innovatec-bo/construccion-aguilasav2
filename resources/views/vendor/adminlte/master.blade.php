@@ -92,6 +92,58 @@
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
 
+{{-- Toast notifications --}}
+<script>
+    function decodeHtml(html)
+        {
+            var txt = document.createElement("textarea");
+            txt.innerHTML = html;
+            return txt.value;
+        }
+        window.toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true,
+                // "positionClass": "toast-top-center",
+                "timeOut": "10000",
+                "allowHtml": true,
+                "preventDuplicates": true
+            }
+        @if(session('successMessage'))
+            window.toastr.success("{{session('successMessage')}}");
+        @endif
+        @if(session('errorMessage'))
+            window.toastr.error("{{session('errorMessage')}}");
+        @endif
+        @if(session('infoMessage'))
+            window.toastr.info("{{session('infoMessage')}}");
+        @endif
+        @if(session('warningMessage'))
+            window.toastr.warning( decodeHtml("{{session('warningMessage')}}") );
+        @endif
+        //Trigger from livewire
+        document.addEventListener('DOMContentLoaded', function(){
+            window.addEventListener('alert', event => {
+                let type = event.detail[0];
+                let message = event.detail[1];
+                switch (event.detail[0]) {
+                    case 'successMessage':
+                            window.toastr.success(message);
+                        break;
+                    case 'errorMessage':
+                            window.toastr.error(message);
+                        break;
+                    case 'infoMessage':
+                            window.toastr.info(message);
+                        break;
+                    case 'warningMessage':
+                        window.toastr.warning(message);
+                        break;
+                }
+            });
+        });
+</script>
+
     {{-- Livewire Script --}}
     @if(config('adminlte.livewire'))
         @if(app()->version() >= 7)
