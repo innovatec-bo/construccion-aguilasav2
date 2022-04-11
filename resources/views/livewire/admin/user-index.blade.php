@@ -2,10 +2,13 @@
     <div class="col-md-10">
         <div class="card">
             <div class="card-header">
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.2s="search" placeholder="Buscar..">
+                <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
             </div>
 
             <div class="card-body">
+                <div class="overlay d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -28,8 +31,8 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='{{route('admin.users.edit', $user)}}'"><i class="fas fa-pen"></i></button>
-                                    <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('admin.users.show', $user)}}'"><i class="fas fa-eye"></i></button>
+                                    <button type="button" wire:loading.class="disabled" class="btn btn-primary btn-sm" onclick="window.location.href='{{route('admin.users.edit', $user)}}'"><i class="fas fa-pen"></i></button>
+                                    <button type="button"  wire:loading.class="disabled" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('admin.users.show', $user)}}'"><i class="fas fa-eye"></i></button>
                                     <form method="post" action="{{route('admin.users.destroy',$user)}}" class="d-inline">
                                         @method('delete')
                                         @csrf

@@ -380,6 +380,18 @@ return [
                 ]       
             ]
         ],
+        [
+            'text'        => 'Almacen',
+            'icon'        => 'fas fa-fw fa-table',
+            'submenu'     => [
+                [
+                    'text'        => 'Movimientos',
+                    'route'       => 'admin.materials-summary.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'ml-4',
+                ]       
+            ]
+        ],
         ['header' => 'labels'],
         [
             'text'       => 'important',
@@ -479,13 +491,18 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'asset' => true,
+                    'location' => 'vendor/sweetalert2/sweetalert2.all.js',
                 ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css',
+                ]
             ],
         ],
         'Pace' => [

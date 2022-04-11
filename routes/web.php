@@ -19,6 +19,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::post('projects/update-manpower/{project}','ProjectController@updateManpower')->name('projects.update-manpower');
     Route::get('projects/rectify-manpower','ProjectController@rectifyManpower')->name('projects.rectify-manpower');
     Route::resource('projects','ProjectController')->names('projects');
+
+    //Materials Summary
+    Route::resource('materials-summary','MaterialSummaryController')->names('materials-summary');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
