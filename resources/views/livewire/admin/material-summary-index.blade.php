@@ -2,12 +2,11 @@
     <div class="col-md-10">
         <div class="card">
             <div class="card-header">
-                {{-- <a href="{{route('admin.roles.create')}}" class="btn btn-sm btn-primary mb-2">Nuevo rol</a> --}}
                 <input class="form-control form-control-sm" type="text" wire:model.debounce.2s="search" placeholder="Buscar..">
             </div>
 
             <div class="card-body">
-                <div class="overlay d-none" wire:loading.class="d-flex" wire:target="delete, previousPage, nextPage, gotoPage">
+                <div class="overlay d-none" wire:loading.class="d-flex" wire:target="delete, previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <table class="table table-bordered">
