@@ -84,8 +84,13 @@ class BuildingStructureController extends Controller
         //
     }
 
-    public function setMaterials()
+    public function uploadDefaultMaterials()
     {
-        return view('admin.building-structures.set-materials');
+        return view('admin.building-structures.upload-default-materials');
+    }
+
+    public function storeDefaultMaterials()
+    {
+
     }
 }

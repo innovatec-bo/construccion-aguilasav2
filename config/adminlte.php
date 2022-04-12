@@ -410,7 +410,7 @@ return [
                 ],
                 [
                     'text'        => 'Establecer materiales',
-                    'route'       => 'admin.building-structures.set-materials',
+                    'route'       => 'admin.building-structures.upload-default-materials',
                     'icon'        => 'fas fa-fw fa-cogs',
                     'shift' => 'pl-4',
                 ]
