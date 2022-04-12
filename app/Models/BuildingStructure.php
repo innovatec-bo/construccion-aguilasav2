@@ -18,4 +18,9 @@ class BuildingStructure extends Model
 
     const CREATED_AT = 'createdon_bus';
     const UPDATED_AT = 'editedon_bus';
+
+    public function defaultStructureMaterials()
+    {
+        return $this->hasMany(DefaultStructureMaterial::class,'structure_id_dsm');
+    }
 }

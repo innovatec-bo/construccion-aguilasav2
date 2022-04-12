@@ -16,12 +16,15 @@
                 </div>
                 <div class="card-footer p-0">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a href="javascript:void(0)" class="nav-link">
-                                Projects 
-                                <span class="float-right badge bg-primary">20 Pza</span>
-                            </a>
-                        </li>
+                        @foreach ($buildingStructure->defaultStructureMaterials as $default)
+                            <li class="nav-item">
+                                <a href="javascript:void(0)" class="nav-link text-light">
+                                    {{$default->material->code_mat}} -
+                                    {{$default->material->description_mat}}
+                                    <span class="float-right badge bg-primary">{{$default->quantity_dsm}} {{$default->material->unit_of_measurement_mat}}</span>
+                                </a>
+                            </li>    
+                        @endforeach
                     </ul>
                 </div>
             </div>

@@ -15,6 +15,7 @@
                             <th>CODIGO</th>
                             <th>DESCRIPCION</th>
                             <th>UNIDAD<br>DE MEDIDA</th>
+                            <th>Materiales</th>
                             <th style="width: 130px">Opciones</th>
                         </tr>
                     </thead>
@@ -24,6 +25,7 @@
                                 <td>{{$buildingStructure->structure_code_bus}}</td>
                                 <td>{{$buildingStructure->description_bus}}</td>
                                 <td>{{$buildingStructure->unit_of_measurement_bus}}</td>
+                                <th>{{$buildingStructure->defaultStructureMaterials->count()}}</th>
                                 <td>
                                     <button type="button" wire:loading.class="disabled" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('admin.building-structures.show', $buildingStructure)}}'"><i class="fas fa-eye"></i></button>
                                 </td>
