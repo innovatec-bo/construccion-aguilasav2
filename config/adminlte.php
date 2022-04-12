@@ -276,7 +276,7 @@ return [
         //             'text'        => 'Lista',
         //             'url'         => 'admin/pages',
         //             'icon'        => 'fas fa-fw fa-table',
-        //             'shift' => 'ml-4',
+        //             'shift' => 'pl-4',
         //         ]       
         //     ]
         // ],
@@ -303,13 +303,13 @@ return [
                     'text'        => 'Lista',
                     'route'       => 'admin.users.index',
                     'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Crear',
                     'route'       => 'admin.users.create',
                     'icon'        => 'fas fa-fw fa-plus',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ]       
             ]
         ],
@@ -321,25 +321,25 @@ return [
                     'text'        => 'Lista',
                     'url'         => 'admin/pages',
                     'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Mapa',
                     'url'         => 'admin/pages',
                     'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Crear',
                     'url'         => 'admin/pages',
                     'icon'        => 'fas fa-fw fa-plus',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Rectificar Mano de obra',
                     'route'       => 'admin.projects.rectify-manpower',
                     'icon'        => 'fas fa-fw fa-edit',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ]
 
             ]
@@ -352,13 +352,13 @@ return [
                     'text'        => 'Lista',
                     'route'       => 'admin.permissions.index',
                     'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Crear',
                     'route'       => 'admin.permissions.create',
                     'icon'        => 'fas fa-fw fa-plus',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ]       
             ]
         ],
@@ -370,13 +370,13 @@ return [
                     'text'        => 'Lista',
                     'route'       => 'admin.roles.index',
                     'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Crear',
                     'route'       => 'admin.roles.create',
                     'icon'        => 'fas fa-fw fa-plus',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ]       
             ]
         ],
@@ -388,13 +388,13 @@ return [
                     'text'        => 'Movimientos',
                     'route'       => 'admin.materials-summary.index',
                     'icon'        => 'fas fa-fw fa-file-alt',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Cargar lista inicial',
                     'route'       => 'admin.materials-summary.load-initial-list',
                     'icon'        => 'fas fa-fw fa-file-upload',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ],
             ],  
         ],
@@ -406,13 +406,13 @@ return [
                     'text'        => 'Lista',
                     'route'       => 'admin.building-structures.index',
                     'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Establecer materiales',
                     'route'       => 'admin.building-structures.set-materials',
                     'icon'        => 'fas fa-fw fa-cogs',
-                    'shift' => 'ml-4',
+                    'shift' => 'pl-4',
                 ]
             ]
         ],
