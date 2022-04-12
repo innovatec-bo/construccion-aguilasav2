@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\MaterialSummary;
+use App\Models\BuildingStructure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
-class MaterialSummaryController extends Controller
+class BuildingStructureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class MaterialSummaryController extends Controller
      */
     public function index()
     {
-        return view('admin.materials-summary.index');
+        return view('admin.building-structures.index');
     }
 
     /**
@@ -43,21 +42,21 @@ class MaterialSummaryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\BuildingStructure  $buildingStructure
      * @return \Illuminate\Http\Response
      */
-    public function show(MaterialSummary $materialsSummary)
+    public function show(BuildingStructure $buildingStructure)
     {
-        return view('admin.materials-summary.show', compact('materialsSummary'));
+        return view('admin.building-structures.show', compact('buildingStructure'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\BuildingStructure  $buildingStructure
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BuildingStructure $buildingStructure)
     {
         //
     }
@@ -66,10 +65,10 @@ class MaterialSummaryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\BuildingStructure  $buildingStructure
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, BuildingStructure $buildingStructure)
     {
         //
     }
@@ -77,16 +76,16 @@ class MaterialSummaryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\BuildingStructure  $buildingStructure
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(BuildingStructure $buildingStructure)
     {
         //
     }
 
-    public function loadInitialList()
+    public function setMaterials()
     {
-        return view('admin.materials-summary.load-initial-list');
+        return view('admin.building-structures.set-materials');
     }
 }

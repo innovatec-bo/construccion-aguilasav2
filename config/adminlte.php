@@ -255,7 +255,7 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-tachometer',
+            'icon'        => 'fas fa-fw fa-tachometer-alt',
         ],
         [
             'text'        => 'Workflow',
@@ -297,7 +297,7 @@ return [
         ],
         [
             'text'        => 'Usuarios',
-            'icon'        => 'fas fa-fw fa-table',
+            'icon'        => 'fas fa-fw fa-users',
             'submenu'     => [
                 [
                     'text'        => 'Lista',
@@ -364,7 +364,7 @@ return [
         ],
         [
             'text'        => 'Roles',
-            'icon'        => 'fas fa-fw fa-table',
+            'icon'        => 'fas fa-fw fa-id-card',
             'submenu'     => [
                 [
                     'text'        => 'Lista',
@@ -382,14 +382,38 @@ return [
         ],
         [
             'text'        => 'Almacen',
-            'icon'        => 'fas fa-fw fa-table',
+            'icon'        => 'fas fa-fw fa-warehouse',
             'submenu'     => [
                 [
                     'text'        => 'Movimientos',
                     'route'       => 'admin.materials-summary.index',
+                    'icon'        => 'fas fa-fw fa-file-alt',
+                    'shift' => 'ml-4',
+                ],
+                [
+                    'text'        => 'Cargar lista inicial',
+                    'route'       => 'admin.materials-summary.load-initial-list',
+                    'icon'        => 'fas fa-fw fa-file-upload',
+                    'shift' => 'ml-4',
+                ],
+            ],  
+        ],
+        [
+            'text'        => 'Estructuras',
+            'icon'        => 'fas fa-fw fa-shapes',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'route'       => 'admin.building-structures.index',
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'ml-4',
-                ]       
+                ],
+                [
+                    'text'        => 'Establecer materiales',
+                    'route'       => 'admin.building-structures.set-materials',
+                    'icon'        => 'fas fa-fw fa-cogs',
+                    'shift' => 'ml-4',
+                ]
             ]
         ],
         ['header' => 'labels'],

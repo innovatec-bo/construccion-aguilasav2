@@ -21,7 +21,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::resource('projects','ProjectController')->names('projects');
 
     //Materials Summary
+    Route::get('materials-summary/load-initial-list','MaterialSummaryController@loadInitialList')->name('materials-summary.load-initial-list');
     Route::resource('materials-summary','MaterialSummaryController')->names('materials-summary');
+
+    //Building Structures
+    Route::get('building-structures/set-materials','BuildingStructureController@setMaterials')->name('building-structures.set-materials');
+    Route::resource('building-structures','BuildingStructureController')->names('building-structures');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
