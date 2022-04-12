@@ -25,6 +25,9 @@
                                 </a>
                             </li>    
                         @endforeach
+                        @if ($buildingStructure->defaultStructureMaterials->count() <= 0)
+                            <p class="text-center my-3">No se han establecido materiales para esta estructura</p>
+                        @endif
                     </ul>
                 </div>
             </div>
