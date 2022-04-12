@@ -9,7 +9,7 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-6">
-        <div class="card card-primary">
+        <div class="card card-primary shadow-lg">
             <form method="post" action="{{route('admin.roles.store')}}">
                 @csrf
                 @method('post')

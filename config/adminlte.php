@@ -252,49 +252,49 @@ return [
             'route'       => 'admin.home.index',
             'icon'        => 'fas fa-fw fa-home',
         ],
-        [
-            'text'        => 'Dashboard',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-tachometer-alt',
-        ],
-        [
-            'text'        => 'Workflow',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-table',
-        ],
-        [
-            'text'        => 'Habilitar linea de procesos',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-table',
-        ],
-        [
-            'text'        => 'Cerrar mes',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-table',
-            'submenu'     => [
-                [
-                    'text'        => 'Lista',
-                    'url'         => 'admin/pages',
-                    'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'ml-4',
-                ]       
-            ]
-        ],
-        [
-            'text'        => 'Asignacion de fiscales',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-table',
-        ],
-        [
-            'text'        => 'Observaciones externas',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-table',
-        ],
-        [
-            'text'        => 'Plan de trabajo',
-            'url'         => 'admin/pages',
-            'icon'        => 'fas fa-fw fa-table',
-        ],
+        // [
+        //     'text'        => 'Dashboard',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'fas fa-fw fa-tachometer-alt',
+        // ],
+        // [
+        //     'text'        => 'Workflow',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'fas fa-fw fa-table',
+        // ],
+        // [
+        //     'text'        => 'Habilitar linea de procesos',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'fas fa-fw fa-table',
+        // ],
+        // [
+        //     'text'        => 'Cerrar mes',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'fas fa-fw fa-table',
+        //     'submenu'     => [
+        //         [
+        //             'text'        => 'Lista',
+        //             'url'         => 'admin/pages',
+        //             'icon'        => 'fas fa-fw fa-table',
+        //             'shift' => 'ml-4',
+        //         ]       
+        //     ]
+        // ],
+        // [
+        //     'text'        => 'Asignacion de fiscales',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'fas fa-fw fa-table',
+        // ],
+        // [
+        //     'text'        => 'Observaciones externas',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'fas fa-fw fa-table',
+        // ],
+        // [
+        //     'text'        => 'Plan de trabajo',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'fas fa-fw fa-table',
+        // ],
         [
             'text'        => 'Usuarios',
             'icon'        => 'fas fa-fw fa-users',
@@ -315,7 +315,7 @@ return [
         ],
         [
             'text'        => 'Proyectos',
-            'icon'        => 'fas fa-fw fa-table',
+            'icon'        => 'fas fa-fw fa-folder',
             'submenu'     => [
                 [
                     'text'        => 'Lista',
@@ -346,7 +346,7 @@ return [
         ],
         [
             'text'        => 'Permisos',
-            'icon'        => 'fas fa-fw fa-table',
+            'icon'        => 'fas fa-fw fa-user-shield',
             'submenu'     => [
                 [
                     'text'        => 'Lista',
@@ -416,22 +416,22 @@ return [
                 ]
             ]
         ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        // ['header' => 'labels'],
+        // [
+        //     'text'       => 'important',
+        //     'icon_color' => 'red',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'warning',
+        //     'icon_color' => 'yellow',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'information',
+        //     'icon_color' => 'cyan',
+        //     'url'        => '#',
+        // ],
     ],
 
     /*

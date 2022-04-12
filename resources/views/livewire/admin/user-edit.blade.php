@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-md-6">
-        <div class="card card-primary">
+        <div class="card card-primary shadow-lg">
             <form wire:submit.prevent="save()">
                 <div class="card-body">
                     <div class="form-group">

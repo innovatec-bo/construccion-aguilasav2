@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-md-10">
-        <div class="card">
+        <div class="card shadow-lg">
             <div class="card-header">
                 <a href="{{route('admin.roles.create')}}" class="btn btn-sm btn-primary mb-2">Nuevo rol</a>
                 <input class="form-control form-control-sm" type="text" wire:model.debounce.2s="search" placeholder="Buscar..">
