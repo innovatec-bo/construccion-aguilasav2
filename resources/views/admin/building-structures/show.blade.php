@@ -18,11 +18,13 @@
                     <ul class="nav flex-column">
                         @foreach ($buildingStructure->defaultStructureMaterials as $default)
                             <li class="nav-item">
-                                <a href="javascript:void(0)" class="nav-link text-light">
-                                    {{$default->material->code_mat}} -
-                                    {{$default->material->description_mat}}
-                                    <span class="float-right badge bg-primary">{{$default->quantity_dsm}} {{$default->material->unit_of_measurement_mat}}</span>
-                                </a>
+                                @if ($default->material)
+                                    <a href="javascript:void(0)" class="nav-link text-light">
+                                        {{$default->material->code_mat}} -
+                                        {{$default->material->description_mat}}
+                                        <span class="float-right badge bg-primary">{{$default->quantity_dsm}} {{$default->material->unit_of_measurement_mat}}</span>
+                                    </a>    
+                                @endif
                             </li>    
                         @endforeach
                         @if ($buildingStructure->defaultStructureMaterials->count() <= 0)
