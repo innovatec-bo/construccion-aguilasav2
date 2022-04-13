@@ -4,7 +4,6 @@
             <div class="card-header">
                 <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
             </div>
-
             <div class="card-body">
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
