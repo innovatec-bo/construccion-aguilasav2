@@ -14,10 +14,10 @@ class DefaultStructureMaterial extends Model
     use Blameable;
     
     protected $table = "bui_default_structure_materials";
-    protected $primaryKey = "id_dms";
+    protected $primaryKey = "id_dsm";
 
-    const CREATED_AT = 'createdon_dms';
-    const UPDATED_AT = 'editedon_dms';
+    const CREATED_AT = 'createdon_dsm';
+    const UPDATED_AT = 'editedon_dsm';
 
     public function structure()
     {
@@ -27,5 +27,11 @@ class DefaultStructureMaterial extends Model
     public function material()
     {
         return $this->belongsTo(Material::class, 'material_id_dsm');
+    }
+
+    public function delete()
+    {
+        $this->deleted_dsm = 1;
+        parent::delete();
     }
 }
