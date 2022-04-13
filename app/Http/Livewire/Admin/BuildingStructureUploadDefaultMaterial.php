@@ -16,10 +16,20 @@ class BuildingStructureUploadDefaultMaterial extends Component
         return view('livewire.admin.building-structure-upload-default-material');
     }
 
+    public function rules()
+    {
+        return [
+            'file' => 'required|file|max:2048|mimes:xlsx, csv, xls' // 1MB Max
+        ];
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function save()
     {
-        $this->validate([
-            'file' => 'required|file|max:2048|mimes:xlsx, csv, xls' // 1MB Max
-        ]);
+        $this->validate();
     }
 }

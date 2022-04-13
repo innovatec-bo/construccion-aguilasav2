@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="materials">Estructuras y materiales</label>
-                        <div class="input-group">
+                        <div class="input-group" wire:ignore>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="materials" name="materials" wire:model="file">
                                 <label class="custom-file-label" for="materials">Seleccione una lista de estructuras con sus respectivos materiales</label>
