@@ -334,6 +334,19 @@ return [
                     'url'         => 'admin/pages',
                     'icon'        => 'fas fa-fw fa-plus',
                     'shift' => 'pl-4',
+                ]
+
+            ]
+        ],
+        [
+            'text'        => 'Manos de obra',
+            'icon'        => 'fas fa-fw fa-tools',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'route'         => 'admin.labor-details.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Rectificar Mano de obra',

@@ -28,6 +28,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::post('building-structures/store-default-materials','BuildingStructureController@storeDefaultMaterials')->name('building-structures.store-default-materials');
     Route::get('building-structures/upload-default-materials','BuildingStructureController@uploadDefaultMaterials')->name('building-structures.upload-default-materials');
     Route::resource('building-structures','BuildingStructureController')->names('building-structures');
+
+    //Labor Details
+    Route::resource('labor-details','LaborDetailController')->names('labor-details');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
