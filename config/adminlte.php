@@ -435,6 +435,24 @@ return [
                 ]
             ]
         ],
+        [
+            'text'        => 'Materiales',
+            'icon'        => 'fas fa-fw fa-shapes',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'route'       => 'admin.materials.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'pl-4',
+                ],
+                [
+                    'text'        => 'Crear',
+                    'route'       => 'admin.materials.create',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'pl-4',
+                ]
+            ]
+        ],
         // ['header' => 'labels'],
         // [
         //     'text'       => 'important',

@@ -32,6 +32,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     //Labor Details
     Route::get('labor-details/internal-conciliation/{labor_detail}','LaborDetailController@internalConciliation')->name('labor-details.internal-conciliation');
     Route::resource('labor-details','LaborDetailController')->names('labor-details');
+
+    //Materials
+    Route::resource('materials', 'MaterialController')->names('materials');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
