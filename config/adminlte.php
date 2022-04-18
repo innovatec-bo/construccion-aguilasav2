@@ -353,6 +353,12 @@ return [
                     'route'       => 'admin.projects.rectify-manpower',
                     'icon'        => 'fas fa-fw fa-edit',
                     'shift' => 'pl-4',
+                ],
+                [
+                    'text'        => 'Conciliacion Interna',
+                    'route'       => 'admin.projects.rectify-manpower',
+                    'icon'        => 'fas fa-clipboard-list',
+                    'shift' => 'pl-4',
                 ]
 
             ]

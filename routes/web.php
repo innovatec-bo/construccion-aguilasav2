@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::resource('building-structures','BuildingStructureController')->names('building-structures');
 
     //Labor Details
+    Route::get('labor-details/internal-conciliation/{labor_detail}','LaborDetailController@internalConciliation')->name('labor-details.internal-conciliation');
     Route::resource('labor-details','LaborDetailController')->names('labor-details');
 });
 

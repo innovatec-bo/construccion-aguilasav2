@@ -155,6 +155,7 @@
 <script>
     $(function () {
       bsCustomFileInput.init();
+      $('[data-toggle=tooltip]').tooltip();
     });
     </script>
     {{-- Livewire Script --}}

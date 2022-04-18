@@ -83,4 +83,9 @@ class LaborDetailController extends Controller
     {
         //
     }
+
+    public function internalConciliation(LaborDetail $laborDetail)
+    {
+        dd($laborDetail);
+    }
 }
