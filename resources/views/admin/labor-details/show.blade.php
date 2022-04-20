@@ -38,12 +38,15 @@
                                         @switch($laborCost->activity_lac)
                                             @case('I')
                                                 Instalacion
+                                                <i class="fas fa-long-arrow-alt-down"></i>
                                                 @break
                                             @case('R')
                                                 Retiro
+                                                <i class="fas fa-long-arrow-alt-up"></i>
                                                 @break
                                             @case('M')
                                                 Movimiento
+                                                <i class="fas fa-arrows-alt-h"></i>
                                                 @break
                                                 
                                         @endswitch
