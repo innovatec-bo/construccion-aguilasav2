@@ -7,19 +7,27 @@
 @stop
 
 @section('content')
-    {{-- @livewire('datatable', ['model' => 'App\Models\User', 'name' => 'all-materials', 'exportable' => true]) --}}
-    <livewire:datatable
-    model="App\Models\User"
-    {{-- with="planet, planet.region" --}}
-    sort="first_name|asc"
-    include="id_usr, first_name, last_name, email"
-    searchable="first_name, last_name, email"
-    {{-- hide="latitude, longitude" --}}
-    dates="created_at"
-    {{-- times="bedtime|g:i A" --}}
-    {{-- hideable="select" --}}
-    exportable
-/>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                {{-- @livewire('datatable', ['model' => 'App\Models\User', 'name' => 'all-materials', 'exportable' => true]) --}}
+                <livewire:datatable
+                model="App\Models\Material"
+                {{-- with="planet, planet.region" --}}
+                {{-- sort="first_name|asc" --}}
+                {{-- include="id_usr, first_name, last_name, email" --}}
+                {{-- searchable="first_name, last_name, email" --}}
+                {{-- hide="latitude, longitude" --}}
+                dates="editedon_mat|d-m-Y H:i:s"
+                {{-- times="bedtime|g:i A" --}}
+                {{-- hideable="select" --}}
+                exportable
+            />
+            </div>
+        </div>
+    </div>
+</div>
 @stop
 
 @section('css')
