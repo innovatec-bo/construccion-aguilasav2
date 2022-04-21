@@ -58,31 +58,47 @@
                         <h5><i class="icon fas fa-info"></i> Nota!</h5>
                         Estos son los materials por defecto que estan configurados por cada estructura, si desea personalizar la composicion de una estructura haga click aqui
                         <strong>(La personalizacion afecta a otros proyectos).</strong>
-                        </div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>C&oacute;digo</th>
-                                <th>Descripcion</th>
-                                <th>Cantidad a<br>retirar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($materials as $key => $material)
+                    </div>
+                    @if (count($materialsToBeReturned) > 0)
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>{{($key+1)}}</td>
-                                    <td>{{$material['code_mat']}}</td>
-                                    <td>{{$material['description_mat']}}</td>
-                                    <td class="text-right">
-                                        
-                                        <p class="badge bg-warning">{{number_format($material['quantity_dsm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
-                                        
-                                    </td>
+                                    <th>#</th>
+                                    <th>C&oacute;digo</th>
+                                    <th>Descripcion</th>
+                                    <th>Cantidad a<br>retirar</th>
+                                    <th>Cantidad registrada<br>en almacen</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($materialsToBeReturned as $key => $material)
+                                    <tr>
+                                        <td>{{($key+1)}}</td>
+                                        <td>{{$material['code_mat']}}</td>
+                                        <td>{{$material['description_mat']}}</td>
+                                        <td class="text-right">                    
+                                            {{number_format($material['quantity_dsm'],2)}} {{$material['unit_of_measurement_mat']}}
+                                        </td>
+                                        <td class="text-right">
+                                            @if ($material['quantity_dsm'] == $material['quantity_prm'])
+                                                <p class="badge bg-success">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
+                                            @elseif($material['quantity_prm'] > 0 && $material['quantity_dsm'] > $material['quantity_prm'])
+                                                <p class="badge bg-info">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
+                                            @elseif($material['quantity_prm'] == 0)
+                                                <p class="badge bg-danger">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
+                                            @elseif($material['quantity_prm'] > $material['quantity_dsm'])
+                                                <p class="badge bg-warning">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
+                                            @endif
+                                            
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else 
+                        La mano de obra no presenta actividad de retiro
+                    @endif
+                    
                 </div>
             </div>
         </div>

@@ -22,4 +22,9 @@ class Project extends Model
     // protected $casts = [
     //     'createdon_pro' => 'datetime'
     // ];
+
+    public function materialSummaries()
+    {
+        return $this->hasMany(MaterialSummary::class, 'project_id_msu');
+    }
 }
