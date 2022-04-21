@@ -4,7 +4,10 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\LaborDetail;
+use App\Models\Material;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LaborDetailController extends Controller
 {
@@ -86,6 +89,26 @@ class LaborDetailController extends Controller
 
     public function internalConciliation(LaborDetail $laborDetail)
     {
-        dd($laborDetail);
+        $materials = [];
+        foreach ($laborDetail->laborCosts->where('activity_lac','R') as $laborCost)
+        {
+            foreach ($laborCost->buildingStructure->defaultStructureMaterials as $defaultMaterial)
+            {
+                if(!isset($materials[$defaultMaterial->material->code_mat]))
+                {
+                    $materials[$defaultMaterial->material->code_mat] = [
+                        'code_mat' =>  $defaultMaterial->material->code_mat,
+                        'description_mat' => $defaultMaterial->material->description_mat,
+                        'unit_of_measurement_mat' => $defaultMaterial->material->unit_of_measurement_mat,
+                        'quantity_dsm' => 0
+                    ];
+                }
+                $materials[$defaultMaterial->material->code_mat]['quantity_dsm'] += $defaultMaterial->quantity_dsm;
+            }
+        }
+        $materials = array_values($materials);
+
+        return view('admin.labor-details.internal-conciliation', compact('materials', 'laborDetail'));
+        
     }
 }

@@ -23,4 +23,9 @@ class BuildingStructure extends Model
     {
         return $this->hasMany(DefaultStructureMaterial::class,'structure_id_dsm');
     }
+
+    public function laborCosts()
+    {
+        return $this->hasMany(LaborCost::class, 'building_structure_id_lac');
+    }
 }

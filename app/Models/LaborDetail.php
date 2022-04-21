@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class LaborDetail extends Model
 {
     use HasFactory;
-    use HasFactory;
     use SoftDeletes;
     use Blameable;
     

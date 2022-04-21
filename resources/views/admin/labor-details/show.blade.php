@@ -24,6 +24,7 @@
                                 <th>Cantidad</th>
                                 <th>Precio<br>Unitario</th>
                                 <th>Es adicional?</th>
+                                <th>Nro. Materiales</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,6 +64,9 @@
                                                 <span class="badge badge-info">NO</span>
                                                 @break
                                         @endswitch
+                                    </td>
+                                    <td>
+                                        {{$laborCost->buildingStructure->defaultStructureMaterials->count()}}
                                     </td>
                                 </tr>    
                             @endforeach
