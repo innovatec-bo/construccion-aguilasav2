@@ -28,10 +28,9 @@
                                 <td>{{$laborDetail->level_of_tension_lad}}</td>
                                 <td>{{$laborDetail->destiny_lad}}</td>
                                 <td>
-                                    {{-- <button type="button" wire:loading.class="disabled" class="btn btn-primary btn-sm" onclick="window.location.href='{{route('admin.users.edit', $user)}}'"><i class="fas fa-pen"></i></button> --}}
-                                    <button type="button"  wire:loading.class="disabled" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('admin.labor-details.show', $laborDetail)}}'" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fas fa-eye"></i></button>
-                                    <button type="button"  wire:loading.class="disabled" class="btn btn-info btn-sm" onclick="window.location.href='{{route('admin.labor-details.internal-conciliation', $laborDetail)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna"><i class="fas fa-clipboard-list"></i></button>
-                                    <button type="button"  wire:loading.class="disabled" class="btn btn-warning btn-sm" onclick="window.location.href='{{route('admin.labor-details.internal-conciliation-builder', $laborDetail)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna(Constructor)"><i class="fas fa-clipboard-list"></i></button>
+                                    <a  wire:loading.class="disabled" class="btn btn-secondary btn-sm" href='{{route('admin.labor-details.show', $laborDetail)}}'" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fas fa-eye"></i></a>
+                                    <a wire:loading.class="disabled" class="btn btn-info btn-sm" href='{{route('admin.labor-details.internal-conciliation', $laborDetail)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna"><i class="fas fa-clipboard-list"></i></a>
+                                    <a wire:loading.class="disabled" class="btn btn-warning btn-sm" href='{{route('admin.labor-details.internal-conciliation-builder', $laborDetail)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna(Constructor)"><i class="fas fa-clipboard-list"></i></a>
                                     {{-- <form method="post" action="{{route('admin.users.destroy',$user)}}" class="d-inline">
                                         @method('delete')
                                         @csrf

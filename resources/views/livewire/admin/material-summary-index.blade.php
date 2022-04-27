@@ -29,6 +29,7 @@
                             <th>Fecha de<br>entrada manual</th>
                             <th>Proyecto</th>
                             <th>Tipo de movimiento</th>
+                            <th>Items</th>
                             <th style="width: 130px">Opciones</th>
                         </tr>
                     </thead>
@@ -56,10 +57,13 @@
                                         class="badge badge-primary">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
                                 </td>
                                 <td>
-                                    <button type="button" wire:loading.class="disabled"
+                                    {{$materialSummary->projectMaterials->count()}}
+                                </td>
+                                <td>
+                                    <a wire:loading.class="disabled"
                                         class="btn btn-secondary btn-sm"
-                                        onclick="window.location.href='{{ route('admin.materials-summary.show', $materialSummary) }}'"><i
-                                            class="fas fa-eye"></i></button>
+                                        href='{{ route('admin.materials-summary.show', $materialSummary) }}'"><i
+                                            class="fas fa-eye"></i></a>
                                     <a href="javascript:void(0)" wire:loading.class="disabled"
                                         data-record='{{ $materialSummary }}'
                                         class="btn btn-danger btn-sm lv-confirm-action"><i
