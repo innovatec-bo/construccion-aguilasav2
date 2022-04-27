@@ -103,7 +103,8 @@ class LaborDetailController extends Controller
                         'code_mat' => $projectMaterial->material->code_mat,
                         'description_mat' => $projectMaterial->material->description_mat,
                         'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
-                        'quantity_prm' => 0
+                        'quantity_prm' => 0,
+                        'quantity_dsm' => 0
                     ];
                 }
                 $returnedMaterials[$projectMaterial->material->code_mat]['quantity_prm'] += $projectMaterial->quantity_prm;
@@ -121,25 +122,85 @@ class LaborDetailController extends Controller
                         'code_mat' =>  $defaultMaterial->material->code_mat,
                         'description_mat' => $defaultMaterial->material->description_mat,
                         'unit_of_measurement_mat' => $defaultMaterial->material->unit_of_measurement_mat,
-                        'quantity_dsm' => 0
+                        'quantity_dsm' => 0,
+                        'quantity_prm' => 0
                     ];
                 }
                 $materialsToBeReturned[$defaultMaterial->material->code_mat]['quantity_dsm'] += $defaultMaterial->quantity_dsm;
             }
         }
-        
+
+        //First loop materials to be returned, this is the control list
         foreach ($materialsToBeReturned as $materialCode => &$material) 
         {
             $material['quantity_prm'] = 0;
             if(isset($returnedMaterials[$materialCode]))
             {
                 $material['quantity_prm'] = $returnedMaterials[$materialCode]['quantity_prm'];
+                unset($returnedMaterials[$materialCode]);
             }
         }
         $materialsToBeReturned = array_values($materialsToBeReturned);
-        // dd($materialsToBeReturned, $returnedMaterials);
+        $returnedMaterials = array_values($returnedMaterials);
 
-        return view('admin.labor-details.internal-conciliation', compact('materialsToBeReturned', 'laborDetail'));
-        
+        return view('admin.labor-details.internal-conciliation', compact('materialsToBeReturned','returnedMaterials', 'laborDetail'));   
+    }
+
+    public function internalConciliationBuilder(LaborDetail $laborDetail)
+    {
+        //builder_returns_old_materials
+        //material_removed_from_construction
+        $returnedMaterials = [];
+        foreach ($laborDetail->project->materialSummaries->whereIn('summary_type_id_msu',[5,11]) as $key => $materialSummary) 
+        {
+            foreach ($materialSummary->projectMaterials as $key => $projectMaterial) 
+            {
+                if(!isset($returnedMaterials[$projectMaterial->material->code_mat]))
+                {
+                    $returnedMaterials[$projectMaterial->material->code_mat] = [
+                        'code_mat' => $projectMaterial->material->code_mat,
+                        'description_mat' => $projectMaterial->material->description_mat,
+                        'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
+                        'quantity_prm' => 0,
+                        'quantity_dsm' => 0
+                    ];
+                }
+                $returnedMaterials[$projectMaterial->material->code_mat]['quantity_prm'] += $projectMaterial->quantity_prm;
+            }
+        }
+
+        $materialsToBeReturned = [];
+        foreach ($laborDetail->laborCosts->where('activity_lac','R') as $laborCost)
+        {
+            foreach ($laborCost->buildingStructure->defaultStructureMaterials as $defaultMaterial)
+            {
+                if(!isset($materialsToBeReturned[$defaultMaterial->material->code_mat]))
+                {
+                    $materialsToBeReturned[$defaultMaterial->material->code_mat] = [
+                        'code_mat' =>  $defaultMaterial->material->code_mat,
+                        'description_mat' => $defaultMaterial->material->description_mat,
+                        'unit_of_measurement_mat' => $defaultMaterial->material->unit_of_measurement_mat,
+                        'quantity_dsm' => 0,
+                        'quantity_prm' => 0
+                    ];
+                }
+                $materialsToBeReturned[$defaultMaterial->material->code_mat]['quantity_dsm'] += $defaultMaterial->quantity_dsm;
+            }
+        }
+
+        //First loop materials to be returned, this is the control list
+        foreach ($materialsToBeReturned as $materialCode => &$material) 
+        {
+            $material['quantity_prm'] = 0;
+            if(isset($returnedMaterials[$materialCode]))
+            {
+                $material['quantity_prm'] = $returnedMaterials[$materialCode]['quantity_prm'];
+                unset($returnedMaterials[$materialCode]);
+            }
+        }
+        $materialsToBeReturned = array_values($materialsToBeReturned);
+        $returnedMaterials = array_values($returnedMaterials);
+
+        return view('admin.labor-details.internal-conciliation-builder', compact('materialsToBeReturned','returnedMaterials', 'laborDetail'));   
     }
 }
