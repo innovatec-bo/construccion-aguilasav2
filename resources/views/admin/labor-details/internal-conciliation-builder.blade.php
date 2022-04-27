@@ -16,11 +16,6 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    <div class="alert alert-info alert-dismissible">
-                        <h5><i class="icon fas fa-info"></i> Nota!</h5>
-                        Estos son los materials por defecto que estan configurados por cada estructura, si desea personalizar la composicion de una estructura haga click aqui
-                        <strong>(La personalizacion afecta a otros proyectos).</strong>
-                    </div>
                     @if (count($materialsToBeReturned) > 0)
                         <table class="table table-bordered">
                             <thead>
