@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\BuildingStructure;
 use App\Models\DefaultStructureMaterial;
 use App\Models\Material;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -33,6 +34,8 @@ class BuildingStructureUploadDefaultMaterial extends Component
 
     public function save()
     {
+        ini_set('max_execution_time', 300);
+
         $this->validate();
         
         //Getting materials and structures in database
@@ -43,17 +46,34 @@ class BuildingStructureUploadDefaultMaterial extends Component
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($temporaryFile);
         $items = $spreadsheet->getSheet(1);
 		$arrayItemsBuildingStructures = $items->toArray();
+        unset($arrayItemsBuildingStructures[0]);
+        unset($arrayItemsBuildingStructures[1]);
+        $arrayItemsBuildingStructures = array_values($arrayItemsBuildingStructures);
+        $collection = new Collection($arrayItemsBuildingStructures);
 
+        //Removing old versions
+        $arrayItemsBuildingStructuresLatestVersions = [];
+        $grouped = $collection->groupBy(0);
+        foreach ($grouped as $key => $value) {
+            $maxVersion = $value->max(2);
+            $latestGroup = $value->where(2,$maxVersion);
+            $arrayItemsBuildingStructuresLatestVersions = array_merge($arrayItemsBuildingStructuresLatestVersions, $latestGroup->toArray());
+        }
+        // dd($arrayItemsBuildingStructuresLatestVersions);
+        // $arrayItemsBuildingStructuresLatestVersions = new Collection($arrayItemsBuildingStructuresLatestVersions);
+        // dd($arrayItemsBuildingStructuresLatestVersions->where(0,'ZG-312A'));
+        
         $i = 0;
 		$notFoundStructures = array();
 		$newMaterialsToSave = array();
-        foreach ($arrayItemsBuildingStructures as $row)
+        foreach ($arrayItemsBuildingStructuresLatestVersions as $row)
         {
             if($i > 1)
 			{
                 $structureCode = $row[0];
                 $structureDescription = $row[1];
-				$materialCode = $row[3];
+				$materialVersion = $row[2];
+                $materialCode = $row[3];
 				$quantity = $row[4];
 				$description = $row[5];
 				$completedData = TRUE;
@@ -74,7 +94,7 @@ class BuildingStructureUploadDefaultMaterial extends Component
 				}
 
                 $materialId = NULL;
-                
+                //Check if material in excel file exists in database
                 if(isset($arrayMaterials[$materialCode]))
 				{
 					$materialId = $arrayMaterials[$materialCode]['id_mat'];
