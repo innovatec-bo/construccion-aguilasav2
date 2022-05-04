@@ -97,17 +97,21 @@ class LaborDetailController extends Controller
         {
             foreach ($materialSummary->projectMaterials as $key => $projectMaterial) 
             {
-                if(!isset($returnedMaterials[$projectMaterial->material->code_mat]))
+                //verify that material status is 'Old material'
+                if($projectMaterial->status->code_mst == 'MEO')
                 {
-                    $returnedMaterials[$projectMaterial->material->code_mat] = [
-                        'code_mat' => $projectMaterial->material->code_mat,
-                        'description_mat' => $projectMaterial->material->description_mat,
-                        'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
-                        'quantity_prm' => 0,
-                        'quantity_dsm' => 0
-                    ];
+                    if(!isset($returnedMaterials[$projectMaterial->material->code_mat]))
+                    {
+                        $returnedMaterials[$projectMaterial->material->code_mat] = [
+                            'code_mat' => $projectMaterial->material->code_mat,
+                            'description_mat' => $projectMaterial->material->description_mat,
+                            'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
+                            'quantity_prm' => 0,
+                            'quantity_dsm' => 0
+                        ];
+                    }
+                    $returnedMaterials[$projectMaterial->material->code_mat]['quantity_prm'] += $projectMaterial->quantity_prm;
                 }
-                $returnedMaterials[$projectMaterial->material->code_mat]['quantity_prm'] += $projectMaterial->quantity_prm;
             }
         }
 
@@ -155,17 +159,20 @@ class LaborDetailController extends Controller
         {
             foreach ($materialSummary->projectMaterials as $key => $projectMaterial) 
             {
-                if(!isset($returnedMaterials[$projectMaterial->material->code_mat]))
+                if($projectMaterial->status->code_mst == 'MEO')
                 {
-                    $returnedMaterials[$projectMaterial->material->code_mat] = [
-                        'code_mat' => $projectMaterial->material->code_mat,
-                        'description_mat' => $projectMaterial->material->description_mat,
-                        'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
-                        'quantity_prm' => 0,
-                        'quantity_dsm' => 0
-                    ];
+                    if(!isset($returnedMaterials[$projectMaterial->material->code_mat]))
+                    {
+                        $returnedMaterials[$projectMaterial->material->code_mat] = [
+                            'code_mat' => $projectMaterial->material->code_mat,
+                            'description_mat' => $projectMaterial->material->description_mat,
+                            'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
+                            'quantity_prm' => 0,
+                            'quantity_dsm' => 0
+                        ];
+                    }
+                    $returnedMaterials[$projectMaterial->material->code_mat]['quantity_prm'] += $projectMaterial->quantity_prm;
                 }
-                $returnedMaterials[$projectMaterial->material->code_mat]['quantity_prm'] += $projectMaterial->quantity_prm;
             }
         }
 
