@@ -90,10 +90,9 @@ class LaborDetailController extends Controller
 
     public function internalConciliation(LaborDetail $laborDetail)
     {
-        //builder_returns_old_materials
-        //material_removed_from_construction
+        //builder_returns_materials
         $returnedMaterials = [];
-        foreach ($laborDetail->project->materialSummaries->whereIn('summary_type_id_msu',[5,11]) as $key => $materialSummary) 
+        foreach ($laborDetail->project->materialSummaries->whereIn('summary_type_id_msu',[18]) as $key => $materialSummary) 
         {
             foreach ($materialSummary->projectMaterials as $key => $projectMaterial) 
             {
@@ -152,10 +151,9 @@ class LaborDetailController extends Controller
 
     public function internalConciliationBuilder(LaborDetail $laborDetail)
     {
-        //builder_returns_old_materials
-        //material_removed_from_construction
+        //builder_returns_materials
         $returnedMaterials = [];
-        foreach ($laborDetail->project->materialSummaries->whereIn('summary_type_id_msu',[5,11]) as $key => $materialSummary) 
+        foreach ($laborDetail->project->materialSummaries->whereIn('summary_type_id_msu',[18]) as $key => $materialSummary) 
         {
             foreach ($materialSummary->projectMaterials as $key => $projectMaterial) 
             {
