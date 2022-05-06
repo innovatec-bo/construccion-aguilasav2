@@ -33,6 +33,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>C&oacute;digo</th>
+                                    {{-- <th>Presente en las<br>siguientes estructuras</th> --}}
                                     <th>Descripcion</th>
                                     <th>Cantidad a<br>retirar</th>
                                     <th>Cantidad registrada<br>en almacen</th>
@@ -43,11 +44,12 @@
                                     <tr>
                                         <td>{{($key+1)}}</td>
                                         <td>{{$material['code_mat']}}</td>
+                                        {{-- <td>{{ substr($material['structures'],0,-2)}}</td> --}}
                                         <td>{{$material['description_mat']}}</td>
                                         <td class="text-right">                    
                                             {{number_format($material['quantity_dsm'],2)}} {{$material['unit_of_measurement_mat']}}
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-right" data-structures="{{substr($material['structures'],0,-2)}}">
                                             @if ($material['quantity_dsm'] == $material['quantity_prm'])
                                                 <p class="badge bg-success">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
                                             @elseif($material['quantity_prm'] > 0 && $material['quantity_dsm'] > $material['quantity_prm'])
@@ -66,6 +68,7 @@
                                     <tr class="bg-success">
                                         <td>{{($key+1)}}</td>
                                         <td>{{$material['code_mat']}}</td>
+                                        {{-- <td>{{ substr($material['structures'],0,-2)}}</td> --}}
                                         <td>{{$material['description_mat']}}</td>
                                         <td class="text-right">                    
                                             {{number_format($material['quantity_dsm'],2)}} {{$material['unit_of_measurement_mat']}}
