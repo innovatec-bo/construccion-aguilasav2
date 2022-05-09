@@ -417,7 +417,7 @@ return [
                 ],
                 [
                     'text'        => 'Constructores y deudas',
-                    'route'       => 'admin.materials-summary.load-initial-list',
+                    'route'       => 'admin.builder-debts-report.index',
                     'icon'        => 'fas fa-fw fa-book-open',
                     'shift' => 'pl-4',
                 ]

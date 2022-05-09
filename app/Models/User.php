@@ -88,4 +88,9 @@ class User extends Authenticatable
     {
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
+
+    public function statusResponsible()
+    {
+        return $this->hasMany(StatusResponsible::class, 'user_id_sre');
+    }
 }

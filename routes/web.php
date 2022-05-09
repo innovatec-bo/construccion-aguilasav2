@@ -39,6 +39,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
 
     //Materials
     Route::resource('materials', 'MaterialController')->names('materials');
+
+    //Builder debts report
+    Route::get('builder-debts-report', 'BuilderDebtReport@index')->name('builder-debts-report.index');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
