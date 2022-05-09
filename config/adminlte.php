@@ -415,6 +415,12 @@ return [
                     'icon'        => 'fas fa-fw fa-file-upload',
                     'shift' => 'pl-4',
                 ],
+                [
+                    'text'        => 'Constructores y deudas',
+                    'route'       => 'admin.materials-summary.load-initial-list',
+                    'icon'        => 'fas fa-fw fa-book-open',
+                    'shift' => 'pl-4',
+                ]
             ],  
         ],
         [
