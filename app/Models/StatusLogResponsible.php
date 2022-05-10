@@ -24,4 +24,9 @@ class StatusLogResponsible extends Model
     {
         return $this->belongsTo(ProjectStatusLog::class,'status_log_id_slr');
     }
+
+    public function responsible()
+    {
+        return $this->belongsTo(StatusResponsible::class, 'responsible_id_slr');
+    }
 }

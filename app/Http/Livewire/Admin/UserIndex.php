@@ -15,6 +15,7 @@ class UserIndex extends Component
     public $sort = 'id_usr';
     public $direction = 'desc';
     public $deleteId = '';
+    protected $queryString = ['search' => ['except' => '']];
 
     public function updatingSearch()
     {

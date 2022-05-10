@@ -15,6 +15,7 @@ class RoleIndex extends Component
     public $sort = 'id';
     public $direction = 'desc';
     public $deleteId = '';
+    protected $queryString = ['search' => ['except' => '']];
 
     public function updatingSearch()
     {

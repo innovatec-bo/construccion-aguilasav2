@@ -28,4 +28,9 @@ class StatusResponsible extends Model
     {
         return $this->belongsTo(ProjectStatus::class, 'status_id_sre');
     }
+
+    public function statusLogResponsible()
+    {
+        return $this->hasMany(StatusLogResponsible::class, 'responsible_id_slr');
+    }
 }

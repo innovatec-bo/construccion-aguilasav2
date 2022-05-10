@@ -2,9 +2,12 @@
     <div class="col-md-10">
         <div class="card shadow-lg">
             <div class="card-header">
+                @foreach ($statusToVerify as $status)
+                    <span class="right badge badge-warning">{{$status->status_name_pst}}</span>
+                @endforeach
                 <div class="form-group">
                     {!! Form::label('builders', 'Constructores') !!}
-                    {!! Form::select('builders', $builders, null, ['id' => 'builders', 'class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::select('builders', $builders, null, ['id' => 'builders', 'class' => 'form-control', 'required' => 'required', 'wire:model' => 'builderSelected']) !!}
                 <small class="text-danger">{{ $errors->first('builders') }}</small>
                 </div>
                 <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
@@ -17,32 +20,26 @@
                     <thead>
                         <tr>
                             <th style="width: 10px">ID</th>
-                            <th>Nombre completo</th>
-                            <th>Correo</th>
-                            <th>Roles</th>
+                            <th>Proyecto</th>
+                            <th>Constructor</th>
                             <th style="width: 130px">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($projects as $project)
                             <tr>
-                                <td>{{$user->id_usr}}</td>
-                                <td>{{$user->full_name}}</td>
-                                <td>{{$user->email}}</td>
+                                <td>{{$project->id_pro}}</td>
+                                <td>{{$project->code_pro}}</td>
                                 <td>
-                                    @foreach ($user->getRoleNames() as $role)
-                                        <span class="badge bg-primary">{{$role}}</span>
+                                    @foreach ($project->statusLogResponsibles as $statusLogResponsible)
+                                        @if ($statusLogResponsible->responsible->user->hasRole('Builder'))
+                                            {{$statusLogResponsible->responsible->user->full_name}}
+                                        @endif
                                     @endforeach
                                 </td>
                                 <td>
-                                    <button type="button" wire:loading.class="disabled" class="btn btn-primary btn-sm" onclick="window.location.href='{{route('admin.users.edit', $user)}}'"><i class="fas fa-pen"></i></button>
-                                    <button type="button"  wire:loading.class="disabled" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('admin.users.show', $user)}}'"><i class="fas fa-eye"></i></button>
-                                    <form method="post" action="{{route('admin.users.destroy',$user)}}" class="d-inline">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                    
+                                    <a wire:loading.class="disabled" class="btn btn-info btn-sm" href='{{route('admin.labor-details.internal-conciliation', $project->laborDetail)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna"><i class="fas fa-clipboard-list"></i></a>
+                                    <a wire:loading.class="disabled" class="btn btn-warning btn-sm" href='{{route('admin.labor-details.internal-conciliation-builder', $project->laborDetail)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna(Constructor)"><i class="fas fa-clipboard-list"></i></a>
                                 </td>
                             </tr>    
                         @endforeach
@@ -51,7 +48,7 @@
             </div>
 
             <div class="card-footer clearfix">
-                {{ $users->links() }}
+                {{ $projects->links() }}
             </div>
         </div>
     </div>

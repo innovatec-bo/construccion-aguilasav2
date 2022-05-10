@@ -17,6 +17,7 @@ class BuildingStructureIndex extends Component
     public $sort = 'id_bus';
     public $direction = 'desc';
     public $deleteId;
+    protected $queryString = ['search' => ['except' => '']];
 
     public function updatingSearch()
     {

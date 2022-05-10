@@ -17,6 +17,7 @@ class LaborDetailIndex extends Component
     public $sort = 'id_lad';
     public $direction = 'desc';
     public $deleteId = '';
+    protected $queryString = ['search' => ['except' => '']];
 
     public function updatingSearch()
     {

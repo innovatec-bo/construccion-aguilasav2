@@ -19,6 +19,7 @@ class MaterialSummaryIndex extends Component
     public $deleteId;
     public $materialSummaryTypeSelected;
     public $materialSummaryTypes;
+    protected $queryString = ['search' => ['except' => ''], 'materialSummaryTypeSelected' => ['except' => '']];
 
     public function mount()
     {

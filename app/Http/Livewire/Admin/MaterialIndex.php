@@ -15,6 +15,7 @@ class MaterialIndex extends Component
     public $sort = 'id_mat';
     public $direction = 'desc';
     public $deleteId = '';
+    protected $queryString = ['search' => ['except' => '']];
 
     public function updatingSearch()
     {
