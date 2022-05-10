@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -25,7 +26,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.roles.create');
+        $permissions = Permission::pluck('name','id');
+        return view('admin.roles.create', compact('permissions'));
     }
 
     /**
@@ -35,14 +37,18 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $this->validate($request, [
-            'name' => ['required','unique:roles,name']
+            'name' => ['required','unique:roles,name'],
+            'permissions_checked' => ['required']
         ]);
-        Role::create([
+
+        $role = Role::create([
             'name' => $request->name,
             'guard_name' => 'web'
         ]);
+        $permissions = Permission::whereIn('id', $request->permissions_checked)->get();
+        $role->syncPermissions($permissions);
 
         return redirect()->route('admin.roles.index')->with('successMessage','Rol agregado exitosamente.');
     }
@@ -66,7 +72,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('admin.roles.edit', compact('role'));
+        $permissions = Permission::pluck('name','id');
+        $permissionInRole = $role->permissions->pluck('id');
+        return view('admin.roles.edit', compact('role','permissions', 'permissionInRole'));
     }
 
     /**
@@ -83,6 +91,9 @@ class RoleController extends Controller
         ]);
         $role->name = $request->name;
         $role->save();
+
+        $permissions = Permission::whereIn('id', $request->permissions_checked)->get();
+        $role->syncPermissions($permissions);
 
         return redirect()->route('admin.roles.index')->with('successMessage','Rol editado exitosamente.');
     }
