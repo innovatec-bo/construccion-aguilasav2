@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         @error('file')
-                            <span class="text-danger small"> {{$message}} </span>
+                            <span class="text-warning small"> {{$message}} </span>
                         @enderror
                     </div>
                 </div>

@@ -7,22 +7,22 @@
                         <label for="firstName">Nombre</label>
                         <input type="text" id="firstName" class="form-control" placeholder="Nombre" wire:model="firstName">
                         @error('firstName')
-                            <span class="text-danger small"> {{$message}} </span>
+                            <span class="text-warning small"> {{$message}} </span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="lastName">Apellido</label>
                         <input type="text" id="lastName" class="form-control" placeholder="Apellido" wire:model="lastName">
                         @error('lastName')
-                            <span class="text-danger small"> {{$message}} </span>
+                            <span class="text-warning small"> {{$message}} </span>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Correo</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Correo"
-                            wire:model="email" readonly>
+                            wire:model="email">
                         @error('email')
-                            <span class="text-danger small"> {{$message}} </span>
+                            <span class="text-warning small"> {{$message}} </span>
                         @enderror
                     </div>
                     <div class="form-check mb-1">
@@ -34,7 +34,7 @@
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
                             wire:model="password">
                         @error('password')
-                            <span class="text-danger small"> {{$message}} </span>
+                            <span class="text-warning small"> {{$message}} </span>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -45,7 +45,7 @@
                             </div>    
                         @endforeach
                         @error('selectedRoles.*')
-                            <span class="text-danger small"> {{$message}} </span>
+                            <span class="text-warning small"> {{$message}} </span>
                         @enderror
                     </div>
                 </div>

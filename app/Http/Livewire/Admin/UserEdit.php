@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\admin;
 
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 
@@ -38,8 +39,8 @@ class UserEdit extends Component
         $data = [
             'firstName' => 'required',
             'lastName' => 'required',
-            // 'email' => 'required|email|unique:sec_users,email,'.$this->user->id_usr,
-            'email' => 'required|email',
+            'email' => ['required','email',Rule::unique('sec_users')->ignore($this->user->id_usr, 'id_usr')],
+            // 'email' => 'required|email',
             'selectedRoles.*' => 'required|exists:roles,id'
         ];
         if(isset($this->updatePassword))

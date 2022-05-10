@@ -18,7 +18,7 @@
                         <label for="name">Nombre</label>
                         <input type="text" id="name" class="form-control" placeholder="Nombre" name="name" value="{{$permission->name}}">
                         @error('name')
-                            <span class="text-danger small"> {{$message}} </span>
+                            <span class="text-warning small"> {{$message}} </span>
                         @enderror
                     </div> --}}
                         <div class="form-group">

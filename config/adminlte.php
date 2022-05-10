@@ -242,102 +242,57 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'Buscar menu',
         ],
-        // [
-        //     'text' => 'blog',
-        //     'url'  => 'admin/blog',
-        //     'can'  => 'manage-blog',
-        // ],
         [
             'text'        => 'Inicio',
             'route'       => 'admin.home.index',
             'icon'        => 'fas fa-fw fa-home',
         ],
-        // [
-        //     'text'        => 'Dashboard',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'fas fa-fw fa-tachometer-alt',
-        // ],
-        // [
-        //     'text'        => 'Workflow',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'fas fa-fw fa-table',
-        // ],
-        // [
-        //     'text'        => 'Habilitar linea de procesos',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'fas fa-fw fa-table',
-        // ],
-        // [
-        //     'text'        => 'Cerrar mes',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'fas fa-fw fa-table',
-        //     'submenu'     => [
-        //         [
-        //             'text'        => 'Lista',
-        //             'url'         => 'admin/pages',
-        //             'icon'        => 'fas fa-fw fa-table',
-        //             'shift' => 'pl-4',
-        //         ]       
-        //     ]
-        // ],
-        // [
-        //     'text'        => 'Asignacion de fiscales',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'fas fa-fw fa-table',
-        // ],
-        // [
-        //     'text'        => 'Observaciones externas',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'fas fa-fw fa-table',
-        // ],
-        // [
-        //     'text'        => 'Plan de trabajo',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'fas fa-fw fa-table',
-        // ],
         [
             'text'        => 'Usuarios',
             'icon'        => 'fas fa-fw fa-users',
+            'can'         => ['admin.users.index', 'admin.users.create'],
             'submenu'     => [
                 [
                     'text'        => 'Lista',
+                    'can'         => 'admin.users.index',
                     'route'       => 'admin.users.index',
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Crear',
+                    'can'         => 'admin.users.create',
                     'route'       => 'admin.users.create',
                     'icon'        => 'fas fa-fw fa-plus',
                     'shift' => 'pl-4',
                 ]       
             ]
         ],
-        [
-            'text'        => 'Proyectos',
-            'icon'        => 'fas fa-fw fa-folder',
-            'submenu'     => [
-                [
-                    'text'        => 'Lista',
-                    'url'         => 'admin/pages',
-                    'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'pl-4',
-                ],
-                [
-                    'text'        => 'Mapa',
-                    'url'         => 'admin/pages',
-                    'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'pl-4',
-                ],
-                [
-                    'text'        => 'Crear',
-                    'url'         => 'admin/pages',
-                    'icon'        => 'fas fa-fw fa-plus',
-                    'shift' => 'pl-4',
-                ]
+        // [
+        //     'text'        => 'Proyectos',
+        //     'icon'        => 'fas fa-fw fa-folder',
+        //     'submenu'     => [
+        //         [
+        //             'text'        => 'Lista',
+        //             'url'         => 'admin/pages',
+        //             'icon'        => 'fas fa-fw fa-table',
+        //             'shift' => 'pl-4',
+        //         ],
+        //         [
+        //             'text'        => 'Mapa',
+        //             'url'         => 'admin/pages',
+        //             'icon'        => 'fas fa-fw fa-table',
+        //             'shift' => 'pl-4',
+        //         ],
+        //         [
+        //             'text'        => 'Crear',
+        //             'url'         => 'admin/pages',
+        //             'icon'        => 'fas fa-fw fa-plus',
+        //             'shift' => 'pl-4',
+        //         ]
 
-            ]
-        ],
+        //     ]
+        // ],
         [
             'text'        => 'Manos de obra',
             'icon'        => 'fas fa-fw fa-tools',
@@ -361,42 +316,6 @@ return [
                     'shift' => 'pl-4',
                 ]
 
-            ]
-        ],
-        [
-            'text'        => 'Permisos',
-            'icon'        => 'fas fa-fw fa-user-shield',
-            'submenu'     => [
-                [
-                    'text'        => 'Lista',
-                    'route'       => 'admin.permissions.index',
-                    'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'pl-4',
-                ],
-                [
-                    'text'        => 'Crear',
-                    'route'       => 'admin.permissions.create',
-                    'icon'        => 'fas fa-fw fa-plus',
-                    'shift' => 'pl-4',
-                ]       
-            ]
-        ],
-        [
-            'text'        => 'Roles',
-            'icon'        => 'fas fa-fw fa-id-card',
-            'submenu'     => [
-                [
-                    'text'        => 'Lista',
-                    'route'       => 'admin.roles.index',
-                    'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'pl-4',
-                ],
-                [
-                    'text'        => 'Crear',
-                    'route'       => 'admin.roles.create',
-                    'icon'        => 'fas fa-fw fa-plus',
-                    'shift' => 'pl-4',
-                ]       
             ]
         ],
         [
@@ -459,22 +378,43 @@ return [
                 ]
             ]
         ],
-        // ['header' => 'labels'],
-        // [
-        //     'text'       => 'important',
-        //     'icon_color' => 'red',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'warning',
-        //     'icon_color' => 'yellow',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'information',
-        //     'icon_color' => 'cyan',
-        //     'url'        => '#',
-        // ],
+        ['header' => 'Seguridad'],
+        [
+            'text'        => 'Permisos',
+            'icon'        => 'fas fa-fw fa-user-shield',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'route'       => 'admin.permissions.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'pl-4',
+                ],
+                [
+                    'text'        => 'Crear',
+                    'route'       => 'admin.permissions.create',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'pl-4',
+                ]       
+            ]
+        ],
+        [
+            'text'        => 'Roles',
+            'icon'        => 'fas fa-fw fa-id-card',
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'route'       => 'admin.roles.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'pl-4',
+                ],
+                [
+                    'text'        => 'Crear',
+                    'route'       => 'admin.roles.create',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'pl-4',
+                ]       
+            ]
+        ],
     ],
 
     /*
