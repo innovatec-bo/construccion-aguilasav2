@@ -37,11 +37,13 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:permissions,name'
+            'name' => 'required|unique:permissions,name',
+            'detail' => 'required|max:100'
         ]);
 
         Permission::create([
             'name' => $request->name,
+            'detail' => $request->detail,
             'guard_name' => 'web'
         ]);
         return redirect()->route('admin.permissions.index')->with('successMessage','Permiso creado exitosamente');
@@ -79,10 +81,12 @@ class PermissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         $this->validate($request, [
-            'name' => ['required','unique:permissions,name,'.$permission->id]
+            'name' => ['required','unique:permissions,name,'.$permission->id],
+            'detail' => ['required','max:100']
         ]);
 
         $permission->name = $request->name;
+        $permission->detail = $request->detail;
         $permission->save();
         return redirect()->route('admin.permissions.index')->with('successMessage','Permiso actualizado exitosamente');
     }

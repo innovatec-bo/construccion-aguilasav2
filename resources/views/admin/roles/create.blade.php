@@ -19,11 +19,11 @@
                     {!! Form::text('name', null, ['class' => 'form-control '.($errors->has('name') ? ' is-invalid' : '' )]) !!}
                         <small class="text-warning">{{ $errors->first('name') }}</small>
                     </div>
-                    
+                    {!! Form::label('name', 'Permisos') !!}
                     <div class="form-group">
                         <div class="row">
                             @foreach ($permissions as $key => $permission)
-                                <div class="col-sm-4">
+                                <div class="col-md-6">
                                     <div class="checkbox">
                                         <label for="permissions_checked_{{$key}}">
                                             {!! Form::checkbox('permissions_checked[]', $key, null, ['id' => 'permissions_checked_'.$key]) !!} {{$permission}}

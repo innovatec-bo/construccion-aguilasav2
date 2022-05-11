@@ -19,7 +19,7 @@
                         {!! Form::text('name', $role->name, ['class' => 'form-control '.($errors->has('name') ? ' is-invalid' : '')]) !!}
                         <small class="text-warning">{{ $errors->first('name') }}</small>
                     </div>
-    
+                    {!! Form::label('name', 'Permisos') !!}
                     <div class="form-group">
                         <div class="row">
                             @foreach ($permissions as $key => $permission)
@@ -37,7 +37,6 @@
                         </div>
                     </div>
                 </div>
-
                 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>

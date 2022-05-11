@@ -12,6 +12,7 @@
                         <tr>
                             <th style="width: 10px">ID</th>
                             <th>Nombre</th>
+                            <th>Detalle</th>
                             <th style="width: 130px">Opciones</th>
                         </tr>
                     </thead>
@@ -20,6 +21,7 @@
                             <tr>
                                 <td>{{$permission->id}}</td>
                                 <td>{{$permission->name}}</td>
+                                <td>{{$permission->detail}}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='{{route('admin.permissions.edit', $permission)}}'"><i class="fas fa-pen"></i></button>
                                     <button type="button" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('admin.permissions.show', $permission)}}'"><i class="fas fa-eye"></i></button>

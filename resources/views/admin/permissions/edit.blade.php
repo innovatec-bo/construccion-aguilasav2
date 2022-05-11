@@ -21,6 +21,11 @@
                             <span class="text-warning small"> {{$message}} </span>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        {!! Form::label('detail', 'Detalle') !!}
+                        {!! Form::text('detail', $permission->detail, ['class' => 'form-control '.($errors->has('detail') ? ' is-invalid' : ''), 'required' => 'required']) !!}
+                        <small class="text-warning">{{ $errors->first('detail') }}</small>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
