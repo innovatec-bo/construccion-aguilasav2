@@ -20,9 +20,15 @@ class BuilderDebtReportIndex extends Component
     public $direction = 'asc';
     public $deleteId = '';
     public $builderSelected;
-    public $statusToVerify;
+    public $statusSelected;
     public $keywordsStatusToVerify;
-    protected $queryString = ['search' => ['except' => ''],'builderSelected' => ['except' => '']];
+    // public $builders;
+    protected $queryString = 
+    [
+        'search' => ['except' => ''],
+        'builderSelected' => ['except' => ''],
+        'statusSelected' => ['except' => '']
+    ];
 
     public function updatingSearch()
     {
@@ -32,14 +38,12 @@ class BuilderDebtReportIndex extends Component
     public function mount()
     {
         $this->keywordsStatusToVerify = ['in_progress','stopped','paused','completed','as_built','conciliation_reception','conciliation_shipment','request_materials_return','cre_return_order','project_return_materials','project_real_budget'];
-        $this->statusToVerify = ProjectStatus::whereIn('keyword_pst', $this->keywordsStatusToVerify)->get();
     }
 
     public function render()
     {
-        
-        $builders = User::role('builder')->orderBy('firstname_usr','asc')->get()->pluck('full_name','id_usr')->prepend('--Lista de constructores--','');
-        
+        $statusToVerify = ProjectStatus::whereIn('keyword_pst', $this->keywordsStatusToVerify)->orderBy('order_pst')->get()->pluck('status_name_pst','id_pst')->prepend('--Todos--','');
+        $builders = User::role('builder')->orderBy('firstname_usr','asc')->get()->pluck('full_name','id_usr')->prepend('--Todos--','');
         $projects = Project::whereHas('status', function(Builder $query){
             $query->whereIn('keyword_pst',$this->keywordsStatusToVerify);
         });
@@ -55,6 +59,10 @@ class BuilderDebtReportIndex extends Component
                 });
             });
         }
+        if(isset($this->statusSelected) && $this->statusSelected != "")
+        {
+            $projects = $projects->where('status_pro', $this->statusSelected);
+        }
         $projects = $projects
         ->whereHas('laborDetail', function(Builder $query){
             $query->whereHas('laborCosts', function(Builder $query){
@@ -64,7 +72,7 @@ class BuilderDebtReportIndex extends Component
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
 
-        return view('livewire.admin.builder-debt-report-index', compact('projects', 'builders'));
+        return view('livewire.admin.builder-debt-report-index', compact('projects','builders','statusToVerify'));
     }
 
     public function order($sort)
