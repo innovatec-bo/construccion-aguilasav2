@@ -388,19 +388,19 @@ return [
         [
             'text'        => 'Permisos',
             'icon'        => 'fas fa-fw fa-user-shield',
-            // 'can'         => ['admin.permissions.index', 'admin.permissions.create'],
+            'can'         => ['admin.permissions.index', 'admin.permissions.create'],
             'submenu'     => [
                 [
                     'text'        => 'Lista',
                     'route'       => 'admin.permissions.index',
-                    // 'can'         => 'admin.permissions.index',
+                    'can'         => 'admin.permissions.index',
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Crear',
                     'route'       => 'admin.permissions.create',
-                    // 'can'         => 'admin.permissions.create',
+                    'can'         => 'admin.permissions.create',
                     'icon'        => 'fas fa-fw fa-plus',
                     'shift' => 'pl-4',
                 ]       
