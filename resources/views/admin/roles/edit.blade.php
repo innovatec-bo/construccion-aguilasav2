@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <div class="row">
                             @foreach ($permissions as $key => $permission)
-                                <div class="col-sm-4">
+                                <div class="col-md-12">
                                     <div class="checkbox">
                                         <label for="permissions_checked_{{$key}}">
                                             {!! Form::checkbox('permissions_checked[]', $key, $permissionInRole->contains($key), ['id' => 'permissions_checked_'.$key]) !!} {{$permission}}

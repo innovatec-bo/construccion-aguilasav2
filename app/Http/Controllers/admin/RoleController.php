@@ -26,7 +26,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::pluck('detail','id');
+        $permissions = Permission::orderBy('detail')->get()->pluck('detail','id');
         return view('admin.roles.create', compact('permissions'));
     }
 
@@ -72,7 +72,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        $permissions = Permission::pluck('detail','id');
+        $permissions = Permission::orderBy('detail')->get()->pluck('detail','id');
         $permissionInRole = $role->permissions->pluck('id');
         return view('admin.roles.edit', compact('role','permissions', 'permissionInRole'));
     }
