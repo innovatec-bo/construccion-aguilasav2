@@ -296,47 +296,47 @@ return [
         [
             'text'        => 'Manos de obra',
             'icon'        => 'fas fa-fw fa-tools',
+            'can'         => ['admin.labor-details.index','admin.projects.rectify-manpower'],
             'submenu'     => [
                 [
                     'text'        => 'Lista',
-                    'route'         => 'admin.labor-details.index',
+                    'route'       => 'admin.labor-details.index',
+                    'can'         => 'admin.labor-details.index',
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Rectificar Mano de obra',
                     'route'       => 'admin.projects.rectify-manpower',
+                    'can'         => 'admin.projects.rectify-manpower',
                     'icon'        => 'fas fa-fw fa-edit',
                     'shift' => 'pl-4',
-                ],
-                [
-                    'text'        => 'Conciliacion Interna',
-                    'route'       => 'admin.projects.rectify-manpower',
-                    'icon'        => 'fas fa-clipboard-list',
-                    'shift' => 'pl-4',
                 ]
-
             ]
         ],
         [
             'text'        => 'Almacen',
             'icon'        => 'fas fa-fw fa-warehouse',
+            'can'         => ['admin.materials-summary.index','admin.materials-summary.load-initial-list','admin.builder-debts-report.index'],
             'submenu'     => [
                 [
                     'text'        => 'Movimientos',
                     'route'       => 'admin.materials-summary.index',
+                    'can'         => 'admin.materials-summary.index',
                     'icon'        => 'fas fa-fw fa-file-alt',
                     'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Cargar lista inicial',
                     'route'       => 'admin.materials-summary.load-initial-list',
+                    'can'         => 'admin.materials-summary.load-initial-list',
                     'icon'        => 'fas fa-fw fa-file-upload',
                     'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Constructores y deudas',
                     'route'       => 'admin.builder-debts-report.index',
+                    'can'         => 'admin.builder-debts-report.index',
                     'icon'        => 'fas fa-fw fa-book-open',
                     'shift' => 'pl-4',
                 ]
@@ -345,16 +345,19 @@ return [
         [
             'text'        => 'Estructuras',
             'icon'        => 'fas fa-fw fa-shapes',
+            'can'         => ['admin.building-structures.index','admin.building-structures.upload-default-materials'],
             'submenu'     => [
                 [
                     'text'        => 'Lista',
                     'route'       => 'admin.building-structures.index',
+                    'can'         => 'admin.building-structures.index',
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Establecer materiales',
                     'route'       => 'admin.building-structures.upload-default-materials',
+                    'can'         => 'admin.building-structures.upload-default-materials',
                     'icon'        => 'fas fa-fw fa-cogs',
                     'shift' => 'pl-4',
                 ]
@@ -363,16 +366,19 @@ return [
         [
             'text'        => 'Materiales',
             'icon'        => 'fas fa-fw fa-shapes',
+            'can'         => ['admin.materials.index', 'admin.materials.create'],
             'submenu'     => [
                 [
                     'text'        => 'Lista',
                     'route'       => 'admin.materials.index',
+                    'can'         => 'admin.materials.index',
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Crear',
                     'route'       => 'admin.materials.create',
+                    'can'         => 'admin.materials.create',
                     'icon'        => 'fas fa-fw fa-plus',
                     'shift' => 'pl-4',
                 ]
@@ -382,16 +388,19 @@ return [
         [
             'text'        => 'Permisos',
             'icon'        => 'fas fa-fw fa-user-shield',
+            // 'can'         => ['admin.permissions.index', 'admin.permissions.create'],
             'submenu'     => [
                 [
                     'text'        => 'Lista',
                     'route'       => 'admin.permissions.index',
+                    // 'can'         => 'admin.permissions.index',
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Crear',
                     'route'       => 'admin.permissions.create',
+                    // 'can'         => 'admin.permissions.create',
                     'icon'        => 'fas fa-fw fa-plus',
                     'shift' => 'pl-4',
                 ]       
@@ -400,16 +409,19 @@ return [
         [
             'text'        => 'Roles',
             'icon'        => 'fas fa-fw fa-id-card',
+            'can'         => ['admin.roles.index', 'admin.roles.create'],
             'submenu'     => [
                 [
                     'text'        => 'Lista',
                     'route'       => 'admin.roles.index',
+                    'can'         => 'admin.roles.index',
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'pl-4',
                 ],
                 [
                     'text'        => 'Crear',
                     'route'       => 'admin.roles.create',
+                    'can'         => 'admin.roles.create',
                     'icon'        => 'fas fa-fw fa-plus',
                     'shift' => 'pl-4',
                 ]       
