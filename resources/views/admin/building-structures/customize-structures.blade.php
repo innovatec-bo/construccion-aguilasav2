@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Detalle de mano de obra')
+@section('title', 'Perzonalizar estructuras')
 
 @section('content_header')
-    <h1>Detalle de mano de obra</h1>
+    <h1>Perzonalizar estructuras</h1>
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
         <div class="col-md-10">
             <div class="card shadow-lg">
                 <div class="card-header">
-                    <h3 class="card-title">Proyecto: {{$laborDetail->project->code_pro}}</h3>
+                    <h3 class="card-title">Proyecto: {{$project->code_pro}}</h3>
                 </div>
 
                 <div class="card-body">
@@ -23,13 +23,13 @@
                                 <th>Ejecucion</th>
                                 <th>Cantidad</th>
                                 <th>Precio<br>Unitario</th>
-                                <th>Es adicional?</th>
-                                <th>Nro. Materiales</th>
-                                <th>Personalizar<br>materiales</th>
+                                <th>Es<br>adicional?</th>
+                                <th>Nro.<br>Materiales</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($laborDetail->laborCosts as $laborCost)
+                            @foreach ($project->laborDetail->laborCosts as $laborCost)
                                 <tr>
                                     <td>
                                         <span class="badge badge-info">{{$laborCost->buildingStructure->structure_code_bus}}</span>
@@ -70,7 +70,7 @@
                                         {{$laborCost->buildingStructure->defaultStructureMaterials->count()}}
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.labor-costs.edit', $laborCost)}}" class="btn btn-sm btn-primary" target="_blank"><i class="fas fa-fw fa-pen"></i></a>
+                                        <a href="#" target="_blank" class="btn btn-sm btn-primary"><i class="fas fa-fw fa-pen"></i> Personalizar</a>
                                     </td>
                                 </tr>    
                             @endforeach

@@ -28,7 +28,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::resource('materials-summary','MaterialSummaryController')->names('materials-summary');
 
     //Building Structures
-    Route::post('building-structures/store-default-materials','BuildingStructureController@storeDefaultMaterials')->name('building-structures.store-default-materials');
+    Route::get('building-structures/customize-structures/{project}','BuildingStructureController@customizeStructures')->name('building-structures.custimize-structures');
     Route::get('building-structures/upload-default-materials','BuildingStructureController@uploadDefaultMaterials')->name('building-structures.upload-default-materials');
     Route::resource('building-structures','BuildingStructureController')->names('building-structures');
 
@@ -42,6 +42,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
 
     //Builder debts report
     Route::get('builder-debts-report', 'BuilderDebtReport@index')->name('builder-debts-report.index');
+
+    //Labor costs
+    Route::resource('labor-costs', 'LaborCostController')->names('labor-costs');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');

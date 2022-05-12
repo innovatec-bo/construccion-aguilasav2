@@ -268,31 +268,6 @@ return [
                 ]       
             ]
         ],
-        // [
-        //     'text'        => 'Proyectos',
-        //     'icon'        => 'fas fa-fw fa-folder',
-        //     'submenu'     => [
-        //         [
-        //             'text'        => 'Lista',
-        //             'url'         => 'admin/pages',
-        //             'icon'        => 'fas fa-fw fa-table',
-        //             'shift' => 'pl-4',
-        //         ],
-        //         [
-        //             'text'        => 'Mapa',
-        //             'url'         => 'admin/pages',
-        //             'icon'        => 'fas fa-fw fa-table',
-        //             'shift' => 'pl-4',
-        //         ],
-        //         [
-        //             'text'        => 'Crear',
-        //             'url'         => 'admin/pages',
-        //             'icon'        => 'fas fa-fw fa-plus',
-        //             'shift' => 'pl-4',
-        //         ]
-
-        //     ]
-        // ],
         [
             'text'        => 'Manos de obra',
             'icon'        => 'fas fa-fw fa-tools',

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\BuildingStructure;
-use App\Models\Project;
+use App\Models\LaborCost;
 use Illuminate\Http\Request;
 
-class BuildingStructureController extends Controller
+class LaborCostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class BuildingStructureController extends Controller
      */
     public function index()
     {
-        return view('admin.building-structures.index');
+        //
     }
 
     /**
@@ -43,33 +42,33 @@ class BuildingStructureController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\BuildingStructure  $buildingStructure
+     * @param  \App\Models\LaborCost  $laborCost
      * @return \Illuminate\Http\Response
      */
-    public function show(BuildingStructure $buildingStructure)
+    public function show(LaborCost $laborCost)
     {
-        return view('admin.building-structures.show', compact('buildingStructure'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\BuildingStructure  $buildingStructure
+     * @param  \App\Models\LaborCost  $laborCost
      * @return \Illuminate\Http\Response
      */
-    public function edit(BuildingStructure $buildingStructure)
+    public function edit(LaborCost $laborCost)
     {
-        //
+        return view('admin.labor-costs.edit', compact('laborCost'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BuildingStructure  $buildingStructure
+     * @param  \App\Models\LaborCost  $laborCost
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BuildingStructure $buildingStructure)
+    public function update(Request $request, LaborCost $laborCost)
     {
         //
     }
@@ -77,21 +76,11 @@ class BuildingStructureController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\BuildingStructure  $buildingStructure
+     * @param  \App\Models\LaborCost  $laborCost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BuildingStructure $buildingStructure)
+    public function destroy(LaborCost $laborCost)
     {
         //
-    }
-
-    public function uploadDefaultMaterials()
-    {
-        return view('admin.building-structures.upload-default-materials');
-    }
-
-    public function customizeStructures(Project $project)
-    {//dd($project->code_pro);
-        return view('admin.building-structures.customize-structures', compact('project'));
     }
 }
