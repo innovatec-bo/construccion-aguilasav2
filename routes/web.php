@@ -28,7 +28,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::resource('materials-summary','MaterialSummaryController')->names('materials-summary');
 
     //Building Structures
-    Route::get('building-structures/customize-structures/{project}','BuildingStructureController@customizeStructures')->name('building-structures.custimize-structures');
     Route::get('building-structures/upload-default-materials','BuildingStructureController@uploadDefaultMaterials')->name('building-structures.upload-default-materials');
     Route::resource('building-structures','BuildingStructureController')->names('building-structures');
 

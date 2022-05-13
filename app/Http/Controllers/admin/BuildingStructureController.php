@@ -89,9 +89,4 @@ class BuildingStructureController extends Controller
     {
         return view('admin.building-structures.upload-default-materials');
     }
-
-    public function customizeStructures(Project $project)
-    {//dd($project->code_pro);
-        return view('admin.building-structures.customize-structures', compact('project'));
-    }
 }
