@@ -28,4 +28,9 @@ class LaborCost extends Model
     {
         return $this->belongsTo(BuildingStructure::class, 'building_structure_id_lac');
     }
+
+    public function customStructureMaterials()
+    {
+        return $this->hasMany(CustomStructureMaterial::class, 'labor_cost_id');
+    }
 }

@@ -25,12 +25,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($laborCost->buildingStructure->defaultStructureMaterials as $default)
+                            @foreach ($laborCost->customStructureMaterials as $custom)
                             <tr>
-                                <td class="text-warning">{{ $default->material->code_mat }}</td>
-                                <td>{{ $default->material->description_mat }}</td>
+                                <td class="text-warning">{{ $custom->material->code_mat }}</td>
+                                <td>{{ $custom->material->description_mat }}</td>
                                 <td class="">
-                                    <input type="text" class="input-mask text-right" name="" value="{{$default->quantity_dsm}}" id="" style="width: 80px"> {{ $default->material->unit_of_measurement_mat }}
+                                    <input type="text" class="input-mask text-right" name="" value="{{$custom->quantity_csm}}" id="" style="width: 80px"> {{ $custom->material->unit_of_measurement_mat }}
                                 </td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-sm btn-danger py-0"><i class="fas fa-fw fa-times"></i></a>

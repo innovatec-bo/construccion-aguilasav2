@@ -16,6 +16,13 @@ class CustomStructureMaterial extends Model
     protected $table = "bui_custom_structure_materials";
     protected $primaryKey = "id_csm";
 
-    const CREATED_AT = 'createdon_csm';
-    const UPDATED_AT = 'editedon_csm';
+    public function laborCost()
+    {
+        return $this->belongsTo(LaborCost::class, 'labor_cost_id');
+    }
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class, 'material_id_csm');
+    }
 }
