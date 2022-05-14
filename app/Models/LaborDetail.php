@@ -74,26 +74,20 @@ class LaborDetail extends Model
             {
                 foreach ($laborCost->buildingStructure->defaultStructureMaterials as $default) 
                 {
-                    // $newCustom = new CustomStructureMaterial;
-                    // $newCustom->labor_cost_id = $laborCost->id_lac;
-                    // $newCustom->material_id_csm = $default->material_id_dsm;
-                    // $newCustom->quantity_csm = $default->quantity_dsm;
-                    // dd($newCustom->created_at);
-                    // $saveAsCustom[] = $newCustom;
                     $saveAsCustom[] = [
                         'labor_cost_id' => $laborCost->id_lac,
                         'material_id_csm' => $default->material_id_dsm,
                         'quantity_csm' => $default->quantity_dsm
                     ];
-                    $object = new CustomStructureMaterial();
+                }
+            }
+            $object = new CustomStructureMaterial();
                     $saveAsCustom = array_map(function ($data) use ($object) {
                         $timestamp = $object->freshTimestampString();
                         $data['created_at'] = $timestamp;
                         $data['created_by'] = Auth::user()->id_usr;
                         return $data;
                     }, $saveAsCustom);
-                }
-            }
             if(count($saveAsCustom) > 0)
             {
                 CustomStructureMaterial::insert($saveAsCustom);

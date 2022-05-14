@@ -3,7 +3,7 @@
 @section('title', 'Editar estructura del proyecto ' . $laborCost->laborDetail->project->code_pro)
 
 @section('content_header')
-    <h1>Editar estructura del proyecto {{ $laborCost->laborDetail->project->code_pro }}</h1>
+    <h1>Editar estructura {{$laborCost->buildingStructure->structure_code_bus}} del proyecto {{ $laborCost->laborDetail->project->code_pro }}</h1>
 @stop
 
 @section('content')

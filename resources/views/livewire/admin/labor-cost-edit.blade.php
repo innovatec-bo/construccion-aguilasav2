@@ -11,7 +11,7 @@
             </div>
 
             <div class="card-body p-0">
-                <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
+                <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search, save, addToCurrentList, removeFromCurrentList">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <table class="table table-sm">
@@ -20,7 +20,7 @@
                             <tr>
                                 <td><span class="text-warning">{{$material->code_mat}}</span> {{$material->description_mat}}</td>
                                 <td style="width: 50px">
-                                    <button class="btn btn-sm btn-primary py-0"><i class="fas fa-angle-right"></i></button>
+                                    <button class="btn btn-sm btn-primary py-0" wire:click="addToCurrentList({{$material}})"><i class="fas fa-angle-right"></i></button>
                                 </td>
                             </tr>    
                         @endforeach
@@ -55,9 +55,12 @@
             <div class="widget-user-header bg-info">
                 <h3 class="widget-user-username ml-1">{{ $laborCost->buildingStructure->description_bus }}</h3>
                 <h5 class="widget-user-desc ml-1">{{ $laborCost->buildingStructure->structure_code_bus }}</h5>
-                <button type="button" class="btn btn-success float-right">Guardar</button>
+                <button type="button" class="btn btn-success float-right" wire:click="save">Guardar</button>
             </div>
             <div class="card-body p-0">
+                <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search, save, addToCurrentList, removeFromCurrentList">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                </div>
                 <table class="table table-sm">
                     <thead>
                         <tr>
@@ -68,18 +71,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($laborCost->customStructureMaterials as $custom)
+                        @foreach ($currentList as $custom)
                             <tr>
-                                <td class="text-warning">{{ $custom->material->code_mat }}</td>
-                                <td>{{ $custom->material->description_mat }}</td>
+                                <td class="text-warning">{{ $custom['code_mat'] }}</td>
+                                <td>{{ $custom['description_mat'] }}</td>
                                 <td class="">
-                                    <input type="text" class="input-mask text-right" name=""
-                                        value="{{ $custom->quantity_csm }}" id="" style="width: 80px">
-                                    {{ $custom->material->unit_of_measurement_mat }}
+                                    <input type="text" class="input-mask text-right" name="" value="{{$custom['quantity_csm']}}" wire:model="currentList.{{$custom['id_mat']}}.quantity_csm" id="" style="width: 80px">
+                                    {{ $custom['unit_of_measurement_mat'] }}
                                 </td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-danger py-0"><i
-                                            class="fas fa-fw fa-times"></i></a>
+                                    <button type="button" class="btn btn-sm btn-danger py-0" wire:click="removeFromCurrentList({{$custom['id_mat']}})">
+                                        <i class="fas fa-fw fa-times"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -88,4 +91,4 @@
             </div>
         </div>
     </div>
-</div>
+</div

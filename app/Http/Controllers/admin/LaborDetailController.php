@@ -51,6 +51,7 @@ class LaborDetailController extends Controller
      */
     public function show(LaborDetail $laborDetail)
     {
+        $laborDetail->applyCustomMaterials();
         return view('admin.labor-details.show', compact('laborDetail'));
     }
 

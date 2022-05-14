@@ -67,7 +67,7 @@
                                         @endswitch
                                     </td>
                                     <td>
-                                        {{$laborCost->buildingStructure->defaultStructureMaterials->count()}}
+                                        {{$laborCost->customStructureMaterials->count()}}
                                     </td>
                                     <td>
                                         <a href="{{route('admin.labor-costs.edit', $laborCost)}}" class="btn btn-sm btn-primary" target="_blank"><i class="fas fa-fw fa-pen"></i></a>
