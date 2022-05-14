@@ -64,10 +64,13 @@
                                         class="btn btn-secondary btn-sm"
                                         href='{{ route('admin.materials-summary.show', $materialSummary) }}'"><i
                                             class="fas fa-eye"></i></a>
-                                    <a href="javascript:void(0)" wire:loading.class="disabled"
+                                    @if (Auth::user()->email == 'jair@twiiti.com')
+                                        <a href="javascript:void(0)" wire:loading.class="disabled"
                                         data-record='{{ $materialSummary }}'
                                         class="btn btn-danger btn-sm lv-confirm-action"><i
-                                            class="fas fa-trash"></i></a>
+                                            class="fas fa-trash"></i></a>    
+                                    @endif
+                                    
                                 </td>
                             </tr>
                         @endforeach
