@@ -70,7 +70,7 @@
                                         {{$laborCost->customStructureMaterials->count()}}
                                     </td>
                                     <td>
-                                        @can('admin.labor-costs.edit', $post)
+                                        @can('admin.labor-costs.edit')
                                             <a href="{{route('admin.labor-costs.edit', $laborCost)}}" class="btn btn-sm btn-primary" target="_blank"><i class="fas fa-fw fa-pen"></i></a>    
                                         @endcan
                                     </td>
