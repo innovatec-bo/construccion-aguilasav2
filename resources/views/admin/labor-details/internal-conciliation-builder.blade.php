@@ -38,22 +38,22 @@
                                     $i =1;
                                 @endphp
                                 @foreach ($materialsToBeReturned as $key => $material)
-                                    @if ($material['quantity_prm'] == 0 || $material['quantity_prm'] < $material['quantity_dsm'])
+                                    @if ($material['quantity_prm'] == 0 || $material['quantity_prm'] < $material['quantity_csm'])
                                         <tr>
                                             <td>{{($i)}}</td>
                                             <td>{{$material['code_mat']}}</td>
                                             <td>{{$material['description_mat']}}</td>
                                             <td class="text-right">                    
-                                                {{number_format($material['quantity_dsm'],2)}} {{$material['unit_of_measurement_mat']}}
+                                                {{number_format($material['quantity_csm'],2)}} {{$material['unit_of_measurement_mat']}}
                                             </td>
                                             <td class="text-right">
-                                                @if ($material['quantity_dsm'] == $material['quantity_prm'])
+                                                @if ($material['quantity_csm'] == $material['quantity_prm'])
                                                     <p class="badge bg-success">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
-                                                @elseif($material['quantity_prm'] > 0 && $material['quantity_dsm'] > $material['quantity_prm'])
+                                                @elseif($material['quantity_prm'] > 0 && $material['quantity_csm'] > $material['quantity_prm'])
                                                     <p class="badge bg-info">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
                                                 @elseif($material['quantity_prm'] == 0)
                                                     <p class="badge bg-danger">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
-                                                @elseif($material['quantity_prm'] > $material['quantity_dsm'])
+                                                @elseif($material['quantity_prm'] > $material['quantity_csm'])
                                                     <p class="badge bg-warning">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
                                                 @endif
                                                 

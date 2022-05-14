@@ -91,6 +91,7 @@ class LaborDetailController extends Controller
 
     public function internalConciliation(LaborDetail $laborDetail)
     {
+        $laborDetail->applyCustomMaterials();
         //builder_returns_materials
         $returnedMaterials = [];
         foreach ($laborDetail->project->materialSummaries->whereIn('summary_type_id_msu',[18]) as $key => $materialSummary) 
@@ -107,7 +108,7 @@ class LaborDetailController extends Controller
                             'description_mat' => $projectMaterial->material->description_mat,
                             'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
                             'quantity_prm' => 0,
-                            'quantity_dsm' => 0,
+                            'quantity_csm' => 0,
                             'structures' => ''
                         ];
                     }
@@ -119,30 +120,30 @@ class LaborDetailController extends Controller
         $materialsToBeReturned = [];
         foreach ($laborDetail->laborCosts->where('activity_lac','R') as $laborCost)
         {
-            $totalDefaultMaterials = $laborCost->buildingStructure->defaultStructureMaterials->count();
-            foreach ($laborCost->buildingStructure->defaultStructureMaterials as $defaultMaterial)
+            $totalCustomMaterials = $laborCost->customStructureMaterials->count();
+            foreach ($laborCost->customStructureMaterials as $customMaterial)
             {
-                if(!isset($materialsToBeReturned[$defaultMaterial->material->code_mat]))
+                if(!isset($materialsToBeReturned[$customMaterial->material->code_mat]))
                 {
-                    $materialsToBeReturned[$defaultMaterial->material->code_mat] = [
-                        'code_mat' =>  $defaultMaterial->material->code_mat,
-                        'description_mat' => $defaultMaterial->material->description_mat,
-                        'unit_of_measurement_mat' => $defaultMaterial->material->unit_of_measurement_mat,
-                        'quantity_dsm' => 0,
+                    $materialsToBeReturned[$customMaterial->material->code_mat] = [
+                        'code_mat' =>  $customMaterial->material->code_mat,
+                        'description_mat' => $customMaterial->material->description_mat,
+                        'unit_of_measurement_mat' => $customMaterial->material->unit_of_measurement_mat,
+                        'quantity_csm' => 0,
                         'quantity_prm' => 0,
                         'structures' => ''
                     ];
                 }
                 
-                if($totalDefaultMaterials == 1)
+                if($totalCustomMaterials == 1)
                 {
-                    $materialsToBeReturned[$defaultMaterial->material->code_mat]['quantity_dsm'] = $laborCost->quantity_lac;
+                    $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] = $laborCost->quantity_lac;
                 }
                 else
                 {
-                    $materialsToBeReturned[$defaultMaterial->material->code_mat]['quantity_dsm'] += $defaultMaterial->quantity_dsm;
+                    $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] += $customMaterial->quantity_csm;
                 }
-                $materialsToBeReturned[$defaultMaterial->material->code_mat]['structures'] .= $laborCost->buildingStructure->structure_code_bus.', ';
+                $materialsToBeReturned[$customMaterial->material->code_mat]['structures'] .= $laborCost->buildingStructure->structure_code_bus.', ';
             }
         }
 
@@ -164,6 +165,7 @@ class LaborDetailController extends Controller
 
     public function internalConciliationBuilder(LaborDetail $laborDetail)
     {
+        $laborDetail->applyCustomMaterials();
         //builder_returns_materials
         $returnedMaterials = [];
         foreach ($laborDetail->project->materialSummaries->whereIn('summary_type_id_msu',[18]) as $key => $materialSummary) 
@@ -180,7 +182,7 @@ class LaborDetailController extends Controller
                             'description_mat' => $projectMaterial->material->description_mat,
                             'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
                             'quantity_prm' => 0,
-                            'quantity_dsm' => 0,
+                            'quantity_csm' => 0,
                             'structures' => ''
                         ];
                     }
@@ -192,30 +194,30 @@ class LaborDetailController extends Controller
         $materialsToBeReturned = [];
         foreach ($laborDetail->laborCosts->where('activity_lac','R') as $laborCost)
         {
-            $totalDefaultMaterials = $laborCost->buildingStructure->defaultStructureMaterials->count();
-            foreach ($laborCost->buildingStructure->defaultStructureMaterials as $defaultMaterial)
+            $totalCustomMaterials = $laborCost->customStructureMaterials->count();
+            foreach ($laborCost->customStructureMaterials as $customMaterial)
             {
-                if(!isset($materialsToBeReturned[$defaultMaterial->material->code_mat]))
+                if(!isset($materialsToBeReturned[$customMaterial->material->code_mat]))
                 {
-                    $materialsToBeReturned[$defaultMaterial->material->code_mat] = [
-                        'code_mat' =>  $defaultMaterial->material->code_mat,
-                        'description_mat' => $defaultMaterial->material->description_mat,
-                        'unit_of_measurement_mat' => $defaultMaterial->material->unit_of_measurement_mat,
-                        'quantity_dsm' => 0,
+                    $materialsToBeReturned[$customMaterial->material->code_mat] = [
+                        'code_mat' =>  $customMaterial->material->code_mat,
+                        'description_mat' => $customMaterial->material->description_mat,
+                        'unit_of_measurement_mat' => $customMaterial->material->unit_of_measurement_mat,
+                        'quantity_csm' => 0,
                         'quantity_prm' => 0,
                         'structures' => ''
                     ];
                 }
                 
-                if($totalDefaultMaterials == 1)
+                if($totalCustomMaterials == 1)
                 {
-                    $materialsToBeReturned[$defaultMaterial->material->code_mat]['quantity_dsm'] = $laborCost->quantity_lac;
+                    $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] = $laborCost->quantity_lac;
                 }
                 else
                 {
-                    $materialsToBeReturned[$defaultMaterial->material->code_mat]['quantity_dsm'] += $defaultMaterial->quantity_dsm;
+                    $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] += $customMaterial->quantity_csm;
                 }
-                $materialsToBeReturned[$defaultMaterial->material->code_mat]['structures'] .= $laborCost->buildingStructure->structure_code_bus.', ';
+                $materialsToBeReturned[$customMaterial->material->code_mat]['structures'] .= $laborCost->buildingStructure->structure_code_bus.', ';
             }
         }
 

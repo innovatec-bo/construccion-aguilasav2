@@ -3,7 +3,7 @@
 @section('title', 'Conciliacion internal')
 
 @section('content_header')
-    <h1>Conciliacion internal</h1>
+    <h1>Conciliacion internal: {{$laborDetail->project->code_pro}}</h1>
 @stop
 
 @section('content')
@@ -24,8 +24,7 @@
                     </div>
                     <div class="alert alert-info alert-dismissible d-print-none">
                         <h5><i class="icon fas fa-info"></i> Nota!</h5>
-                        Estos son los materials por defecto que estan configurados por cada estructura, si desea personalizar la composicion de una estructura haga click aqui
-                        <strong>(La personalizacion afecta a otros proyectos).</strong>
+                        La presente lista esta basada en la composici&oacute;n estandar de materiales. Para editar la composicion de una estructura acceda al <a class="text-dark" href="{{route('admin.labor-details.show', $laborDetail)}}">detalle de la mano de obra</a> y haga click en el boton de lapiz
                     </div>
                     @if (count($materialsToBeReturned) > 0)
                         <table class="table table-bordered">
@@ -47,16 +46,16 @@
                                         {{-- <td>{{ substr($material['structures'],0,-2)}}</td> --}}
                                         <td>{{$material['description_mat']}}</td>
                                         <td class="text-right">                    
-                                            {{number_format($material['quantity_dsm'],2)}} {{$material['unit_of_measurement_mat']}}
+                                            {{number_format($material['quantity_csm'],2)}} {{$material['unit_of_measurement_mat']}}
                                         </td>
                                         <td class="text-right" data-structures="{{substr($material['structures'],0,-2)}}">
-                                            @if ($material['quantity_dsm'] == $material['quantity_prm'])
+                                            @if ($material['quantity_csm'] == $material['quantity_prm'])
                                                 <p class="badge bg-success">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
-                                            @elseif($material['quantity_prm'] > 0 && $material['quantity_dsm'] > $material['quantity_prm'])
+                                            @elseif($material['quantity_prm'] > 0 && $material['quantity_csm'] > $material['quantity_prm'])
                                                 <p class="badge bg-info">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
                                             @elseif($material['quantity_prm'] == 0)
                                                 <p class="badge bg-danger">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
-                                            @elseif($material['quantity_prm'] > $material['quantity_dsm'])
+                                            @elseif($material['quantity_prm'] > $material['quantity_csm'])
                                                 <p class="badge bg-warning">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
                                             @endif
                                             
@@ -71,7 +70,7 @@
                                         {{-- <td>{{ substr($material['structures'],0,-2)}}</td> --}}
                                         <td>{{$material['description_mat']}}</td>
                                         <td class="text-right">                    
-                                            {{number_format($material['quantity_dsm'],2)}} {{$material['unit_of_measurement_mat']}}
+                                            {{number_format($material['quantity_csm'],2)}} {{$material['unit_of_measurement_mat']}}
                                         </td>
                                         <td class="text-right">
                                             <p class="badge bg-warning">{{number_format($material['quantity_prm'],2)}} {{$material['unit_of_measurement_mat']}}</p>
