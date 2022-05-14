@@ -58,7 +58,6 @@ class LaborCostController extends Controller
      */
     public function edit(LaborCost $laborCost)
     {
-        // dd($laborCost->laborDetail->project->code_pro,$laborCost->laborDetail->hasCustomMaterials);
         $laborCost->laborDetail->applyCustomMaterials();
         return view('admin.labor-costs.edit', compact('laborCost'));
     }
