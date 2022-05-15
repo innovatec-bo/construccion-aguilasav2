@@ -134,15 +134,7 @@ class LaborDetailController extends Controller
                         'structures' => ''
                     ];
                 }
-                
-                if($totalCustomMaterials == 1)
-                {
-                    $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] = $laborCost->quantity_lac;
-                }
-                else
-                {
-                    $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] += $customMaterial->quantity_csm;
-                }
+                $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] += ($customMaterial->quantity_csm * $laborCost->quantity_lac) ;
                 $materialsToBeReturned[$customMaterial->material->code_mat]['structures'] .= $laborCost->buildingStructure->structure_code_bus.', ';
             }
         }
@@ -208,15 +200,7 @@ class LaborDetailController extends Controller
                         'structures' => ''
                     ];
                 }
-                
-                if($totalCustomMaterials == 1)
-                {
-                    $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] = $laborCost->quantity_lac;
-                }
-                else
-                {
-                    $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] += $customMaterial->quantity_csm;
-                }
+                $materialsToBeReturned[$customMaterial->material->code_mat]['quantity_csm'] += ($customMaterial->quantity_csm * $laborCost->quantity_lac) ;
                 $materialsToBeReturned[$customMaterial->material->code_mat]['structures'] .= $laborCost->buildingStructure->structure_code_bus.', ';
             }
         }
