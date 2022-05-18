@@ -111,11 +111,6 @@
 
 @section('css')
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-    <style>
-        @page {
-            size: letter;
-        }
-    </style>
 @stop
 
 @section('js')

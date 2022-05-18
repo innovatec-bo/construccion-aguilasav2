@@ -1,21 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', 'Detalle de mano de obra')
+@section('title', 'Detalle de mano de obra: '.$laborDetail->project->code_pro)
 
 @section('content_header')
-    <h1>Detalle de mano de obra</h1>
+    <h1>Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h1>
 @stop
 
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card shadow-lg">
-                <div class="card-header">
+                {{-- <div class="card-header">
                     <h3 class="card-title">Proyecto: {{$laborDetail->project->code_pro}}</h3>
-                </div>
+                </div> --}}
 
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-sm table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>Estructura</th>
@@ -23,8 +23,8 @@
                                 <th>Ejecucion</th>
                                 <th>Cantidad</th>
                                 <th>Precio<br>Unitario</th>
-                                <th>Es adicional?</th>
-                                <th>Nro. Materiales</th>
+                                <th>Es<br>adicional?</th>
+                                <th>Nro.<br>Materiales</th>
                                 <th>Personalizar<br>materiales</th>
                             </tr>
                         </thead>
@@ -32,7 +32,7 @@
                             @foreach ($laborDetail->laborCosts as $laborCost)
                                 <tr>
                                     <td>
-                                        <span class="badge badge-info">{{$laborCost->buildingStructure->structure_code_bus}}</span>
+                                        <span class="text-warning">{{$laborCost->buildingStructure->structure_code_bus}}</span>
                                         {{$laborCost->buildingStructure->description_bus}}
                                         
                                     </td>
@@ -56,7 +56,7 @@
                                     <td>{{$laborCost->execution_lac}}</td>
                                     <td class="text-right">{{$laborCost->quantity_lac}}</td>
                                     <td class="text-right">{{$laborCost->unit_price_lac}}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @switch($laborCost->is_additional_lac)
                                             @case(1)
                                                 <span class="badge badge-danger">SI</span>
@@ -66,12 +66,12 @@
                                                 @break
                                         @endswitch
                                     </td>
-                                    <td>
+                                    <td class="text-right">
                                         {{$laborCost->customStructureMaterials->count()}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         @can('admin.labor-costs.edit')
-                                            <a href="{{route('admin.labor-costs.edit', $laborCost)}}" class="btn btn-sm btn-primary" target="_blank"><i class="fas fa-fw fa-pen"></i></a>    
+                                            <a href="{{route('admin.labor-costs.edit', $laborCost)}}" class="btn btn-sm btn-primary py-0" target="_blank"><i class="fas fa-fw fa-pen"></i></a>    
                                         @endcan
                                     </td>
                                 </tr>    
