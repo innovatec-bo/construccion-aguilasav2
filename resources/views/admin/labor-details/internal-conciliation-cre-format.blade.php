@@ -1,0 +1,113 @@
+@extends('adminlte::page')
+
+@section('title', 'Conciliacion internal(Formato CRE): '.$laborDetail->project->code_pro)
+
+@section('content_header')
+    <h1>Conciliacion internal(Formato CRE): {{$laborDetail->project->code_pro}}</h1>
+@stop
+
+@section('content')
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card card-primary shadow-lg">
+                <div class="card-header d-print-none">
+                    <h4 class="card-title">
+                        Materiales que deben ser retirados segun el archivo de mano de obra
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12 mb-3">
+                            <a class="btn btn-primary d-print-none float-right mx-1" href="{{url()->previous()}}">Volver</a>
+                            <a class="btn btn-info d-print-none float-right" href="javascript:void(0)" onclick="window.print();"><i class="fa fa-print fa-fw"></i>Imprimir</a>
+                        </div>
+                    </div>
+                    <div class="row invoice-info mb-3">
+                        <div class="col-md-10 d-none d-print-inline">
+                            <h3 class="text-center mb-4">Conciliacion interna(Formato CRE)</h3>
+                        </div>
+                        <div class="col-sm-2 invoice-col">
+                            <address class="mb-1">
+                                <strong>Fiscal</strong><br>
+                                @foreach ($laborDetail->project->statusLogResponsibles as $statusLogResponsible)
+                                    @if ($statusLogResponsible->responsible->user->hasRole('Fiscal'))
+                                        {{$statusLogResponsible->responsible->user->full_name}}
+                                    @endif
+                                @endforeach
+                            </address>    
+                        </div>
+                        <div class="col-sm-2 invoice-col">
+                            <address class="mb-1">
+                                <strong>Constructor</strong><br>
+                                @foreach ($laborDetail->project->statusLogResponsibles as $statusLogResponsible)
+                                    @if ($statusLogResponsible->responsible->user->hasRole('Builder'))
+                                        {{$statusLogResponsible->responsible->user->full_name}}
+                                    @endif
+                                @endforeach
+                            </address>
+                        </div>
+                        <div class="col-sm-2 invoice-col">
+                            <address class="mb-1">
+                                <strong>Proyecto</strong><br>
+                                {{$laborDetail->project->code_pro}}
+                            </address>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-sm table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>C&oacute;digo</th>
+                                <th>Descripci&oacute;n</th>
+                                <th>Entregada</th>
+                                <th>Cant. final</th>
+                                <th>Dev. CRE</th>
+                                <th>Dev. Contr</th>
+                                <th>Retiros</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $i =1;
+                            @endphp
+                            @foreach ($laborDetail->internalConciliation() as $key => $row)
+                                <tr>
+                                    <td>{{($i)}}</td>
+                                    <td>{{$row['material_code']}}</td>
+                                    <td>{{$row['material_description']}}</td>
+                                    <td class="text-right">                    
+                                        {{number_format($row['materials_picked_up_from_cre'],2)}}
+                                    </td>
+                                    <td class="text-right">
+                                        {{number_format($row['total_used'],2)}}
+                                    </td>
+                                    <td class="text-right">
+                                        {{number_format($row['return_to_serebo'],2)}}
+                                    </td>
+                                    <td class="text-right">
+                                        {{number_format($row['return_to_cre'],2)}}
+                                    </td>
+                                    <td class="text-right">
+                                        {{number_format($row['builder_returns_materials_meo'],2)}}
+                                    </td>
+                                </tr>
+                                @php
+                                    $i++;
+                                @endphp    
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- @livewire('admin.labor-detail-index') --}}
+@stop
+
+@section('css')
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
+
+@section('js')
+    {{-- <script> console.log('Hi!'); </script> --}}
+@stop

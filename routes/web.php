@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::resource('building-structures','BuildingStructureController')->names('building-structures');
 
     //Labor Details
+    Route::get('mano-de-obra/conciliacion-interna-formato-cre/{labor_detail}','LaborDetailController@internalConciliationCreFormat')->name('labor-details.internal-conciliation-cre-format');
     Route::get('labor-details/internal-conciliation-builder/{labor_detail}','LaborDetailController@internalConciliationBuilder')->name('labor-details.internal-conciliation-builder');
     Route::get('labor-details/internal-conciliation/{labor_detail}','LaborDetailController@internalConciliation')->name('labor-details.internal-conciliation');
     Route::resource('labor-details','LaborDetailController')->names('labor-details');

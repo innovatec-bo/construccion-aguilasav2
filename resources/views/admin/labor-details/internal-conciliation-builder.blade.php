@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Conciliacion internal(Vista de constructor)')
+@section('title', 'Conciliacion internal(Vista de constructor): '.$laborDetail->project->code_pro)
 
 @section('content_header')
     <h1>Conciliacion internal(Vista de constructor): {{$laborDetail->project->code_pro}}</h1>

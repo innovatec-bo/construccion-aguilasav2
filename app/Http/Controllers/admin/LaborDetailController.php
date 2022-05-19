@@ -220,4 +220,10 @@ class LaborDetailController extends Controller
 
         return view('admin.labor-details.internal-conciliation-builder', compact('materialsToBeReturned','returnedMaterials', 'laborDetail'));   
     }
+
+    public function internalConciliationCreFormat(LaborDetail $laborDetail)
+    {
+        $laborDetail->internalConciliation();
+        return view('admin.labor-details.internal-conciliation-cre-format', compact('laborDetail'));   
+    }
 }

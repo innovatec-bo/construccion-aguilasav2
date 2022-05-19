@@ -248,27 +248,6 @@ return [
             'icon'        => 'fas fa-fw fa-home',
         ],
         [
-            'text'        => 'Usuarios',
-            'icon'        => 'fas fa-fw fa-users',
-            'can'         => ['admin.users.index', 'admin.users.create'],
-            'submenu'     => [
-                [
-                    'text'        => 'Lista',
-                    'can'         => 'admin.users.index',
-                    'route'       => 'admin.users.index',
-                    'icon'        => 'fas fa-fw fa-table',
-                    'shift' => 'pl-4',
-                ],
-                [
-                    'text'        => 'Crear',
-                    'can'         => 'admin.users.create',
-                    'route'       => 'admin.users.create',
-                    'icon'        => 'fas fa-fw fa-plus',
-                    'shift' => 'pl-4',
-                ]       
-            ]
-        ],
-        [
             'text'        => 'Manos de obra',
             'icon'        => 'fas fa-fw fa-tools',
             'can'         => ['admin.labor-details.index','admin.projects.rectify-manpower'],
@@ -359,7 +338,28 @@ return [
                 ]
             ]
         ],
-        ['header' => 'Seguridad', 'can' => ['admin.permissions.index', 'admin.permissions.create','admin.roles.index', 'admin.roles.create']],
+        ['header' => 'Seguridad', 'can' => ['admin.users.index', 'admin.users.create', 'admin.permissions.index', 'admin.permissions.create','admin.roles.index', 'admin.roles.create']],
+        [
+            'text'        => 'Usuarios',
+            'icon'        => 'fas fa-fw fa-users',
+            'can'         => ['admin.users.index', 'admin.users.create'],
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'can'         => 'admin.users.index',
+                    'route'       => 'admin.users.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'pl-4',
+                ],
+                [
+                    'text'        => 'Crear',
+                    'can'         => 'admin.users.create',
+                    'route'       => 'admin.users.create',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'pl-4',
+                ]       
+            ]
+        ],
         [
             'text'        => 'Permisos',
             'icon'        => 'fas fa-fw fa-user-shield',

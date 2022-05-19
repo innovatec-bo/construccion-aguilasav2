@@ -94,4 +94,81 @@ class LaborDetail extends Model
             }
         }
     }
+
+    public function internalConciliation()
+    {
+        $summaryTypes = [
+            'materials_picked_up_from_cre', 
+            'materials_delivered_to_builder', 
+            'materials_delivered_to_builder_loan',
+            'builder_returns_materials'
+        ];
+        $report = [];
+        $summaries = $this->project->materialSummaries()->whereHas('summaryType', function(Builder $query)use($summaryTypes){
+            $query->whereIn('keyword_mqt', $summaryTypes);
+        })->get();
+
+        foreach ($summaries as $key => $materialSummary) 
+        {
+            foreach ($materialSummary->projectMaterials as $key2 => $projectMaterial) 
+            {
+                if(!isset($report[$projectMaterial->material->code_mat]))
+                {
+                    $report[$projectMaterial->material->code_mat] = [
+                        'material_code' => $projectMaterial->material->code_mat,
+                        'material_description' => $projectMaterial->material->description_mat,
+                        'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
+                        'materials_picked_up_from_cre' => 0,
+                        'materials_delivered_to_builder' => 0,
+                        'materials_delivered_to_builder_loan' => 0,
+                        'builder_returns_materials_nvo' => 0,
+                        'total_used' => 0,
+                        'return_to_cre' => 0,
+                        'return_to_serebo' => 0,
+                        'builder_returns_materials_meo' => 0
+                    ];
+                }
+                switch ($materialSummary->summaryType->keyword_mqt) 
+                {
+                    case 'materials_picked_up_from_cre':
+                        $report[$projectMaterial->material->code_mat]['materials_picked_up_from_cre'] += $projectMaterial->quantity_prm;
+                        break;
+                    case 'materials_delivered_to_builder':
+                        $report[$projectMaterial->material->code_mat]['materials_delivered_to_builder'] += $projectMaterial->quantity_prm;
+                        break;
+                    case 'materials_delivered_to_builder_loan':
+                        $report[$projectMaterial->material->code_mat]['materials_delivered_to_builder_loan'] += $projectMaterial->quantity_prm;
+                        break;
+                    case 'builder_returns_materials':
+                        if($projectMaterial->status->code_mst == 'MEO')
+                        {
+                            $report[$projectMaterial->material->code_mat]['builder_returns_materials_meo'] += $projectMaterial->quantity_prm;
+                        }
+                        elseif($projectMaterial->status->code_mst == 'NVO')
+                        {
+                            $report[$projectMaterial->material->code_mat]['builder_returns_materials_nvo'] += $projectMaterial->quantity_prm;
+                        }
+                        break;
+                }
+            }
+        }
+
+        foreach ($report as &$row) 
+        {
+            $in = $row['materials_picked_up_from_cre'] + $row['builder_returns_materials_nvo'];
+            $out = $row['materials_delivered_to_builder'] + $row['materials_delivered_to_builder_loan'];
+            $row['total_used'] = $out - $row['builder_returns_materials_nvo'];
+            if($in > $out)
+            {
+                $row['return_to_cre'] = $in - $out;    
+            }
+            elseif($out > $in)
+            {
+                $row['return_to_serebo'] = $out - $in;    
+            }
+
+            // $row['total_used'] = ($row['materials_picked_up_from_cre'] + $row['builder_returns_materials_nvo']) - ($row['materials_delivered_to_builder'] + $row['materials_delivered_to_builder_loan']);
+        }
+        return $report;
+    }
 }
