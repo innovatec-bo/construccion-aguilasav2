@@ -36,7 +36,7 @@
                                         </button>
                                             <div class="dropdown-menu" role="menu" style="">
                                                 @can('admin.labor-details.show')
-                                                    <a  wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.labor-details.show', $laborDetail)}}'"><i class="fas fa-eye"></i> Ver</a>    
+                                                    <a  wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.labor-details.show', $laborDetail)}}'"><i class="fas fa-eye"></i> Ver</a>
                                                 @endcan
                                                 @can('admin.labor-details.internal-conciliation')
                                                     <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.labor-details.internal-conciliation', $laborDetail)}}'"><i class="fas fa-clipboard-list"></i> Conciliacion interna</a>    

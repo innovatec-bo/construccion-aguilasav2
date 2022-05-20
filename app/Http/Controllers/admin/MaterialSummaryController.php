@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\MaterialSummary;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -88,5 +89,15 @@ class MaterialSummaryController extends Controller
     public function loadInitialList()
     {
         return view('admin.materials-summary.load-initial-list');
+    }
+
+    public function groupedMovements()
+    {
+        return view('admin.materials-summary.grouped-movements');
+    }
+
+    public function groupedMovementDetails(Project $project)
+    {
+        return view('admin.materials-summary.grouped-movement-details', compact('project'));
     }
 }

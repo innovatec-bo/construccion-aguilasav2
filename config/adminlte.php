@@ -281,6 +281,13 @@ return [
                     'shift' => 'pl-4',
                 ],
                 [
+                    'text'        => 'Movimientos agrupados',
+                    'route'       => 'admin.materials-summary.grouped-movements',
+                    // 'can'         => 'admin.materials-summary.index',
+                    'icon'        => 'fas fa-fw fa-file-alt',
+                    'shift' => 'pl-4',
+                ],
+                [
                     'text'        => 'Cargar lista inicial',
                     'route'       => 'admin.materials-summary.load-initial-list',
                     'can'         => 'admin.materials-summary.load-initial-list',
