@@ -29,9 +29,9 @@ class MaterialSummaryGroupedMovementDetails extends Component
         ->when($this->search, function($query){
             $query->whereHas('projectMaterials', function(Builder $query){
                 $query->whereHas('material', function(Builder $query){
-                    $query->where('code_mat',$this->search)
-                            ->orWhere('name_mat','like','%'.$this->search.'%')
-                            ->orWhere('description_mat','like','%'.$this->search.'%');
+                    $query->where('code_mat',$this->search);
+                            // ->orWhere('name_mat','like','%'.$this->search.'%')
+                            // ->orWhere('description_mat','like','%'.$this->search.'%');
                 });
             });
         })
