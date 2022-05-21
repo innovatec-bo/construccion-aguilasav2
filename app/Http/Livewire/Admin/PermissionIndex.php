@@ -25,7 +25,8 @@ class PermissionIndex extends Component
     {
 
         $permissions = Permission::Where(function($query){
-            $query->where('name','like','%'.$this->search.'%');
+            $query->where('name','like','%'.$this->search.'%')
+            ->orWhere('detail','like','%'.$this->search.'%');
         })
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);

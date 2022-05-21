@@ -7,6 +7,9 @@
             </div>
 
             <div class="card-body">
+                <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
