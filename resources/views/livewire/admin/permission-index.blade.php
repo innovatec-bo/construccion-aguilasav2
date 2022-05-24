@@ -10,7 +10,7 @@
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered table-hover table-striped table-sm">
                     <thead>
                         <tr>
                             <th style="width: 10px">ID</th>
