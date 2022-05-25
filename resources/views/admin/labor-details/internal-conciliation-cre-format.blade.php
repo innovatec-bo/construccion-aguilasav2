@@ -59,11 +59,11 @@
                                 <th>#</th>
                                 <th>C&oacute;digo</th>
                                 <th>Descripci&oacute;n</th>
-                                <th>Entregada</th>
-                                <th>Cant. final</th>
-                                <th>Dev. CRE</th>
-                                <th>Dev. Contr</th>
-                                <th>Retiros</th>
+                                <th>Retirado<br>de CRE</th>
+                                <th>Entregado menos<br>devuelto(NVO)</th>
+                                <th>Devuelve<br>CRE(NVO)</th>
+                                <th>Devuelve<br>SEREBO(NVO</th>
+                                <th>Devuelve<br>SEREBO(MEO).</th>
                             </tr>
                         </thead>
                         <tbody>
