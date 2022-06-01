@@ -31,8 +31,14 @@
                                         <tr>
                                             <td>{{$materialSummary->id_msu}}</td>
                                             <td>{{$materialSummary->entry_date_msu}}</td>
-                                            <td>{{ $materialSummary->summaryType->name_mqt }} <small
-                                                class="badge badge-primary">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
+                                            <td>{{ $materialSummary->summaryType->name_mqt }} 
+                                                @if (strtoupper($materialSummary->summaryType->movement_type_mqt) == 'OUT')
+                                                    <small class="badge badge-warning">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>    
+                                                @elseif(strtoupper($materialSummary->summaryType->movement_type_mqt) == 'IN')
+                                                    <small class="badge badge-success">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
+                                                @else
+                                                    <small class="badge badge-primary">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
+                                                @endif
                                             </td>
                                             <td>{{$materialSummary->correlative_counter_msu}}</td>
                                             <td>{{$projectMaterial->material->code_mat}}</td>
@@ -50,8 +56,14 @@
                                     <tr>
                                         <td>{{$materialSummary->id_msu}}</td>
                                         <td>{{$materialSummary->entry_date_msu}}</td>
-                                        <td>{{ $materialSummary->summaryType->name_mqt }} <small
-                                            class="badge badge-primary">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
+                                        <td>{{ $materialSummary->summaryType->name_mqt }}
+                                            @if (strtoupper($materialSummary->summaryType->movement_type_mqt) == 'OUT')
+                                                <small class="badge badge-warning">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>    
+                                            @elseif(strtoupper($materialSummary->summaryType->movement_type_mqt) == 'IN')
+                                                <small class="badge badge-success">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
+                                            @else
+                                                <small class="badge badge-primary">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
+                                            @endif
                                         </td>
                                         <td>{{$materialSummary->correlative_counter_msu}}</td>
                                         <td>{{$projectMaterial->material->code_mat}}</td>
