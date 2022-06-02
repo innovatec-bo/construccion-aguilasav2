@@ -48,6 +48,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
 
     //Labor costs
     Route::resource('labor-costs', 'LaborCostController')->names('labor-costs');
+
+    //Project materials
+    Route::resource('project-materials','ProjectMaterialController')->names('project-materials');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');

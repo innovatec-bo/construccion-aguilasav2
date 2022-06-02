@@ -58,7 +58,12 @@
                                         @can('admin.materials-summary.grouped-movement-details')
                                             <a  wire:loading.class="disabled" target="_blank" class="dropdown-item" href='{{route('admin.materials-summary.grouped-movement-details', ['project' => $item->id_pro,'search' => $item->code_mat])}}'"><i class="fas fa-eye"></i> Detalle de movimiento</a>
                                         @endcan
-                                        <a  wire:loading.class="disabled" target="_blank" class="dropdown-item" href='{{route('admin.materials-summary.grouped-movement-details', ['project' => $item->id_pro,'search' => $item->code_mat])}}'"><i class="fas fa-times"></i> Eliminar registro de salida</a>
+                                        <form action="{{route('admin.project-materials.destroy', $item->id_prm)}}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button wire:loading.class="disabled" type="submit" onclick="return confirm('Are you sure?')" class="dropdown-item"><i class="fas fa-times"></i> Eliminar registro de salida</button>
+                                        </form>
+                                        {{-- <a wire:loading.class="disabled" target="_blank" class="dropdown-item" href='{{route('admin.project-materials.destroy', $item->id_prm)}}'"><i class="fas fa-times"></i> Eliminar registro de salida</a> --}}
                                     </div>
                                 </div>
                             </td>

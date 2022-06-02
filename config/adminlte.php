@@ -300,6 +300,13 @@ return [
                     'can'         => 'admin.builder-debts-report.index',
                     'icon'        => 'fas fa-fw fa-book-open',
                     'shift' => 'pl-4',
+                ],
+                [
+                    'text'        => 'Salidas observadas',
+                    'route'       => 'admin.materials-summary.duplicate-outputs',
+                    'can'         => 'admin.materials-summary.duplicate-outputs',
+                    'icon'        => 'fas fa-fw fa-exclamation-triangle',
+                    'shift' => 'pl-4',
                 ]
             ],  
         ],

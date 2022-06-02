@@ -118,6 +118,7 @@ class MaterialSummaryController extends Controller
                 movement_type_mqt,
                 code_mat,
                 description_mat,
+                id_prm,
                 quantity_prm,
                 concat(id_pro,'-',code_mat) project_material,
                 0 balance,
