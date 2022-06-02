@@ -106,6 +106,7 @@ class MaterialSummaryController extends Controller
     {
         set_time_limit(300);
 		ini_set('memory_limit','256M');
+
         $materialsSummary = DB::select("
             select 
                 id_pro,
@@ -138,48 +139,49 @@ class MaterialSummaryController extends Controller
                 -- and code_pro = 'ro.21.0670'
             
             group by project_id_msu, id_prm
-            -- having project_material = '2153-2739'
-            order by entry_date_msu
+            -- having project_material in ('2153-2739','2153-447','2146-783')
+            -- having project_material in ('2146-783')
+            order by project_id_msu, id_mat, entry_date_msu
         ");
-        // $projects = [];
-        // $projectMaterials = [];
-        $projectMaterialMemory = [];
-        $materialsSummaryToFix = [];
-        foreach ($materialsSummary as $row) 
+
+        foreach ($materialsSummary as $key => $item) 
         {
-            if($pos = array_search($row->project_material, $projectMaterialMemory) === FALSE)
+            //Existing previous element
+            if(isset($materialsSummary[$key-1]) && $item->project_material == $materialsSummary[$key-1]->project_material)
             {
-                $projectMaterialMemory[] = $row->project_material;
-                $balance = 0;
-                $balanceString = '';
-                $movements = 0;
-                $materialsSummaryAux = collect($materialsSummary)->where('project_material', $row->project_material)->toArray();
-                foreach ($materialsSummaryAux as $key => $item) 
+                switch ($item->movement_type_mqt) 
                 {
-                    switch ($item->movement_type_mqt) 
-                   {
-                       case 'in':
-                            $movements++;
-                            $balance += $item->quantity_prm;    
-                            $item->balance = $balance;
-                            $balanceString .= " (+$item->quantity_prm)";
-                            $item->balance_string = $balanceString;
-                            $item->movements = $movements;
-                            break;
-                       case 'out':
-                            $movements++;
-                            $balance -= $item->quantity_prm;    
-                            $item->balance = $balance;
-                            $balanceString .= " (-$item->quantity_prm)";
-                            $item->balance_string = $balanceString;
-                            $item->movements = $movements;
-                            break;
-                   }
-                   $materialsSummaryToFix[] = $item;
+                    case 'in':
+                        $item->balance = $item->quantity_prm + $materialsSummary[$key-1]->balance;
+                        $item->balance_string .= $materialsSummary[$key-1]->balance_string." (+$item->quantity_prm)";
+                        break;
+                    case 'out':
+                        $item->balance = $materialsSummary[$key-1]->balance - $item->quantity_prm;
+                        $item->balance_string .= $materialsSummary[$key-1]->balance_string." (-$item->quantity_prm)";
+                        break;
                 }
-            }       
+                $item->movements = $materialsSummary[$key-1]->movements + 1;
+            }
+            //Not existing previous element
+            else
+            {
+                switch ($item->movement_type_mqt) 
+                {
+                    case 'in':
+                        $item->balance += $item->quantity_prm;
+                        $item->balance_string .= "(+$item->quantity_prm)";
+                        break;
+                    case 'out':
+                        $item->balance -= $item->quantity_prm;
+                        $item->balance_string .= "(-$item->quantity_prm)";
+                        break;
+                }
+                $item->movements++;
+            }
         }
-        $materialsSummaryToFix = collect($materialsSummaryToFix)->where('balance','<',0)->where('movements','>',1)->toArray();
-        return view('admin.materials-summary.duplicate-outputs', compact('materialsSummary','materialsSummaryToFix'));
+        
+        $materialsSummary = collect($materialsSummary)->where('balance','<',0)->where('movements','>',1)->toArray();
+        // dd($materialsSummary);
+        return view('admin.materials-summary.duplicate-outputs', compact('materialsSummary'));
     }
 }

@@ -34,7 +34,7 @@ class MaterialSummaryGroupedMovements extends Component
 
     public function render()
     {
-        $projectStatus = ['in_progress','stopped','paused','completed','as_built','conciliation_reception','conciliation_shipment','request_materials_return','cre_return_order','project_return_materials','project_real_budget'];
+        $projectStatus = ['in_progress','stopped','paused','completed','project_energized','as_built','conciliation_reception','conciliation_shipment','request_materials_return','cre_return_order','project_return_materials','project_real_budget'];
         $projects = Project::whereHas('status', function(Builder $query)use($projectStatus){
             $query->whereIn('keyword_pst', $projectStatus);
         })
