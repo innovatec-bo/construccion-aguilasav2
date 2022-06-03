@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\MaterialSummary;
 use App\Models\Project;
+use App\Models\ProjectMaterial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -124,7 +125,9 @@ class MaterialSummaryController extends Controller
                 0 balance,
                 '' balance_string,
                 0 quantity_assigned,
-                0 movements
+                0 movements,
+                '' pattern,
+                0 uniform_movement
             from 
                 mat_materials_summary
             LEFT JOIN mat_projects_materials on id_msu = materials_summary_id_prm
@@ -155,12 +158,15 @@ class MaterialSummaryController extends Controller
                     case 'in':
                         $item->balance = $item->quantity_prm + $materialsSummary[$key-1]->balance;
                         $item->balance_string .= $materialsSummary[$key-1]->balance_string." (+$item->quantity_prm)";
+                        $item->pattern .= $materialsSummary[$key-1]->pattern." +";
                         break;
                     case 'out':
                         $item->balance = $materialsSummary[$key-1]->balance - $item->quantity_prm;
                         $item->balance_string .= $materialsSummary[$key-1]->balance_string." (-$item->quantity_prm)";
+                        $item->pattern .= $materialsSummary[$key-1]->pattern." -";
                         break;
                 }
+                $item->uniform_movement = $materialsSummary[$key-1]->uniform_movement.",$item->quantity_prm";
                 $item->movements = $materialsSummary[$key-1]->movements + 1;
             }
             //Not existing previous element
@@ -171,18 +177,39 @@ class MaterialSummaryController extends Controller
                     case 'in':
                         $item->balance += $item->quantity_prm;
                         $item->balance_string .= "(+$item->quantity_prm)";
+                        $item->pattern .= "+";
                         break;
                     case 'out':
                         $item->balance -= $item->quantity_prm;
                         $item->balance_string .= "(-$item->quantity_prm)";
+                        $item->pattern .= "-";
                         break;
                 }
+                $item->uniform_movement = $item->quantity_prm;
                 $item->movements++;
             }
         }
+
+        foreach ($materialsSummary as $key => &$item) 
+        {
+            $list = explode(',',$item->uniform_movement);
+            $sameValues = count(array_unique($list)) == 1?'SI':'NO';
+            $item->uniform_movement = $sameValues;
+        }
         
+        $materialsSummaryToDelete = collect($materialsSummary)->where('balance','<',0)->where('pattern','+ - -')->where('movements','>=', 3)->where('uniform_movement','SI')->toArray();
+        $idsToDelete = [];
+        foreach ($materialsSummaryToDelete as $value) {
+            $idsToDelete[] = $value->id_prm;
+        }
+        
+        if(count($idsToDelete) > 0)
+        {
+            ProjectMaterial::destroy($idsToDelete);
+        }
+
         $materialsSummary = collect($materialsSummary)->where('balance','<',0)->where('movements','>',1)->toArray();
-        // dd($materialsSummary);
+
         return view('admin.materials-summary.duplicate-outputs', compact('materialsSummary'));
     }
 }

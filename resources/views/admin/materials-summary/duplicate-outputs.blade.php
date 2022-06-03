@@ -21,6 +21,8 @@
                         <th>Cantidad <br>Movida</th>
                         <th>Balance</th>
                         <th>Historia de movimientos</th>
+                        <th>Patron de movimientos</th>
+                        <th>Movimientos uniformes</th>
                         <th>Movimientos</th>
                         <th>Opciones</th>
                     </tr>
@@ -48,6 +50,8 @@
                             <td class="text-right">{{$item->quantity_prm}}</td>
                             <td class="text-right">{{$item->balance}}</td>
                             <td class="text-right">{{$item->balance_string}}</td>
+                            <td class="text-center text-xl">{{$item->pattern}}</td>
+                            <td class="text-center">{{$item->uniform_movement}}</td>
                             <td class="text-right">{{$item->movements}}</td>
                             <td>
                                 <div class="btn-group btn-group-sm">
@@ -58,12 +62,13 @@
                                         @can('admin.materials-summary.grouped-movement-details')
                                             <a  wire:loading.class="disabled" target="_blank" class="dropdown-item" href='{{route('admin.materials-summary.grouped-movement-details', ['project' => $item->id_pro,'search' => $item->code_mat])}}'"><i class="fas fa-eye"></i> Detalle de movimiento</a>
                                         @endcan
-                                        <form action="{{route('admin.project-materials.destroy', $item->id_prm)}}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button wire:loading.class="disabled" type="submit" onclick="return confirm('Are you sure?')" class="dropdown-item"><i class="fas fa-times"></i> Eliminar registro de salida</button>
-                                        </form>
-                                        {{-- <a wire:loading.class="disabled" target="_blank" class="dropdown-item" href='{{route('admin.project-materials.destroy', $item->id_prm)}}'"><i class="fas fa-times"></i> Eliminar registro de salida</a> --}}
+                                        @can('admin.materials-summary.duplicate-outputs')
+                                            <form action="{{route('admin.project-materials.destroy', $item->id_prm)}}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button wire:loading.class="disabled" type="submit" onclick="return confirm('Eliminar salida de material? Solo se eliminara el material {{$item->code_mat}} presente en la lista {{$item->id_msu}}')" class="dropdown-item"><i class="fas fa-times"></i> Eliminar registro de salida</button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </div>
                             </td>
