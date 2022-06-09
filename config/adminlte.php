@@ -416,6 +416,11 @@ return [
                 ]       
             ]
         ],
+        [
+            'text'        => 'Documentacion',
+            'icon'        => 'fas fa-fw fa-book',
+            'url'         => 'docs'
+        ],
     ],
 
     /*

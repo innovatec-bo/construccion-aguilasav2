@@ -4,8 +4,8 @@
     <nav class="flex items-center justify-between text-black bg-navbar shadow-xs h-16">
         <div class="flex items-center flex-no-shrink">
             <a href="{{ url('/') }}" class="flex items-center flex-no-shrink text-black mx-4">
-                @include("larecipe::partials.logo")
-
+                {{-- @include("larecipe::partials.logo") --}}
+                <img src="{{asset('favicon.ico')}}" alt="" style="height: 50px; width:auto">
                 <p class="inline-block font-semibold mx-1 text-grey-dark">
                     {{ config('app.name') }}
                 </p>
@@ -27,12 +27,12 @@
                 </larecipe-button>
             @endif
 
-            <larecipe-button tag="a" href="https://github.com/saleem-hadad/larecipe" target="__blank" type="black" class="mx-2 px-4">
+            {{-- <larecipe-button tag="a" href="https://github.com/saleem-hadad/larecipe" target="__blank" type="black" class="mx-2 px-4">
                 <i class="fab fa-github"></i>
-            </larecipe-button>
+            </larecipe-button> --}}
 
             {{-- versions dropdown --}}
-            <larecipe-dropdown>
+            {{-- <larecipe-dropdown>
                 <larecipe-button type="primary" class="flex">
                     {{ $currentVersion }} <i class="mx-1 fa fa-angle-down"></i>
                 </larecipe-button>
@@ -46,14 +46,14 @@
                         @endforeach
                     </ul>
                 </template>
-            </larecipe-dropdown>
+            </larecipe-dropdown> --}}
             {{-- /versions dropdown --}}
 
             @auth
                 {{-- account --}}
                 <larecipe-dropdown>
                     <larecipe-button type="white" class="ml-2">
-                        {{ auth()->user()->name ?? 'Account' }} <i class="fa fa-angle-down"></i>
+                        {{ auth()->user()->first_name ?? 'Account' }} <i class="fa fa-angle-down"></i>
                     </larecipe-button>
 
                     <template slot="list">

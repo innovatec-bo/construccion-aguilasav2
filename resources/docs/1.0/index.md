@@ -1,2 +1,10 @@
-- ## Get Started
-    - [Overview](/{{route}}/{{version}}/overview)
+- ## Gestion
+    - [Inicio](/{{route}}/{{version}}/home)
+    - [Manos de Obra](/{{route}}/{{version}}/labor)
+    - [Almacen](/{{route}}/{{version}}/warehouse)
+    - [Estructuras](/{{route}}/{{version}}/structures)
+    - [Materiales](/{{route}}/{{version}}/materials)
+- ## Seguridad
+    - [Usuarios](/{{route}}/{{version}}/users)
+    - [Permisos](/{{route}}/{{version}}/permissions)
+    - [Roles](/{{route}}/{{version}}/roles)

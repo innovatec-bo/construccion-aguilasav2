@@ -16,7 +16,7 @@ return [
     'docs'        => [
         'route'   => '/docs',
         'path'    => '/resources/docs',
-        'landing' => 'overview',
+        'landing' => 'home',
         'middleware' => ['web'],
     ],
 
@@ -55,7 +55,7 @@ return [
     */
 
     'settings'       => [
-        'auth'       => false,
+        'auth'       => TRUE,
         'guard'      => null,
         'ga_id'      => '',
         'middleware' => [
