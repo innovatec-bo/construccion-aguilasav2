@@ -10,6 +10,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin.users.index', ['only' => ['index']]);
+        $this->middleware('permission:admin.users.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:admin.users.edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:admin.users.show', ['only' => ['show']]); 
+        $this->middleware('permission:admin.users.delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

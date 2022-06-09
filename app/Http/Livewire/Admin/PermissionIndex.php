@@ -12,7 +12,7 @@ class PermissionIndex extends Component
     
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $sort = 'id';
+    public $sort = 'name';
     public $direction = 'desc';
     public $deleteId = '';
     protected $queryString = ['search' => ['except' => '']];
