@@ -552,6 +552,16 @@ return [
                     'location' => 'vendor/bs-custom-file-input/bs-custom-file-input.min.js',
                 ]
             ],
+        ],
+        'inputmask' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/inputmask/jquery.inputmask.min.js',
+                ],
+            ],
         ]
     ],
 

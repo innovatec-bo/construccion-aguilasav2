@@ -2,13 +2,21 @@
     <div class="col-md-10">
         <div class="card shadow-lg">
             <div class="card-header">
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                @can('admin.users.create')
+                    <a href="{{route('admin.users.create')}}" class="btn btn-xs btn-primary">Nuevo</a>    
+                @endcan
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                    </div>
+                </div>
             </div>
             <div class="card-body">
-                <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
+                <div class="overlay dark d-none" wire:loading.class="d-flex"
+                    wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered table-hover table-sm">
                     <thead>
                         <tr>
                             <th style="width: 10px">ID</th>
@@ -21,25 +29,35 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{$user->id_usr}}</td>
-                                <td>{{$user->full_name}}</td>
-                                <td>{{$user->email}}</td>
+                                <td>{{ $user->id_usr }}</td>
+                                <td>{{ $user->full_name }}</td>
+                                <td>{{ $user->email }}</td>
                                 <td>
                                     @foreach ($user->getRoleNames() as $role)
                                         <span class="badge bg-primary">{{$role}}</span>
                                     @endforeach
                                 </td>
-                                <td>
-                                    <button type="button" wire:loading.class="disabled" class="btn btn-primary btn-sm" onclick="window.location.href='{{route('admin.users.edit', $user)}}'"><i class="fas fa-pen"></i></button>
-                                    <button type="button"  wire:loading.class="disabled" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('admin.users.show', $user)}}'"><i class="fas fa-eye"></i></button>
-                                    <form method="post" action="{{route('admin.users.destroy',$user)}}" class="d-inline">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
+                                <td class="text-center">
+                                    @can('admin.users.edit')
+                                        <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href='{{ route('admin.users.edit', $user) }}'"><i class="fas fa-pen"></i></a>    
+                                    @endcan
+                                    @can('admin.users.show')
+                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.users.show', $user) }}'"><i class="fas fa-eye"></i></a>    
+                                    @endcan
+                                    @can('admin.users.destroy')
+                                        <form method="post" action="{{ route('admin.users.destroy', $user) }}"
+                                            class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" onclick="return confirm('Eliminar?')" class="btn btn-danger btn-xs"><i
+                                                    class="fas fa-trash-alt"></i></button>
+                                        </form>    
+                                    @endcan
                                     
+                                    
+
                                 </td>
-                            </tr>    
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

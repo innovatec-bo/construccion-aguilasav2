@@ -2,17 +2,23 @@
     <div class="col-md-10">
         <div class="card shadow-lg">
             <div class="card-header">
-                <div class="form-group">
-                    <label>Tipo de movimiento</label>
-                    <select class="form-control" wire:model="materialSummaryTypeSelected">
-                        <option value=""></option>
-                        @foreach ($materialSummaryTypes as $materialSummaryType)
-                            <option value="{{$materialSummaryType->id_mqt}}">{{$materialSummaryType->name_mqt}}</option>
-                        @endforeach
-                    </select>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tipo de movimiento</label>
+                        <select class="form-control form-control-sm" wire:model="materialSummaryTypeSelected">
+                            <option value=""></option>
+                            @foreach ($materialSummaryTypes as $materialSummaryType)
+                                <option value="{{$materialSummaryType->id_mqt}}">{{$materialSummaryType->name_mqt}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.2s="search"
-                    placeholder="Buscar..">
+                
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                    </div>
+                </div>
             </div>
 
             <div class="card-body">
@@ -20,7 +26,7 @@
                     wire:target="delete, previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered table-sm table-hover table-striped">
                     <thead>
                         <tr>
                             <th style="width: 10px">ID</th>
@@ -56,19 +62,18 @@
                                 <td>{{ $materialSummary->summaryType->name_mqt }} <small
                                         class="badge badge-primary">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{$materialSummary->projectMaterials->count()}}
                                 </td>
-                                <td>
-                                    <a wire:loading.class="disabled"
-                                        class="btn btn-secondary btn-sm"
-                                        href='{{ route('admin.materials-summary.show', $materialSummary) }}'"><i
-                                            class="fas fa-eye"></i></a>
+                                <td class="text-center">
+                                    @can('admin.materials-summary.edit')
+                                        @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
+                                            <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href='{{ route('admin.materials-summary.edit', $materialSummary) }}'"><i class="fas fa-pen"></i></a>        
+                                        @endif
+                                    @endcan
+                                    <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.materials-summary.show', $materialSummary) }}'"><i class="fas fa-eye"></i></a>
                                     @if (Auth::user()->email == 'jair@twiiti.com')
-                                        <a href="javascript:void(0)" wire:loading.class="disabled"
-                                        data-record='{{ $materialSummary }}'
-                                        class="btn btn-danger btn-sm lv-confirm-action"><i
-                                            class="fas fa-trash"></i></a>    
+                                        {{-- <a href="javascript:void(0)" wire:loading.class="disabled" data-record='{{ $materialSummary }}' class="btn btn-danger btn-xs lv-confirm-action"><i class="fas fa-trash"></i></a> --}}
                                     @endif
                                     
                                 </td>

@@ -14,7 +14,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <a class="btn btn-primary d-print-none float-right mx-1" href='{{url()->previous()}}'>Volver</a>
-                            <a class="btn btn-info d-print-none float-right" href='javascript:void(0)' onclick='window.print();'><i class="fa fa-print fa-fw"></i>Imprimir</a>
+                            <a class="btn btn-info d-print-none float-right" href='javascript:void(0)' onclick='window.print();'><i class="fa fa-print fa-fw"></i> Imprimir</a>
+                            @can('admin.materials-summary.edit')
+                                <a class="btn btn-secondary d-print-none float-right mx-1"   href='{{route('admin.materials-summary.edit', $materialsSummary)}}'><i class="fa fa-pen fa-fw"></i> Editar</a>    
+                            @endcan
                         </div>
                     </div>
                     <div class="row invoice-info">
@@ -58,7 +61,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-hover table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">CODIGO</th>

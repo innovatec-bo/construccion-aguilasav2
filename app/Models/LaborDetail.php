@@ -171,4 +171,151 @@ class LaborDetail extends Model
         }
         return $report;
     }
+
+    public function summary(MaterialSummary $materialSummary = NULL)
+    {
+        $materialSummaryId = NULL;
+        $reservationNumber = NULL;
+        if($materialSummary instanceof MaterialSummary)
+        {
+            $materialSummaryId = $materialSummary->id_msu;
+            $reservationNumber = $materialSummary->reservation_number_msu;
+        }
+
+        $summaryTypes = [
+            'materials_initial_list',
+            'materials_additional_list',
+            'materials_picked_up_from_cre',
+            'entry_by_conciliation_221',
+            'materials_delivered_to_builder', 
+            'materials_delivered_to_builder_loan',
+            'out_by_conciliation_222',
+            'request_materials',
+            'builder_returns_materials'
+        ];
+        $report = [];
+        $summaries = $this->project->materialSummaries()
+            ->when($materialSummaryId, function(Builder $query, $materialSummaryId){
+                $query->where('id_msu','!=', $materialSummaryId);
+            })
+            ->whereHas('summaryType', function(Builder $query)use($summaryTypes){
+                $query->whereIn('keyword_mqt', $summaryTypes);
+            })
+            ->get();
+        
+        foreach ($summaries as $key => $materialSummary) 
+        {
+            foreach ($materialSummary->projectMaterials as $key2 => $projectMaterial) 
+            {
+                if(!isset($report[$projectMaterial->material->code_mat]))
+                {
+                    $report[$projectMaterial->material->code_mat] = [
+                        'material_code' => $projectMaterial->material->code_mat,
+                        'material_description' => $projectMaterial->material->description_mat,
+                        'unit_of_measurement_mat' => $projectMaterial->material->unit_of_measurement_mat,
+                        'total_assigned' => 0,
+                        'materials_initial_list' => 0,
+                        'materials_additional_list' => 0,
+                        'materials_picked_up_from_cre' => 0,
+                        'entry_by_conciliation_221' => 0,
+                        'pending_material_in_cre' => 0,
+                        'total_materials_delivered_to_builder' => 0,
+                        'materials_delivered_to_builder' => 0,
+                        'materials_delivered_to_builder_loan' => 0,
+                        'out_by_conciliation_222'=> 0, 
+                        'request_materials' => 0,
+                        'request_loans_materials' => 0,
+                        'builder_returns_materials_nvo' => 0,
+                        'quantity_in_warehouse' => 0,
+                        'total_used' => 0,
+                        'return_to_cre' => 0,
+                        'return_to_serebo' => 0,
+                        'builder_returns_materials_meo' => 0
+                    ];
+                }
+                switch ($materialSummary->summaryType->keyword_mqt) 
+                {
+                    case 'materials_initial_list'://******************CONTROL_IN
+                        if((isset($reservationNumber) && $materialSummary->reservation_number_msu == $reservationNumber) || is_null($reservationNumber))
+                        {
+                            $report[$projectMaterial->material->code_mat]['materials_initial_list'] += $projectMaterial->quantity_prm;
+                            $report[$projectMaterial->material->code_mat]['total_assigned'] += $projectMaterial->quantity_prm;
+                            $report[$projectMaterial->material->code_mat]['pending_material_in_cre'] += $projectMaterial->quantity_prm;
+                        }
+                        break;
+                    case 'materials_additional_list'://******************CONTROL_IN
+                        if((isset($reservationNumber) && $materialSummary->reservation_number_msu == $reservationNumber) || is_null($reservationNumber))
+                        {
+                            $report[$projectMaterial->material->code_mat]['materials_additional_list'] += $projectMaterial->quantity_prm;
+                            $report[$projectMaterial->material->code_mat]['total_assigned'] += $projectMaterial->quantity_prm;
+                            $report[$projectMaterial->material->code_mat]['pending_material_in_cre'] += $projectMaterial->quantity_prm;
+                        }
+                        break;
+                    case 'materials_picked_up_from_cre'://******************IN
+                        if((isset($reservationNumber) && $materialSummary->reservation_number_msu == $reservationNumber) || is_null($reservationNumber))
+                        {
+                            $report[$projectMaterial->material->code_mat]['materials_picked_up_from_cre'] += $projectMaterial->quantity_prm;
+                            $report[$projectMaterial->material->code_mat]['pending_material_in_cre'] -= $projectMaterial->quantity_prm;
+                            $report[$projectMaterial->material->code_mat]['quantity_in_warehouse'] += $projectMaterial->quantity_prm;
+                        }
+                        break;
+                    case 'entry_by_conciliation_221'://******************IN
+                        if((isset($reservationNumber) && $materialSummary->reservation_number_msu == $reservationNumber) || is_null($reservationNumber))
+                        {
+                            $report[$projectMaterial->material->code_mat]['entry_by_conciliation_221'] += $projectMaterial->quantity_prm;
+                            $report[$projectMaterial->material->code_mat]['quantity_in_warehouse'] += $projectMaterial->quantity_prm;
+                        }
+                        break;
+                    case 'builder_returns_materials'://******************IN
+                        if($projectMaterial->status->code_mst == 'MEO')
+                        {
+                            $report[$projectMaterial->material->code_mat]['builder_returns_materials_meo'] += $projectMaterial->quantity_prm;
+                        }
+                        elseif($projectMaterial->status->code_mst == 'NVO')
+                        {
+                            $report[$projectMaterial->material->code_mat]['builder_returns_materials_nvo'] += $projectMaterial->quantity_prm;
+                        }
+                        $report[$projectMaterial->material->code_mat]['quantity_in_warehouse'] += $projectMaterial->quantity_prm;
+                        break;
+                    case 'materials_delivered_to_builder'://******************OUT
+                        $report[$projectMaterial->material->code_mat]['materials_delivered_to_builder'] += $projectMaterial->quantity_prm;
+                        $report[$projectMaterial->material->code_mat]['total_materials_delivered_to_builder'] += $projectMaterial->quantity_prm;
+                        $report[$projectMaterial->material->code_mat]['quantity_in_warehouse'] -= $projectMaterial->quantity_prm;
+                        break;
+                    case 'materials_delivered_to_builder_loan'://******************OUT
+                        $report[$projectMaterial->material->code_mat]['materials_delivered_to_builder_loan'] += $projectMaterial->quantity_prm;
+                        $report[$projectMaterial->material->code_mat]['total_materials_delivered_to_builder'] += $projectMaterial->quantity_prm;
+                        $report[$projectMaterial->material->code_mat]['quantity_in_warehouse'] -= $projectMaterial->quantity_prm;
+                        break;
+                    case 'out_by_conciliation_222'://******************OUT
+                        if((isset($reservationNumber) && $materialSummary->reservation_number_msu == $reservationNumber) || is_null($reservationNumber))
+                        {
+                            $report[$projectMaterial->material->code_mat]['out_by_conciliation_222'] += $projectMaterial->quantity_prm;
+                            $report[$projectMaterial->material->code_mat]['quantity_in_warehouse'] -= $projectMaterial->quantity_prm;
+                        }
+                        break;
+                    case 'request_materials'://******************REQUEST
+                        $report[$projectMaterial->material->code_mat]['request_materials'] += $projectMaterial->quantity_prm;
+                        break;
+                    
+                }
+            }
+        }
+
+        foreach ($report as &$row) 
+        {
+            $in = $row['materials_picked_up_from_cre'] + $row['builder_returns_materials_nvo'];
+            $out = $row['materials_delivered_to_builder'] + $row['materials_delivered_to_builder_loan'];
+            $row['total_used'] = $out - $row['builder_returns_materials_nvo'];
+            if($in > $out)
+            {
+                $row['return_to_cre'] = $in - $out;    
+            }
+            elseif($out > $in)
+            {
+                $row['return_to_serebo'] = $out - $in;    
+            }
+        }
+        return $report;
+    }
 }

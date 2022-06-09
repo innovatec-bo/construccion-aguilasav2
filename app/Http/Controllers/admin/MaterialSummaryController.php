@@ -60,9 +60,9 @@ class MaterialSummaryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(MaterialSummary $materialsSummary)
     {
-        //
+        return view('admin.materials-summary.edit', compact('materialsSummary'));   
     }
 
     /**
