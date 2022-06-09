@@ -10,6 +10,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::get('home','HomeController@index')->name('home.index');
 
     //Users
+    Route::get('usuarios/exportar/{users}','UserController@export')->name('users.export');
     Route::resource('users','UserController')->names('users');
 
     //Permissions

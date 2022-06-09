@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\admin;
 
+use App\Exports\UsersExport;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserIndex extends Component
 {
@@ -16,6 +18,7 @@ class UserIndex extends Component
     public $direction = 'desc';
     public $deleteId = '';
     protected $queryString = ['search' => ['except' => '']];
+    public $usersToExport;
 
     public function updatingSearch()
     {
@@ -29,9 +32,10 @@ class UserIndex extends Component
             $query->where('first_name','like','%'.$this->search.'%')
             ->orWhere('last_name','like','%'.$this->search.'%')
             ->orWhere('email','like','%'.$this->search.'%');
-        })
-        ->orderBy($this->sort, $this->direction)
-        ->paginate(6);
+        });
+        $users = $users->orderBy($this->sort, $this->direction);
+        $this->usersToExport = $users->get();
+        $users = $users->paginate(6);
 
         return view('livewire.admin.user-index', compact('users'));
     }
@@ -56,5 +60,11 @@ class UserIndex extends Component
             $this->direction = 'asc';
         }   
         
+    }
+
+    public function export()
+    {
+        $export = new UsersExport($this->usersToExport);
+        return Excel::download($export, 'Usuarios.xlsx');
     }
 }
