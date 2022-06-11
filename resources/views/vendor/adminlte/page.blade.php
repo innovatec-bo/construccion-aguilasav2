@@ -13,7 +13,9 @@
 
 @section('body')
     <div class="wrapper">
-
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="{{asset('favicon.ico')}}" alt="Serebo2Logo" height="60" width="60">
+        </div>
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
             @include('adminlte::partials.navbar.navbar-layout-topnav')

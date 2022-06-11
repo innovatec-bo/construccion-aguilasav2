@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin.projects.index', ['only' => ['index']]);
+        $this->middleware('permission:admin.projects.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:admin.projects.edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:admin.projects.show', ['only' => ['show']]); 
+        $this->middleware('permission:admin.projects.delete', ['only' => ['destroy']]); 
+    }
+    
     /**
      * Display a listing of the resource.
      *
