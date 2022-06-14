@@ -3,7 +3,14 @@
 @section('title', 'Conciliacion internal(Vista de constructor): '.$laborDetail->project->code_pro)
 
 @section('content_header')
-    <h1>Conciliacion internal(Vista de constructor): {{$laborDetail->project->code_pro}}</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Conciliacion internal(Vista de constructor): {{$laborDetail->project->code_pro}}</h1>
+        </div>
+        <div class="col-sm-6">
+            {{ Breadcrumbs::render('admin.labor-details.internal-conciliation-builder', $laborDetail) }}
+        </div>
+    </div>
 @stop
 
 @section('content')

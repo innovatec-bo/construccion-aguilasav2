@@ -3,7 +3,14 @@
 @section('title', 'Conciliacion interna')
 
 @section('content_header')
-    <h1>Conciliacion interna: {{$laborDetail->project->code_pro}}</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Conciliacion interna: {{$laborDetail->project->code_pro}}</h1>
+        </div>
+        <div class="col-sm-6">
+            {{ Breadcrumbs::render('admin.labor-details.internal-conciliation', $laborDetail) }}
+        </div>
+    </div>
 @stop
 
 @section('content')
