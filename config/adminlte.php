@@ -352,7 +352,7 @@ return [
                 ]
             ]
         ],
-        ['header' => 'Seguridad', 'can' => ['admin.users.index', 'admin.users.create', 'admin.permissions.index', 'admin.permissions.create','admin.roles.index', 'admin.roles.create']],
+        ['header' => 'SEGURIDAD', 'can' => ['admin.users.index', 'admin.users.create', 'admin.permissions.index', 'admin.permissions.create','admin.roles.index', 'admin.roles.create']],
         [
             'text'        => 'Usuarios',
             'icon'        => 'fas fa-fw fa-users',
