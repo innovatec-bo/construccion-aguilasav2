@@ -30,7 +30,7 @@ class PermissionIndex extends Component
             ->orWhere('detail','like','%'.$this->search.'%');
         })
         ->orderBy($this->sort, $this->direction)
-        ->paginate(6);
+        ->paginate(15);
 
         return view('livewire.admin.permission-index', compact('permissions'));
     }

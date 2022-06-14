@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Exports\LaborDetailExport;
 use App\Http\Controllers\Controller;
 use App\Models\LaborDetail;
-use App\Models\Material;
-use App\Models\Project;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaborDetailController extends Controller
 {
@@ -225,5 +223,11 @@ class LaborDetailController extends Controller
     {
         $laborDetail->internalConciliation();
         return view('admin.labor-details.internal-conciliation-cre-format', compact('laborDetail'));   
+    }
+
+    public function export(LaborDetail $laborDetail)
+    {
+        $export = new LaborDetailExport($laborDetail->laborCosts);
+        return Excel::download($export, 'Mano de obra - '.date('Y.m.d:H.i.s').'.xlsx');
     }
 }

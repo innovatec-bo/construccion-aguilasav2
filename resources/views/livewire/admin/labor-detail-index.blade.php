@@ -2,7 +2,11 @@
     <div class="col-md-10">
         <div class="card shadow-lg">
             <div class="card-header">
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="">
+                        <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">

@@ -10,9 +10,15 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card shadow-lg">
-                {{-- <div class="card-header">
-                    <h3 class="card-title">Proyecto: {{$laborDetail->project->code_pro}}</h3>
-                </div> --}}
+                <div class="card-header">
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="">
+                            @can('admin.labor-details.export')
+                                <a href="{{route('admin.labor-details.export', $laborDetail->id_lad)}}" class="btn btn-primary btn-xs"><i class="far fa-file-excel"></i> Exportar</a>
+                            @endcan
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <table class="table table-bordered table-sm table-hover table-striped">
