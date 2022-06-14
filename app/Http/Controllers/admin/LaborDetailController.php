@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Exports\LaborDetailExport;
+use App\Exports\LaborDetailInternalConciliationCreFormatExport;
+use App\Exports\LaborDetailInternalConciliationExport;
 use App\Http\Controllers\Controller;
 use App\Models\LaborDetail;
 use Illuminate\Http\Request;
@@ -10,6 +12,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class LaborDetailController extends Controller
 {
+    private $_internalConciliation;
+
     /**
      * Display a listing of the resource.
      *
@@ -149,7 +153,8 @@ class LaborDetailController extends Controller
         }
         $materialsToBeReturned = array_values($materialsToBeReturned);
         $returnedMaterials = array_values($returnedMaterials);
-
+        $this->_internalConciliation['materialsToBeReturned'] = $materialsToBeReturned;
+        $this->_internalConciliation['returnedMaterials'] = $returnedMaterials;
         return view('admin.labor-details.internal-conciliation', compact('materialsToBeReturned','returnedMaterials', 'laborDetail'));   
     }
 
@@ -221,13 +226,25 @@ class LaborDetailController extends Controller
 
     public function internalConciliationCreFormat(LaborDetail $laborDetail)
     {
-        $laborDetail->internalConciliation();
+        // $laborDetail->internalConciliationCreFormat();
         return view('admin.labor-details.internal-conciliation-cre-format', compact('laborDetail'));   
     }
 
     public function export(LaborDetail $laborDetail)
     {
         $export = new LaborDetailExport($laborDetail->laborCosts);
-        return Excel::download($export, 'Mano de obra - '.date('Y.m.d:H.i.s').'.xlsx');
+        return Excel::download($export, 'Mano de obra '.$laborDetail->project->code_pro.' - '.date('Y.m.d_H.i.s').'.xlsx');
+    }
+
+    public function exportInternalConciliation(LaborDetail $laborDetail)
+    {
+        $export = new LaborDetailInternalConciliationExport($laborDetail->laborCosts);
+        return Excel::download($export, 'Conciliacion interna '.$laborDetail->project->code_pro.' - '.date('Y.m.d_H.i.s').'.xlsx');
+    }
+
+    public function exportInternalConciliationCreFormat(LaborDetail $laborDetail)
+    {
+        $export = new LaborDetailInternalConciliationCreFormatExport($laborDetail->internalConciliationCreFormat());
+        return Excel::download($export, 'Conciliacion interna formato CRE '.$laborDetail->project->code_pro.' - '.date('Y.m.d_H.i.s').'.xlsx');
     }
 }

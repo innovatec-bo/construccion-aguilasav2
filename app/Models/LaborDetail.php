@@ -95,7 +95,7 @@ class LaborDetail extends Model
         }
     }
 
-    public function internalConciliation()
+    public function internalConciliationCreFormat()
     {
         $summaryTypes = [
             'materials_picked_up_from_cre', 
