@@ -8,11 +8,19 @@ use App\Exports\LaborDetailInternalConciliationExport;
 use App\Http\Controllers\Controller;
 use App\Models\LaborDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
 class LaborDetailController extends Controller
 {
     private $_internalConciliation;
+    private $_previousRoute;
+    public function __construct()
+    {
+        $url = url()->previous();
+        $this->_previousRoute = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
+
+    }
 
     /**
      * Display a listing of the resource.
@@ -93,6 +101,7 @@ class LaborDetailController extends Controller
 
     public function internalConciliation(LaborDetail $laborDetail)
     {
+        $previousRoute = $this->_previousRoute;
         $laborDetail->applyCustomMaterials();
         //builder_returns_materials
         $returnedMaterials = [];
@@ -155,11 +164,12 @@ class LaborDetailController extends Controller
         $returnedMaterials = array_values($returnedMaterials);
         $this->_internalConciliation['materialsToBeReturned'] = $materialsToBeReturned;
         $this->_internalConciliation['returnedMaterials'] = $returnedMaterials;
-        return view('admin.labor-details.internal-conciliation', compact('materialsToBeReturned','returnedMaterials', 'laborDetail'));   
+        return view('admin.labor-details.internal-conciliation', compact('materialsToBeReturned','returnedMaterials', 'laborDetail', 'previousRoute'));   
     }
 
     public function internalConciliationBuilder(LaborDetail $laborDetail)
     {
+        $previousRoute = $this->_previousRoute;
         $laborDetail->applyCustomMaterials();
         //builder_returns_materials
         $returnedMaterials = [];
@@ -221,7 +231,7 @@ class LaborDetailController extends Controller
         $materialsToBeReturned = array_values($materialsToBeReturned);
         $returnedMaterials = array_values($returnedMaterials);
 
-        return view('admin.labor-details.internal-conciliation-builder', compact('materialsToBeReturned','returnedMaterials', 'laborDetail'));   
+        return view('admin.labor-details.internal-conciliation-builder', compact('materialsToBeReturned','returnedMaterials', 'laborDetail', 'previousRoute'));   
     }
 
     public function internalConciliationCreFormat(LaborDetail $laborDetail)

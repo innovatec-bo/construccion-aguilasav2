@@ -8,7 +8,7 @@
             <h1>Conciliacion interna: {{$laborDetail->project->code_pro}}</h1>
         </div>
         <div class="col-sm-6">
-            {{ Breadcrumbs::render('admin.labor-details.internal-conciliation', $laborDetail) }}
+            {{ Breadcrumbs::render('admin.labor-details.internal-conciliation', $laborDetail, $previousRoute) }}
         </div>
     </div>
 @stop

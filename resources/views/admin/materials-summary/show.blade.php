@@ -3,21 +3,40 @@
 @section('title', 'Detalle de movimiento')
 
 @section('content_header')
-    <h1>Detalle de movimiento</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Detalle de movimiento</h1>
+        </div>
+        <div class="col-sm-6">
+            {{ Breadcrumbs::render('admin.materials-summary.show', $materialsSummary) }}
+        </div>
+    </div>
 @stop
 
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
+                <div class="card-header d-print-none">
+                    {{-- <h4 class="card-title">
+                        Materiales que deben ser retirados segun el archivo de mano de obra
+                    </h4> --}}
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="">
+                            <a class="btn btn-xs btn-primary d-print-none float-right mx-1" href='{{url()->previous()}}'>Volver</a>
+                            <a class="btn btn-xs btn-info d-print-none float-right" href='javascript:void(0)' onclick='window.print();'><i class="fa fa-print fa-fw"></i> Imprimir</a>
+                            @can('admin.materials-summary.edit')
+                                <a class="btn btn-xs btn-secondary d-print-none float-right mx-1"   href='{{route('admin.materials-summary.edit', $materialsSummary)}}'><i class="fa fa-pen fa-fw"></i> Editar</a>    
+                            @endcan
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <a class="btn btn-primary d-print-none float-right mx-1" href='{{url()->previous()}}'>Volver</a>
-                            <a class="btn btn-info d-print-none float-right" href='javascript:void(0)' onclick='window.print();'><i class="fa fa-print fa-fw"></i> Imprimir</a>
-                            @can('admin.materials-summary.edit')
-                                <a class="btn btn-secondary d-print-none float-right mx-1"   href='{{route('admin.materials-summary.edit', $materialsSummary)}}'><i class="fa fa-pen fa-fw"></i> Editar</a>    
-                            @endcan
+                            
+                            
+                            
                         </div>
                     </div>
                     <div class="row invoice-info">

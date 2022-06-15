@@ -3,7 +3,14 @@
 @section('title', 'Salidas duplicadas')
 
 @section('content_header')
-    <h1>Salidas duplicadas</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Salidas duplicadas</h1>
+        </div>
+        <div class="col-sm-6">
+            {{ Breadcrumbs::render('admin.materials-summary.duplicate-outputs') }}
+        </div>
+    </div>
 @stop
 
 @section('content')
