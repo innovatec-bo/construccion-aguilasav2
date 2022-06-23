@@ -73,7 +73,7 @@
                                     @endcan
                                     <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.materials-summary.show', $materialSummary) }}'"><i class="fas fa-eye"></i></a>
                                     @if (Auth::user()->email == 'jair@twiiti.com')
-                                        {{-- <a href="javascript:void(0)" wire:loading.class="disabled" data-record='{{ $materialSummary }}' class="btn btn-danger btn-xs lv-confirm-action"><i class="fas fa-trash"></i></a> --}}
+                                        <a href="javascript:void(0)" wire:loading.class="disabled" data-record='{{ $materialSummary }}' class="btn btn-danger btn-xs lv-confirm-action"><i class="fas fa-trash"></i></a>
                                     @endif
                                     
                                 </td>
