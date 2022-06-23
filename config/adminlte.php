@@ -189,7 +189,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'admin/home',
+    'dashboard_url' => 'admin/inicio',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => false,
