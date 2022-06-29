@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\ProjectRealBudget;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Mavinoo\Batch\Batch;
 
 class MoveConciliations extends Command
 {
@@ -42,9 +44,9 @@ class MoveConciliations extends Command
         select
             code_pro,
             project_id_psl,
-            concat('[',group_concat(concat('{\"id_psl\": ',id_psl,', \"status_id_psl\": ',status_id_psl,', \"id_reb\": ',ifnull(id_reb,'null'),', \"manual_entry_date_psl\": \"',manual_entry_date_psl,'\"}')),']') conciliations,
-            id_reb,
-            wfl_project_status_log.*
+            concat('[',group_concat(concat('{\"id_psl\": ',id_psl,', \"deleted_psl\":',deleted_psl,', \"status_id_psl\": ',status_id_psl,', \"id_reb\": ',ifnull(id_reb,'null'),', \"manual_entry_date_psl\": \",manual_entry_date_psl,\"}')),']') conciliations
+            -- id_reb,
+            -- wfl_project_status_log.*
         from 
             wfl_project_status_log 
         left join wfl_project_real_budgets on status_log_id_reb = id_psl
@@ -53,6 +55,7 @@ class MoveConciliations extends Command
         status_id_psl in (34, 35)
         -- and manual_entry_date_psl > '2022-01-01 00:00:00'
         and deleted_psl != 1
+        and deleted_pro != 1
         group by project_id_psl
         order by project_id_psl, status_id_psl, manual_entry_date_psl
         ");
@@ -99,6 +102,8 @@ class MoveConciliations extends Command
             ];
         }
         // dd(count($dataToUpdate));
-        dd($withoutReceptions, $withoutShipments);
+        // dd($dataToUpdate);
+        $instance = new ProjectRealBudget;
+        batch()->update($instance, $dataToUpdate, 'id_reb');
     }
 }
