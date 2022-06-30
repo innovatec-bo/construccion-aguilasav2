@@ -352,6 +352,27 @@ return [
                 ]
             ]
         ],
+        [
+            'text'        => 'Observaciones externas',
+            'icon'        => 'fas fa-fw fa-shapes',
+            'can'         => ['admin.external-observations.index', 'admin.external-observations.create'],
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'route'       => 'admin.external-observations.index',
+                    'can'         => 'admin.external-observations.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'pl-4',
+                ],
+                [
+                    'text'        => 'Crear',
+                    'route'       => 'admin.external-observations.create',
+                    'can'         => 'admin.external-observations.create',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'pl-4',
+                ]
+            ]
+        ],
         ['header' => 'SEGURIDAD', 'can' => ['admin.users.index', 'admin.users.create', 'admin.permissions.index', 'admin.permissions.create','admin.roles.index', 'admin.roles.create']],
         [
             'text'        => 'Usuarios',

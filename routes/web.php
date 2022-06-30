@@ -54,6 +54,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
 
     //Project materials
     Route::resource('project-materials','ProjectMaterialController')->names('project-materials');
+
+    //External observations
+    Route::get('observaciones-externas/marcar-como-resuelto/{external_observation}', 'ExternalObservationController@markAsFixed')->name('external-observations.mark-as-fixed');
+    Route::resource('observaciones-externas', 'ExternalObservationController')->parameters(['observaciones-externas' => 'external_observation'])->names('external-observations');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
