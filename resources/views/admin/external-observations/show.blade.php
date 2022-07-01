@@ -3,7 +3,14 @@
 @section('title', 'Detalle de observacion')
 
 @section('content_header')
-    <h1>Detalle de observacion</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Detalle de observacion</h1>
+        </div>
+        <div class="col-sm-6">
+            {{ Breadcrumbs::render('admin.external-observations.show', $externalObservation) }}
+        </div>
+    </div>
 @stop
 
 @section('content')

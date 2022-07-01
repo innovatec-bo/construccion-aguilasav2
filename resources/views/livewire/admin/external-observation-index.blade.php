@@ -68,7 +68,7 @@
                                         <div class="dropdown-menu" role="menu" style="">
                                             @can('admin.external-observations.edit')
                                                 @if (!$externalObservation->fixed_efo)
-                                                    <a  wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.edit', $externalObservation)}}'"><i class="fas fa-pen fa-fw"></i> Editar</a>
+                                                    {{-- <a  wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.edit', $externalObservation)}}'"><i class="fas fa-pen fa-fw"></i> Editar</a> --}}
                                                 @endif
                                             @endcan
                                             @can('admin.external-observations.show')
@@ -81,35 +81,11 @@
                                             @endcan
                                             @can('admin.external-observations.destroy')
                                                 @if (!$externalObservation->fixed_efo)
-                                                    <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.destroy', $externalObservation)}}'"><i class="fas fa-trash-alt fa-fw"></i> Eliminar</a>    
+                                                    {{-- <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.destroy', $externalObservation)}}'"><i class="fas fa-trash-alt fa-fw"></i> Eliminar</a>     --}}
                                                 @endif
                                             @endcan
                                         </div>
                                     </div>
-                                    {{-- @can('admin.external-observations.edit')
-                                        @if (!$externalObservation->fixed_efo)
-                                            <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href='{{ route('admin.external-observations.edit', $externalObservation) }}'"><i class="fas fa-pen"></i></a>        
-                                        @endif
-                                    @endcan
-                                    @can('admin.external-observations.show')
-                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.external-observations.show', $externalObservation) }}'"><i class="fas fa-eye"></i></a>    
-                                    @endcan
-                                    @can('admin.external-observations.mark-as-fixed')
-                                        @if (!$externalObservation->fixed_efo)
-                                            <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href="{{route('admin.external-observations.mark-as-fixed', $externalObservation)}}"><i class="fas fa-check"></i></a>        
-                                        @endif    
-                                    @endcan
-                                    @can('admin.external-observations.destroy')
-                                        @if (!$externalObservation->fixed_efo)
-                                            <form method="post" action="{{ route('admin.external-observations.destroy', $externalObservation) }}"
-                                                class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                <button type="submit" onclick="return confirm('Eliminar?')" class="btn btn-danger btn-xs"><i
-                                                        class="fas fa-trash-alt"></i></button>
-                                            </form>    
-                                        @endif
-                                    @endcan --}}
                                 </td>
                             </tr>
                         @endforeach

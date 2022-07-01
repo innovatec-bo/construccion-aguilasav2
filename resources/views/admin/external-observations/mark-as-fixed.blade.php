@@ -3,7 +3,14 @@
 @section('title', 'Marcar como resuelto')
 
 @section('content_header')
-    <h1>Marcar como resuelto</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Marcar como resuelto</h1>
+        </div>
+        <div class="col-sm-6">
+            {{ Breadcrumbs::render('admin.external-observations.mark-as-fixed', $externalObservation) }}
+        </div>
+    </div>
 @stop
 
 @section('content')

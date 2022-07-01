@@ -61,6 +61,30 @@ Breadcrumbs::for('admin.materials-summary.grouped-movement-details', function (B
     $trail->push($project->code_pro, route('admin.materials-summary.grouped-movement-details', $project));
 });
 
+// External observation
+Breadcrumbs::for('admin.external-observations.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Observaciones externas', route('admin.external-observations.index'));
+});
+
+// External observation - show
+Breadcrumbs::for('admin.external-observations.show', function (BreadcrumbTrail $trail, $externalObservation) {
+    $trail->parent('admin.external-observations.index');
+    $trail->push('Detalle de Observacion externa '. $externalObservation->project->code_pro, route('admin.external-observations.index', $externalObservation));
+});
+
+// External observation - mark as fixed
+Breadcrumbs::for('admin.external-observations.mark-as-fixed', function (BreadcrumbTrail $trail, $externalObservation) {
+    $trail->parent('admin.external-observations.index');
+    $trail->push('Marcar como resuelto', route('admin.external-observations.index', $externalObservation));
+});
+
+// External observation - edit
+Breadcrumbs::for('admin.external-observations.edit', function (BreadcrumbTrail $trail, $externalObservation) {
+    $trail->parent('admin.external-observations.index');
+    $trail->push('Editar Observacion externa '. $externalObservation->project->code_pro, route('admin.external-observations.index', $externalObservation));
+});
+
 Breadcrumbs::for('admin.materials-summary.duplicate-outputs', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');
     $trail->push('Salidas duplicadas', route('admin.materials-summary.duplicate-outputs'));
