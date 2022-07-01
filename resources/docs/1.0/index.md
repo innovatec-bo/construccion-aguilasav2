@@ -4,6 +4,7 @@
     - [Almacen](/{{route}}/{{version}}/warehouse)
     - [Estructuras](/{{route}}/{{version}}/structures)
     - [Materiales](/{{route}}/{{version}}/materials)
+    - [Observaciones externas](/{{route}}/{{version}}/external_observations)
 - ## Seguridad
     - [Usuarios](/{{route}}/{{version}}/users)
     - [Permisos](/{{route}}/{{version}}/permissions)
