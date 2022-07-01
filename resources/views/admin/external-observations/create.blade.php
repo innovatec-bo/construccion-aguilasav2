@@ -1,48 +1,53 @@
 @extends('adminlte::page')
 
-@section('title', 'Nuevo rol')
+@section('title', 'Nueva observacion')
 
 @section('content_header')
-    <h1>Nuevo Rol</h1>
+    <h1>Nueva observaci&oacute;n</h1>
 @stop
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="card card-primary shadow-lg">
-            <form method="post" action="{{route('admin.roles.store')}}">
-                @csrf
-                @method('post')
-                <div class="card-body">
+            <div class="card-body">
+                {!! Form::open(['method' => 'POST', 'route' => 'admin.external-observations.store', 'class' => '']) !!}
                     <div class="form-group">
-                    {!! Form::label('name', 'Nombre del Rol') !!}
-                    {!! Form::text('name', null, ['class' => 'form-control '.($errors->has('name') ? ' is-invalid' : '' )]) !!}
-                        <small class="text-warning">{{ $errors->first('name') }}</small>
+                        {!! Form::label('code_pro', 'Proyecto') !!}
+                        {!! Form::text('code_pro', null, ['class' => 'form-control '.( $errors->has('code_pro') ? ' is-invalid' : ''), 'required' => 'required']) !!}
+                        @error('code_pro')
+                            <small class="text-warning">{{ $message }}</small>    
+                        @enderror
                     </div>
-                    {!! Form::label('name', 'Permisos') !!}
+
                     <div class="form-group">
-                        <div class="row">
-                            @foreach ($permissions as $key => $permission)
-                                <div class="col-md-12">
-                                    <div class="checkbox">
-                                        <label for="permissions_checked_{{$key}}">
-                                            {!! Form::checkbox('permissions_checked[]', $key, null, ['id' => 'permissions_checked_'.$key]) !!} {{$permission}}
-                                        </label>
-                                    </div>
-                                </div>
-                            @endforeach
-                            <div class="col-md-12">
-                                <small class="text-warning">{{ $errors->first('permissions_checked') }}</small>
-                            </div>
-                        </div>
-                    </div>    
-                    
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="{{route('admin.roles.index')}}" class="btn btn-secondary">Cancelar</a>
-                </div>
-            </form>
+                        {!! Form::label('fiscal_id_efo', 'Fiscal de CRE') !!}
+                        {!! Form::select('fiscal_id_efo', $fiscals, null, ['id' => 'fiscal_id_efo', 'class' => 'form-control '.( $errors->has('fiscal_id_efo') ? ' is-invalid' : ''), 'required' => 'required']) !!}
+                        @error('fiscal_id_efo')
+                            <small class="text-warning">{{ $message }}</small>    
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('observation_efo', "Observaci&oacute;n") !!}
+                        {!! Form::textarea('observation_efo', null, ['class' => 'form-control '.( $errors->has('observation_efo') ? ' is-invalid' : ''), 'required' => 'required', 'rows' => '5']) !!}
+                        @error('observation_efo')
+                            <small class="text-warning">{{ $message }}</small>    
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('entry_date_efo', "Fecha de observaci&oacute;n") !!}
+                        {!! Form::text('entry_date_efo', date('d/m/Y H:i:s'), ['class' => 'form-control '.( $errors->has('entry_date_efo') ? ' is-invalid' : ''), 'required' => 'required', 'placeholder' => "dd/mm/yyyy hh:mm:ss", "data-inputmask-alias" => "datetime", 'data-inputmask-inputformat' => "dd/mm/yyyy HH:MM:ss", 'inputmode' => 'numeric']) !!}
+                        @error('entry_date_efo')
+                            <small class="text-warning">{{ $message }}</small>    
+                        @enderror
+                    </div>
+                    <div class="btn-group pull-right">
+                        {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                        <a class="btn btn-danger" href="{{url()->previous()}}">Cancelar</a>
+                    </div>
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 </div>
@@ -55,4 +60,7 @@
 
 @section('js')
     {{-- <script> console.log('Hi!'); </script> --}}
+    <script>
+        $('[data-inputmask-alias]').inputmask();
+    </script>
 @stop

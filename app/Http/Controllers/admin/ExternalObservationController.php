@@ -4,7 +4,13 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ExternalObservation;
+use App\Models\Project;
+use App\Models\ProjectStatus;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ExternalObservationController extends Controller
 {
@@ -26,6 +32,16 @@ class ExternalObservationController extends Controller
         return view('admin.external-observations.index');
     }
 
+    public function messages()
+    {
+        return [
+            'code_pro.exists' => 'El proyecto no existe',
+            'fiscal_id_efo.exists' => "El fiscal no existe",
+            'observation_efo.required' => 'La observacion es requerida',
+            'entry_date_efo.date_format' => 'El formato de fecha es incorreccto' 
+        ];
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,7 +49,9 @@ class ExternalObservationController extends Controller
      */
     public function create()
     {
-        //
+        $status = ProjectStatus::all()->pluck('status_name_pst','id_pst');
+        $fiscals = User::role('Fiscal de CRE')->get()->pluck('full_name','id_usr');
+        return view('admin.external-observations.create', compact('fiscals'));
     }
 
     /**
@@ -44,7 +62,24 @@ class ExternalObservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'code_pro' => ['required', 'exists:wfl_projects,code_pro'],
+            'fiscal_id_efo' => ['required', 'exists:sec_users,id_usr'],
+            'observation_efo' => ['required'],
+            'entry_date_efo' => ['required', 'date_format:d/m/Y H:i:s']
+        ],$this->messages());
+        $request->entry_date_efo = Carbon::createFromFormat('d/m/Y H:i:s', $request->entry_date_efo)->format('Y-m-d H:i:s');
+        $project = Project::where('code_pro', $request->code_pro)->first();
+        $data = [
+            'project_id_efo' => $project->id_pro,
+            'fiscal_id_efo' => $request->fiscal_id_efo,
+            'observation_efo' => $request->observation_efo,
+            'entry_date_efo' => $request->entry_date_efo,
+            'status_id_efo' => $project->status_pro
+        ];
+        ExternalObservation::create($data);
+        Session::flash('Observacion externa creada exitosamente.');
+        return redirect('admin.external-observations.index');
     }
 
     /**
@@ -53,9 +88,9 @@ class ExternalObservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ExternalObservation $externalObservation)
     {
-        //
+        return view('admin.external-observations.show', compact('externalObservation'));
     }
 
     /**
@@ -95,5 +130,20 @@ class ExternalObservationController extends Controller
     public function markAsFixed(ExternalObservation $externalObservation)
     {
         return view('admin.external-observations.mark-as-fixed', compact('externalObservation'));
+    }
+
+    public function markAsFixedUpdate(Request $request, ExternalObservation $externalObservation)
+    {
+        $this->validate($request, [
+            'fix_detail_efo' => 'required',
+            'fixed_date_efo' => 'required|date_format:d/m/Y H:i:s'
+        ]);
+
+        $externalObservation->fixed_by_efo = Auth::user()->id_usr;
+        $externalObservation->fix_detail_efo = $request->fix_detail_efo;
+        $externalObservation->fixed_date_efo = Carbon::createFromFormat('d/m/Y H:i:s', $request->fixed_date_efo)->format('Y-m-d H:i:s');
+        $externalObservation->save();
+        Session::flash('successMessage', 'Observacion marcada como resuelta.');
+        return redirect()->route('admin.external-observations.index');
     }
 }

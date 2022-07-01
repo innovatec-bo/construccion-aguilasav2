@@ -56,6 +56,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::resource('project-materials','ProjectMaterialController')->names('project-materials');
 
     //External observations
+    Route::post('observaciones-externas/marcar-como-resuelto-actualizar/{external_observation}', 'ExternalObservationController@markAsFixedUpdate')->name('external-observations.mark-as-fixed-update');
     Route::get('observaciones-externas/marcar-como-resuelto/{external_observation}', 'ExternalObservationController@markAsFixed')->name('external-observations.mark-as-fixed');
     Route::resource('observaciones-externas', 'ExternalObservationController')->parameters(['observaciones-externas' => 'external_observation'])->names('external-observations');
 });

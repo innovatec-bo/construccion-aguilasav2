@@ -16,9 +16,15 @@ class ExternalObservation extends Model
     protected $table = "wfl_external_fiscal_observations";
     protected $primaryKey = "id_efo";
 
+    protected $guarded = [
+        'createdon_efo',
+        'editedon_efo'
+    ];
+
     protected $casts = [
         'entry_date_efo' => 'datetime',
-        'fixed_date_efo' => 'datetime'
+        'fixed_date_efo' => 'datetime',
+        'fixed_efo' => 'boolean'
     ];
 
     const CREATED_AT = 'createdon_efo';

@@ -31,7 +31,7 @@ return [
     'distinct'       => 'El :attribute el campo tiene un valor duplicado',
     'email'          => 'El :attribute debe ser una dirección de correo valida.',
     'ends_with'      => 'El atributo: debe terminar con uno de los siguientes valores::.',
-    'exists'         => 'El : attribute seleccionado es invalido.',
+    'exists'         => 'El :attribute seleccionado es invalido.',
     'file'           => 'El :attribute debe ser un archivo.',
     'filled'         => 'El campo :attribute es requerido.',
     'gt'             => [
