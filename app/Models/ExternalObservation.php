@@ -49,4 +49,9 @@ class ExternalObservation extends Model
     {
         return $this->belongsTo(ProjectStatus::class, 'status_id_efo');
     }
+
+    public function externalObservationType()
+    {
+        return $this->belongsTo(ExternalObservationType::class, 'external_observation_type_id');
+    }
 }

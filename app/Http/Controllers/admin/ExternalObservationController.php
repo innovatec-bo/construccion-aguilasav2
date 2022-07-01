@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ExternalObservation;
+use App\Models\ExternalObservationType;
 use App\Models\Project;
 use App\Models\ProjectStatus;
 use App\Models\User;
@@ -49,9 +50,9 @@ class ExternalObservationController extends Controller
      */
     public function create()
     {
-        $status = ProjectStatus::all()->pluck('status_name_pst','id_pst');
         $fiscals = User::role('Fiscal de CRE')->get()->pluck('full_name','id_usr');
-        return view('admin.external-observations.create', compact('fiscals'));
+        $externalObservationTypes = ExternalObservationType::all()->pluck('name','id');
+        return view('admin.external-observations.create', compact('fiscals','externalObservationTypes'));
     }
 
     /**
@@ -65,6 +66,7 @@ class ExternalObservationController extends Controller
         $this->validate($request, [
             'code_pro' => ['required', 'exists:wfl_projects,code_pro'],
             'fiscal_id_efo' => ['required', 'exists:sec_users,id_usr'],
+            'external_observation_type_id' => ['required', 'exists:external_observation_types,id'],
             'observation_efo' => ['required'],
             'entry_date_efo' => ['required', 'date_format:d/m/Y H:i:s']
         ],$this->messages());
@@ -73,13 +75,14 @@ class ExternalObservationController extends Controller
         $data = [
             'project_id_efo' => $project->id_pro,
             'fiscal_id_efo' => $request->fiscal_id_efo,
+            'external_observation_type_id' => $request->external_observation_type_id,
             'observation_efo' => $request->observation_efo,
             'entry_date_efo' => $request->entry_date_efo,
             'status_id_efo' => $project->status_pro
         ];
         ExternalObservation::create($data);
         Session::flash('Observacion externa creada exitosamente.');
-        return redirect('admin.external-observations.index');
+        return redirect()->route('admin.external-observations.index');
     }
 
     /**

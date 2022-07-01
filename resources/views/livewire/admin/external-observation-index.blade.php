@@ -22,6 +22,7 @@
                             <th>Proyecto</th>
                             <th>Estado en<br>observaci&oacute;n</th>
                             <th>Observaci&oacute;n</th>
+                            <th>Tipo</th>
                             <th>Fecha<br>observaci&oacute;n</th>
                             <th>Fiscal<br>externo</th>
                             <th>Registrado por</th>
@@ -37,6 +38,11 @@
                                 <td>{{ $externalObservation->project->code_pro }}</td>
                                 <td>{{ $externalObservation->status->status_name_pst }}</td>
                                 <td class="text-sm"><i>{{$externalObservation->observation_efo}}</i></td>
+                                <td>
+                                    @if ($externalObservation->externalObservationType)
+                                        {{ $externalObservation->externalObservationType->name }}    
+                                    @endif
+                                </td>
                                 <td>
                                     {{ $externalObservation->entry_date_efo->format('d-m-Y H:i:s')}}
                                     <small class="badge badge-primary">{{ $externalObservation->entry_date_efo->diffForHumans() }}</small>

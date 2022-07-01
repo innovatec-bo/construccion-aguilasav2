@@ -29,6 +29,14 @@
                     </div>
 
                     <div class="form-group">
+                        {!! Form::label('external_observation_type_id', 'Tipo') !!}
+                        {!! Form::select('external_observation_type_id', $externalObservationTypes, null, ['id' => 'external_observation_type_id', 'class' => 'form-control '.( $errors->has('external_observation_type_id') ? ' is-invalid' : ''), 'required' => 'required']) !!}
+                        @error('external_observation_type_id')
+                            <small class="text-warning">{{ $message }}</small>    
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         {!! Form::label('observation_efo', "Observaci&oacute;n") !!}
                         {!! Form::textarea('observation_efo', null, ['class' => 'form-control '.( $errors->has('observation_efo') ? ' is-invalid' : ''), 'required' => 'required', 'rows' => '5']) !!}
                         @error('observation_efo')

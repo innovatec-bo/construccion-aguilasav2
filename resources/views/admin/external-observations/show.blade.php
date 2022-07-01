@@ -35,6 +35,12 @@
                                     <small class="badge badge-primary">{{ $externalObservation->entry_date_efo->diffForHumans() }}</small>
                                 </p>
                             </div>
+                            <div class="form-group">
+                                <label for="lastName">Tipo</label>
+                                @if ($externalObservation->externalObservationType)
+                                    <p>{{$externalObservation->externalObservationType->name}}</p>    
+                                @endif                                
+                            </div>
                         </div>
                         <div class="col-md-8">
                             <figure>
