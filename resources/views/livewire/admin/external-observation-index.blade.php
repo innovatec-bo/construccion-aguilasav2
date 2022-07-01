@@ -25,7 +25,7 @@
                             <th>Tipo</th>
                             <th>Fecha<br>observaci&oacute;n</th>
                             <th>Fiscal<br>externo</th>
-                            <th>Registrado por</th>
+                            {{-- <th>Registrado por</th> --}}
                             <th>Corregido por</th>
                             <th>Detalle de la correcci&oacute;n</th>
                             <th>Fecha de<br>correcci&oacute;n</th>
@@ -48,7 +48,7 @@
                                     <small class="badge badge-primary">{{ $externalObservation->entry_date_efo->diffForHumans() }}</small>
                                 </td>
                                 <td>{{ $externalObservation->fiscal->full_name }}</td>
-                                <td></td>
+                                {{-- <td></td> --}}
                                 <td>
                                     @if ($externalObservation->fixedBy)
                                         {{ $externalObservation->fixedBy->full_name}}    
