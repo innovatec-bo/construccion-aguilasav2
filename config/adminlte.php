@@ -248,6 +248,27 @@ return [
             'icon'        => 'fas fa-fw fa-home',
         ],
         [
+            'text'        => 'Proyectos',
+            'icon'        => 'fas fa-fw fa-folder',
+            'can'         => ['admin.projects.index', 'admin.projects.create'],
+            'submenu'     => [
+                [
+                    'text'        => 'Lista',
+                    'route'       => 'admin.projects.index',
+                    'can'         => 'admin.projects.index',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'pl-4',
+                ],
+                [
+                    'text'        => 'Crear',
+                    'route'       => 'admin.projects.create',
+                    'can'         => 'admin.projects.create',
+                    'icon'        => 'fas fa-fw fa-plus',
+                    'shift' => 'pl-4',
+                ]
+            ]
+        ],
+        [
             'text'        => 'Manos de obra',
             'icon'        => 'fas fa-fw fa-tools',
             'can'         => ['admin.labor-details.index','admin.projects.rectify-manpower'],

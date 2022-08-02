@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Permisos')
+@section('title', 'Proyectos')
 
 @section('content_header')
-    <h1>Permisos</h1>
+    <h1>Proyectos</h1>
 @stop
 
 @section('content')
-    @livewire('admin.permission-index')
+    @livewire('admin.project-index')
 @stop
 
 @section('css')
