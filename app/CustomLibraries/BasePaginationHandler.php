@@ -124,14 +124,20 @@ class BasePaginationHandler
 		}
 
 		$sql = 'select '.$this->_dataTableColumns().' from ' . $this->_coreQuery().'
-		 where 1=1 and (';
-		foreach ($this->_colsArray as $var)
+		 where 1=1 ';
+		if (count($this->_colsArray) > 0) 
 		{
-			$sql .= ' ' . $var . ' like \'%' . $this->_textToSearch . '%\' ESCAPE \'!\' or ';
+			$sql .= ' and ( ';
+			foreach ($this->_colsArray as $var)
+			{
+				$sql .= ' ' . $var . ' like \'%' . $this->_textToSearch . '%\' ESCAPE \'!\' or ';
+			}
+			$sql = substr($sql, 0, -3);
+			$sql .= ' ) ';
 		}
 
-		$sql = substr($sql, 0, -3);
-		$sql .= ') '.$this->_additionalParameters().' group by '.static::TABLE_ID.' order by ' . $this->_orderBy . ' ' . $this->_orderType . ' limit ' . $this->_limit . ' offset ' . $this->_offset;
+		
+		$sql .= ' '.$this->_additionalParameters().' group by '.static::TABLE_ID.' order by ' . $this->_orderBy . ' ' . $this->_orderType . ' limit ' . $this->_limit . ' offset ' . $this->_offset;
 		
 		$results = DB::select($sql);
 		if($this->_returnAsObjectCollection)
@@ -154,14 +160,21 @@ class BasePaginationHandler
 	public function searchTotalCount() : int
 	{
 		$sql = 'select count('.static::TABLE_ID.') as total from ' . $this->_coreQuery().'
-		 where 1=1 and (';
-		foreach ($this->_colsArray as $var)
-		{
-			$sql .= ' ' . $var . ' like \'%' . $this->_textToSearch . '%\' or ';
-		}
+		 where 1=1 ';
 
-		$sql = substr($sql, 0, -3);
-		$sql .= ') '.$this->_additionalParameters();
+		 if (count($this->_colsArray) > 0) 
+		 {
+			 $sql .= ' and ( ';
+			 foreach ($this->_colsArray as $var)
+			 {
+				 $sql .= ' ' . $var . ' like \'%' . $this->_textToSearch . '%\' ESCAPE \'!\' or ';
+			 }
+			 $sql = substr($sql, 0, -3);
+			 $sql .= ' ) ';
+		 }
+
+		
+		$sql .= ' '.$this->_additionalParameters();
 
 		$result = DB::select($sql)[0];
         return $result->total;

@@ -20,7 +20,7 @@
                     wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <div class="table-responsible">
+                <div class="table-responsive">
                     <table class="table table-bordered table-hover table-sm">
                         <thead>
                             <tr class="text-center">

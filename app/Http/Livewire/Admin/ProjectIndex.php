@@ -17,7 +17,7 @@ class ProjectIndex extends Component
     use WithPagination;
     
     protected $paginationTheme = 'bootstrap';
-    public $search;
+    public $search = "";
     public $sort = 'id_usr';
     public $direction = 'desc';
     public $deleteId = '';
@@ -40,15 +40,25 @@ class ProjectIndex extends Component
         $perPage = 5;
         $page = $this->page;
         $additionalParameters = [];
-        $offset = ($page?$page-1:0) * $perPage;
-        $paginationHandler = new WorkflowPaginationHandler($perPage, $offset, 'entry_date_pro');
+        $cols = [
+            'code_pro',
+            'status_name_pst',
+            'system_pro',
+            'cre_fiscal_pro',
+            'stake_responsible',
+            'assign_to_responsible',
+            'address_pro',
+            'project_current_budget'
+        ];
+        $offset = ($page?$page-1:0) * $perPage;//dd($perPage, $offset, 'entry_date_pro','asc', $this->search);
+        $paginationHandler = new WorkflowPaginationHandler($perPage, $offset, 'entry_date_pro','asc', $this->search, $cols);
 		$paginationHandler->setColumnsToShow(['order_pst','cre_fiscal_pro','assign_to_responsible','fiscal_responsible','builder_responsible','project_current_budget','status_log_manual_entry_date','static_days','status_name_pst','manpower_file_id','builder_responsible_id','fiscal_responsible_id','quantity_picked_up_from_cre','materials_delivered_to_cre','quantity_materials_assigned','pending_material_in_cre','stake_responsible']);
         $paginationHandler->setAdditionalParameters($additionalParameters);
         $projects = $paginationHandler->getResponseForDataTable();
         $collection = collect($projects['resultArray']);
 
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        return new LengthAwarePaginator($collection, $projects['recordsTotal'], $perPage, $page, $options);
+        return new LengthAwarePaginator($collection, $projects['recordsFiltered'], $perPage, $page, $options);
     }
 
     public function order($sort)
