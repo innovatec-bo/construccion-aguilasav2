@@ -2,9 +2,9 @@
 
 ---
 
-- [First Section](#section-1)
+- [Descripci&oacute;n](#description)
 
-<a name="section-1"></a>
-## First Section
+<a name="description"></a>
+## [Descripci&oacute;n](#description)
 
-Write something cool.. 🦊
+Los registros listados en la table son todas las manos de obras ingresadas en el momento de la aprobacion del proyecto.

@@ -2,9 +2,11 @@
 
 ---
 
-- [First Section](#section-1)
+- [Descripti&oacute;n](#description)
 
-<a name="section-1"></a>
-## First Section
+<a name="description"></a>
+## [Descripti&oacute;n](#description)
 
-Write something cool.. 🦊
+La seguridad del sistema se maneja a traves de los roles, a estos roles se les asignan permisos y finalmente a los usuario se les asignan roles.
+
+Para crear un rol solo se require del nombre del rol y seleccionar los permisos que tendra dicho rol.
