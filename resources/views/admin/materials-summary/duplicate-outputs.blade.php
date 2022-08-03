@@ -16,76 +16,78 @@
 @section('content')
     <div class="card shadow-lg">
         <div class="card-body">
-            <table class="table table-bordered table-sm table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Codigo de<br>Proyecto</th>
-                        <th>ID<br>Movimiento</th>
-                        <th>Fecha de<br>movimiento</th>
-                        <th>Movimiento</th>
-                        <th>Descripcion de<br>Material</th>
-                        <th>Cantidad <br>Movida</th>
-                        <th>Balance</th>
-                        <th>Historia de movimientos</th>
-                        <th>Patron de movimientos</th>
-                        <th>Movimientos uniformes</th>
-                        <th>Movimientos</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $i = 1;  
-                    @endphp
-                    @foreach ($materialsSummary as $key => $item)
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm table-hover table-striped">
+                    <thead>
                         <tr>
-                            <td>{{$i}}</td>
-                            <td>{{$item->code_pro}}</td>
-                            <td class="text-right">{{$item->id_msu}}</td>
-                            <td class="text-right">{{$item->entry_date_msu}}</td>
-                            <td>
-                                @if ($item->movement_type_mqt == 'out')
-                                    <span class="text-warning">Salida: </span>
-                                @else
-                                    <span class="text-success">Entrada: </span>        
-                                @endif
-                                
-                                {{$item->name_mqt}}
-                            </td>
-                            <td class="text-left"><span class="text-info">{{$item->code_mat}}:</span> {{$item->description_mat}}</td>
-                            <td class="text-right">{{$item->quantity_prm}}</td>
-                            <td class="text-right">{{$item->balance}}</td>
-                            <td class="text-right">{{$item->balance_string}}</td>
-                            <td class="text-center text-xl">{{$item->pattern}}</td>
-                            <td class="text-center">{{$item->uniform_movement}}</td>
-                            <td class="text-right">{{$item->movements}}</td>
-                            <td>
-                                <div class="btn-group btn-group-sm">
-                                    <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-cogs"></i>
-                                    </button>
-                                    <div class="dropdown-menu" role="menu" style="">
-                                        @can('admin.materials-summary.grouped-movement-details')
-                                            <a  wire:loading.class="disabled" target="_blank" class="dropdown-item" href='{{route('admin.materials-summary.grouped-movement-details', ['project' => $item->id_pro,'search' => $item->code_mat])}}'"><i class="fas fa-eye"></i> Detalle de movimiento</a>
-                                        @endcan
-                                        @can('admin.materials-summary.duplicate-outputs')
-                                            <form action="{{route('admin.project-materials.destroy', $item->id_prm)}}" method="post">
-                                                @method('delete')
-                                                @csrf
-                                                <button wire:loading.class="disabled" type="submit" onclick="return confirm('Eliminar salida de material? Solo se eliminara el material {{$item->code_mat}} presente en la lista {{$item->id_msu}}')" class="dropdown-item"><i class="fas fa-times"></i> Eliminar registro de salida</button>
-                                            </form>
-                                        @endcan
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>    
+                            <th>#</th>
+                            <th>Codigo de<br>Proyecto</th>
+                            <th>ID<br>Movimiento</th>
+                            <th>Fecha de<br>movimiento</th>
+                            <th>Movimiento</th>
+                            <th>Descripcion de<br>Material</th>
+                            <th>Cantidad <br>Movida</th>
+                            <th>Balance</th>
+                            <th>Historia de movimientos</th>
+                            <th>Patron de movimientos</th>
+                            <th>Movimientos uniformes</th>
+                            <th>Movimientos</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         @php
-                            $i++;  
+                            $i = 1;  
                         @endphp
-                    @endforeach
-                </tbody>
-            </table>
+                        @foreach ($materialsSummary as $key => $item)
+                            <tr>
+                                <td>{{$i}}</td>
+                                <td>{{$item->code_pro}}</td>
+                                <td class="text-right">{{$item->id_msu}}</td>
+                                <td class="text-right">{{$item->entry_date_msu}}</td>
+                                <td>
+                                    @if ($item->movement_type_mqt == 'out')
+                                        <span class="text-warning">Salida: </span>
+                                    @else
+                                        <span class="text-success">Entrada: </span>        
+                                    @endif
+                                    
+                                    {{$item->name_mqt}}
+                                </td>
+                                <td class="text-left"><span class="text-info">{{$item->code_mat}}:</span> {{$item->description_mat}}</td>
+                                <td class="text-right">{{$item->quantity_prm}}</td>
+                                <td class="text-right">{{$item->balance}}</td>
+                                <td class="text-right">{{$item->balance_string}}</td>
+                                <td class="text-center text-xl">{{$item->pattern}}</td>
+                                <td class="text-center">{{$item->uniform_movement}}</td>
+                                <td class="text-right">{{$item->movements}}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-cogs"></i>
+                                        </button>
+                                        <div class="dropdown-menu" role="menu" style="">
+                                            @can('admin.materials-summary.grouped-movement-details')
+                                                <a  wire:loading.class="disabled" target="_blank" class="dropdown-item" href='{{route('admin.materials-summary.grouped-movement-details', ['project' => $item->id_pro,'search' => $item->code_mat])}}'"><i class="fas fa-eye"></i> Detalle de movimiento</a>
+                                            @endcan
+                                            @can('admin.materials-summary.duplicate-outputs')
+                                                <form action="{{route('admin.project-materials.destroy', $item->id_prm)}}" method="post">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button wire:loading.class="disabled" type="submit" onclick="return confirm('Eliminar salida de material? Solo se eliminara el material {{$item->code_mat}} presente en la lista {{$item->id_msu}}')" class="dropdown-item"><i class="fas fa-times"></i> Eliminar registro de salida</button>
+                                                </form>
+                                            @endcan
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>    
+                            @php
+                                $i++;  
+                            @endphp
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @stop

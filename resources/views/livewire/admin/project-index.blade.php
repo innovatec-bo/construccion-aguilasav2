@@ -21,7 +21,7 @@
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-sm">
+                    <table class="table table-bordered table-striped table-hover table-sm">
                         <thead>
                             <tr class="text-center">
                                 <th>C&oacute;digo</th>
@@ -69,7 +69,9 @@
             </div>
 
             <div class="card-footer clearfix">
-                {{ $projects->links() }}
+                <div class="table-responsive">
+                    {{ $projects->links() }}
+                </div>
             </div>
         </div>
     </div>

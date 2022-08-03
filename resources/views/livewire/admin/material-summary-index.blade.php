@@ -26,65 +26,68 @@
                     wire:target="delete, previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <table class="table table-bordered table-sm table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">ID</th>
-                            <th>Fiscal</th>
-                            <th>Constructor</th>
-                            <th>Fecha de<br>entrada manual</th>
-                            <th>Proyecto</th>
-                            <th>Tipo de movimiento</th>
-                            <th>Items</th>
-                            <th style="width: 130px">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($materialSummaryList as $materialSummary)
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm table-hover table-striped">
+                        <thead>
                             <tr>
-                                <td>{{ $materialSummary->id_msu }}</td>
-                                <td>
-                                    @if ($materialSummary->fiscal)
-                                        {{ $materialSummary->fiscal->full_name }}
-                                    @endif
-
-                                </td>
-                                <td>
-                                    @if ($materialSummary->builder)
-                                        {{ $materialSummary->builder->full_name }}
-                                    @endif
-                                </td>
-                                <td>{{ $materialSummary->entry_date_msu->format('d-m-Y H:i:s') }}
-                                    <small
-                                        class="badge badge-primary">{{ $materialSummary->entry_date_msu->diffForHumans() }}</small>
-                                </td>
-                                <td>{{ $materialSummary->project->code_pro }}</td>
-                                <td>{{ $materialSummary->summaryType->name_mqt }} <small
-                                        class="badge badge-primary">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
-                                </td>
-                                <td class="text-center">
-                                    {{$materialSummary->projectMaterials->count()}}
-                                </td>
-                                <td class="text-center">
-                                    @can('admin.materials-summary.edit')
-                                        @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
-                                            <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href='{{ route('admin.materials-summary.edit', $materialSummary) }}'"><i class="fas fa-pen"></i></a>        
-                                        @endif
-                                    @endcan
-                                    <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.materials-summary.show', $materialSummary) }}'"><i class="fas fa-eye"></i></a>
-                                    @if (Auth::user()->email == 'jair@twiiti.com')
-                                        <a href="javascript:void(0)" wire:loading.class="disabled" data-record='{{ $materialSummary }}' class="btn btn-danger btn-xs lv-confirm-action"><i class="fas fa-trash"></i></a>
-                                    @endif
-                                    
-                                </td>
+                                <th style="width: 10px">ID</th>
+                                <th>Fiscal</th>
+                                <th>Constructor</th>
+                                <th>Fecha de<br>entrada manual</th>
+                                <th>Proyecto</th>
+                                <th>Tipo de movimiento</th>
+                                <th>Items</th>
+                                <th style="width: 130px">Opciones</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($materialSummaryList as $materialSummary)
+                                <tr>
+                                    <td>{{ $materialSummary->id_msu }}</td>
+                                    <td>
+                                        @if ($materialSummary->fiscal)
+                                            {{ $materialSummary->fiscal->full_name }}
+                                        @endif
+    
+                                    </td>
+                                    <td>
+                                        @if ($materialSummary->builder)
+                                            {{ $materialSummary->builder->full_name }}
+                                        @endif
+                                    </td>
+                                    <td>{{ $materialSummary->entry_date_msu->format('d-m-Y H:i:s') }}
+                                        <small
+                                            class="badge badge-primary">{{ $materialSummary->entry_date_msu->diffForHumans() }}</small>
+                                    </td>
+                                    <td>{{ $materialSummary->project->code_pro }}</td>
+                                    <td>{{ $materialSummary->summaryType->name_mqt }} <small
+                                            class="badge badge-primary">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
+                                    </td>
+                                    <td class="text-center">
+                                        {{$materialSummary->projectMaterials->count()}}
+                                    </td>
+                                    <td class="text-center">
+                                        @can('admin.materials-summary.edit')
+                                            @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
+                                                <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href="{{ route('admin.materials-summary.edit', $materialSummary) }}"><i class="fas fa-pen"></i></a>
+                                            @endif
+                                        @endcan
+                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.materials-summary.show', $materialSummary) }}'><i class="fas fa-eye"></i></a>
+                                        @if (Auth::user()->email == 'jair@twiiti.com')
+                                            <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-xs lv-confirm-action"><i class="fas fa-trash"></i></a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="card-footer clearfix">
-                {{ $materialSummaryList->links() }}
+                <div class="table-responsive">
+                    {{ $materialSummaryList->links() }}
+                </div>
             </div>
         </div>
     </div>

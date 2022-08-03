@@ -20,55 +20,56 @@
                     wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <table class="table table-bordered table-hover table-sm">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">ID</th>
-                            <th>Nombre completo</th>
-                            <th>Correo</th>
-                            <th>Roles</th>
-                            <th style="width: 130px">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover table-sm">
+                        <thead>
                             <tr>
-                                <td>{{ $user->id_usr }}</td>
-                                <td>{{ $user->full_name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    @foreach ($user->getRoleNames() as $role)
-                                        <span class="badge bg-primary">{{$role}}</span>
-                                    @endforeach
-                                </td>
-                                <td class="text-center">
-                                    @can('admin.users.edit')
-                                        <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href='{{ route('admin.users.edit', $user) }}'"><i class="fas fa-pen"></i></a>    
-                                    @endcan
-                                    @can('admin.users.show')
-                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.users.show', $user) }}'"><i class="fas fa-eye"></i></a>    
-                                    @endcan
-                                    @can('admin.users.destroy')
-                                        <form method="post" action="{{ route('admin.users.destroy', $user) }}"
-                                            class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" onclick="return confirm('Eliminar?')" class="btn btn-danger btn-xs"><i
-                                                    class="fas fa-trash-alt"></i></button>
-                                        </form>    
-                                    @endcan
-                                    
-                                    
-
-                                </td>
+                                <th style="width: 10px">ID</th>
+                                <th>Nombre completo</th>
+                                <th>Correo</th>
+                                <th>Roles</th>
+                                <th style="width: 130px">Opciones</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $user->id_usr }}</td>
+                                    <td>{{ $user->full_name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        @foreach ($user->getRoleNames() as $role)
+                                            <span class="badge bg-primary">{{$role}}</span>
+                                        @endforeach
+                                    </td>
+                                    <td class="text-center">
+                                        @can('admin.users.edit')
+                                            <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href='{{ route('admin.users.edit', $user) }}'"><i class="fas fa-pen"></i></a>    
+                                        @endcan
+                                        @can('admin.users.show')
+                                            <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.users.show', $user) }}'"><i class="fas fa-eye"></i></a>    
+                                        @endcan
+                                        @can('admin.users.destroy')
+                                            <form method="post" action="{{ route('admin.users.destroy', $user) }}"
+                                                class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" onclick="return confirm('Eliminar?')" class="btn btn-danger btn-xs"><i
+                                                        class="fas fa-trash-alt"></i></button>
+                                            </form>    
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="card-footer clearfix">
-                {{ $users->links() }}
+                <div class="table-responsive">
+                    {{ $users->links() }}
+                </div>
             </div>
         </div>
     </div>

@@ -16,35 +16,39 @@
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <table class="table table-bordered table-hover table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">ID</th>
-                            <th>Nombre</th>
-                            <th style="width: 130px">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($roles as $role)
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped table-sm">
+                        <thead>
                             <tr>
-                                <td>{{$role->id}}</td>
-                                <td>{{$role->name}}</td>
-                                <td class="text-center">
-                                    @can('admin.roles.edit')
-                                        <a class="btn btn-primary btn-xs" href='{{route('admin.roles.edit', $role)}}'"><i class="fas fa-pen"></i></a>
-                                    @endcan
-                                    @can('admin.roles.show')
-                                        <a class="btn btn-secondary btn-xs" href='{{route('admin.roles.show', $role)}}'"><i class="fas fa-eye"></i></a>
-                                    @endcan
-                                </td>
-                            </tr>    
-                        @endforeach
-                    </tbody>
-                </table>
+                                <th style="width: 10px">ID</th>
+                                <th>Nombre</th>
+                                <th style="width: 130px">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($roles as $role)
+                                <tr>
+                                    <td>{{$role->id}}</td>
+                                    <td>{{$role->name}}</td>
+                                    <td class="text-center">
+                                        @can('admin.roles.edit')
+                                            <a class="btn btn-primary btn-xs" href='{{route('admin.roles.edit', $role)}}'"><i class="fas fa-pen"></i></a>
+                                        @endcan
+                                        @can('admin.roles.show')
+                                            <a class="btn btn-secondary btn-xs" href='{{route('admin.roles.show', $role)}}'"><i class="fas fa-eye"></i></a>
+                                        @endcan
+                                    </td>
+                                </tr>    
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="card-footer clearfix">
-                {{ $roles->links() }}
+                <div class="table-responsive">
+                    {{ $roles->links() }}
+                </div>
             </div>
         </div>
     </div>

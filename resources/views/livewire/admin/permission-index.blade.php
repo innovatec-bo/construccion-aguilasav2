@@ -16,37 +16,41 @@
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <table class="table table-bordered table-hover table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">ID</th>
-                            <th>Nombre</th>
-                            <th>Detalle</th>
-                            <th style="width: 130px">Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($permissions as $permission)
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped table-sm">
+                        <thead>
                             <tr>
-                                <td>{{$permission->id}}</td>
-                                <td>{{$permission->name}}</td>
-                                <td>{{$permission->detail}}</td>
-                                <td class="text-center">
-                                    @can('admin.permissions.edit')
-                                        <a class="btn btn-primary btn-xs" href='{{route('admin.permissions.edit', $permission)}}'"><i class="fas fa-pen"></i></a>
-                                    @endcan
-                                    {{-- @can('admin.permissions.show')
-                                        <a class="btn btn-secondary btn-xs" href='{{route('admin.permissions.show', $permission)}}'"><i class="fas fa-eye"></i></a>
-                                    @endcan --}}
-                                </td>
-                            </tr>    
-                        @endforeach
-                    </tbody>
-                </table>
+                                <th style="width: 10px">ID</th>
+                                <th>Nombre</th>
+                                <th>Detalle</th>
+                                <th style="width: 130px">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($permissions as $permission)
+                                <tr>
+                                    <td>{{$permission->id}}</td>
+                                    <td>{{$permission->name}}</td>
+                                    <td>{{$permission->detail}}</td>
+                                    <td class="text-center">
+                                        @can('admin.permissions.edit')
+                                            <a class="btn btn-primary btn-xs" href='{{route('admin.permissions.edit', $permission)}}'"><i class="fas fa-pen"></i></a>
+                                        @endcan
+                                        {{-- @can('admin.permissions.show')
+                                            <a class="btn btn-secondary btn-xs" href='{{route('admin.permissions.show', $permission)}}'"><i class="fas fa-eye"></i></a>
+                                        @endcan --}}
+                                    </td>
+                                </tr>    
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="card-footer clearfix">
-                {{ $permissions->links() }}
+                <div class="table-responsive">
+                    {{ $permissions->links() }}
+                </div>
             </div>
         </div>
     </div>
