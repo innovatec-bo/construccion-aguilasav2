@@ -51,7 +51,7 @@ class ProjectIndex extends Component
             'project_current_budget'
         ];
         $offset = ($page?$page-1:0) * $perPage;//dd($perPage, $offset, 'entry_date_pro','asc', $this->search);
-        $paginationHandler = new WorkflowPaginationHandler($perPage, $offset, 'entry_date_pro','asc', $this->search, $cols);
+        $paginationHandler = new WorkflowPaginationHandler($perPage, $offset, 'entry_date_pro','desc', $this->search, $cols);
 		$paginationHandler->setColumnsToShow(['order_pst','cre_fiscal_pro','assign_to_responsible','fiscal_responsible','builder_responsible','project_current_budget','status_log_manual_entry_date','static_days','status_name_pst','manpower_file_id','builder_responsible_id','fiscal_responsible_id','quantity_picked_up_from_cre','materials_delivered_to_cre','quantity_materials_assigned','pending_material_in_cre','stake_responsible']);
         $paginationHandler->setAdditionalParameters($additionalParameters);
         $projects = $paginationHandler->getResponseForDataTable();

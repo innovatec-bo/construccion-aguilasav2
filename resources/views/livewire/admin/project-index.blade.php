@@ -26,9 +26,10 @@
                             <tr class="text-center">
                                 <th>C&oacute;digo</th>
                                 <th>Ingreso<br>en sistema</th>
-                                <th>Ingreso<br>en estado</th>
-                                <th>Dias<br>estatico</th>
                                 <th>Estado</th>
+                                <th>Ingreso<br>en estado</th>
+                                {{-- <th>Dias<br>estatico</th> --}}
+                                
                                 <th>Sistema</th>
                                 <th>Distancia y<br>puntos</th>
                                 <th>Fiscal<br>de CRE</th>
@@ -43,10 +44,20 @@
                             @foreach ($projects as $project)
                                 <tr>
                                     <td>{{ $project->code_pro }}</td>
-                                    <td class="text-center" style="width: 100px">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->entry_date_pro)->format('d-m-Y') }} </td>
-                                    <td class="text-center" style="width: 100px">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->status_log_manual_entry_date)->format('d-m-Y') }} </td>
-                                    <td class="text-right"> {{ $project->static_days }} </td>
-                                    <td> {{ $project->status_name_pst }} </td>
+                                    <td class="text-center" style="width: 100px">
+                                        {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->entry_date_pro)->format('d/m/Y') }}
+                                        <p class="small mb-0 text-warning">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->entry_date_pro)->diffForHumans() }}</p>
+                                    </td>
+                                    <td>
+                                        {{ $project->status_name_pst }}
+                                        <p class="small mb-0 text-warning">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->status_log_manual_entry_date)->diffForHumans() }}</p>
+                                    </td>
+                                    <td class="text-center" style="width: 100px">
+                                        {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->status_log_manual_entry_date)->format('d/m/Y') }}
+                                        
+                                    </td>
+                                    {{-- <td class="text-right"> {{ $project->static_days }} </td> --}}
+                                    
                                     <td> {{ $project->system_pro }} </td>
                                     <td class="text-right"> 
                                         @if ($project->distance_pro && $project->points_pro)
