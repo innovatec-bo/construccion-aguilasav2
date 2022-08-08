@@ -1,36 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Nuevo Permiso')
+@section('title', 'Nuevo Proyecto')
 
 @section('content_header')
-    <h1>Nuevo Permiso</h1>
+    <h1>Nuevo Proyecto</h1>
 @stop
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card card-primary">
-            <form method="post" action="{{route('admin.permissions.store')}}">
-                @csrf
-                @method('post')
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" id="name" class="form-control" placeholder="Nombre" name="name">
-                        @error('name')
-                            <span class="text-warning small"> {{$message}} </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="{{route('admin.permissions.index')}}" class="btn btn-secondary">Cancelar</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
+    @livewire('admin.project-create')
 @stop
 
 @section('css')
