@@ -39,6 +39,11 @@ class Project extends Model
         return $this->hasMany(ProjectStatusLog::class, 'project_id_psl');
     }
 
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class, 'contract_id_pro');
+    }
+
     public function statusLogResponsibles()
     {
         return $this->hasManyThrough(StatusLogResponsible::class, ProjectStatusLog::class,'project_id_psl', 'status_log_id_slr')

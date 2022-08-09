@@ -3,35 +3,41 @@
         <div class="card card-primary shadow-lg">
             <div class="card-header">
                 Datos del proyecto
+                <div class="icheck-primary d-inline float-right">
+                    <input type="checkbox" id="showLabels" wire:model='showLabels'>
+                    <label for="showLabels">
+                        Ver etiquetas
+                    </label>
+                </div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="firstName">Dise&ntilde;o Bs.</label>
-                            <input type="text" id="firstName" class="form-control" placeholder="Monto"
-                                wire:model="firstName">
-                            @error('firstName')
+                            <label class='{{$showLabels?'':'d-none'}}' for="designBudget">Dise&ntilde;o Bs.</label>
+                            <input type="text" id="designBudget" class="form-control form-control-border @error('designBudget') is-invalid @enderror" placeholder="Dise&ntilde;o Bs."
+                                wire:model="designBudget">
+                            @error('designBudget')
                                 <span class="text-warning small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="lastName">Construcci&oacute;n</label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Apellido"
-                                wire:model="lastName">
-                            @error('lastName')
+                            <label class='{{$showLabels?'':'d-none'}}' for="buildingBudget">Construcci&oacute;n Bs.</label>
+                            <input type="text" id="buildingBudget" class="form-control form-control-border @error('buildingBudget') is-invalid @enderror" placeholder="Construcci&oacute;n Bs."
+                                wire:model="buildingBudget">
+                            @error('buildingBudget')
                                 <span class="text-warning small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">C&oacute;digo</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Correo"
-                                wire:model="email">
-                            @error('email')
+                            <label class='{{$showLabels?'':'d-none'}}' for="code">C&oacute;digo</label>
+                            <input type="text" class="form-control form-control-border @error('code')is-invalid @enderror" id="code" placeholder="C&oacute;digo"
+                                wire:model="code">
+                            @error('code')
                                 <span class="text-warning small"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -40,20 +46,23 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="firstName">Area de trabajo</label>
-                            <input type="text" id="firstName" class="form-control" placeholder="Monto"
-                                wire:model="firstName">
-                            @error('firstName')
+                            <label class='{{$showLabels?'':'d-none'}}' for="workArea">Area de trabajo</label>
+                                <select class="form-control form-control-border @error('workArea')is-invalid @enderror" wire:model="workArea">
+                                    <option value="">Area de trabajo</option>
+                                    <option value="GIS">GIS</option>
+                                    <option value="GIR">GIR</option>
+                                </select>
+                            @error('workArea')
                                 <span class="text-warning small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="lastName">A&ntilde;o del proyecto</label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Apellido"
-                                wire:model="lastName">
-                            @error('lastName')
+                            <label class='{{$showLabels?'':'d-none'}}' for="projectYear">A&ntilde;o del proyecto</label>
+                            <input type="text" id="projectYear" class="form-control form-control-border @error('projectYear') is-invalid @enderror" placeholder="A&ntilde;o del proyecto"
+                                wire:model="projectYear">
+                            @error('projectYear')
                                 <span class="text-warning small"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -61,14 +70,16 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="form-group">
-                                <label>Contratos</label>
-                                <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
+                                <label class='{{$showLabels?'':'d-none'}}' for="contractId">Contrato</label>
+                                <select class="form-control form-control-border @error('contractId')is-invalid @enderror" id="contractId" wire:model="contractId">
+                                    <option value="">Contrato</option>
+                                    @foreach ($contracts as $contract)
+                                        <option value="{{$contract->id_con}}">{{$contract->contract_number_con}}</option>
+                                    @endforeach
                                 </select>
+                                @error('contractId')
+                                    <span class="text-warning small"> {{ $message }} </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -76,34 +87,40 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Detalle del proyecto</label>
-                            <textarea class="form-control" rows="2" placeholder="Enter ..."></textarea>
+                            <label class='{{$showLabels?'':'d-none'}}' for="projectDetail">Detalle del proyecto</label>
+                            <textarea class="form-control form-control-border @error('projectDetail')is-invalid @enderror" id="projectDetail" wire:model="projectDetail" rows="2" placeholder="Detalle"></textarea>
+                            @error('projectDetail')
+                                <span class="text-warning small"> {{ $message }} </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Direcci&oacute;n</label>
-                            <textarea class="form-control" rows="2" placeholder="Enter ..."></textarea>
+                            <label class='{{$showLabels?'':'d-none'}}' for="projectAddress">Direcci&oacute;n</label>
+                            <textarea class="form-control form-control-border @error('projectAddress')is-invalid @enderror" id="projectAddress" wire:model="projectAddress" rows="2" placeholder="Direccion"></textarea>
+                            @error('projectAddress')
+                                <span class='text-warning small'>{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="firstName">Fecha de Ingreso</label>
-                            <input type="text" id="firstName" class="form-control" placeholder="Monto"
-                                wire:model="firstName">
-                            @error('firstName')
+                            <label class='{{$showLabels?'':'d-none'}}' for="entryDate">Fecha de Ingreso</label>
+                            <input type="text" id="entryDate" class="form-control form-control-border @error('entryDate')is-invalid @enderror" placeholder="Fecha de Ingreso"
+                                wire:model="entryDate">
+                            @error('entryDate')
                                 <span class="text-warning small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="lastName">Fecha de folder</label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Apellido"
-                                wire:model="lastName">
-                            @error('lastName')
+                            <label class='{{$showLabels?'':'d-none'}}' for="folderDate">Fecha de folder</label>
+                            <input type="text" id="folderDate" class="form-control form-control-border @error('folderDate') @enderror" placeholder="Fecha de folder"
+                                wire:model="folderDate">
+                            @error('folderDate')
                                 <span class="text-warning small"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -111,56 +128,16 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="form-group">
-                                <label>Fiscal de CRE</label>
-                                <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
+                                <label class='{{$showLabels?'':'d-none'}}' for="CREFiscal">Fiscal de CRE</label>
+                                <select class="form-control form-control-border @error('CREFiscal')is-invalid @enderror" wire:model='CREFiscal' id="CREFiscal">
+                                    <option value="">Fiscal de CRE</option>
+                                    @foreach ($CREFiscals as $fiscal)
+                                        <option value="{{$fiscal->id_usr}}">{{$fiscal->full_name}}</option>
+                                    @endforeach
                                 </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label>Sistema</label>
-                                <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label>Administracion</label>
-                                <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label>Nivel de calidad</label>
-                                <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                </select>
+                                @error('CREFiscal')
+                                    <span class="text-warning small"> {{ $message }} </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -168,35 +145,50 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="firstName">Fin de dise&ntilde;o(CRE)</label>
-                            <input type="text" id="firstName" class="form-control" placeholder="Monto"
-                                wire:model="firstName">
-                            @error('firstName')
-                                <span class="text-warning small"> {{ $message }} </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="lastName">Fin de construcci&oacute;n(CRE)</label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Apellido"
-                                wire:model="lastName">
-                            @error('lastName')
-                                <span class="text-warning small"> {{ $message }} </span>
-                            @enderror
+                            <div class="form-group">
+                                <label class='{{$showLabels?'':'d-none'}}' for="system">Sistema</label>
+                                <select class="form-control form-control-border @error('system')is-invalid @enderror" wire:model="system" id="system">
+                                    <option value="">Sistema</option>
+                                    @foreach ($systems as $key => $item)
+                                        <option value="{{$key}}">{{$item}}</option>
+                                    @endforeach
+                                </select>
+                                @error('system')
+                                    <span class="text-warning small"> {{ $message }} </span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="form-group">
-                                <label>Posicion presupuestaria</label>
-                                <select class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
+                                <label class='{{$showLabels?'':'d-none'}}' for="management">Administracion</label>
+                                <select class="form-control form-control-border @error('management')is-invalid @enderror" wire:model="management" id="management">
+                                    <option value="">Administracion</option>
+                                    @foreach ($managements as $key => $item)
+                                        <option value="{{$key}}">{{$item}}</option>
+                                    @endforeach
                                 </select>
+                                @error('management')
+                                    <span class="text-warning small"> {{ $message }} </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class='{{$showLabels?'':'d-none'}}' for="qualityLevel">Nivel de calidad</label>
+                                <select class="form-control form-control-border @error('qualityLevel')is-invalid @enderror" id="qualityLevel" wire:model="qualityLevel">
+                                    <option value="">Nivel de calidad</option>
+                                    <option value="0">Ninguno</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                @error('qualityLevel')
+                                    <span class="text-warning small"> {{ $message }} </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -204,20 +196,58 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="firstName">Puntos</label>
-                            <input type="text" id="firstName" class="form-control" placeholder="Monto"
-                                wire:model="firstName">
-                            @error('firstName')
+                            <label class='{{$showLabels?'':'d-none'}}' for="creDesignCompletionDate">Fin de dise&ntilde;o(CRE)</label>
+                            <input type="text" id="creDesignCompletionDate" id="creDesignCompletionDate" class="form-control form-control-border @error('creDesignCompletionDate')is-invalid @enderror" placeholder="Fin de dise&ntilde;o(CRE)"
+                                wire:model="creDesignCompletionDate">
+                            @error('creDesignCompletionDate')
                                 <span class="text-warning small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="lastName">Distancia KM</label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Apellido"
-                                wire:model="lastName">
-                            @error('lastName')
+                            <label class='{{$showLabels?'':'d-none'}}' for="creBuildingCompletionDate">Fin de construcci&oacute;n(CRE)</label>
+                            <input type="text" id="creBuildingCompletionDate" id="creBuildingCompletionDate" class="form-control form-control-border @error('creBuildingCompletionDate')is-invalid @enderror" placeholder="Fin de construcci&oacute;n(CRE)"
+                                wire:model="creBuildingCompletionDate">
+                            @error('creBuildingCompletionDate')
+                                <span class="text-warning small"> {{ $message }} </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class='{{$showLabels?'':'d-none'}}' for="projectBudgetaryPosition">Posicion presupuestaria</label>
+                                <select class="form-control form-control-border @error('projectBudgetaryPosition')is-invalid @enderror" id="projectBudgetaryPosition" wire:model="projectBudgetaryPosition">
+                                    <option value="">Posicion presupuestaria</option>
+                                    @for ($i = 1; $i <= 11; $i++)
+                                        <option value="{{$i*10}}">{{$i*10}}</option>    
+                                    @endfor
+                                </select>
+                                @error('projectBudgetaryPosition')
+                                    <span class="text-warning small">{{$message}}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class='{{$showLabels?'':'d-none'}}' for="points">Puntos</label>
+                            <input type="text" id="points" class="form-control form-control-border @error('points')is-invalid @enderror" placeholder="Puntos"
+                                wire:model="points">
+                            @error('points')
+                                <span class="text-warning small"> {{ $message }} </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class='{{$showLabels?'':'d-none'}}' for="distance">Distancia KM</label>
+                            <input type="text" id="distance" class="form-control form-control-border @error('distance')is-invalid @enderror" placeholder="Distancia"
+                                wire:model="distance">
+                            @error('distance')
                                 <span class="text-warning small"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -243,30 +273,20 @@
                     <i class="fas fa-map-marker-alt mr-1"></i>
                     Ubicaci&oacute;n
                 </h3>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="firstName">Latitud</label>
-                            <input type="text" id="firstName" class="form-control" placeholder="Monto"
-                                wire:model="firstName">
-                            @error('firstName')
-                                <span class="text-warning small"> {{ $message }} </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="lastName">Longitud</label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Apellido"
-                                wire:model="lastName">
-                            @error('lastName')
-                                <span class="text-warning small"> {{ $message }} </span>
-                            @enderror
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 300px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Latitud">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Longitud">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
+                
+            </div>
+            <div class="card-body">
                 <div id="world-map"
                     style="height: 350px; width: 100%; position: relative; overflow: hidden; background-color: transparent;">
                     <svg width="627.906" height="350">
