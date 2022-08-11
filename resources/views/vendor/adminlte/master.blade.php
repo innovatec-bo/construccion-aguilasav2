@@ -131,15 +131,15 @@
             txt.innerHTML = html;
             return txt.value;
         }
-        window.toastr.options =
-            {
-                "closeButton" : true,
-                "progressBar" : true,
-                // "positionClass": "toast-top-center",
-                "timeOut": "10000",
-                "allowHtml": true,
-                "preventDuplicates": true
-            }
+        // window.toastr.options =
+        //     {
+        //         "closeButton" : true,
+        //         "progressBar" : true,
+        //         // "positionClass": "toast-top-center",
+        //         "timeOut": "10000",
+        //         "allowHtml": true,
+        //         "preventDuplicates": true
+        //     }
         @if(session('successMessage'))
             window.toastr.success("{{session('successMessage')}}");
         @endif
@@ -177,7 +177,7 @@
 <script>
     $(function () {
       bsCustomFileInput.init();
-      $('[data-toggle=tooltip]').tooltip();
+    //   $('[data-toggle=tooltip]').tooltip();
     });
     </script>
     {{-- Livewire Script --}}

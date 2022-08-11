@@ -1,7 +1,14 @@
-window._ = require('lodash');
+// window._ = require('lodash');
 
 try {
     require('bootstrap');
+    window.$ = window.jQuery = require('../../public/vendor/jquery/jquery.min');
+    // window.Popper = require('popper');
+    require('../../public/vendor/bootstrap/js/bootstrap.bundle');
+    require('../../public/vendor/overlayScrollbars/js/jquery.overlayScrollbars.min');
+    window.toastr = require('../../public/vendor/toastr/toastr.min.js');
+    window.bsCustomFileInput = require('../../public/vendor/bs-custom-file-input/bs-custom-file-input.min');
+    require('../../public/vendor/adminlte/dist/js/adminlte.min.js');
 } catch (e) {}
 
 /**
