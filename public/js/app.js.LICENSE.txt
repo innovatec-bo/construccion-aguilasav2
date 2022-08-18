@@ -60,6 +60,11 @@
  * Date: 2021-03-02T17:08Z
  */
 
+/*!
+* sweetalert2 v11.4.0
+* Released under the MIT License.
+*/
+
 /*! jQuery v3.6.0 | (c) OpenJS Foundation and other contributors | jquery.org/license */
 
 /**!
