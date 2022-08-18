@@ -21,7 +21,7 @@
                                 <th>Nro. Grafo</th>
                                 <th>Nivel de tension</th>
                                 <th>Destino</th>
-                                <th style="width: 130px">Opciones</th>
+                                <th style="width: 190px">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,11 +33,10 @@
                                     <td>{{$laborDetail->level_of_tension_lad}}</td>
                                     <td>{{$laborDetail->destiny_lad}}</td>
                                     <td>
-                                        
                                         <div class="btn-group btn-group-sm">
                                             <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
                                             {{-- <span class="sr-only">Toggle Dropdown</span> --}}
-                                            <i class="fas fa-cogs"></i>
+                                            Dise&ntilde;o
                                             </button>
                                                 <div class="dropdown-menu" role="menu" style="">
                                                     @can('admin.labor-details.show')
@@ -52,11 +51,24 @@
                                                     <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.labor-details.internal-conciliation-cre-format', $laborDetail)}}'"><i class="fas fa-clipboard-list"></i> Conciliacion interna(Formato CRE)</a>    
                                                 </div>
                                             </div>
-                                        {{-- <form method="post" action="{{route('admin.users.destroy',$user)}}" class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-                                        </form> --}}
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                                {{-- <span class="sr-only">Toggle Dropdown</span> --}}
+                                                Construcci&oacute;n
+                                                </button>
+                                                    <div class="dropdown-menu" role="menu" style="">
+                                                        @can('admin.labor-details.show')
+                                                            <a  wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.labor-details.show', $laborDetail)}}'"><i class="fas fa-eye"></i> Ver</a>
+                                                        @endcan
+                                                        @can('admin.labor-details.internal-conciliation')
+                                                            <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.labor-details.internal-conciliation', $laborDetail)}}'"><i class="fas fa-clipboard-list"></i> Conciliacion interna</a>    
+                                                        @endcan
+                                                        @can('admin.labor-details.internal-conciliation-builder')
+                                                            <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.labor-details.internal-conciliation-builder', $laborDetail)}}'"><i class="fas fa-clipboard-list"></i> Conciliacion interna(Constructor)</a>    
+                                                        @endcan
+                                                        <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.labor-details.internal-conciliation-cre-format', $laborDetail)}}'"><i class="fas fa-clipboard-list"></i> Conciliacion interna(Formato CRE)</a>    
+                                                    </div>
+                                                </div>
                                     </td>
                                 </tr>    
                             @endforeach

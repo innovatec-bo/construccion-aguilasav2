@@ -27,7 +27,7 @@ class LaborDetailIndex extends Component
     public function render()
     {
 
-        $laborDetails = LaborDetail::Where(function($query){
+        $laborDetails = LaborDetail::where('status_id_lad', 11)->Where(function($query){
             if(isset($this->search) && $this->search != "")
             {
                 $query->where('graph_number_lad','like','%'.$this->search.'%')
