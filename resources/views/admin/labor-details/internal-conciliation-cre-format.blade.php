@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Conciliacion internal(Formato CRE): '.$laborDetail->project->code_pro)
+@section('title', 'Conciliacion interna(Formato CRE): '.$laborDetail->project->code_pro)
 
 @section('content_header')
     <div class="row">
         <div class="col-sm-6">
-            <h1>Conciliacion internal(Formato CRE): {{$laborDetail->project->code_pro}}</h1>
+            <h1>Conciliacion interna en {!! ($laborDetail->environment['label']) !!}(Formato CRE): {{$laborDetail->project->code_pro}}</h1>
         </div>
         <div class="col-sm-6">
             {{ Breadcrumbs::render('admin.labor-details.internal-conciliation-cre-format', $laborDetail) }}

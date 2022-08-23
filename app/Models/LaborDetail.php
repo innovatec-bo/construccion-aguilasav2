@@ -36,12 +36,12 @@ class LaborDetail extends Model
         switch ($this->attributes['status_id_lad'])
         {
             case 11://Approved
-                $response['label'] = "dise&ntilde;o";
+                $response['label'] = "diseño";
                 $response['key'] = "design";
                 break;
             
             case 34://Conciliation reception
-                $response['label'] = "construcci&oacute;n";
+                $response['label'] = "construcción";
                 $response['key'] = "construction";
                 break;
             default:

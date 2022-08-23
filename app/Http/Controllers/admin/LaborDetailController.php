@@ -243,18 +243,18 @@ class LaborDetailController extends Controller
     public function export(LaborDetail $laborDetail)
     {
         $export = new LaborDetailExport($laborDetail->laborCosts);
-        return Excel::download($export, 'Mano de obra '.$laborDetail->project->code_pro.' - '.date('Y.m.d_H.i.s').'.xlsx');
+        return Excel::download($export, 'Mano de obra en '.$laborDetail->environment['label'].' '.$laborDetail->project->code_pro.' - '.date('Y.m.d_H.i.s').'.xlsx');
     }
 
     public function exportInternalConciliation(LaborDetail $laborDetail)
     {
         $export = new LaborDetailInternalConciliationExport($laborDetail->laborCosts);
-        return Excel::download($export, 'Conciliacion interna '.$laborDetail->project->code_pro.' - '.date('Y.m.d_H.i.s').'.xlsx');
+        return Excel::download($export, 'Conciliacion interna en '.$laborDetail->environment['label'].' '.$laborDetail->project->code_pro.' - '.date('Y.m.d_H.i.s').'.xlsx');
     }
 
     public function exportInternalConciliationCreFormat(LaborDetail $laborDetail)
     {
         $export = new LaborDetailInternalConciliationCreFormatExport($laborDetail->internalConciliationCreFormat());
-        return Excel::download($export, 'Conciliacion interna formato CRE '.$laborDetail->project->code_pro.' - '.date('Y.m.d_H.i.s').'.xlsx');
+        return Excel::download($export, 'Conciliacion interna formato CRE en '.$laborDetail->environment['label'].' '.$laborDetail->project->code_pro.' - '.date('Y.m.d_H.i.s').'.xlsx');
     }
 }

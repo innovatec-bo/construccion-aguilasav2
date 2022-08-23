@@ -31,7 +31,8 @@
                         <div class="input-group input-group-sm" style="">
                             <a class="btn btn-xs btn-primary d-print-none float-right mx-1" href="{{url()->previous()}}">Volver</a>
                             @can('admin.labor-details.export')
-                                {{-- <a href="{{route('admin.labor-details.export', $laborDetail->id_lad)}}" class="btn btn-primary btn-xs d-print-none"><i class="far fa-file-excel"></i> Exportar</a> --}}
+                                {{-- not ready yet export file class --}}
+                                {{-- <a href="{{route('admin.labor-details.export-internal-conciliation', $laborDetail->id_lad)}}" class="btn btn-primary btn-xs d-print-none"><i class="far fa-file-excel"></i> Exportar</a> --}}
                                 <a class="btn btn-info btn-xs d-print-none float-right ml-2" href="javascript:void(0)" onclick="window.print();"><i class="fa fa-print fa-fw"></i>Imprimir</a>
                             @endcan
                         </div>

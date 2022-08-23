@@ -36,6 +36,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::resource('building-structures','BuildingStructureController')->names('building-structures');
 
     //Labor Details
+    Route::get('manos-de-obra/exportar-conciliacion-interna/{laborDetail}','LaborDetailController@exportInternalConciliation')->name('labor-details.export-internal-conciliation');
     Route::get('manos-de-obra/exportar-conciliacion-interna-formato-cre/{laborDetail}','LaborDetailController@exportInternalConciliationCreFormat')->name('labor-details.export-internal-conciliation-cre-format');
     Route::get('manos-de-obra/exportar/{laborDetail}','LaborDetailController@export')->name('labor-details.export');
     Route::get('manos-de-obra/conciliacion-interna-formato-cre/{labor_detail}','LaborDetailController@internalConciliationCreFormat')->name('labor-details.internal-conciliation-cre-format');
