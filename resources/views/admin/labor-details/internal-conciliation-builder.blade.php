@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="row">
         <div class="col-sm-6">
-            <h1>Conciliacion internal(Vista de constructor): {{$laborDetail->project->code_pro}}</h1>
+            <h1>Conciliacion internal en {!!$laborDetail->environment['label']!!}(Vista de constructor): {{$laborDetail->project->code_pro}}</h1>
         </div>
         <div class="col-sm-6">
             {{ Breadcrumbs::render('admin.labor-details.internal-conciliation-builder', $laborDetail, $previousRoute) }}
@@ -24,7 +24,7 @@
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="">
                             @can('admin.labor-details.internal-conciliation-builder')
-                                <a href="{{route('admin.labor-details.internal-conciliation-builder', $laborDetail->id_lad)}}" class="btn btn-primary btn-xs d-print-none"><i class="far fa-file-excel"></i> Exportar</a>
+                                {{-- <a href="{{route('admin.labor-details.internal-conciliation-builder', $laborDetail->id_lad)}}" class="btn btn-primary btn-xs d-print-none"><i class="far fa-file-excel"></i> Exportar</a> --}}
                                 <a class="btn btn-info btn-xs d-print-none float-right ml-2" href="javascript:void(0)" onclick="window.print();"><i class="fa fa-print fa-fw"></i>Imprimir</a>
                             @endcan
                         </div>
@@ -33,7 +33,8 @@
                 <div class="card-body">
                     <div class="row invoice-info mb-3">
                         <div class="col-md-10 d-none d-print-inline">
-                            <h3 class="text-center mb-4">Conciliacion interna(Vista de constructor)</h3>
+                            <h3 class="text-center mb-0">Conciliacion interna(Vista de constructor)</h3>
+                            <h4 class="text-center mb-4">{!! ($laborDetail->environment['label']) !!}</h4>
                         </div>
                         <div class="col-sm-2 invoice-col">
                             <address class="mb-1">

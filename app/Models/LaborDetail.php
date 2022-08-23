@@ -31,12 +31,34 @@ class LaborDetail extends Model
         return $this->hasMany(LaborCost::class, 'labor_detail_id_lac');
     }
 
+    public function getEnvironmentAttribute()
+    {
+        switch ($this->attributes['status_id_lad'])
+        {
+            case 11://Approved
+                $response['label'] = "dise&ntilde;o";
+                $response['key'] = "design";
+                break;
+            
+            case 34://Conciliation reception
+                $response['label'] = "construcci&oacute;n";
+                $response['key'] = "construction";
+                break;
+            default:
+                $response['label'] = "undefined";
+                $response['key'] = "indefinido";
+                $response['id'] = '0';
+        }
+        return $response;
+    }
+
     public function defaultStructureMaterials()
     {
         $defaultMaterials = DefaultStructureMaterial::whereHas('structure', function(Builder $query){
             $query->whereHas('laborCosts', function(Builder $query){
                 $query->whereHas('laborDetail', function(Builder $query){
-                   $query->where('project_id_lad', $this->attributes['project_id_lad']); 
+                   $query->where('project_id_lad', $this->attributes['project_id_lad'])
+                   ->where('status_id_lad', $this->status_id_lad);
                 });
             });
         })->get();
@@ -47,7 +69,8 @@ class LaborDetail extends Model
     {
         $customMaterials = CustomStructureMaterial::whereHas('laborCost', function(Builder $query){
             $query->whereHas('laborDetail', function(Builder $query){
-                $query->where('project_id_lad', $this->attributes['project_id_lad']); 
+                $query->where('project_id_lad', $this->attributes['project_id_lad'])
+                ->where('status_id_lad', $this->status_id_lad);
             });
         })->get();
         return $customMaterials;
@@ -57,11 +80,10 @@ class LaborDetail extends Model
     {
         $defaultMaterials = $this->defaultStructureMaterials();
         $customMaterials = $this->customStructureMaterials();
-
         $response = true;
         if($defaultMaterials->count() > 0 && $customMaterials->count() == 0)
             $response = false;
-
+        
         return $response;
     }
 

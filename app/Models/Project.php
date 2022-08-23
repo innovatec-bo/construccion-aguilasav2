@@ -80,9 +80,14 @@ class Project extends Model
     //     })->get();
     // }
 
-    public function laborDetail()
+    public function laborDetailDesign()
     {
-        return $this->hasOne(LaborDetail::class, 'project_id_lad');
+        return $this->hasOne(LaborDetail::class, 'project_id_lad')->where('status_id_lad', 11);//Approved
+    }
+
+    public function laborDetailBuilding()
+    {
+        return $this->hasOne(LaborDetail::class, 'project_id_lad')->where('status_id_lad', 34);//Conciliation reception
     }
 
     /**

@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="row">
         <div class="col-sm-6">
-            <h1>Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h1>
+            <h1>Detalle de mano de obra en {!!$laborDetail->environment['label']!!}: {{$laborDetail->project->code_pro}}</h1>
         </div>
         <div class="col-sm-6">
             {{ Breadcrumbs::render('admin.labor-details.show', $laborDetail) }}
@@ -18,7 +18,8 @@
         <div class="col-md-10">
             <div class="card shadow-lg">
                 <div class="card-header">
-                    <h2 class="text-center d-none d-print-block">Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h2>
+                    <h3 class="text-center d-none d-print-block">Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h3>
+                    <h4 class="text-center mb-4 d-none d-print-block">{!! ($laborDetail->environment['label']) !!}</h4>
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="">
                             @can('admin.labor-details.export')

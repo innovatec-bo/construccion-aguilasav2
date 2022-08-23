@@ -55,7 +55,7 @@ class MaterialSummaryEdit extends Component
         $this->builders = User::role('builder')->get();
         $this->manualEntryDate = $this->materialsSummary->entry_date_msu->format('d-m-Y H:i:s');
         $this->materialSummaryTypes = SummaryType::whereIn('keyword_mqt', ['materials_additional_list','materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials'])->get();
-        $this->laborDetailSummary = $this->materialsSummary->project->laborDetail->summary($this->materialsSummary);
+        $this->laborDetailSummary = $this->materialsSummary->project->laborDetailDesign->summary($this->materialsSummary);
         $this->reservationNumberList = $this->materialsSummary->project->materialSummaries()->whereNotNull('reservation_number_msu')->groupBy('reservation_number_msu')->get()->pluck('reservation_number_msu');
         $this->materialsToMove = collect($this->materialsSummary->projectMaterials()->with('material')->get()->toArray())->sortBy('material_id_prm');
         $this->responsiblesVisibility();

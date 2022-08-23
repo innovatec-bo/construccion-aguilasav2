@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\admin;
 
 use App\Models\LaborDetail;
+use App\Models\Project;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
@@ -14,7 +15,7 @@ class LaborDetailIndex extends Component
     
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $sort = 'id_lad';
+    public $sort = 'id_pro';
     public $direction = 'desc';
     public $deleteId = '';
     protected $queryString = ['search' => ['except' => '']];
@@ -25,6 +26,22 @@ class LaborDetailIndex extends Component
     }
 
     public function render()
+    {
+        $projects = Project::whereHas('laborDetailDesign', function(Builder $query){
+            $query->when($this->search, function(Builder $query, $search){
+                $query->where('graph_number_lad','like','%'.$search.'%')
+                ->orWhere('destiny_lad','like','%'.$search.'%');
+            });
+        })
+        ->when($this->search, function(Builder $query, $search){
+            $query->orWhere('code_pro','like','%'.$search.'%');
+        })
+        ->orderBy($this->sort, $this->direction)
+        ->paginate(6);
+        return view('livewire.admin.labor-detail-index', compact('projects'));
+    }
+
+    public function _render()
     {
 
         $laborDetails = LaborDetail::where('status_id_lad', 11)->Where(function($query){

@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="row">
         <div class="col-sm-6">
-            <h1>Conciliacion interna: {{$laborDetail->project->code_pro}}</h1>
+            <h1>Conciliacion interna en {!!$laborDetail->environment['label']!!}: {{$laborDetail->project->code_pro}}</h1>
         </div>
         <div class="col-sm-6">
             {{ Breadcrumbs::render('admin.labor-details.internal-conciliation', $laborDetail, $previousRoute) }}
@@ -40,7 +40,8 @@
                 <div class="card-body">
                     <div class="row invoice-info mb-3">
                         <div class="col-md-10 d-none d-print-inline">
-                            <h3 class="text-center mb-4">Conciliacion interna</h3>
+                            <h3 class="text-center mb-0">Conciliacion interna</h3>
+                            <h4 class="text-center mb-4">{!! ($laborDetail->environment['label']) !!}</h4>
                         </div>
                         <div class="col-sm-2 invoice-col">
                             <address class="mb-1">

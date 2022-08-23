@@ -34,7 +34,8 @@
                 <div class="card-body">
                     <div class="row invoice-info mb-3">
                         <div class="col-md-10 d-none d-print-inline">
-                            <h3 class="text-center mb-4">Conciliacion interna(Formato CRE)</h3>
+                            <h3 class="text-center mb-0">Conciliacion interna(Formato CRE)</h3>
+                            <h4 class="text-center mb-4">{!! ($laborDetail->environment['label']) !!}</h4>
                         </div>
                         <div class="col-sm-2 invoice-col">
                             <address class="mb-1">

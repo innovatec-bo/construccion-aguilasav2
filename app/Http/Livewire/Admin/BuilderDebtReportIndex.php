@@ -64,7 +64,7 @@ class BuilderDebtReportIndex extends Component
             $projects = $projects->where('status_pro', $this->statusSelected);
         }
         $projects = $projects
-        ->whereHas('laborDetail', function(Builder $query){
+        ->whereHas('laborDetailDesign', function(Builder $query){
             $query->whereHas('laborCosts', function(Builder $query){
                 $query->where('activity_lac', 'R');
             });

@@ -5,49 +5,49 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('home/magic-login/{encrypted}',[HomeController::class,'magicLogin'])->name('home.magic-login');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Controllers\admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'App\Http\Controllers\admin', 'middleware' => ['auth']], function () {
     //Home
     Route::get('inicio','HomeController@index')->name('home.index');
 
     //Users
     Route::get('usuarios/exportar/{users}','UserController@export')->name('users.export');
-    Route::resource('users','UserController')->names('users');
+    Route::resource('usuarios','UserController')->names('users');
 
     //Permissions
-    Route::resource('permissions','PermissionController')->names('permissions');
+    Route::resource('permisos','PermissionController')->names('permissions');
 
     //Roles
     Route::resource('roles','RoleController')->names('roles');
 
     //Projects
-    Route::post('projects/update-manpower/{project}','ProjectController@updateManpower')->name('projects.update-manpower');
-    Route::get('projects/rectify-manpower','ProjectController@rectifyManpower')->name('projects.rectify-manpower');
-    Route::resource('projects','ProjectController')->names('projects');
+    Route::post('proyectos/actualizar-mano-de-obra/{project}','ProjectController@updateManpower')->name('projects.update-manpower');
+    Route::get('proyectos/rectificar-mano-de-obra','ProjectController@rectifyManpower')->name('projects.rectify-manpower');
+    Route::resource('proyectos','ProjectController')->names('projects');
 
     //Materials Summary
     Route::get('movimientos/movimientos-duplicados', 'MaterialSummaryController@duplicateOutputs')->name('materials-summary.duplicate-outputs');
     Route::get('movimientos/movimientos-agrupados/{project}','MaterialSummaryController@groupedMovementDetails')->name('materials-summary.grouped-movement-details');
     Route::get('movimientos/movimientos-agrupados','MaterialSummaryController@groupedMovements')->name('materials-summary.grouped-movements');
-    Route::get('materials-summary/load-initial-list','MaterialSummaryController@loadInitialList')->name('materials-summary.load-initial-list');
-    Route::resource('materials-summary','MaterialSummaryController')->names('materials-summary');
+    Route::get('resumen-de-materiales/cargar-lista-inicial','MaterialSummaryController@loadInitialList')->name('materials-summary.load-initial-list');
+    Route::resource('resumen-de-materiales','MaterialSummaryController')->names('materials-summary');
 
     //Building Structures
     Route::get('building-structures/upload-default-materials','BuildingStructureController@uploadDefaultMaterials')->name('building-structures.upload-default-materials');
     Route::resource('building-structures','BuildingStructureController')->names('building-structures');
 
     //Labor Details
-    Route::get('mano-de-obra/exportar-conciliacion-interna-formato-cre/{laborDetail}','LaborDetailController@exportInternalConciliationCreFormat')->name('labor-details.export-internal-conciliation-cre-format');
-    Route::get('mano-de-obra/exportar/{laborDetail}','LaborDetailController@export')->name('labor-details.export');
-    Route::get('mano-de-obra/conciliacion-interna-formato-cre/{labor_detail}','LaborDetailController@internalConciliationCreFormat')->name('labor-details.internal-conciliation-cre-format');
-    Route::get('labor-details/internal-conciliation-builder/{labor_detail}','LaborDetailController@internalConciliationBuilder')->name('labor-details.internal-conciliation-builder');
-    Route::get('labor-details/internal-conciliation/{labor_detail}','LaborDetailController@internalConciliation')->name('labor-details.internal-conciliation');
-    Route::resource('labor-details','LaborDetailController')->names('labor-details');
+    Route::get('manos-de-obra/exportar-conciliacion-interna-formato-cre/{laborDetail}','LaborDetailController@exportInternalConciliationCreFormat')->name('labor-details.export-internal-conciliation-cre-format');
+    Route::get('manos-de-obra/exportar/{laborDetail}','LaborDetailController@export')->name('labor-details.export');
+    Route::get('manos-de-obra/conciliacion-interna-formato-cre/{labor_detail}','LaborDetailController@internalConciliationCreFormat')->name('labor-details.internal-conciliation-cre-format');
+    Route::get('manos-de-obra/internal-conciliation-builder/{labor_detail}','LaborDetailController@internalConciliationBuilder')->name('labor-details.internal-conciliation-builder');
+    Route::get('manos-de-obra/internal-conciliation/{labor_detail}','LaborDetailController@internalConciliation')->name('labor-details.internal-conciliation');
+    Route::resource('manos-de-obra','LaborDetailController')->parameters(['manos-de-obra' => 'labor_detail'])->names('labor-details');
 
     //Materials
-    Route::resource('materials', 'MaterialController')->names('materials');
+    Route::resource('materiales', 'MaterialController')->names('materials');
 
     //Builder debts report
-    Route::get('builder-debts-report', 'BuilderDebtReport@index')->name('builder-debts-report.index');
+    Route::get('constructores-y-deudas', 'BuilderDebtReport@index')->name('builder-debts-report.index');
 
     //Labor costs
     Route::resource('labor-costs', 'LaborCostController')->names('labor-costs');
