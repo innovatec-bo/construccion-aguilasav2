@@ -14,7 +14,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::resource('usuarios','UserController')->names('users');
 
     //Permissions
-    Route::resource('permisos','PermissionController')->names('permissions');
+    Route::resource('permisos','PermissionController')->parameters(['permisos' => 'permission'])->names('permissions');
 
     //Roles
     Route::resource('roles','RoleController')->names('roles');
@@ -29,11 +29,11 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::get('movimientos/movimientos-agrupados/{project}','MaterialSummaryController@groupedMovementDetails')->name('materials-summary.grouped-movement-details');
     Route::get('movimientos/movimientos-agrupados','MaterialSummaryController@groupedMovements')->name('materials-summary.grouped-movements');
     Route::get('resumen-de-materiales/cargar-lista-inicial','MaterialSummaryController@loadInitialList')->name('materials-summary.load-initial-list');
-    Route::resource('resumen-de-materiales','MaterialSummaryController')->names('materials-summary');
+    Route::resource('resumen-de-materiales','MaterialSummaryController')->parameters(['resumen-de-materiales' => 'materials_summary'])->names('materials-summary');
 
     //Building Structures
-    Route::get('building-structures/upload-default-materials','BuildingStructureController@uploadDefaultMaterials')->name('building-structures.upload-default-materials');
-    Route::resource('building-structures','BuildingStructureController')->names('building-structures');
+    Route::get('estructuras-de-construccion/upload-default-materials','BuildingStructureController@uploadDefaultMaterials')->name('building-structures.upload-default-materials');
+    Route::resource('estructuras-de-construccion','BuildingStructureController')->parameters(['estructuras-de-construccion' => 'building_structure'])->names('building-structures');
 
     //Labor Details
     Route::get('manos-de-obra/exportar-conciliacion-interna/{laborDetail}','LaborDetailController@exportInternalConciliation')->name('labor-details.export-internal-conciliation');
