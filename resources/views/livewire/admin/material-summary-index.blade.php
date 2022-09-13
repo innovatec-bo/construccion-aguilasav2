@@ -55,13 +55,17 @@
                                             {{ $materialSummary->builder->full_name }}
                                         @endif
                                     </td>
-                                    <td>{{ $materialSummary->entry_date_msu->format('d-m-Y H:i:s') }}
-                                        <small
-                                            class="badge badge-primary">{{ $materialSummary->entry_date_msu->diffForHumans() }}</small>
+                                    <td class="small stacked-info">
+                                        {{ $materialSummary->entry_date_msu->format('d-m-Y H:i:s') }}
+                                        <p class="mb-0 text-warning">{{ $materialSummary->entry_date_msu->diffForHumans() }}</p>
                                     </td>
-                                    <td>{{ $materialSummary->project->code_pro }}</td>
-                                    <td>{{ $materialSummary->summaryType->name_mqt }} <small
-                                            class="badge badge-primary">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>
+                                    <td class="small stacked-info">
+                                        <p class="mb-0">{{ $materialSummary->project->code_pro }}</p>
+                                        <p class="mb-0 text-warning">{{ $materialSummary->project->status->status_name_pst }}</p>
+                                    </td>
+                                    <td class="small stacked-info">
+                                        {{ $materialSummary->summaryType->name_mqt }} 
+                                        <p class="mb-0 text-warning">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</p>
                                     </td>
                                     <td class="text-center">
                                         {{$materialSummary->projectMaterials->count()}}
