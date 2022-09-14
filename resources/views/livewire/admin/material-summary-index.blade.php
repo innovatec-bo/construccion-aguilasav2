@@ -55,15 +55,15 @@
                                             {{ $materialSummary->builder->full_name }}
                                         @endif
                                     </td>
-                                    <td class="small stacked-info">
+                                    <td class="stacked-info">
                                         {{ $materialSummary->entry_date_msu->format('d-m-Y H:i:s') }}
                                         <p class="mb-0 text-warning">{{ $materialSummary->entry_date_msu->diffForHumans() }}</p>
                                     </td>
-                                    <td class="small stacked-info">
+                                    <td class="stacked-info">
                                         <p class="mb-0">{{ $materialSummary->project->code_pro }}</p>
                                         <p class="mb-0 text-warning">{{ $materialSummary->project->status->status_name_pst }}</p>
                                     </td>
-                                    <td class="small stacked-info">
+                                    <td class="stacked-info">
                                         {{ $materialSummary->summaryType->name_mqt }} 
                                         <p class="mb-0 text-warning">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</p>
                                     </td>

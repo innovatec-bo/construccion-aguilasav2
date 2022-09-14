@@ -8,12 +8,11 @@
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered table-sm table-hover table-striped">
                     <thead>
                         <tr>
                             <th style="width: 10px">ID</th>
                             <th>Proyecto</th>
-                            <th>Estado</th>
                             <th>Fiscal</th>
                             <th>Constructor</th>
                             <th>Movimientos</th>
@@ -24,8 +23,10 @@
                         @foreach ($projects as $project)
                             <tr>
                                 <td>{{$project->id_pro}}</td>
-                                <td>{{$project->code_pro}}</td>
-                                <td>{{$project->status->status_name_pst}}</td>
+                                <td class="stacked-info">
+                                    {{$project->code_pro}}
+                                    <p class="mb-0 text-warning">{{$project->status->status_name_pst}}</p>
+                                </td>
                                 <td>
                                     @foreach ($project->statusLogResponsibles as $statusLogResponsible)
                                         @if ($statusLogResponsible->responsible->user->hasRole('Fiscal'))

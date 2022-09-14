@@ -28,7 +28,13 @@
                             @foreach ($projects as $project)
                                 <tr>
                                     <td>{{$project->laborDetailDesign->id_lad}}</td>
-                                    <td>{{$project->code_pro}}</td>
+                                    {{-- <td>
+                                        {{$project->code_pro}}
+                                    </td> --}}
+                                    <td class="stacked-info">
+                                        <p class="mb-0">{{ $project->code_pro }}</p>
+                                        <p class="mb-0 text-warning">{{ $project->status->status_name_pst }}</p>
+                                    </td>
                                     <td>{{$project->laborDetailDesign->graph_number_lad}}</td>
                                     <td>{{$project->laborDetailDesign->level_of_tension_lad}}</td>
                                     <td>{{$project->laborDetailDesign->destiny_lad}}</td>
