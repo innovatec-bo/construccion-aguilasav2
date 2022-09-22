@@ -29,9 +29,9 @@ class UserIndex extends Component
     {
 
         $users = User::Where(function($query){
-            $query->where('first_name','like','%'.$this->search.'%')
-            ->orWhere('last_name','like','%'.$this->search.'%')
-            ->orWhere('email','like','%'.$this->search.'%');
+            $query->where('firstname_usr','like','%'.$this->search.'%')
+            ->orWhere('lastname_usr','like','%'.$this->search.'%')
+            ->orWhere('email_usr','like','%'.$this->search.'%');
         });
         $users = $users->orderBy($this->sort, $this->direction);
         $this->usersToExport = $users->get();

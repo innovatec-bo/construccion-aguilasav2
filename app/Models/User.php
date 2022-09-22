@@ -86,7 +86,7 @@ class User extends Authenticatable
 
     public function getFullNameAttribute() 
     {
-        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+        return ucfirst($this->firstname_usr) . ' ' . ucfirst($this->lastname_usr);
     }
 
     public function statusResponsible()
