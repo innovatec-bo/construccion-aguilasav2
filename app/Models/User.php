@@ -93,4 +93,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(StatusResponsible::class, 'user_id_sre');
     }
+
+    public function getAuthPassword()
+    {
+        return $this->password_usr;
+    }
 }
