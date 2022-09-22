@@ -11,7 +11,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
 
     //Users
     Route::get('usuarios/exportar/{users}','UserController@export')->name('users.export');
-    Route::resource('usuarios','UserController')->names('users');
+    Route::resource('usuarios','UserController')->parameters(['usuarios' => 'user'])->names('users');
 
     //Permissions
     Route::resource('permisos','PermissionController')->parameters(['permisos' => 'permission'])->names('permissions');
