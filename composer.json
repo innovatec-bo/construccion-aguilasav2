@@ -12,6 +12,7 @@
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "imanghafoori/laravel-masterpass": "^2.0",
         "jeroennoten/laravel-adminlte": "^3.8",
         "laravel-appkit/blameable": "^1.0",
         "laravel/framework": "^8.75",
