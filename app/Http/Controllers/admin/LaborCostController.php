@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class LaborCostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin.labor-costs.edit', ['only' => ['edit','update']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
