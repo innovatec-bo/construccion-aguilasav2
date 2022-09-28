@@ -23,7 +23,7 @@
                     </h4>
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="">
-                            @can('admin.labor-details.internal-conciliation-builder')
+                            @can('admin.labor-details.export-internal-conciliation-builder')
                                 {{-- <a href="{{route('admin.labor-details.internal-conciliation-builder', $laborDetail->id_lad)}}" class="btn btn-primary btn-xs d-print-none"><i class="far fa-file-excel"></i> Exportar</a> --}}
                                 <a class="btn btn-info btn-xs d-print-none float-right ml-2" href="javascript:void(0)" onclick="window.print();"><i class="fa fa-print fa-fw"></i>Imprimir</a>
                             @endcan
