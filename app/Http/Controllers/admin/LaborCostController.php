@@ -10,7 +10,7 @@ class LaborCostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin.labor-costs.edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:admin.labor-costs.edit', ['only' => ['edit','update']]);
     }
 
     /**
