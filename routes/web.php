@@ -65,3 +65,31 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
 
 Auth::routes(['register' => false]);
+
+/*
+ SELECT
+	code_pro,
+	mat_materials_summary.project_id_msu,
+	id_mat,
+    description_mat,
+    mat_materials_summary.id_msu,
+    mat_materials_summary_types.name_mqt,
+    mat_materials_summary_types.keyword_mqt
+FROM
+    mat_materials
+LEFT JOIN mat_projects_materials on mat_projects_materials.material_id_prm = id_mat
+LEFT JOIN mat_materials_summary on materials_summary_id_prm = mat_materials_summary.id_msu
+LEFT JOIN wfl_projects on id_pro = project_id_msu
+LEFT JOIN mat_materials_summary_types on id_mqt = summary_type_id_msu
+where 
+	project_id_msu = 2495
+    and mat_projects_materials.deleted_prm != 1
+    and mat_projects_materials.deleted_at is null
+    and mat_materials_summary.deleted_msu != 1
+    and mat_materials_summary.deleted_at is null
+    and wfl_projects.deleted_pro != 1
+    and 
+    and mat_materials_summary_types.deleted_mqt != 1
+    and mat_materials_summary_types.deleted_at is null
+order by id_msu, keyword_mqt, id_mat;
+ */
