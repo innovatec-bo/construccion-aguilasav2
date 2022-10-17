@@ -83,4 +83,9 @@ class MaterialController extends Controller
     {
         //
     }
+
+    public function materialSummary()
+    {
+        return view('admin.materials.material-summary');
+    }
 }

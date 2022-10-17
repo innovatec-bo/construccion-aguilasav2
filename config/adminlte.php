@@ -292,7 +292,7 @@ return [
         [
             'text'        => 'Almacen',
             'icon'        => 'fas fa-fw fa-warehouse',
-            'can'         => ['admin.materials-summary.index','admin.materials-summary.load-initial-list','admin.builder-debts-report.index'],
+            'can'         => ['admin.materials-summary.index','admin.materials-summary.load-initial-list','admin.builder-debts-report.index','admin.materials.material-summary'],
             'submenu'     => [
                 [
                     'text'        => 'Movimientos',
@@ -328,7 +328,14 @@ return [
                     'can'         => 'admin.materials-summary.duplicate-outputs',
                     'icon'        => 'fas fa-fw fa-exclamation-triangle',
                     'shift' => 'pl-4',
-                ]
+                ],
+                [
+                    'text'        => 'Resumen de materiales',
+                    'route'       => 'admin.materials.material-summary',
+                    'can'         => 'admin.materials.material-summary',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'pl-4',
+                ],
             ],  
         ],
         [
@@ -370,7 +377,7 @@ return [
                     'can'         => 'admin.materials.create',
                     'icon'        => 'fas fa-fw fa-plus',
                     'shift' => 'pl-4',
-                ]
+                ],
             ]
         ],
         [

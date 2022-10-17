@@ -25,11 +25,12 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::resource('proyectos','ProjectController')->names('projects');
 
     //Materials Summary
+    
     Route::get('movimientos/movimientos-duplicados', 'MaterialSummaryController@duplicateOutputs')->name('materials-summary.duplicate-outputs');
     Route::get('movimientos/movimientos-agrupados/{project}','MaterialSummaryController@groupedMovementDetails')->name('materials-summary.grouped-movement-details');
     Route::get('movimientos/movimientos-agrupados','MaterialSummaryController@groupedMovements')->name('materials-summary.grouped-movements');
-    Route::get('resumen-de-materiales/cargar-lista-inicial','MaterialSummaryController@loadInitialList')->name('materials-summary.load-initial-list');
-    Route::resource('resumen-de-materiales','MaterialSummaryController')->parameters(['resumen-de-materiales' => 'materials_summary'])->names('materials-summary');
+    Route::get('movimientos/cargar-lista-inicial','MaterialSummaryController@loadInitialList')->name('materials-summary.load-initial-list');
+    Route::resource('movimientos','MaterialSummaryController')->parameters(['resumen-de-materiales' => 'materials_summary'])->names('materials-summary');
 
     //Building Structures
     Route::get('estructuras-de-construccion/upload-default-materials','BuildingStructureController@uploadDefaultMaterials')->name('building-structures.upload-default-materials');
@@ -45,6 +46,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::resource('manos-de-obra','LaborDetailController')->parameters(['manos-de-obra' => 'labor_detail'])->names('labor-details');
 
     //Materials
+    Route::get('materiales/resumen', 'MaterialController@materialSummary')->name('materials.material-summary');
     Route::resource('materiales', 'MaterialController')->names('materials');
 
     //Builder debts report
