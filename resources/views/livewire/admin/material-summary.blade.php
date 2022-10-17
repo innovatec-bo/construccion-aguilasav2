@@ -34,7 +34,7 @@
                             @foreach ($materialSummaries as $materialSummary)
                                 <tr>
                                     <td class="stacked-info">
-                                        {{ $materialSummary->material_id }}
+                                        {{ $materialSummary->material_code }}
                                         {{-- <p class="mb-0 text-warning">{{ $materialSummary->status_name_pst }}</p> --}}
                                     </td>
                                     <td>
@@ -44,17 +44,17 @@
                                         {{ $materialSummary->project_code }}
                                         {{-- <p class="mb-0 text-warning">{{ $materialSummary->status_name_pst }}</p> --}}
                                     </td>
-                                    <td> 
+                                    <td class="text-right"> 
                                         {{ $materialSummary->quantity_assigned_materials }} 
                                     </td>
+                                    <td class="text-right">
+                                        {{ $materialSummary->quantity_picked_up_from_cre }}
+                                    </td>
                                     <td class="text-right"> 
-                                            {{ $materialSummary->quantity_picked_up_from_cre }}
+                                        {{ $materialSummary->pending_material_in_cre }}
                                     </td>
-                                    <td> 
-                                        {{-- {{ $materialSummary->cre_fiscal_pro }}  --}}
-                                    </td>
-                                    <td> 
-                                        {{-- {{ $materialSummary->stake_responsible }}  --}}
+                                    <td class="text-right"> 
+                                        {{ $materialSummary->quantity_materials_delivered_to_builder }} 
                                     </td>
                                 </tr>
                             @endforeach

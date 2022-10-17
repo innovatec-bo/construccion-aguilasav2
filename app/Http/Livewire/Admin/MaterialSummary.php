@@ -41,17 +41,17 @@ class MaterialSummary extends Component
         $perPage = 5;
         $page = $this->page;
         $additionalParameters = [];
-        // $cols = [
-        //     'code_pro',
-        //     'status_name_pst',
-        //     'system_pro',
-        //     'cre_fiscal_pro',
-        //     'stake_responsible',
-        //     'assign_to_responsible',
-        //     'address_pro',
-        //     'project_current_budget'
-        // ];
-        $cols = [];  
+        $cols = [
+            'project_code',
+            // 'status_name_pst',
+            // 'system_pro',
+            // 'cre_fiscal_pro',
+            // 'stake_responsible',
+            // 'assign_to_responsible',
+            // 'address_pro',
+            // 'project_current_budget'
+        ];
+        // $cols = [];  
         $offset = ($page?$page-1:0) * $perPage;
         $paginationHandler = new MaterialSummaryPaginationHandler($perPage, $offset, 'material_id','desc', $this->search, $cols);
         // $paginationHandler->setAdditionalParameters($additionalParameters);
