@@ -97,7 +97,6 @@ class BasePaginationHandler
 				1 = 1
 				'.$this->_additionalParameters().'                    
                 group by '.static::TABLE_ID.' order by ' . $this->_orderBy . ' ' . $this->_orderType . ' limit ' . $this->_limit . ' offset ' . $this->_offset;
-
 		$results = DB::select($sql);
 		if($this->_returnAsObjectCollection)
 		{

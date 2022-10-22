@@ -5,6 +5,7 @@ namespace App\Http\Livewire\admin;
 use App\CustomLibraries\MaterialSummaryPaginationHandler;
 use App\CustomLibraries\WorkflowPaginationHandler;
 use App\Exports\UsersExport;
+use App\Models\Project;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
@@ -22,10 +23,17 @@ class MaterialSummary extends Component
     public $sort = 'id_mat';
     public $direction = 'desc';
     public $deleteId = '';
-    protected $queryString = ['search' => ['except' => '']];
+    protected $queryString = ['search' => ['except' => ''], 'groupByProject' => ['except' => false], 'projectCode' => ['except' => '']];
     public $usersToExport;
+    public $groupByProject = false;
+    public $projectCode;
 
     public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+    
+    public function updatingProjectCode()
     {
         $this->resetPage();
     }
@@ -54,7 +62,24 @@ class MaterialSummary extends Component
         // $cols = [];  
         $offset = ($page?$page-1:0) * $perPage;
         $paginationHandler = new MaterialSummaryPaginationHandler($perPage, $offset, 'material_id','desc', $this->search, $cols);
-        // $paginationHandler->setAdditionalParameters($additionalParameters);
+        // $additionalParameters['project-id'] = '1067';
+        $additionalParameters['grouping-criteria'] = ' project_id_msu, material_id_prm, status_id_prm ';
+        if($this->groupByProject)
+        {
+            $additionalParameters['grouping-criteria'] = ' project_id_msu ';
+        }
+        if($this->projectCode)
+        {
+            $project = Project::where('code_pro', $this->projectCode)->where('deleted_pro','!=',1)->first();
+            $additionalParameters['project-id'] = 000;
+            if($project)
+            {
+                $additionalParameters['project-id'] = $project->id_pro;
+            }
+            
+        }
+        // dd($additionalParameters);
+        $paginationHandler->setAdditionalParameters($additionalParameters);
         $projects = $paginationHandler->getResponseForDataTable();
         $collection = collect($projects['resultArray']);
 

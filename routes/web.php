@@ -30,7 +30,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::get('movimientos/movimientos-agrupados/{project}','MaterialSummaryController@groupedMovementDetails')->name('materials-summary.grouped-movement-details');
     Route::get('movimientos/movimientos-agrupados','MaterialSummaryController@groupedMovements')->name('materials-summary.grouped-movements');
     Route::get('movimientos/cargar-lista-inicial','MaterialSummaryController@loadInitialList')->name('materials-summary.load-initial-list');
-    Route::resource('movimientos','MaterialSummaryController')->parameters(['resumen-de-materiales' => 'materials_summary'])->names('materials-summary');
+    Route::resource('movimientos','MaterialSummaryController')->parameters(['movimientos' => 'materials_summary'])->names('materials-summary');
 
     //Building Structures
     Route::get('estructuras-de-construccion/upload-default-materials','BuildingStructureController@uploadDefaultMaterials')->name('building-structures.upload-default-materials');

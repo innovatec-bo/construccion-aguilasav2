@@ -1,7 +1,20 @@
 <div class="row justify-content-center">
     <div class="col-md-10">
         <div class="card shadow-lg">
+            
             <div class="card-header">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="groupByProject" wire:model="groupByProject">
+                            <label class="form-check-label" for="groupByProject">Agrupar por proyecto <i  id="popover" class="fas fa-info-circle"></i></label>
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="exampleInputEmail1" class="mb-0">Proyecto</label>
+                            <input type="text" class="form-control"  wire:model.debounce.1500ms="projectCode" id="exampleInputEmail1" placeholder="Codigo proyecto">
+                            </div>
+                    </div>
+                </div>
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="">
                         <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.1500ms="search" placeholder="Buscar..">
@@ -14,7 +27,7 @@
             </div>
             <div class="card-body">
                 <div class="overlay dark d-none" wire:loading.class="d-flex"
-                    wire:target="previousPage, nextPage, gotoPage, search">
+                    wire:target="previousPage, nextPage, gotoPage, search,groupByProject">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive">
@@ -45,16 +58,16 @@
                                         {{-- <p class="mb-0 text-warning">{{ $materialSummary->status_name_pst }}</p> --}}
                                     </td>
                                     <td class="text-right"> 
-                                        {{ $materialSummary->quantity_assigned_materials }} 
+                                        {{ number_format($materialSummary->quantity_assigned_materials,'2','.',',') }} 
                                     </td>
                                     <td class="text-right">
-                                        {{ $materialSummary->quantity_picked_up_from_cre }}
+                                        {{ number_format($materialSummary->quantity_picked_up_from_cre,'2','.',',') }}
                                     </td>
                                     <td class="text-right"> 
-                                        {{ $materialSummary->pending_material_in_cre }}
+                                        {{ number_format($materialSummary->pending_material_in_cre,'2','.',',') }}
                                     </td>
                                     <td class="text-right"> 
-                                        {{ $materialSummary->quantity_materials_delivered_to_builder }} 
+                                        {{ number_format($materialSummary->quantity_materials_delivered_to_builder,'2','.',',') }} 
                                     </td>
                                 </tr>
                             @endforeach

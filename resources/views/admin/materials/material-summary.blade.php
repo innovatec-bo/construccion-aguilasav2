@@ -24,4 +24,16 @@
 @section('js')
     @stack('scripts')    
 {{-- <script> console.log('Hi!'); </script> --}}
+    <script>
+        $(function () {
+            $('#popover').popover({
+                container: 'body',
+                html: true,
+                title: "Info",
+                content: 'Esta opcion permite tener un total absoluto de los totales del proyecto',
+                trigger: 'hover',
+                template: '<div class="popover dark-mode" role="tooltip"><div class="arrow"></div><h3 class="popover-header dark-mode"></h3><div class="popover-body dark-mode"></div></div>'
+            })
+        });
+    </script>
 @stop

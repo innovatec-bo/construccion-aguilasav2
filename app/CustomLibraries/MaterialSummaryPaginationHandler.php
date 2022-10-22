@@ -1,6 +1,6 @@
 <?php
 namespace App\CustomLibraries;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 
 class MaterialSummaryPaginationHandler extends BasePaginationHandler
@@ -13,9 +13,9 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 	{
 		parent::__construct($limit, $offset, $orderBy, $orderType, $textToSearch, $colsArray);
 		// 'grouping-criteria' => ' project_id_msu, material_id_prm, tension_id_prm, status_id_prm '
-		$this->_additionalParameters = array(
+		$this->_additionalParameters = [
 			'grouping-criteria' => ' project_id_msu, material_id_prm, status_id_prm '
-		);
+		];
 	}
 
 	/**
@@ -24,26 +24,50 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 	 */
 	protected function _coreQuery() : string
 	{
+		$groupBy = "";
+		$mainColumns = "
+			IFNULL(assigned_materials.quantity,0) quantity_assigned_materials,
+			IFNULL(additional_materials.quantity,0) quantity_additional_materials,
+			IFNULL(materials_picked_up_from_cre.quantity,0) quantity_picked_up_from_cre,
+			(IFNULL(materials_delivered_to_builder.quantity,0) + IFNULL(materials_delivered_to_builder_loan.quantity,0) )- IFNULL(non_used_materials.quantity,0) quantity_materials_delivered_to_builder,
+			IFNULL(materials_delivered_to_cre.quantity,0) quantity_materials_delivered_to_cre,
+			IFNULL(builder_returns_new_materials.quantity,0) quantity_new_materials_returned_by_builder,
+			IFNULL(builder_returns_old_materials.quantity,0) quantity_old_materials_returned_by_builder,
+			IFNULL(builder_returns_good_condition_materials.quantity,0) quantity_good_condition_materials_returned_by_builder,
+			IFNULL(builder_returns_materials.quantity,0) quantity_materials_returned_by_builder,
+			IFNULL(entry_by_conciliation_221.quantity,0) quantity_entry_by_conciliation_221,
+			IFNULL(non_used_materials.quantity,0) quantity_non_used_materials,
+			IFNULL(material_removed_from_construction.quantity,0) quantity_material_removed_from_construction,
+			IFNULL(assigned_materials.quantity,0) - IFNULL(materials_picked_up_from_cre.quantity,0) pending_material_in_cre,
+			IFNULL(request_materials.quantity,0) request_materials_quantity,
+		";
+		if(isset($this->_additionalParameters['grouping-criteria']) && trim($this->_additionalParameters['grouping-criteria']) == 'project_id_msu')
+		{
+			$groupBy = " GROUP BY  project_id ";
+			$mainColumns = "
+				sum(IFNULL(assigned_materials.quantity,0)) quantity_assigned_materials,
+				sum(IFNULL(additional_materials.quantity,0)) quantity_additional_materials,
+				sum(IFNULL(materials_picked_up_from_cre.quantity,0)) quantity_picked_up_from_cre,
+				sum((IFNULL(materials_delivered_to_builder.quantity,0) + IFNULL(materials_delivered_to_builder_loan.quantity,0) )- IFNULL(non_used_materials.quantity,0)) quantity_materials_delivered_to_builder,
+				sum(IFNULL(materials_delivered_to_cre.quantity,0)) quantity_materials_delivered_to_cre,
+				sum(IFNULL(builder_returns_new_materials.quantity,0)) quantity_new_materials_returned_by_builder,
+				sum(IFNULL(builder_returns_old_materials.quantity,0)) quantity_old_materials_returned_by_builder,
+				sum(IFNULL(builder_returns_good_condition_materials.quantity,0)) quantity_good_condition_materials_returned_by_builder,
+				sum(IFNULL(builder_returns_materials.quantity,0)) quantity_materials_returned_by_builder,
+				sum(IFNULL(entry_by_conciliation_221.quantity,0)) quantity_entry_by_conciliation_221,
+				sum(IFNULL(non_used_materials.quantity,0)) quantity_non_used_materials,
+				sum(IFNULL(material_removed_from_construction.quantity,0)) quantity_material_removed_from_construction,
+				sum(IFNULL(assigned_materials.quantity,0) - IFNULL(materials_picked_up_from_cre.quantity,0)) pending_material_in_cre,
+				sum(IFNULL(request_materials.quantity,0)) request_materials_quantity,
+			";
+		}
 		$coreQuery = "
 			(
 				select 
 					working_materials.*,
 					-- Filter by project
-					IFNULL(assigned_materials.quantity,0) quantity_assigned_materials,
-					IFNULL(additional_materials.quantity,0) quantity_additional_materials,
-					IFNULL(materials_picked_up_from_cre.quantity,0) quantity_picked_up_from_cre,
-					(IFNULL(materials_delivered_to_builder.quantity,0) + IFNULL(materials_delivered_to_builder_loan.quantity,0) )- IFNULL(non_used_materials.quantity,0) quantity_materials_delivered_to_builder,
-					IFNULL(materials_delivered_to_cre.quantity,0) quantity_materials_delivered_to_cre,
-					IFNULL(builder_returns_new_materials.quantity,0) quantity_new_materials_returned_by_builder,
-					IFNULL(builder_returns_old_materials.quantity,0) quantity_old_materials_returned_by_builder,
-					IFNULL(builder_returns_good_condition_materials.quantity,0) quantity_good_condition_materials_returned_by_builder,
-					IFNULL(builder_returns_materials.quantity,0) quantity_materials_returned_by_builder,
-					IFNULL(entry_by_conciliation_221.quantity,0) quantity_entry_by_conciliation_221,
-					IFNULL(non_used_materials.quantity,0) quantity_non_used_materials,
-					IFNULL(material_removed_from_construction.quantity,0) quantity_material_removed_from_construction,
-					IFNULL(assigned_materials.quantity,0) - IFNULL(materials_picked_up_from_cre.quantity,0) pending_material_in_cre,
-					IFNULL(request_materials.quantity,0) request_materials_quantity,
 					
+					{$mainColumns}
 					(
 						IFNULL(materials_picked_up_from_cre.quantity,0) +
 						IFNULL(entry_by_conciliation_221.quantity,0) +
@@ -86,9 +110,9 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 						tension_id_prm,
 						status_id_prm
 					FROM
-						mat_projects_materials
+						mat_materials
+					LEFT JOIN mat_projects_materials on material_id_prm = id_mat and deleted_prm != 1
 					LEFT JOIN mat_materials_summary on materials_summary_id_prm = id_msu and deleted_msu != 1
-					LEFT JOIN mat_materials on material_id_prm = id_mat and deleted_prm != 1
 					LEFT JOIN wfl_projects on id_pro = project_id_msu
 					where 
 						1=1
@@ -165,6 +189,7 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 				LEFT JOIN (
 					{$this->_subQueryQuantity('18')}
 				) builder_returns_materials on builder_returns_materials.material_id = working_materials.material_id and builder_returns_materials.project_id = working_materials.project_id
+					{$groupBy}
 			) ".static::TABLE_NAME."_master_detail
 		";//echo"<pre>";var_dump($this->_applyNestedFilters($coreQuery));exit;
 		return $this->_applyNestedFilters($coreQuery);
@@ -398,5 +423,86 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 		//Remove keywords that hasn't values to be replaced
 		$query = preg_replace("/\{[^}]+\}/","", $query);
 		return $query;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function search() : array
+	{
+		if ($this->_orderBy === "")
+		{
+			$this->_orderBy = static::TABLE_ID;
+		}
+		$groupBy = static::TABLE_ID;
+		if(isset($this->_additionalParameters['grouping-criteria']) && trim($this->_additionalParameters['grouping-criteria']) == 'project_id_msu')
+		{
+			$groupBy = "project_id";
+		}
+
+		$sql = 'select '.$this->_dataTableColumns().' from ' . $this->_coreQuery().'
+		 where 1=1 ';
+		if (count($this->_colsArray) > 0) 
+		{
+			$sql .= ' and ( ';
+			foreach ($this->_colsArray as $var)
+			{
+				$sql .= ' ' . $var . ' like \'%' . $this->_textToSearch . '%\' ESCAPE \'!\' or ';
+			}
+			$sql = substr($sql, 0, -3);
+			$sql .= ' ) ';
+		}
+
+		
+		$sql .= ' '.$this->_additionalParameters().' group by '.$groupBy.' order by ' . $this->_orderBy . ' ' . $this->_orderType . ' limit ' . $this->_limit . ' offset ' . $this->_offset;
+		
+		$results = DB::select($sql);
+		if($this->_returnAsObjectCollection)
+		{
+			return $results;
+		}
+		else
+		{
+			foreach ($results as $key => $value) 
+			{
+				$results[$key] = (array)$value;
+			}
+			return $results;
+		}
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getAll() : array
+	{
+		if ($this->_orderBy === "")
+		{
+			$this->_orderBy = static::TABLE_ID;
+		}
+
+		$groupBy = static::TABLE_ID;
+		if(isset($this->_additionalParameters['grouping-criteria']) && trim($this->_additionalParameters['grouping-criteria']) == 'project_id_msu')
+		{
+			$groupBy = "project_id";
+		}
+		$sql = 'select '.$this->_dataTableColumns().' from ' . $this->_coreQuery() . ' 
+				where
+				1 = 1
+				'.$this->_additionalParameters().'                    
+                group by '.$groupBy.' order by ' . $this->_orderBy . ' ' . $this->_orderType . ' limit ' . $this->_limit . ' offset ' . $this->_offset;
+		$results = DB::select($sql);
+		if($this->_returnAsObjectCollection)
+		{
+			return $results;
+		}
+		else
+		{
+			foreach ($results as $key => $value) 
+			{
+				$results[$key] = (array)$value;
+			}
+			return $results;
+		}
 	}
 }
