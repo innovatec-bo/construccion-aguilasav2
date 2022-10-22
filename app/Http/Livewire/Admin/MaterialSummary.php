@@ -71,7 +71,7 @@ class MaterialSummary extends Component
         if($this->projectCode)
         {
             $project = Project::where('code_pro', $this->projectCode)->where('deleted_pro','!=',1)->first();
-            $additionalParameters['project-id'] = 000;
+            $additionalParameters['project-id'] = 1000000;
             if($project)
             {
                 $additionalParameters['project-id'] = $project->id_pro;
