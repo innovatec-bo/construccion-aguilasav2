@@ -21,7 +21,7 @@ class MaterialSummary extends Component
     
     protected $paginationTheme = 'bootstrap';
     public $search = "";
-    public $sort = 'id_mat';
+    public $sort = 'material_id';
     public $direction = 'desc';
     public $deleteId = '';
     protected $queryString = [
@@ -30,6 +30,8 @@ class MaterialSummary extends Component
         'projectCode' => ['except' => ''],
         'projectStatusId' => ['except' => ''],
         'materialCode' => ['except' => ''],
+        'sort' => ['except' => ''],
+        'direction' => ['except' => ''],
     ];
     public $usersToExport;
     public $groupByProject = false;
@@ -61,6 +63,11 @@ class MaterialSummary extends Component
         $this->resetPage();
     }
     
+    public function resetFilters()
+    {
+        $this->reset(['groupByProject','materialCode','projectStatusId','search','projectCode']);
+    }
+
     public function render()
     {
         $materialSummaries = $this->_paginate();
@@ -78,7 +85,7 @@ class MaterialSummary extends Component
         ];
         // $cols = [];  
         $offset = ($page?$page-1:0) * $perPage;
-        $paginationHandler = new MaterialSummaryPaginationHandler($perPage, $offset, 'material_id','desc', $this->search, $cols);
+        $paginationHandler = new MaterialSummaryPaginationHandler($perPage, $offset, $this->sort, $this->direction, $this->search, $cols);
         // $additionalParameters['project-id'] = '1067';
         $additionalParameters['grouping-criteria'] = ' project_id_msu, material_id_prm, status_id_prm ';
         if($this->groupByProject)
@@ -96,7 +103,7 @@ class MaterialSummary extends Component
         if($this->projectCode)
         {
             $project = Project::where('code_pro', $this->projectCode)->where('deleted_pro','!=',1)->first();
-            $additionalParameters['project-id'] = 1000000;
+            $additionalParameters['project-id'] = 10000000;
             if($project)
             {
                 $additionalParameters['project-id'] = $project->id_pro;

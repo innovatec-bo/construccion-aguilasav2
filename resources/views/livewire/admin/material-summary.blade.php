@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group col-2">
                         <label for="projectStatusId" class="mb-0">Estado</label>
-                        <select class="form-control" wire:model.debounce.1500ms="projectStatusId" id="projectStatusId">
+                        <select class="form-control" wire:model="projectStatusId" id="projectStatusId">
                             <option value="">Estado del proyecto</option>
                             @foreach ($projectStatus as $status)
                                 <option value="{{$status->id_pst}}">{{$status->status_name_pst}}</option>
@@ -32,26 +32,118 @@
                         <input type="text" class="form-control"  wire:model.debounce.1500ms="search" id="search" placeholder="Descripcion material">
                     </div>
                     <div class="form-group col-2">
-                        <button type="button" class="btn btn-primary mt-4">Quitar filtros</button>
+                        <button type="button" wire:click="resetFilters" class="btn btn-primary mt-4">Quitar filtros</button>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="overlay dark d-none" wire:loading.class="d-flex"
-                    wire:target="previousPage, nextPage, gotoPage, search,groupByProject,projectCode,projectStatusId,materialCode">
+                    wire:target="previousPage, nextPage, gotoPage, search,groupByProject,projectCode,projectStatusId,materialCode,resetFilters,order">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover table-sm">
                         <thead>
                             <tr class="text-center">
-                                <th>C&oacute;digo</th>
-                                <th>Descripci&oacute;n</th>
-                                <th>Proyecto</th>
-                                <th>Cantidad<br>Comprometida</th>
-                                <th>Retirado<br>de CRE</th>
-                                <th>Pendiente por<br>retirar de CRE</th>
-                                <th>Entregado<br>al construcor</th>
+                                <th wire:click="order('material_code')">
+                                    C&oacute;digo
+                                    <div class="float-right">
+                                        @if ($sort == 'material_code')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up"></i>
+                                            @else
+                                                <i class="fas fa-sort-down"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort"></i>
+                                        @endif
+                                    </div>
+                                    
+                                </th>
+                                <th wire:click="order('material_description')">
+                                    Descripci&oacute;n
+                                    <div class="float-right">
+                                        @if ($sort == 'material_description')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up"></i>
+                                            @else
+                                                <i class="fas fa-sort-down"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort"></i>
+                                        @endif
+                                    </div>
+                                </th>
+                                <th wire:click="order('project_code')">
+                                    Proyecto
+                                    <div class="float-right">
+                                        @if ($sort == 'project_code')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up"></i>
+                                            @else
+                                                <i class="fas fa-sort-down"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort"></i>
+                                        @endif
+                                    </div>
+                                </th>
+                                <th wire:click="order('quantity_assigned_materials')">
+                                    Cantidad<br>Comprometida
+                                    <div class="float-right">
+                                        @if ($sort == 'quantity_assigned_materials')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up"></i>
+                                            @else
+                                                <i class="fas fa-sort-down"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort"></i>
+                                        @endif
+                                    </div>
+                                </th>
+                                <th wire:click="order('quantity_picked_up_from_cre')">
+                                    Retirado<br>de CRE
+                                    <div class="float-right">
+                                        @if ($sort == 'quantity_picked_up_from_cre')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up"></i>
+                                            @else
+                                                <i class="fas fa-sort-down"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort"></i>
+                                        @endif
+                                    </div>
+                                </th>
+                                <th wire:click="order('pending_material_in_cre')">
+                                    Pendiente por<br>retirar de CRE
+                                    <div class="float-right">
+                                        @if ($sort == 'pending_material_in_cre')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up"></i>
+                                            @else
+                                                <i class="fas fa-sort-down"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort"></i>
+                                        @endif
+                                    </div>
+                                </th>
+                                <th wire:click="order('quantity_materials_delivered_to_builder')">
+                                    Entregado<br>al constructor
+                                    <div class="float-right">
+                                        @if ($sort == 'quantity_materials_delivered_to_builder')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up"></i>
+                                            @else
+                                                <i class="fas fa-sort-down"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort"></i>
+                                        @endif
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,7 +151,6 @@
                                 <tr>
                                     <td class="stacked-info">
                                         {{ $materialSummary->material_code }}
-                                        
                                     </td>
                                     <td>
                                         {{ $materialSummary->material_description }}
