@@ -108,17 +108,22 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 						description_mat material_description,
 						reservation_number_msu summary_reservation_number,
 						tension_id_prm,
-						status_id_prm
+						status_id_prm,
+						id_pst project_status_id,
+						status_name_pst project_status_name
 					FROM
 						mat_materials
 					LEFT JOIN mat_projects_materials on material_id_prm = id_mat and deleted_prm != 1
 					LEFT JOIN mat_materials_summary on materials_summary_id_prm = id_msu and deleted_msu != 1
 					LEFT JOIN wfl_projects on id_pro = project_id_msu
+					left join wfl_project_status on status_pro = id_pst
 					where 
 						1=1
 						{project-id}
 						{reservation-number}
 						{material-ids}
+						{material-codes}
+						{project-status-id}
 						GROUP BY project_id_msu, material_id_prm
 						ORDER BY createdby_msu
 				) as working_materials
@@ -235,55 +240,6 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 	}
 
 	/**
-	 * @param string $summaryTypeId
-	 * @return string
-	 */
-	// private function _subQueryQuantityWithoutReservationNumber(string $summaryTypeId) : string
-	// {
-
-	// 	return "
-	// 	SELECT
-	// 		sum(quantity_prm) quantity,
-	// 		material_id_prm material_id,
-	// 		project_id_msu project_id
-	// 	FROM
-	// 		mat_projects_materials
-	// 	LEFT JOIN mat_materials_summary on materials_summary_id_prm = id_msu
-	// 	where 
-	// 		summary_type_id_msu in ({$summaryTypeId})
-	// 		{project-id}
-	// 		and deleted_msu != 1
-	// 		and deleted_prm != 1
-	// 	GROUP BY {grouping-criteria}
-	// 	";
-	// }
-
-	/**
-	 * @param string $summaryTypeId
-	 * @return string
-	 */
-	// private function _subQueryQuantityRequested(string $summaryTypeId) : string
-	// {
-	// 	return "
-	// 	SELECT
-	// 		sum(quantity_prm) quantity,
-	// 		material_id_prm material_id,
-	// 		project_id_msu project_id
-	// 	FROM
-	// 		mat_projects_materials
-	// 	LEFT JOIN mat_materials_summary on materials_summary_id_prm = id_msu
-	// 	where 
-	// 		summary_type_id_msu in ({$summaryTypeId})
-	// 		{project-id}
-	// 		{reservation-number}
-	// 		and status_id_msu = 1 -- pending
-	// 		and deleted_msu != 1
-	// 		and deleted_prm != 1
-	// 	GROUP BY {grouping-criteria}
-	// 	";
-	// }
-
-	/**
 	 * This method define the columns that will be used from _coreQuery
 	 * @return string
 	 */
@@ -394,7 +350,12 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 						{
 							$query = str_replace("{project-id}",' and project_id_msu = '.$value.' ', $query);
 						}
-						
+						break;
+					case "{project-status-id}":
+							if($value != "")
+							{
+								$query = str_replace("{project-status-id}",' and id_pst = '.$value.' ', $query);
+							}
 						break;
 					case "{grouping-criteria}":
 						$query = str_replace("{grouping-criteria}",$value, $query);
@@ -414,6 +375,24 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 							if($idListFilter != "")
 							{
 								$query = str_replace("{material-ids}",' and id_mat in ('.$idListFilter.') ', $query);
+							}
+							
+						break;
+					case "{material-codes}":
+							$codeList = $value;
+							$codeList = str_replace("\r\n"," ", $codeList);
+							$codeList = str_replace(" ",PHP_EOL, $codeList);
+							$codeList = explode(PHP_EOL, $codeList);
+							$codeList = array_values(array_filter($codeList));
+							$idListFilter = "";
+							foreach ($codeList as $id)
+							{
+								$idListFilter .= $id.", ";
+							}
+							$idListFilter = substr($idListFilter,0, -2);
+							if($idListFilter != "")
+							{
+								$query = str_replace("{material-codes}",' and code_mat in ('.$idListFilter.') ', $query);
 							}
 							
 						break;

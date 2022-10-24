@@ -6,6 +6,7 @@ use App\CustomLibraries\MaterialSummaryPaginationHandler;
 use App\CustomLibraries\WorkflowPaginationHandler;
 use App\Exports\UsersExport;
 use App\Models\Project;
+use App\Models\ProjectStatus;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
@@ -23,10 +24,18 @@ class MaterialSummary extends Component
     public $sort = 'id_mat';
     public $direction = 'desc';
     public $deleteId = '';
-    protected $queryString = ['search' => ['except' => ''], 'groupByProject' => ['except' => false], 'projectCode' => ['except' => '']];
+    protected $queryString = [
+        'search' => ['except' => ''], 
+        'groupByProject' => ['except' => false], 
+        'projectCode' => ['except' => ''],
+        'projectStatusId' => ['except' => ''],
+        'materialCode' => ['except' => ''],
+    ];
     public $usersToExport;
     public $groupByProject = false;
     public $projectCode;
+    public $projectStatusId;
+    public $materialCode;
 
     public function updatingSearch()
     {
@@ -37,11 +46,26 @@ class MaterialSummary extends Component
     {
         $this->resetPage();
     }
+    public function updatingProjectStatusId()
+    {
+        $this->resetPage();
+    }
+    
+    public function updatingMaterialCode()
+    {
+        $this->resetPage();
+    }
 
+    public function updatingGroupByProject()
+    {
+        $this->resetPage();
+    }
+    
     public function render()
     {
         $materialSummaries = $this->_paginate();
-        return view('livewire.admin.material-summary', compact('materialSummaries'));
+        $projectStatus = ProjectStatus::orderBy('order_pst')->get();
+        return view('livewire.admin.material-summary', compact('materialSummaries', 'projectStatus'));
     }
 
     public function _paginate($options = [])
@@ -50,14 +74,7 @@ class MaterialSummary extends Component
         $page = $this->page;
         $additionalParameters = [];
         $cols = [
-            'project_code',
-            // 'status_name_pst',
-            // 'system_pro',
-            // 'cre_fiscal_pro',
-            // 'stake_responsible',
-            // 'assign_to_responsible',
-            // 'address_pro',
-            // 'project_current_budget'
+            'material_description'
         ];
         // $cols = [];  
         $offset = ($page?$page-1:0) * $perPage;
@@ -67,6 +84,14 @@ class MaterialSummary extends Component
         if($this->groupByProject)
         {
             $additionalParameters['grouping-criteria'] = ' project_id_msu ';
+        }
+        if($this->projectStatusId)
+        {
+            $additionalParameters['project-status-id'] = $this->projectStatusId;
+        }
+        if($this->materialCode)
+        {
+            $additionalParameters['material-codes'] = $this->materialCode;
         }
         if($this->projectCode)
         {
