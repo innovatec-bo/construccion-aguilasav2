@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "bastinald/laravel-livewire-modals": "^3.0",
         "binarytorch/larecipe": "^2.5",
         "binarytorch/larecipe-dark-theme": "^0.1.5",
         "diglactic/laravel-breadcrumbs": "^7.2",
