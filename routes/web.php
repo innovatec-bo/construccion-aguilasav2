@@ -46,6 +46,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::resource('manos-de-obra','LaborDetailController')->parameters(['manos-de-obra' => 'labor_detail'])->names('labor-details');
 
     //Materials
+    Route::get('materiales/depurar', 'MaterialController@debug')->name('materials.debug');
     Route::get('materiales/resumen', 'MaterialController@materialSummary')->name('materials.material-summary');
     Route::resource('materiales', 'MaterialController')->names('materials');
 

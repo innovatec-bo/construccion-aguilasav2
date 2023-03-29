@@ -3,7 +3,14 @@
 @section('title', 'Materiales')
 
 @section('content_header')
-    <h1>Materiales</h1>
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Materiales</h1>
+    </div>
+    <div class="col-sm-6">
+        {{ Breadcrumbs::render('admin.materials.index') }}
+    </div>
+</div>
 @stop
 
 @section('content')

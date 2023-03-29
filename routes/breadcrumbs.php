@@ -37,6 +37,18 @@ Breadcrumbs::for('admin.labor-details.internal-conciliation-cre-format', functio
     $trail->push('Conciliacion interna Formato CRE '. $laborDetail->project->code_pro, route('admin.labor-details.internal-conciliation-cre-format', $laborDetail));
 });
 
+// Materials
+Breadcrumbs::for('admin.materials.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Materiales', route('admin.materials.index'));
+});
+
+// Materials - debug
+Breadcrumbs::for('admin.materials.debug', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Depurar materiales', route('admin.materials.debug'));
+});
+
 // Materials summary
 Breadcrumbs::for('admin.materials-summary.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');

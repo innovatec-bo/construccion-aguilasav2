@@ -330,12 +330,20 @@ return [
                     'shift' => 'pl-4',
                 ],
                 [
+                    'text'        => 'Depurar materiales',
+                    'route'       => 'admin.materials.debug',
+                    // 'can'         => 'admin.materials.debug',
+                    'icon'        => 'fas fa-fw fa-bug',
+                    'shift' => 'pl-4',
+                ],
+                [
                     'text'        => 'Resumen de materiales',
                     'route'       => 'admin.materials.material-summary',
                     'can'         => 'admin.materials.material-summary',
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'pl-4',
                 ],
+                
             ],  
         ],
         [
