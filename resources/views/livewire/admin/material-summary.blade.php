@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group col-2">
                         <button type="button" wire:click="resetFilters" class="btn btn-primary mt-4">Quitar filtros</button>
-                        <button type="button" wire:click="resetFilters" class="btn btn-danger mt-4 ms-2" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar</button>
+                        <button type="button" class="btn btn-danger mt-4 ms-2" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar</button>
                     </div>
                 </div>
             </div>

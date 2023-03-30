@@ -108,7 +108,7 @@
 
     {{-- Body Content --}}
     @yield('body')
-
+    
     {{-- Base Scripts --}}
     @if(!config('adminlte.enabled_laravel_mix'))
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
@@ -122,7 +122,7 @@
     @else
         <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
     @endif
-
+    
 {{-- Toast notifications --}}
 <script>
     function decodeHtml(html)
@@ -180,6 +180,7 @@
     //   $('[data-toggle=tooltip]').tooltip();
     });
     </script>
+
     {{-- Livewire Script --}}
     @if(config('adminlte.livewire'))
         @if(app()->version() >= 7)
@@ -188,7 +189,7 @@
             <livewire:scripts />
         @endif
     @endif
-
+    <livewire:modals/>    
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
