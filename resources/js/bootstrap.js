@@ -9,6 +9,8 @@ try {
     require('../../public/vendor/overlayScrollbars/js/jquery.overlayScrollbars.min');
     window.Swal = require('../../public/vendor/sweetalert2/sweetalert2.all.js');
     window.toastr = require('../../public/vendor/toastr/toastr.min.js');
+    window.moment = require('moment');
+    require('../../public/vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4');
     window.bsCustomFileInput = require('../../public/vendor/bs-custom-file-input/bs-custom-file-input.min');
     require('../../public/vendor/adminlte/dist/js/adminlte.min.js');
     require('../../vendor/bastinald/laravel-livewire-modals/resources/js/modals');

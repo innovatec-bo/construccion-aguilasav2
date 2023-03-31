@@ -2,21 +2,45 @@
     <div class="col-md-10">
         <div class="card shadow-lg">
             <div class="card-header">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Tipo de movimiento</label>
-                        <select class="form-control form-control-sm" wire:model="materialSummaryTypeSelected">
-                            <option value=""></option>
-                            @foreach ($materialSummaryTypes as $materialSummaryType)
-                                <option value="{{$materialSummaryType->id_mqt}}">{{$materialSummaryType->name_mqt}}</option>
-                            @endforeach
-                        </select>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>ID de movimiento</label>
+                            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="idMSU">
+                        </div>
                     </div>
-                </div>
-                
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Tipo de movimiento</label>
+                            <select class="form-control form-control-sm" wire:model="materialSummaryTypeSelected">
+                                <option value=""></option>
+                                @foreach ($materialSummaryTypes as $materialSummaryType)
+                                    <option value="{{$materialSummaryType->id_mqt}}">{{$materialSummaryType->name_mqt}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Desde</label>
+                            <div class="input-group input-group-sm date" id="from" data-target-input="nearest">
+                                <input type="text" readonly="yes" class="form-control datetimepicker-input" data-target="#from">
+                                <div class="input-group-append" data-target="#from" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>hasta</label>
+                            <div class="input-group input-group-sm date" id="to" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#to">
+                                <div class="input-group-append" data-target="#to" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,6 +128,15 @@
                 var question = $(this).data('confirm-question');
                 confirmSubmit(question, record);
             });
+
+            $('#from').datetimepicker({
+                format: 'DD/MM/YYYY',
+                ignoreReadonly: true
+            });
+
+            $('#to').datetimepicker({
+                format: 'L'
+            });
         });
 
         function confirmSubmit(question, recordId) {
@@ -119,5 +152,7 @@
                 }
             });
         }
+
+        
     </script>
 @endpush
