@@ -26,10 +26,13 @@ class MaterialSummaryIndex extends Component
     public $materialSummaryTypes;
     protected $queryString = [
         'idMSU' => ['except' => '', 'as' => 'id-de-movimiento'],
-        'materialSummaryTypeSelected' => ['except' => '', 'as' => 'tipo-de-movimiento']
+        'materialSummaryTypeSelected' => ['except' => '', 'as' => 'tipo-de-movimiento'],
+        'from' => ['except' => '', 'as' => 'desde'],
+        'to' => ['except' => '', 'as' => 'hasta']
     ];
     protected $listeners = [
-        'fromChanged' => 'fromChanged'
+        'fromChanged' => 'fromChanged',
+        'toChanged' => 'toChanged'
     ];
     protected $messages = [
         'from.date_format' => 'Formato incorrecto.',
@@ -41,23 +44,21 @@ class MaterialSummaryIndex extends Component
         $this->materialSummaryTypes = SummaryType::all();
     }
 
-    // public function updating($attribute)
-    // {
-    //     $toValidate = ['from', 'to'];
-    //     // dd(array_search($attribute, $toValidate) !== FALSE);
-    //     if (array_search($attribute, $toValidate) !== FALSE) 
-    //     {
-    //         $this->validate();
-    //     }
-    //     $this->resetPage();
-    // }
+    public function updating($attribute)
+    {
+        $toValidate = ['idMSU','from', 'to'];
+        // dd(array_search($attribute, $toValidate) !== FALSE);
+        if (array_search($attribute, $toValidate) !== FALSE) 
+        {
+            $this->resetPage();
+        }
+    }
     
     public function rules()
     {
         return [
-            // 'idMSU' => ['numeric'],
-            'from' => ['date_format:d/m/Y'],
-            'to' => ['date_format:d/m/Y'],
+            'from' => ['date_format:d-m-Y'],
+            'to' => ['date_format:d-m-Y'],
         ];
     }
 
@@ -74,11 +75,11 @@ class MaterialSummaryIndex extends Component
             });
         })
         ->when($this->from, function(Builder $query, $from){
-            $from = Carbon::createFromFormat('d/m/Y',$from)->format('Y-m-d 00:00:00');
+            $from = Carbon::createFromFormat('d-m-Y',$from)->format('Y-m-d 00:00:00');
             $query->where('entry_date_msu', '>=', $from);
         })
-        ->when($this->from, function(Builder $query, $to){
-            $to = Carbon::createFromFormat('d/m/Y', $to)->format('Y-m-d 23:59:59');
+        ->when($this->to, function(Builder $query, $to){
+            $to = Carbon::createFromFormat('d-m-Y', $to)->format('Y-m-d 23:59:59');
             $query->where('entry_date_msu', '<=', $to);
         })
         ->when($this->materialSummaryTypeSelected, function(Builder $query, $materialSummaryTypeSelected){
@@ -92,9 +93,14 @@ class MaterialSummaryIndex extends Component
         return view('livewire.admin.material-summary-index', compact('materialSummaryList'));
     }
 
-    public function fromChanged()
+    public function fromChanged($date)
     {
-        $this->from = date('d/m/Y');
+        $this->from = $date;
+    }
+
+    public function toChanged($date)
+    {
+        $this->to = $date;
     }
 
     public function order($sort)

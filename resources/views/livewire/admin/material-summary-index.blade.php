@@ -77,7 +77,6 @@
                                         @if ($materialSummary->fiscal)
                                             {{ $materialSummary->fiscal->full_name }}
                                         @endif
-    
                                     </td>
                                     <td>
                                         @if ($materialSummary->builder)
@@ -135,18 +134,20 @@
             });
 
             $('#from').datetimepicker({
-                format: 'DD/MM/YYYY',
+                format: 'DD-MM-YYYY',
                 ignoreReadonly: true
             });
-            var _this = @this;
+
             $('#from').on('change.datetimepicker', function(e){
-                // _this.set('from',e.date.format('DD/MM/YYYY'));
-                // @this.from = e.date.format('DD/MM/YYYY');
-                Livewire.emit('fromChanged', e.date.format('DD/MM/YYYY'));
+                Livewire.emit('fromChanged', e.date.format('DD-MM-YYYY'));
             });
 
             $('#to').datetimepicker({
-                format: 'L'
+                format: 'DD-MM-YYYY',
+                ignoreReadonly: true
+            });
+            $('#to').on('change.datetimepicker', function(e){
+                Livewire.emit('toChanged', e.date.format('DD-MM-YYYY'));
             });
         });
 
