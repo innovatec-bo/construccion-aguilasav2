@@ -28,19 +28,42 @@ class MaterialSummaryIndex extends Component
         'idMSU' => ['except' => '', 'as' => 'id-de-movimiento'],
         'materialSummaryTypeSelected' => ['except' => '', 'as' => 'tipo-de-movimiento']
     ];
+    protected $listeners = [
+        'fromChanged' => 'fromChanged'
+    ];
+    protected $messages = [
+        'from.date_format' => 'Formato incorrecto.',
+        'to.date_format' => 'Formato incorrecto.',
+    ];
 
     public function mount()
     {
         $this->materialSummaryTypes = SummaryType::all();
     }
 
-    public function updatingSearch()
+    // public function updating($attribute)
+    // {
+    //     $toValidate = ['from', 'to'];
+    //     // dd(array_search($attribute, $toValidate) !== FALSE);
+    //     if (array_search($attribute, $toValidate) !== FALSE) 
+    //     {
+    //         $this->validate();
+    //     }
+    //     $this->resetPage();
+    // }
+    
+    public function rules()
     {
-        $this->resetPage();
+        return [
+            // 'idMSU' => ['numeric'],
+            'from' => ['date_format:d/m/Y'],
+            'to' => ['date_format:d/m/Y'],
+        ];
     }
 
     public function render()
     {
+        // $this->validate();
         $materialSummaryList = MaterialSummary::whereNotNull('id_msu')
         ->when($this->idMSU, function(Builder $query, $idMSU){
             $query->where('id_msu', $this->idMSU);
@@ -67,6 +90,11 @@ class MaterialSummaryIndex extends Component
         ->paginate(6);
 
         return view('livewire.admin.material-summary-index', compact('materialSummaryList'));
+    }
+
+    public function fromChanged()
+    {
+        $this->from = date('d/m/Y');
     }
 
     public function order($sort)

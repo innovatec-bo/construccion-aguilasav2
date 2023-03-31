@@ -7,6 +7,9 @@
                         <div class="form-group">
                             <label>ID de movimiento</label>
                             <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="idMSU">
+                            @error('idMSU')
+                                <span class="text-danger small">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -18,11 +21,12 @@
                                     <option value="{{$materialSummaryType->id_mqt}}">{{$materialSummaryType->name_mqt}}</option>
                                 @endforeach
                             </select>
+                            
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="form-group">
-                            <label>Desde</label>
+                        <div class="form-group" wire:ignore>
+                            <label>Desde </label>
                             <div class="input-group input-group-sm date" id="from" data-target-input="nearest">
                                 <input type="text" readonly="yes" class="form-control datetimepicker-input" data-target="#from">
                                 <div class="input-group-append" data-target="#from" data-toggle="datetimepicker">
@@ -30,6 +34,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{$from}}
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
@@ -47,7 +52,7 @@
 
             <div class="card-body">
                 <div class="overlay dark d-none" wire:loading.class="d-flex"
-                    wire:target="delete, previousPage, nextPage, gotoPage, search">
+                    wire:target="delete, previousPage, nextPage, gotoPage, idMSU">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive">
@@ -132,6 +137,12 @@
             $('#from').datetimepicker({
                 format: 'DD/MM/YYYY',
                 ignoreReadonly: true
+            });
+            var _this = @this;
+            $('#from').on('change.datetimepicker', function(e){
+                // _this.set('from',e.date.format('DD/MM/YYYY'));
+                // @this.from = e.date.format('DD/MM/YYYY');
+                Livewire.emit('fromChanged', e.date.format('DD/MM/YYYY'));
             });
 
             $('#to').datetimepicker({
