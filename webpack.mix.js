@@ -11,8 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix
+    .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     // .typeScript('resources/ts/MapsHandler.ts', 'public/js')
+    .js('resources/js/serebo.dashboard.js', 'public/js')
+    .sass('resources/sass/serebo.dashboard.scss', 'public/css')
     .sourceMaps();
 mix.version();

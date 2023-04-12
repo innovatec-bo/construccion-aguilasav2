@@ -1,4 +1,6 @@
 {
-    "/js/app.js": "/js/app.js?id=1d6226aa1e91889542a79daa222b7c96",
-    "/css/app.css": "/css/app.css?id=8cdc1959edf5f841a1acd876172f4f6c"
+    "/js/app.js": "/js/app.js?id=6cdf048a810c30d9c8a58cf71dc1ae9b",
+    "/js/serebo.dashboard.js": "/js/serebo.dashboard.js?id=25a325eaab42d3a5c81d67c6e8298601",
+    "/css/app.css": "/css/app.css?id=8cdc1959edf5f841a1acd876172f4f6c",
+    "/css/serebo.dashboard.css": "/css/serebo.dashboard.css?id=8b8f0ea1e24fc2e2722eb0d97ef0559b"
 }
