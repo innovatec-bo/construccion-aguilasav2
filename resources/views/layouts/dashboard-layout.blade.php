@@ -28,6 +28,7 @@
     {{-- <link href="../coreui/css/examples.css" rel="stylesheet"> --}}
     {{-- <link href="../coreui/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ mix('css/serebo.dashboard.css') }}">
+    @livewireStyles
 </head>
 
 <body>
@@ -438,6 +439,7 @@
                             <div>
                                 <h4 class="card-title mb-0">Traffic</h4>
                                 <div class="small text-medium-emphasis">January - July 2022</div>
+                                {{-- <button type="button" class="btn btn-danger mt-4 ms-2" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar</button> --}}
                             </div>
                             <div class="btn-toolbar d-none d-md-block" role="toolbar"
                                 aria-label="Toolbar with buttons">
@@ -1285,16 +1287,18 @@
         </footer>
     </div>
     <!-- CoreUI and necessary plugins-->
-    {{-- <script src="../coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script> --}}
-    {{-- <script src="../coreui/vendors/simplebar/js/simplebar.min.js"></script> --}}
+    <script src="../coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script> 
+    <script src="../coreui/vendors/simplebar/js/simplebar.min.js"></script>
     <!-- Plugins and scripts required by this view-->
-    {{-- <script src="../coreui/vendors/chart.js/js/chart.min.js"></script> --}}
-    {{-- <script src="../coreui/vendors/@coreui/chartjs/js/coreui-chartjs.js"></script> --}}
-    {{-- <script src="../coreui/vendors/@coreui/utils/js/coreui-utils.js"></script> --}}
-    {{-- <script src="../coreui/js/main.js"></script> --}}
-    <link rel="stylesheet" href="{{ mix('js/serebo.dashboard.js') }}">
+    <script src="../coreui/vendors/chart.js/js/chart.min.js"></script>
+    <script src="../coreui/vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
+    <script src="../coreui/vendors/@coreui/utils/js/coreui-utils.js"></script>
+    <script src="../coreui/js/main.js"></script>
+    <livewire:modals/>
+    {{-- <script src="{{ mix('js/serebo.dashboard.core.js') }}"></script>
+    <script src="{{ mix('js/serebo.dashboard.js') }}"></script> --}}
     <script></script>
-
+    @livewireScripts
+    
 </body>
-
 </html>
