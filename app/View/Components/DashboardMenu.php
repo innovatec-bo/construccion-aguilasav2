@@ -4,10 +4,10 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class TenantDashboardMenu extends Component
+class DashboardMenu extends Component
 {
-    public $tenant;
     public $menu;
+
     /**
      * Create a new component instance.
      *
@@ -25,7 +25,7 @@ class TenantDashboardMenu extends Component
      */
     public function render()
     {
-        return view('components.tenant-dashboard-menu');
+        return view('components.dashboard-menu');
     }
 
     public function buildMenu()
@@ -33,8 +33,8 @@ class TenantDashboardMenu extends Component
         $this->menu = [
             [
                 'text' => 'Inicio',
-                'route' => 'admin.home.index',
-                'icon' => 'tf-icons ti ti-home',
+                'route' => 'admin.home.index2',
+                'icon' => 'cil-speedometer',
             ],
             // [
             //     'text' => 'Productos',
