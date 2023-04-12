@@ -343,6 +343,13 @@ return [
                     'icon'        => 'fas fa-fw fa-table',
                     'shift' => 'pl-4',
                 ],
+                [
+                    'text'        => 'Registro 221 - 222',
+                    'route'       => 'admin.materials.material-summary',
+                    'can'         => 'admin.materials.material-summary',
+                    'icon'        => 'fas fa-fw fa-table',
+                    'shift' => 'pl-4',
+                ],
                 
             ],  
         ],
