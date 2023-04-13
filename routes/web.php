@@ -7,7 +7,7 @@ Route::get('home/magic-login/{encrypted}',[HomeController::class,'magicLogin'])-
 
 Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'App\Http\Controllers\admin', 'middleware' => ['auth']], function () {
     //Home
-    Route::get('inicio2','HomeController@index2')->name('home.index2');
+    Route::get('inicio2','HomeController@dashboard')->name('home.dashboard');
     Route::get('inicio','HomeController@index')->name('home.index');
 
     //Users

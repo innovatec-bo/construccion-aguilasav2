@@ -35,31 +35,33 @@ class MenuItem extends Component
 
     public function setActive()
     {
-        if(isset($this->item['submenu']))
+        if (!isset($this->item['header'])) 
         {
-            foreach ($this->item['submenu'] as $subItem) 
+            if(isset($this->item['submenu']))
             {
-                
-                if(strpos(Route::currentRouteName(), $subItem['route']) !== FALSE)
+                foreach ($this->item['submenu'] as $subItem) 
                 {
-                    $this->isActive = TRUE;
-                    $this->isOpen = TRUE;
-                    break;
-                }    
-                else
-                {
-                    $this->isActive = FALSE;
-                    $this->isOpen = FALSE;
+                    
+                    if(strpos(Route::currentRouteName(), $subItem['route']) !== FALSE)
+                    {
+                        $this->isActive = TRUE;
+                        $this->isOpen = TRUE;
+                        break;
+                    }    
+                    else
+                    {
+                        $this->isActive = FALSE;
+                        $this->isOpen = FALSE;
+                    }
                 }
             }
-        }
-        else
-        {
-            if(strpos(Route::currentRouteName(), $this->item['route']) !== FALSE)
+            else
             {
-                $this->isActive = TRUE;
+                if(strpos(Route::currentRouteName(), $this->item['route']) !== FALSE)
+                {
+                    $this->isActive = TRUE;
+                }
             }
-        }
-        
+        } 
     }
 }
