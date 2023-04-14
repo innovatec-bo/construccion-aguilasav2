@@ -18,7 +18,7 @@
                             <input type="text" id="designBudget" class="form-control form-control-border @error('designBudget') is-invalid @enderror" placeholder="Dise&ntilde;o Bs."
                                 wire:model="designBudget">
                             @error('designBudget')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                             <input type="text" id="buildingBudget" class="form-control form-control-border @error('buildingBudget') is-invalid @enderror" placeholder="Construcci&oacute;n Bs."
                                 wire:model="buildingBudget">
                             @error('buildingBudget')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                             <input type="text" class="form-control form-control-border @error('code')is-invalid @enderror" id="code" placeholder="C&oacute;digo"
                                 wire:model="code">
                             @error('code')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                     <option value="GIR">GIR</option>
                                 </select>
                             @error('workArea')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <input type="text" id="projectYear" class="form-control form-control-border @error('projectYear') is-invalid @enderror" placeholder="A&ntilde;o del proyecto"
                                 wire:model="projectYear">
                             @error('projectYear')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                     @endforeach
                                 </select>
                                 @error('contractId')
-                                    <span class="text-warning small"> {{ $message }} </span>
+                                    <span class="text-danger small"> {{ $message }} </span>
                                 @enderror
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                             <label class='{{$showLabels?'':'d-none'}}' for="projectDetail">Detalle del proyecto</label>
                             <textarea class="form-control form-control-border @error('projectDetail')is-invalid @enderror" id="projectDetail" wire:model="projectDetail" rows="2" placeholder="Detalle"></textarea>
                             @error('projectDetail')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                             <label class='{{$showLabels?'':'d-none'}}' for="projectAddress">Direcci&oacute;n</label>
                             <textarea class="form-control form-control-border @error('projectAddress')is-invalid @enderror" id="projectAddress" wire:model="projectAddress" rows="2" placeholder="Direccion"></textarea>
                             @error('projectAddress')
-                                <span class='text-warning small'>{{$message}}</span>
+                                <span class='text-danger small'>{{$message}}</span>
                             @enderror
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                             <input type="text" id="entryDate" class="form-control form-control-border @error('entryDate')is-invalid @enderror" placeholder="Fecha de Ingreso"
                                 wire:model="entryDate">
                             @error('entryDate')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                             <input type="text" id="folderDate" class="form-control form-control-border @error('folderDate') @enderror" placeholder="Fecha de folder"
                                 wire:model="folderDate">
                             @error('folderDate')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                                     @endforeach
                                 </select>
                                 @error('CREFiscal')
-                                    <span class="text-warning small"> {{ $message }} </span>
+                                    <span class="text-danger small"> {{ $message }} </span>
                                 @enderror
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                                     @endforeach
                                 </select>
                                 @error('system')
-                                    <span class="text-warning small"> {{ $message }} </span>
+                                    <span class="text-danger small"> {{ $message }} </span>
                                 @enderror
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                                     @endforeach
                                 </select>
                                 @error('management')
-                                    <span class="text-warning small"> {{ $message }} </span>
+                                    <span class="text-danger small"> {{ $message }} </span>
                                 @enderror
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                                     <option value="3">3</option>
                                 </select>
                                 @error('qualityLevel')
-                                    <span class="text-warning small"> {{ $message }} </span>
+                                    <span class="text-danger small"> {{ $message }} </span>
                                 @enderror
                             </div>
                         </div>
@@ -200,7 +200,7 @@
                             <input type="text" id="creDesignCompletionDate" id="creDesignCompletionDate" class="form-control form-control-border @error('creDesignCompletionDate')is-invalid @enderror" placeholder="Fin de dise&ntilde;o(CRE)"
                                 wire:model="creDesignCompletionDate">
                             @error('creDesignCompletionDate')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -210,7 +210,7 @@
                             <input type="text" id="creBuildingCompletionDate" id="creBuildingCompletionDate" class="form-control form-control-border @error('creBuildingCompletionDate')is-invalid @enderror" placeholder="Fin de construcci&oacute;n(CRE)"
                                 wire:model="creBuildingCompletionDate">
                             @error('creBuildingCompletionDate')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -225,7 +225,7 @@
                                     @endfor
                                 </select>
                                 @error('projectBudgetaryPosition')
-                                    <span class="text-warning small">{{$message}}</span>
+                                    <span class="text-danger small">{{$message}}</span>
                                 @enderror
                             </div>
                         </div>
@@ -238,7 +238,7 @@
                             <input type="text" id="points" class="form-control form-control-border @error('points')is-invalid @enderror" placeholder="Puntos"
                                 wire:model="points">
                             @error('points')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>
@@ -248,7 +248,7 @@
                             <input type="text" id="distance" class="form-control form-control-border @error('distance')is-invalid @enderror" placeholder="Distancia"
                                 wire:model="distance">
                             @error('distance')
-                                <span class="text-warning small"> {{ $message }} </span>
+                                <span class="text-danger small"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div>

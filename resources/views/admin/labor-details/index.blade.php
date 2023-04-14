@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Manos de obra')
 
-@section('content_header')
+{{-- @section('content_header')
     <div class="row">
         <div class="col-sm-6">
             <h1>Manos de obra</h1>
@@ -11,6 +11,10 @@
             {{ Breadcrumbs::render('admin.labor-details.index') }}
         </div>
     </div>
+@stop --}}
+
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.labor-details.index') }}
 @stop
 
 @section('content')

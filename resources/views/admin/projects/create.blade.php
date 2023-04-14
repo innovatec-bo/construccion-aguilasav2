@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Nuevo Proyecto')
 

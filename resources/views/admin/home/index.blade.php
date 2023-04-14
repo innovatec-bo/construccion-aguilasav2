@@ -2,7 +2,7 @@
 
 @section('title', 'Inicio')
 
-@section('content_header')
+{{-- @section('content_header')
 <div class="row">
     <div class="col-sm-6">
         <h1>Inicio</h1>
@@ -11,7 +11,7 @@
         {{ Breadcrumbs::render('admin.home.index') }}
     </div>
 </div>
-@stop
+@stop --}}
 @section('breadcrumb')
     {{ Breadcrumbs::render('admin.home.index') }}
 @stop

@@ -22,7 +22,7 @@
                       </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover table-sm">
+                    <table class="table table-bordered table-striped table-hover table-sm small">
                         <thead>
                             <tr class="text-center">
                                 <th>C&oacute;digo</th>

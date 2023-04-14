@@ -61,12 +61,12 @@
         <x-dashboard-footer/>
     </div>
     <!-- CoreUI and necessary plugins-->
-    <script src="../coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script> 
-    <script src="../coreui/vendors/simplebar/js/simplebar.min.js"></script>
+    <script src="{{asset('coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js')}}"></script> 
+    <script src="{{asset('coreui/vendors/simplebar/js/simplebar.min.js')}}"></script>
     <!-- Plugins and scripts required by this view-->
     {{-- <script src="../coreui/vendors/chart.js/js/chart.min.js"></script> --}}
-    <script src="../coreui/vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
-    <script src="../coreui/vendors/@coreui/utils/js/coreui-utils.js"></script>
+    <script src="{{asset('coreui/vendors/@coreui/chartjs/js/coreui-chartjs.js')}}"></script>
+    <script src="{{asset('coreui/vendors/@coreui/utils/js/coreui-utils.js')}}"></script>
     {{-- <script src="../coreui/js/main.js"></script> --}}
     <livewire:modals/>
     @livewireScripts
