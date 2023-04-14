@@ -33,4 +33,9 @@ class Incident extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function status()
+    {
+        return $this->belongsTo(ProjectStatus::class, 'status_id_inc');
+    }
 }
