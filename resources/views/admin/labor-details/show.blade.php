@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Detalle de mano de obra: '.$laborDetail->project->code_pro)
 
-@section('content_header')
+{{-- @section('content_header')
     <div class="row">
         <div class="col-sm-6">
             <h1>Detalle de mano de obra en {!!$laborDetail->environment['label']!!}: {{$laborDetail->project->code_pro}}</h1>
@@ -11,11 +11,14 @@
             {{ Breadcrumbs::render('admin.labor-details.show', $laborDetail) }}
         </div>
     </div>
+@stop --}}
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.labor-details.show', $laborDetail) }}
 @stop
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card shadow-lg">
                 <div class="card-header">
                     <h3 class="text-center d-none d-print-block">Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h3>
@@ -31,7 +34,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table class="table table-bordered table-sm table-hover table-striped">
+                    <table class="table table-bordered table-sm table-hover table-striped small">
                         <thead>
                             <tr>
                                 <th>Estructura</th>
@@ -48,7 +51,7 @@
                             @foreach ($laborDetail->laborCosts as $laborCost)
                                 <tr>
                                     <td>
-                                        <span class="text-warning">{{$laborCost->buildingStructure->structure_code_bus}}</span>
+                                        <span class="text-info">{{$laborCost->buildingStructure->structure_code_bus}}</span>
                                         {{$laborCost->buildingStructure->description_bus}}
                                         
                                     </td>
@@ -69,8 +72,8 @@
                                         @endswitch
                                     </td>
                                     <td>{{$laborCost->execution_lac}}</td>
-                                    <td class="text-right">{{$laborCost->quantity_lac}}</td>
-                                    <td class="text-right">{{$laborCost->unit_price_lac}}</td>
+                                    <td class="text-end">{{$laborCost->quantity_lac}}</td>
+                                    <td class="text-end">{{$laborCost->unit_price_lac}}</td>
                                     <td class="text-center">
                                         @switch($laborCost->is_additional_lac)
                                             @case(1)
@@ -83,7 +86,7 @@
                                                 @break
                                         @endswitch
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         {{$laborCost->customStructureMaterials->count()}}
                                     </td>
                                     <td class="text-center d-print-none">
