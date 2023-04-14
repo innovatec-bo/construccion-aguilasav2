@@ -35,14 +35,14 @@ class DashboardMenu extends Component
     {
         $this->menu = [
             [
+                'text'        => 'Inicio',
+                'route'       => 'admin.home.index',
+                'icon'        => 'cil-home',
+            ],
+            [
                 'text' => 'Dashboard',
                 'route' => 'admin.home.dashboard',
                 'icon' => 'cil-speedometer',
-            ],
-            [
-                'text'        => 'Inicio',
-                'route'       => 'admin.home.index',
-                'icon'        => 'cil-speedometer',
             ],
             [
                 'text'        => 'Proyectos',

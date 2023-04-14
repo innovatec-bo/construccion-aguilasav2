@@ -29,6 +29,22 @@
     {{-- <link href="../coreui/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ mix('css/serebo.dashboard.css') }}">
     @livewireStyles
+    <style>
+        .overlay
+        {
+            border-radius: 0.25rem;
+            align-items: center;
+            background-color: rgba(255,255,255,.7);
+            display: flex;
+            justify-content: center;
+            z-index: 50;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>

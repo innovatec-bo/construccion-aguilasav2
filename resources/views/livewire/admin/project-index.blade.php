@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card shadow-lg">
             <div class="card-header">
                 @can('admin.projects.create')
@@ -16,9 +16,10 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="overlay dark d-none" wire:loading.class="d-flex"
-                    wire:target="previousPage, nextPage, gotoPage, search">
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, search">
+                    <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover table-sm">
@@ -44,21 +45,21 @@
                                 <tr>
                                     <td class="stacked-info">
                                         {{ $project->code_pro }}
-                                        <p class="mb-0 text-warning">{{ $project->status_name_pst }}</p>
+                                        <p class="mb-0 text-info small">{{ $project->status_name_pst }}</p>
                                     </td>
                                     <td class="stacked-info">
                                         {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->entry_date_pro)->format('d/m/Y') }}
-                                        <p class="mb-0 text-warning">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->entry_date_pro)->diffForHumans() }}</p>
+                                        <p class="mb-0 text-info small">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->entry_date_pro)->diffForHumans() }}</p>
                                     </td>
                                     <td class="stacked-info">
                                         {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->status_log_manual_entry_date)->format('d/m/Y') }}
-                                        <p class="mb-0 text-warning">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->status_log_manual_entry_date)->diffForHumans() }}</p>
+                                        <p class="mb-0 text-info small">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project->status_log_manual_entry_date)->diffForHumans() }}</p>
                                         
                                     </td>
-                                    {{-- <td class="text-right"> {{ $project->static_days }} </td> --}}
+                                    {{-- <td class="text-end"> {{ $project->static_days }} </td> --}}
                                     
                                     <td> {{ $project->system_pro }} </td>
-                                    <td class="text-right"> 
+                                    <td class="text-end"> 
                                         @if ($project->distance_pro && $project->points_pro)
                                             {{$project->points_pro}}p/{{$project->distance_pro}}Km
                                         @else
@@ -69,7 +70,7 @@
                                     <td> {{ $project->stake_responsible }} </td>
                                     <td> {{ $project->assign_to_responsible }} </td>
                                     <td> {{ $project->address_pro }} </td>
-                                    <td class="text-right"> {{ number_format($project->project_current_budget,2,'.',',')  }} </td>
+                                    <td class="text-end"> {{ number_format($project->project_current_budget,2,'.',',')  }} </td>
                                     <td></td>
                                 </tr>
                             @endforeach
