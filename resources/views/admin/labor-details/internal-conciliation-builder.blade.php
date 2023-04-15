@@ -1,16 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Conciliacion internal(Vista de constructor): '.$laborDetail->project->code_pro)
 
-@section('content_header')
-    <div class="row">
-        <div class="col-sm-6">
-            <h1>Conciliacion internal en {!!$laborDetail->environment['label']!!}(Vista de constructor): {{$laborDetail->project->code_pro}}</h1>
-        </div>
-        <div class="col-sm-6">
-            {{ Breadcrumbs::render('admin.labor-details.internal-conciliation-builder', $laborDetail, $previousRoute) }}
-        </div>
-    </div>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.labor-details.internal-conciliation-builder', $laborDetail, $previousRoute) }}
 @stop
 
 @section('content')

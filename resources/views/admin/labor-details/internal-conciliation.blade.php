@@ -1,18 +1,10 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Conciliacion interna')
 
-@section('content_header')
-    <div class="row">
-        <div class="col-sm-6">
-            <h1>Conciliacion interna en {!!$laborDetail->environment['label']!!}: {{$laborDetail->project->code_pro}}</h1>
-        </div>
-        <div class="col-sm-6">
-            {{ Breadcrumbs::render('admin.labor-details.internal-conciliation', $laborDetail, $previousRoute) }}
-        </div>
-    </div>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.labor-details.internal-conciliation', $laborDetail, $previousRoute) }}
 @stop
-
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-10">

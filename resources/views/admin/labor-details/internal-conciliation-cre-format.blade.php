@@ -1,16 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Conciliacion interna(Formato CRE): '.$laborDetail->project->code_pro)
 
-@section('content_header')
-    <div class="row">
-        <div class="col-sm-6">
-            <h1>Conciliacion interna en {!! ($laborDetail->environment['label']) !!}(Formato CRE): {{$laborDetail->project->code_pro}}</h1>
-        </div>
-        <div class="col-sm-6">
-            {{ Breadcrumbs::render('admin.labor-details.internal-conciliation-cre-format', $laborDetail) }}
-        </div>
-    </div>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.labor-details.internal-conciliation-cre-format', $laborDetail) }}
 @stop
 
 @section('content')
@@ -86,19 +79,19 @@
                                     <td>{{($i)}}</td>
                                     <td>{{$row['material_code']}}</td>
                                     <td>{{$row['material_description']}}</td>
-                                    <td class="text-right">                    
+                                    <td class="text-end">                    
                                         {{number_format($row['materials_picked_up_from_cre'],2)}}
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         {{number_format($row['total_used'],2)}}
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         {{number_format($row['return_to_serebo'],2)}}
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         {{number_format($row['return_to_cre'],2)}}
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         {{number_format($row['builder_returns_materials_meo'],2)}}
                                     </td>
                                 </tr>
