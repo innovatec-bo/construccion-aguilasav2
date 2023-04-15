@@ -2,32 +2,33 @@
     <div class="container-fluid">
         <button class="header-toggler px-md-0 me-md-3" type="button"
             onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
-            <svg class="icon icon-lg">
-                <use xlink:href="../coreui/vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
-            </svg>
-        </button><a class="header-brand d-md-none" href="#">
-            <svg width="118" height="46" alt="CoreUI Logo">
-                <use xlink:href="../coreui/assets/brand/coreui.svg#full"></use>
-            </svg></a>
+            <x-coreui-icon svgClass="icon icon-lg" icon="cil-menu"/>
+        </button>
+        <a class="header-brand d-md-none" href="#">
+            <x-coreui-icon svgClass="icon icon-lg" icon="cil-menu" width="118" height="46"/>
+        </a>
         <ul class="header-nav ms-auto d-none">
-            <li class="nav-item"><a class="nav-link" href="#">
-                    <svg class="icon icon-lg">
-                        <use xlink:href="../coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
-                    </svg></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                    <svg class="icon icon-lg">
-                        <use xlink:href="../coreui/vendors/@coreui/icons/svg/free.svg#cil-list-rich"></use>
-                    </svg></a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
-                    <svg class="icon icon-lg">
-                        <use xlink:href="../coreui/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
-                    </svg></a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <x-coreui-icon svgClass="icon icon-lg" icon="cil-bell"/>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <x-coreui-icon svgClass="icon icon-lg" icon="cil-list-rich"/>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <x-coreui-icon svgClass="icon icon-lg" icon="cil-envelope-open"/>
+                </a>
+            </li>
         </ul>
         <ul class="header-nav ms-3">
             <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#"
                     role="button" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-md">
-                        <img class="avatar-img" src="https://dummyimage.com/40x40/f0f0f0.jpg&text=VS"
+                        <img class="avatar-img" src="https://dummyimage.com/40x40/f0f0f0.jpg&text={{$abbreviature}}"
                             alt="user@email.com">
                     </div>
                 </a>
@@ -36,10 +37,8 @@
                         @method('post')
                         @csrf
                         <button type="submit" class="dropdown-item">
-                            <svg class="icon me-2">
-                                <use xlink:href="../coreui/vendors/@coreui/icons/svg/free.svg#cil-account-logout">
-                                </use>
-                            </svg> Cerrar Sesion
+                            <x-coreui-icon svgClass="icon me-2" icon="cil-account-logout"/>
+                            Cerrar Sesion
                         </button>
                     </form>
                 </div>

@@ -14,19 +14,19 @@
     <meta name="keyword" content="serebo">
     <title>@yield('title')</title>
     <link rel="icon" type="image/png" sizes="128x128" href="{{ asset('favicon.ico') }}">
-    <link rel="manifest" href="../coreui/assets/favicon/manifest.json">
+    <link rel="manifest" href="{{asset('coreui/assets/favicon/manifest.json')}}">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="../coreui/assets/favicon/ms-icon-144x144.png">
+    <meta name="msapplication-TileImage" content="{{asset('coreui/assets/favicon/ms-icon-144x144.png')}}">
     <meta name="theme-color" content="#ffffff">
     <!-- Vendors styles-->
-    {{-- <link rel="stylesheet" href="../coreui/vendors/simplebar/css/simplebar.css"> --}}
-    {{-- <link rel="stylesheet" href="../coreui/css/vendors/simplebar.css"> --}}
+    {{-- <link rel="stylesheet" href="{{asset('coreui/vendors/simplebar/css/simplebar.css')}}"> --}}
+    {{-- <link rel="stylesheet" href="{{asset('coreui/css/vendors/simplebar.css')}}"> --}}
     <!-- Main styles for this application-->
-    {{-- <link href="../coreui/css/style.css" rel="stylesheet"> --}}
+    {{-- <link href="{{asset('coreui/css/style.css')}}" rel="stylesheet"> --}}
     <!-- We use those styles to show code examples, you should remove them in your application.-->
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css"> --}}
-    {{-- <link href="../coreui/css/examples.css" rel="stylesheet"> --}}
-    {{-- <link href="../coreui/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet"> --}}
+    {{-- <link href="{{asset('coreui/css/examples.css')}}" rel="stylesheet"> --}}
+    {{-- <link href="{{asset('coreui/vendors/@coreui/chartjs/css/coreui-chartjs.css')}}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ mix('css/serebo.dashboard.css') }}">
     @livewireStyles
     <style>
@@ -88,10 +88,10 @@
     <script src="{{asset('coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js')}}"></script> 
     <script src="{{asset('coreui/vendors/simplebar/js/simplebar.min.js')}}"></script>
     <!-- Plugins and scripts required by this view-->
-    {{-- <script src="../coreui/vendors/chart.js/js/chart.min.js"></script> --}}
+    {{-- <script src="{{asset('coreui/vendors/chart.js/js/chart.min.js')}}"></script> --}}
     <script src="{{asset('coreui/vendors/@coreui/chartjs/js/coreui-chartjs.js')}}"></script>
     <script src="{{asset('coreui/vendors/@coreui/utils/js/coreui-utils.js')}}"></script>
-    {{-- <script src="../coreui/js/main.js"></script> --}}
+    {{-- <script src="{{('coreui/js/main.js')}}"></script> --}}
     <livewire:modals/>
     @livewireScripts
     <script src="{{ mix('js/serebo.dashboard.core.js') }}"></script>

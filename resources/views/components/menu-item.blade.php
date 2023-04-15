@@ -3,11 +3,8 @@
 @else
     <li class="{{isset($item['submenu'])?'nav-group': 'nav-item' }}">
         <a class="nav-link {{$isActive && !isset($item['submenu'])?'active':''}} {{isset($item['submenu'])?'nav-group-toggle': '' }}" href="{{isset($item['submenu'])?'#': route($item['route']) }}">
-            <svg class="nav-icon">
-                <use xlink:href="../coreui/vendors/@coreui/icons/svg/free.svg#{{$item['icon']}}"></use>
-            </svg> 
+            <x-coreui-icon svgClass="nav-icon" icon="{{$item['icon']}}"/>
             {{$item['text']}}
-            {{-- <span class="badge badge-sm bg-info ms-auto">NEW</span> --}}
         </a>
         @if (isset($item['submenu']))
             <ul class="nav-group-items">
