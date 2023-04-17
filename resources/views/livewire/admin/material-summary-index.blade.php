@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card shadow-lg">
             <div class="card-header">
                 <div class="row">
@@ -84,15 +84,15 @@
                                     </td>
                                     <td class="stacked-info">
                                         {{ $materialSummary->entry_date_msu->format('d-m-Y H:i:s') }}
-                                        <p class="mb-0 text-warning">{{ $materialSummary->entry_date_msu->diffForHumans() }}</p>
+                                        <p class="mb-0 text-info">{{ $materialSummary->entry_date_msu->diffForHumans() }}</p>
                                     </td>
                                     <td class="stacked-info">
                                         <p class="mb-0">{{ $materialSummary->project->code_pro }}</p>
-                                        <p class="mb-0 text-warning">{{ $materialSummary->project->status->status_name_pst }}</p>
+                                        <p class="mb-0 text-info">{{ $materialSummary->project->status->status_name_pst }}</p>
                                     </td>
                                     <td class="stacked-info">
                                         {{ $materialSummary->summaryType->name_mqt }} 
-                                        <p class="mb-0 text-warning">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</p>
+                                        <p class="mb-0 text-info">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</p>
                                     </td>
                                     <td class="text-center">
                                         {{$materialSummary->projectMaterials->count()}}
@@ -100,12 +100,12 @@
                                     <td class="text-center">
                                         @can('admin.materials-summary.edit')
                                             @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
-                                                <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href="{{ route('admin.materials-summary.edit', $materialSummary) }}"><i class="fas fa-pen"></i></a>
+                                                <a wire:loading.class="disabled" class="btn btn-primary btn-sm" href="{{ route('admin.materials-summary.edit', $materialSummary) }}"><i class="fas fa-pen"></i></a>
                                             @endif
                                         @endcan
-                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.materials-summary.show', $materialSummary) }}'><i class="fas fa-eye"></i></a>
+                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-sm" href='{{ route('admin.materials-summary.show', $materialSummary) }}'><i class="fas fa-eye"></i></a>
                                         @if (Auth::user()->email == 'jair@twiiti.com')
-                                            <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-xs lv-confirm-action"><i class="fas fa-trash"></i></a>
+                                            <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-sm lv-confirm-action"><i class="fas fa-trash"></i></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -132,7 +132,11 @@
                 confirmSubmit(question, record);
             });
 
-            $('#from').datetimepicker({
+            $('#from').datepicker({
+                language: "es",
+                autoclose: true
+            });
+            $('#fromm').datetimepicker({
                 format: 'DD-MM-YYYY',
                 ignoreReadonly: true
             });
