@@ -25,29 +25,17 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="form-group" wire:ignore>
-                            <label>Desde </label>
-                            <div class="input-group input-group-sm date">
-                                <input type="text" readonly="yes" class="form-control datetimepicker-input" data-target="#from">
-                                <div class="input-group-append" data-target="#from" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                </div>
-                            </div>
-                            <div class="input-group date" id="from">
-                                <input class="form-control" type="text" placeholder="Input group example">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
+                        <label>Desde</label>
+                        <div class="input-group input-group-sm date mb-3 from">
+                            <input class="form-control" type="text" value="{{$from}}" placeholder="dd/mm/yyyy">
+                            <span class="input-group-text input-group-append" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+                          </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="form-group">
-                            <label>hasta</label>
-                            <div class="input-group input-group-sm date" id="to" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#to">
-                                <div class="input-group-append" data-target="#to" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                </div>
-                            </div>
+                        <label>Hasta</label>
+                        <div class="input-group input-group-sm date mb-3 to">
+                            <input class="form-control" type="text" value="{{$to}}" placeholder="dd/mm/yyyy">
+                            <span class="input-group-text input-group-append" id="basic-addon2"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
                 </div>
@@ -136,25 +124,31 @@
                 confirmSubmit(question, record);
             });
 
-            $('#from').datepicker({
+            $('.input-group.date').datepicker({
                 language: "es",
-                autoclose: true
-            });
-            $('#fromm').datetimepicker({
-                format: 'DD-MM-YYYY',
-                ignoreReadonly: true
-            });
-
-            $('#from').on('change.datetimepicker', function(e){
-                Livewire.emit('fromChanged', e.date.format('DD-MM-YYYY'));
-            });
-
-            $('#to').datetimepicker({
-                format: 'DD-MM-YYYY',
-                ignoreReadonly: true
-            });
-            $('#to').on('change.datetimepicker', function(e){
-                Livewire.emit('toChanged', e.date.format('DD-MM-YYYY'));
+                format: 'dd-mm-yyyy',
+                autoclose: true,
+                clearBtn: true,
+            }).on('changeDate', function(e) {
+                if ($(this).hasClass('from')) 
+                {
+                    Livewire.emit('fromChanged', moment(e.date).format('DD-MM-YYYY'));        
+                } 
+                else 
+                {
+                    Livewire.emit('toChanged', moment(e.date).format('DD-MM-YYYY')); 
+                }
+            }).on('clearDate', function(e) {
+                
+                if ($(this).hasClass('from')) 
+                {
+                    Livewire.emit('fromChanged', '');        
+                    console.log('clear date');
+                } 
+                else 
+                {
+                    Livewire.emit('toChanged', null); 
+                }
             });
         });
 
