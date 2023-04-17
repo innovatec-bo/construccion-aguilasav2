@@ -27,11 +27,15 @@
                     <div class="col-md-2">
                         <div class="form-group" wire:ignore>
                             <label>Desde </label>
-                            <div class="input-group input-group-sm date" id="from" data-target-input="nearest">
+                            <div class="input-group input-group-sm date">
                                 <input type="text" readonly="yes" class="form-control datetimepicker-input" data-target="#from">
                                 <div class="input-group-append" data-target="#from" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
+                            </div>
+                            <div class="input-group date" id="from">
+                                <input class="form-control" type="text" placeholder="Input group example">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
                     </div>

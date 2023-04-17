@@ -95,7 +95,7 @@
     <livewire:modals/>
     @livewireScripts
     <script src="{{ mix('js/serebo.dashboard.core.js') }}"></script>
-    {{-- <script src="{{asset('')}}"></script> --}}
+    <script src="{{asset('bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.js')}}"></script>
     {{-- <script src="{{ mix('js/serebo.dashboard.js') }}"></script> --}}
     <script></script>
     @stack('js')
