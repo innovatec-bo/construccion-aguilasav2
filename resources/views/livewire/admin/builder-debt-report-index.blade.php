@@ -2,15 +2,23 @@
     <div class="col-md-10">
         <div class="card shadow-lg">
             <div class="card-header">
-                <div class="form-group">
-                    {!! Form::label('builders', 'Constructor') !!}
-                    {!! Form::select('builders', $builders, null, ['id' => 'builders', 'class' => 'form-control', 'required' => 'required', 'wire:model' => 'builderSelected']) !!}
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('builders', 'Constructor') !!}
+                            {!! Form::select('builders', $builders, null, ['id' => 'builders', 'class' => 'form-control form-control-sm', 'required' => 'required', 'wire:model' => 'builderSelected']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('statusSelected', 'Estado del proyecto') !!}
+                            {!! Form::select('statusSelected', $statusToVerify, null, ['id' => 'statusSelected', 'class' => 'form-control form-control-sm', 'wire:model' => 'statusSelected']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <input class="form-control form-control-sm mt-4" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                    </div>
                 </div>
-                <div class="form-group">
-                    {!! Form::label('statusSelected', 'Estado del proyecto') !!}
-                    {!! Form::select('statusSelected', $statusToVerify, null, ['id' => 'statusSelected', 'class' => 'form-control', 'wire:model' => 'statusSelected']) !!}
-                </div>
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
             </div>
             <div class="card-body">
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search, builderSelected, statusSelected">

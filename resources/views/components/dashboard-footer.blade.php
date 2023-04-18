@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer d-print-none">
     <div>
         {{env('APP_NAME')}}
         ©
