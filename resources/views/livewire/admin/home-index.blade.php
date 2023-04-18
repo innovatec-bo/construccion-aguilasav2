@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card mb-4">
             <div class="card-header">{{$lastIncident->created_at->diffInDays(\Carbon\Carbon::now())}} dias sin incidentes</div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <!-- /.row-->
                 <div class="table-responsive">
                     <table class="table table-striped table-hover border mb-0 small">

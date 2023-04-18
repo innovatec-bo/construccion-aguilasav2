@@ -92,12 +92,12 @@
                                     <td class="text-center">
                                         @can('admin.materials-summary.edit')
                                             @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
-                                                <a wire:loading.class="disabled" class="btn btn-primary btn-sm" href="{{ route('admin.materials-summary.edit', $materialSummary) }}"><i class="fas fa-pen"></i></a>
+                                                <a wire:loading.class="disabled" class="btn btn-primary btn-sm my-2" href="{{ route('admin.materials-summary.edit', $materialSummary) }}"><i class="fas fa-pen"></i></a>
                                             @endif
                                         @endcan
-                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-sm" href='{{ route('admin.materials-summary.show', $materialSummary) }}'><i class="fas fa-eye"></i></a>
+                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-sm my-2" href='{{ route('admin.materials-summary.show', $materialSummary) }}'><i class="fas fa-eye"></i></a>
                                         @if (Auth::user()->email == 'jair@twiiti.com')
-                                            <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-sm lv-confirm-action"><i class="fas fa-trash"></i></a>
+                                            <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-sm lv-confirm-action my-2"><i class="fas fa-trash"></i></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -129,25 +129,21 @@
                 format: 'dd-mm-yyyy',
                 autoclose: true,
                 clearBtn: true,
-            }).on('changeDate', function(e) {
-                if ($(this).hasClass('from')) 
+            });
+            $('.input-group.date').on('changeDate', function(e) {
+                let date = null;
+                if (e.date !== undefined) 
                 {
-                    Livewire.emit('fromChanged', moment(e.date).format('DD-MM-YYYY'));        
-                } 
-                else 
-                {
-                    Livewire.emit('toChanged', moment(e.date).format('DD-MM-YYYY')); 
+                    date = moment(e.date).format('DD-MM-YYYY');
                 }
-            }).on('clearDate', function(e) {
-                
                 if ($(this).hasClass('from')) 
                 {
-                    Livewire.emit('fromChanged', '');        
-                    console.log('clear date');
+                    Livewire.emit('fromChanged', date); 
+                    console.log(date);  
                 } 
                 else 
                 {
-                    Livewire.emit('toChanged', null); 
+                    Livewire.emit('toChanged', date);
                 }
             });
         });

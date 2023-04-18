@@ -95,6 +95,7 @@ class MaterialSummaryIndex extends Component
 
     public function fromChanged($date)
     {
+        // dd($date);
         $this->from = $date;
     }
 
