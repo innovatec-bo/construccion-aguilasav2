@@ -1,16 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Detalle de movimiento')
 
-@section('content_header')
-    <div class="row">
-        <div class="col-sm-6">
-            <h1>Detalle de movimiento</h1>
-        </div>
-        <div class="col-sm-6">
-            {{ Breadcrumbs::render('admin.materials-summary.show', $materialsSummary) }}
-        </div>
-    </div>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.materials-summary.show', $materialsSummary) }}
 @stop
 
 @section('content')
@@ -97,7 +90,7 @@
                                             <td>{{ $projectMaterial->material->code_mat }}</td>
                                             <td>{{ $projectMaterial->material->description_mat }}</td>
                                             <td>{{ $projectMaterial->material->unit_of_measurement_mat }}</td>
-                                            <td>{{ $projectMaterial->quantity_prm }}</td>
+                                            <td class="text-end">{{ $projectMaterial->quantity_prm }}</td>
                                             <td>
                                                 @if ($projectMaterial->status)
                                                     {{ $projectMaterial->status->detail_mst }}    

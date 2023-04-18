@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card shadow-lg">
             <div class="card-header">
                 <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar por codigo de material..">
@@ -30,7 +30,10 @@
                                     @if ($search == $projectMaterial->material->code_mat)
                                         <tr>
                                             <td>{{$materialSummary->id_msu}}</td>
-                                            <td>{{$materialSummary->entry_date_msu}}</td>
+                                            <td>
+                                                {{$materialSummary->entry_date_msu->format('d/m/Y H:i:s')}}<br>
+                                                {{$materialSummary->entry_date_msu->diffForHumans()}}
+                                            </td>
                                             <td>{{ $materialSummary->summaryType->name_mqt }} 
                                                 @if (strtoupper($materialSummary->summaryType->movement_type_mqt) == 'OUT')
                                                     <small class="badge badge-warning">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>    
@@ -41,9 +44,9 @@
                                                 @endif
                                             </td>
                                             <td>{{$materialSummary->correlative_counter_msu}}</td>
-                                            <td>{{$projectMaterial->material->code_mat}}</td>
+                                            <td class="text-center">{{$projectMaterial->material->code_mat}}</td>
                                             <td>{{$projectMaterial->material->description_mat}}</td>
-                                            <td>{{ $projectMaterial->quantity_prm }}</td>
+                                            <td class="text-end">{{ $projectMaterial->quantity_prm }}</td>
                                             <td>{{$projectMaterial->material->unit_of_measurement_mat}}</td>
                                             <td>
                                                 @if ($projectMaterial->status)
@@ -55,7 +58,10 @@
                                 @else
                                     <tr>
                                         <td>{{$materialSummary->id_msu}}</td>
-                                        <td>{{$materialSummary->entry_date_msu}}</td>
+                                        <td>
+                                            {{$materialSummary->entry_date_msu->format('d/m/Y H:i:s')}}<br>
+                                            <span class="text-info">{{$materialSummary->entry_date_msu->diffForHumans()}}</span>
+                                        </td>
                                         <td>{{ $materialSummary->summaryType->name_mqt }}
                                             @if (strtoupper($materialSummary->summaryType->movement_type_mqt) == 'OUT')
                                                 <small class="badge badge-warning">{{ strtoupper($materialSummary->summaryType->movement_type_mqt) }}</small>    
@@ -66,9 +72,9 @@
                                             @endif
                                         </td>
                                         <td>{{$materialSummary->correlative_counter_msu}}</td>
-                                        <td>{{$projectMaterial->material->code_mat}}</td>
+                                        <td class="text-center">{{$projectMaterial->material->code_mat}}</td>
                                         <td>{{$projectMaterial->material->description_mat}}</td>
-                                        <td>{{ $projectMaterial->quantity_prm }}</td>
+                                        <td class="text-end">{{ $projectMaterial->quantity_prm }}</td>
                                         <td>{{$projectMaterial->material->unit_of_measurement_mat}}</td>
                                         <td>
                                             @if ($projectMaterial->status)

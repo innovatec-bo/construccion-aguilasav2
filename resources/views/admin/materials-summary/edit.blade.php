@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Editar de movimiento')
 
-@section('content_header')
-    <h1>Editar movimiento</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.materials-summary.edit', $materialsSummary) }}
 @stop
 
 @section('content')

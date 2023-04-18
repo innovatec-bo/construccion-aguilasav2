@@ -1,16 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Movimientos agrupados por proyectos')
 
-@section('content_header')
-    <div class="row">
-        <div class="col-sm-6">
-            <h1>Movimientos agrupados por proyecto</h1>
-        </div>
-        <div class="col-sm-6">
-            {{ Breadcrumbs::render('admin.materials-summary.grouped-movements') }}
-        </div>
-    </div>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.materials-summary.grouped-movements') }}
 @stop
 
 @section('content')

@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card shadow-lg">
             <div class="card-header">
                 <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
@@ -25,7 +25,7 @@
                                 <td>{{$project->id_pro}}</td>
                                 <td class="stacked-info">
                                     {{$project->code_pro}}
-                                    <p class="mb-0 text-warning">{{$project->status->status_name_pst}}</p>
+                                    <p class="mb-0 text-info">{{$project->status->status_name_pst}}</p>
                                 </td>
                                 <td>
                                     @foreach ($project->statusLogResponsibles as $statusLogResponsible)
@@ -45,7 +45,7 @@
                                     {{$project->materialSummaries->count()}}
                                 </td>
                                 <td class="text-center">
-                                    <a  wire:loading.class="disabled" class="btn btn-primary btn-sm" href='{{route('admin.materials-summary.grouped-movement-details', $project)}}'"><i class="fas fa-eye"></i></a>
+                                    <a  wire:loading.class="disabled" class="btn btn-primary btn-sm my-2" href='{{route('admin.materials-summary.grouped-movement-details', $project)}}'"><i class="fas fa-eye"></i></a>
                                 </td>
                             </tr>    
                         @endforeach

@@ -61,6 +61,12 @@ Breadcrumbs::for('admin.materials-summary.show', function (BreadcrumbTrail $trai
     $trail->push('Detalle de movimiento '.$materialsSummary->id_msu, route('admin.materials-summary.show', $materialsSummary));
 });
 
+// Materials summary - edit
+Breadcrumbs::for('admin.materials-summary.edit', function (BreadcrumbTrail $trail, $materialsSummary) {
+    $trail->parent('admin.materials-summary.index');
+    $trail->push('Editar movimiento '.$materialsSummary->id_msu, route('admin.materials-summary.edit', $materialsSummary));
+});
+
 // Grouped movements
 Breadcrumbs::for('admin.materials-summary.grouped-movements', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');
