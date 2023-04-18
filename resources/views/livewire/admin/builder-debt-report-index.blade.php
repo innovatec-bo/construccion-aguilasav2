@@ -32,7 +32,7 @@
                                     <td>{{$project->id_pro}}</td>
                                     <td class="stacked-info">
                                         {{$project->code_pro}}
-                                        <p class="mb-0 text-warning">{{$project->status->status_name_pst}}</p>
+                                        <p class="mb-0 text-info">{{$project->status->status_name_pst}}</p>
                                     </td>
                                     <td>
                                         @foreach ($project->statusLogResponsibles as $statusLogResponsible)
@@ -41,9 +41,9 @@
                                             @endif
                                         @endforeach
                                     </td>
-                                    <td>
-                                        <a wire:loading.class="disabled" class="btn btn-info btn-sm" href='{{route('admin.labor-details.internal-conciliation', $project->laborDetailDesign)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna"><i class="fas fa-clipboard-list"></i></a>
-                                        <a wire:loading.class="disabled" class="btn btn-warning btn-sm" href='{{route('admin.labor-details.internal-conciliation-builder', $project->laborDetailDesign)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna(Constructor)"><i class="fas fa-clipboard-list"></i></a>
+                                    <td class="text-center">
+                                        <a wire:loading.class="disabled" class="btn btn-info btn-sm my-2" href='{{route('admin.labor-details.internal-conciliation', $project->laborDetailDesign)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna"><i class="fas fa-clipboard-list"></i></a>
+                                        <a wire:loading.class="disabled" class="btn btn-warning btn-sm my-2" href='{{route('admin.labor-details.internal-conciliation-builder', $project->laborDetailDesign)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna(Constructor)"><i class="fas fa-clipboard-list"></i></a>
                                     </td>
                                 </tr>    
                             @endforeach

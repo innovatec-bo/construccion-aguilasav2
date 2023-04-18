@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Cargar lista inicial de materiales')
 
-@section('content_header')
-    <h1>Cargar lista inicial de materiales</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.materials-summary.load-initial-list') }}
 @stop
 
 @section('content')
@@ -11,7 +11,7 @@
         <div class="col-md-5">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Ingrese un codigo de proyecto y seleccione un archivo con la lista de materiales</h3>
+                    <h4 class="card-title">Ingrese un codigo de proyecto y seleccione un archivo con la lista de materiales</h4>
                 </div>
                 <form>
                     <div class="card-body">
