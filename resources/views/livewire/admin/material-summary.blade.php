@@ -1,10 +1,10 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card shadow-lg">
             
-            <div class="card-header">
+            <div class="card-header py-4">
                 <div class="row">
-                    <div class="form-check col-2">
+                    <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="groupByProject" wire:model="groupByProject">
                         <label class="form-check-label" for="groupByProject">Agrupar por proyecto <i  id="popover" class="fas fa-info-circle"></i></label>
                     </div>
@@ -31,13 +31,15 @@
                         <label for="search" class="mb-0">Mat. Descripcion</label>
                         <input type="text" class="form-control"  wire:model.debounce.1500ms="search" id="search" placeholder="Descripcion material">
                     </div>
-                    <div class="form-group col-2">
-                        <button type="button" wire:click="resetFilters" class="btn btn-primary mt-4">Quitar filtros</button>
-                        <button type="button" class="btn btn-danger mt-4 ms-2" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar</button>
+                    <div class="form-group col">
+                        <div class="d-grid gap-2 d-md-block">
+                            <button type="button" wire:click="resetFilters" class="btn btn-primary mt-4">Quitar filtros</button>
+                            <button type="button" class="btn btn-danger mt-4 ms-2" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="overlay dark d-none" wire:loading.class="d-flex"
                     wire:target="previousPage, nextPage, gotoPage, search,groupByProject,projectCode,projectStatusId,materialCode,resetFilters,order">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
@@ -150,7 +152,7 @@
                         <tbody>
                             @foreach ($materialSummaries as $materialSummary)
                                 <tr>
-                                    <td class="stacked-info text-right">
+                                    <td class="stacked-info text-end">
                                         {{ $materialSummary->material_code }}
                                     </td>
                                     <td>
@@ -158,18 +160,18 @@
                                     </td>
                                     <td class="stacked-info">
                                         {{ $materialSummary->project_code }}
-                                        <p class="mb-0 text-warning">{{ $materialSummary->project_status_name }}</p>
+                                        <p class="mb-0 text-info">{{ $materialSummary->project_status_name }}</p>
                                     </td>
-                                    <td class="text-right"> 
+                                    <td class="text-end"> 
                                         {{ number_format($materialSummary->quantity_assigned_materials,'2','.',',') }} 
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         {{ number_format($materialSummary->quantity_picked_up_from_cre,'2','.',',') }}
                                     </td>
-                                    <td class="text-right"> 
+                                    <td class="text-end"> 
                                         {{ number_format($materialSummary->pending_material_in_cre,'2','.',',') }}
                                     </td>
-                                    <td class="text-right"> 
+                                    <td class="text-end"> 
                                         {{ number_format($materialSummary->quantity_materials_delivered_to_builder,'2','.',',') }} 
                                     </td>
                                 </tr>

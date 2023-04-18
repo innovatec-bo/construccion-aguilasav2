@@ -56,7 +56,7 @@
                                 <td class="text-end">{{$item->movements}}</td>
                                 <td>
                                     <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" type="button" data-coreui-toggle="dropdown" aria-expanded="false"><i class="fas fa-cogs"></i></button>
+                                        <button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdownMenuButton" type="button" data-coreui-toggle="dropdown" aria-expanded="false"><i class="fas fa-cogs"></i></button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="">
                                             <li>
                                                 @can('admin.materials-summary.grouped-movement-details')

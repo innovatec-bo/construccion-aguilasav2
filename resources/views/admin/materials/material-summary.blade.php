@@ -1,16 +1,16 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Resumen de materiales')
 
-@section('content_header')
-    <div class="row">
+@section('breadcrumb')
+    {{-- <div class="row">
         <div class="col-sm-6">
             <h1>Resumen de materiales</h1>
-        </div>
+        </div> --}}
         {{-- <div class="col-sm-6">
             {{ Breadcrumbs::render('admin.materials-summary.index') }}
         </div> --}}
-    </div>
+    {{-- </div> --}}
 @stop
 
 @section('content')
