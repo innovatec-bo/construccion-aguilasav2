@@ -8,7 +8,7 @@
             </div>
             <div class="card-header py-4">
                 <div class="row">
-                    <div class="form-check">
+                    <div class="form-check ms-2">
                         <input type="checkbox" class="form-check-input" id="groupByProject" wire:model="groupByProject">
                         <label class="form-check-label" for="groupByProject">Agrupar por proyecto <i  id="popover" class="fas fa-info-circle"></i></label>
                     </div>
@@ -43,13 +43,13 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <div class="overlay dark d-none" wire:loading.class="d-flex"
+            <div class="card-body p-0 position-relative">
+                <div class="overlay d-none" wire:loading.class="d-flex"
                     wire:target="previousPage, nextPage, gotoPage, search,groupByProject,projectCode,projectStatusId,materialCode,resetFilters,order">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover table-sm">
+                    <table class="table table-bordered table-striped table-hover table-sm mb-0">
                         <thead>
                             <tr class="text-center">
                                 <th wire:click="order('material_code')" role="button">

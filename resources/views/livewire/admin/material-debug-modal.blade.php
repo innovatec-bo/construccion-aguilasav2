@@ -1,8 +1,13 @@
-<div class="modal-dialog">
+<div class="modal-dialog position-relative">
+    <div class="overlay d-none" wire:loading.class="d-flex" wire:target="debug">
+        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Depurar materiales</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
         </div>
         <div class="modal-body">
             <p>
@@ -11,7 +16,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">Aplicar depuraci&oacute;n</button>
+            <button type="button" class="btn btn-primary" wire:click="debug">Aplicar depuraci&oacute;n</button>
         </div>
     </div>
 </div>

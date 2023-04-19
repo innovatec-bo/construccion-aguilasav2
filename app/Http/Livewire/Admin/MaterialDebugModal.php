@@ -10,4 +10,9 @@ class MaterialDebugModal extends Component
     {
         return view('livewire.admin.material-debug-modal');
     }
+
+    public function debug()
+    {        
+        dd('toc toc');
+    }
 }
