@@ -39,11 +39,11 @@ class DashboardMenu extends Component
                 'route'       => 'admin.home.index',
                 'icon'        => 'cil-home',
             ],
-            [
-                'text' => 'Dashboard',
-                'route' => 'admin.home.dashboard',
-                'icon' => 'cil-speedometer',
-            ],
+            // [
+            //     'text' => 'Dashboard',
+            //     'route' => 'admin.home.dashboard',
+            //     'icon' => 'cil-speedometer',
+            // ],
             [
                 'text'        => 'Proyectos',
                 'icon'        => 'cil-folder',
