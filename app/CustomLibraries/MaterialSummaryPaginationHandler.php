@@ -354,7 +354,7 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 					case "{project-status-id}":
 							if($value != "")
 							{
-								$query = str_replace("{project-status-id}",' and id_pst = '.$value.' ', $query);
+								$query = str_replace("{project-status-id}",' and id_pst in ('.$value.') ', $query);
 							}
 						break;
 					case "{grouping-criteria}":

@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
             <p>
-                Esta operaci&oacute;n crea un movimiento llamado <strong>Depurac&oacute;n</strong> que resta los materiales pendientes para proyectos desde <strong>Material devuelto a CRE</strong> en adelante
+                Esta operaci&oacute;n crea un movimiento llamado <strong>Depuraci&oacute;n</strong> que resta los materiales pendientes para proyectos desde <strong>Material devuelto a CRE</strong> en adelante
             </p>
         </div>
         <div class="modal-footer">
