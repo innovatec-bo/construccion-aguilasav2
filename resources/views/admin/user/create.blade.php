@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Nuevo usuario')
 
-@section('content_header')
-    <h1>Nuevo usuario</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.users.create') }}
 @stop
 
 @section('content')

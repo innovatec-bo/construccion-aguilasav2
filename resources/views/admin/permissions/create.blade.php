@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Nuevo Permiso')
 
-@section('content_header')
-    <h1>Nuevo Permiso</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.permissions.create') }}
 @stop
 
 @section('content')

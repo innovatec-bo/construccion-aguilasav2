@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card shadow-lg">
             <div class="card-header">
                 @can('admin.roles.create')
@@ -32,10 +32,10 @@
                                     <td>{{$role->name}}</td>
                                     <td class="text-center">
                                         @can('admin.roles.edit')
-                                            <a class="btn btn-primary btn-xs" href='{{route('admin.roles.edit', $role)}}'"><i class="fas fa-pen"></i></a>
+                                            <a class="btn btn-primary btn-sm" href='{{route('admin.roles.edit', $role)}}'"><i class="fas fa-pen"></i></a>
                                         @endcan
                                         @can('admin.roles.show')
-                                            <a class="btn btn-secondary btn-xs" href='{{route('admin.roles.show', $role)}}'"><i class="fas fa-eye"></i></a>
+                                            <a class="btn btn-secondary btn-sm" href='{{route('admin.roles.show', $role)}}'"><i class="fas fa-eye"></i></a>
                                         @endcan
                                     </td>
                                 </tr>    

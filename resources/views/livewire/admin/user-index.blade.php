@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card shadow-lg">
             <div class="card-header">
                 @can('admin.users.create')
@@ -44,17 +44,17 @@
                                     </td>
                                     <td class="text-center">
                                         @can('admin.users.edit')
-                                            <a wire:loading.class="disabled" class="btn btn-primary btn-xs" href='{{ route('admin.users.edit', $user) }}'"><i class="fas fa-pen"></i></a>    
+                                            <a wire:loading.class="disabled" class="btn btn-primary btn-sm" href='{{ route('admin.users.edit', $user) }}'"><i class="fas fa-pen"></i></a>    
                                         @endcan
                                         @can('admin.users.show')
-                                            <a wire:loading.class="disabled" class="btn btn-secondary btn-xs" href='{{ route('admin.users.show', $user) }}'"><i class="fas fa-eye"></i></a>    
+                                            <a wire:loading.class="disabled" class="btn btn-secondary btn-sm" href='{{ route('admin.users.show', $user) }}'"><i class="fas fa-eye"></i></a>    
                                         @endcan
                                         @can('admin.users.destroy')
                                             <form method="post" action="{{ route('admin.users.destroy', $user) }}"
                                                 class="d-inline">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" onclick="return confirm('Eliminar?')" class="btn btn-danger btn-xs"><i
+                                                <button wire:loading.class="disabled" type="submit" onclick="return confirm('Eliminar?')" class="btn btn-danger btn-sm"><i
                                                         class="fas fa-trash-alt"></i></button>
                                             </form>    
                                         @endcan

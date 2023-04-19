@@ -56,12 +56,12 @@ Breadcrumbs::for('admin.building-structures.upload-default-materials', function 
 // Materials
 Breadcrumbs::for('admin.materials.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');
-    $trail->push('Crear material', route('admin.materials.create'));
+    $trail->push('Materiales', route('admin.materials.index'));
 });
 //Materials - create
 Breadcrumbs::for('admin.materials.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');
-    $trail->push('Materiales', route('admin.materials.index'));
+    $trail->push('Crear material', route('admin.materials.create'));
 });
 
 // Materials - debug
@@ -145,4 +145,48 @@ Breadcrumbs::for('admin.builder-debts-report.index', function (BreadcrumbTrail $
     //dd($route);
     $trail->parent('admin.home.index');
     $trail->push('Reporte de deuda de constructores', route('admin.builder-debts-report.index'));
+});
+
+// Users
+Breadcrumbs::for('admin.users.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Lista de usuarios', route('admin.users.index'));
+});
+// Users - create
+Breadcrumbs::for('admin.users.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Crear usuario', route('admin.users.create'));
+});
+
+// Permissions
+Breadcrumbs::for('admin.permissions.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Lista de permisos', route('admin.permissions.index'));
+});
+// Permissions - create
+Breadcrumbs::for('admin.permissions.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Crear permiso', route('admin.permissions.create'));
+});
+
+// Permissions - edit
+Breadcrumbs::for('admin.permissions.edit', function (BreadcrumbTrail $trail, $permission) {
+    $trail->parent('admin.home.index');
+    $trail->push('Editar permiso', route('admin.permissions.edit', $permission->id));
+});
+
+// Roles
+Breadcrumbs::for('admin.roles.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Lista de rols', route('admin.roles.index'));
+});
+// Roles - create
+Breadcrumbs::for('admin.roles.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Crear rol', route('admin.roles.create'));
+});
+// Roles - edit
+Breadcrumbs::for('admin.roles.edit', function (BreadcrumbTrail $trail, $role) {
+    $trail->parent('admin.home.index');
+    $trail->push('Editar rol', route('admin.roles.edit', $role->id));
 });

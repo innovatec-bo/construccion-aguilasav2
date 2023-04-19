@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Editar rol')
 
-@section('content_header')
-    <h1>Editar rol</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.roles.edit', $role) }}
 @stop
 
 @section('content')
