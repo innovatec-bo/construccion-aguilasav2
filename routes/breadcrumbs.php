@@ -70,6 +70,12 @@ Breadcrumbs::for('admin.materials.debug', function (BreadcrumbTrail $trail) {
     $trail->push('Depurar materiales', route('admin.materials.debug'));
 });
 
+// Materials - summary
+Breadcrumbs::for('admin.materials.material-summary', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Resumen de materiales', route('admin.materials.material-summary'));
+});
+
 // Materials summary
 Breadcrumbs::for('admin.materials-summary.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');
