@@ -1,7 +1,11 @@
 <div class="row justify-content-center">
     <div class="col-md-12">
         <div class="card shadow-lg">
-            
+            <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, search">
+                <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
             <div class="card-header py-4">
                 <div class="row">
                     <div class="form-check">
