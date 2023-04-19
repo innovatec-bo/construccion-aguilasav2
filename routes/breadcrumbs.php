@@ -37,8 +37,29 @@ Breadcrumbs::for('admin.labor-details.internal-conciliation-cre-format', functio
     $trail->push('Conciliacion interna Formato CRE '. $laborDetail->project->code_pro, route('admin.labor-details.internal-conciliation-cre-format', $laborDetail));
 });
 
+//Building structures
+Breadcrumbs::for('admin.building-structures.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push("Estructuras de construccion", route('admin.building-structures.index'));
+});
+//Building structures - show
+Breadcrumbs::for('admin.building-structures.show', function (BreadcrumbTrail $trail, $buildingStructure) {
+    $trail->parent('admin.building-structures.index');
+    $trail->push('Estructura de construccion '.$buildingStructure->structure_code_bus, route('admin.building-structures.show', $buildingStructure));
+});
+//Building structures - upload default materials
+Breadcrumbs::for('admin.building-structures.upload-default-materials', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.building-structures.index');
+    $trail->push('Establecer materiales por defecto', route('admin.building-structures.upload-default-materials'));
+});
+
 // Materials
 Breadcrumbs::for('admin.materials.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Crear material', route('admin.materials.create'));
+});
+//Materials - create
+Breadcrumbs::for('admin.materials.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');
     $trail->push('Materiales', route('admin.materials.index'));
 });
@@ -90,7 +111,11 @@ Breadcrumbs::for('admin.external-observations.index', function (BreadcrumbTrail 
     $trail->parent('admin.home.index');
     $trail->push('Observaciones externas', route('admin.external-observations.index'));
 });
-
+// External observation - create
+Breadcrumbs::for('admin.external-observations.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Crear observacion externa', route('admin.external-observations.create'));
+});
 // External observation - show
 Breadcrumbs::for('admin.external-observations.show', function (BreadcrumbTrail $trail, $externalObservation) {
     $trail->parent('admin.external-observations.index');

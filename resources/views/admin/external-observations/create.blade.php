@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Nueva observacion')
 
-@section('content_header')
-    <h1>Nueva observaci&oacute;n</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.external-observations.create') }}
 @stop
 
 @section('content')
@@ -68,7 +68,7 @@
 
 @section('js')
     {{-- <script> console.log('Hi!'); </script> --}}
-    <script>
+    {{-- <script>
         $('[data-inputmask-alias]').inputmask();
-    </script>
+    </script> --}}
 @stop

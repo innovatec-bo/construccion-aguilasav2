@@ -50,7 +50,7 @@
                             <tr class="text-center">
                                 <th wire:click="order('material_code')" role="button">
                                     C&oacute;digo
-                                    <div class="float-right">
+                                    <div class="float-end">
                                         @if ($sort == 'material_code')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up"></i>
@@ -65,7 +65,7 @@
                                 </th>
                                 <th wire:click="order('material_description')" role="button">
                                     Descripci&oacute;n
-                                    <div class="float-right">
+                                    <div class="float-end">
                                         @if ($sort == 'material_description')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up"></i>
@@ -79,7 +79,7 @@
                                 </th>
                                 <th wire:click="order('project_code')" role="button">
                                     Proyecto
-                                    <div class="float-right">
+                                    <div class="float-end">
                                         @if ($sort == 'project_code')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up"></i>
@@ -93,7 +93,7 @@
                                 </th>
                                 <th wire:click="order('quantity_assigned_materials')" role="button">
                                     Cantidad<br>Comprometida
-                                    <div class="float-right">
+                                    <div class="float-end">
                                         @if ($sort == 'quantity_assigned_materials')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up"></i>
@@ -107,7 +107,7 @@
                                 </th>
                                 <th wire:click="order('quantity_picked_up_from_cre')" role="button">
                                     Retirado<br>de CRE
-                                    <div class="float-right">
+                                    <div class="float-end">
                                         @if ($sort == 'quantity_picked_up_from_cre')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up"></i>
@@ -121,7 +121,7 @@
                                 </th>
                                 <th wire:click="order('pending_material_in_cre')" role="button">
                                     Pendiente por<br>retirar de CRE
-                                    <div class="float-right">
+                                    <div class="float-end">
                                         @if ($sort == 'pending_material_in_cre')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up"></i>
@@ -135,7 +135,7 @@
                                 </th>
                                 <th wire:click="order('quantity_materials_delivered_to_builder')" role="button">
                                     Entregado<br>al constructor
-                                    <div class="float-right">
+                                    <div class="float-end">
                                         @if ($sort == 'quantity_materials_delivered_to_builder')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up"></i>

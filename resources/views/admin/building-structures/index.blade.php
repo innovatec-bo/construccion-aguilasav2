@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Estructuras de construccion')
 
-@section('content_header')
-    <h1>Estructuras de construccion</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.building-structures.index') }}
 @stop
 
 @section('content')

@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <input class="form-control form-control-sm" type="text" wire:model.debounce.2s="search" placeholder="Buscar..">
@@ -27,7 +27,7 @@
                                     <td>{{$buildingStructure->description_bus}}</td>
                                     <td>{{$buildingStructure->unit_of_measurement_bus}}</td>
                                     <th>{{$buildingStructure->defaultStructureMaterials->count()}}</th>
-                                    <td>
+                                    <td class="text-center">
                                         <button type="button" wire:loading.class="disabled" class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('admin.building-structures.show', $buildingStructure)}}'"><i class="fas fa-eye"></i></button>
                                     </td>
                                 </tr>    

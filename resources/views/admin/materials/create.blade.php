@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Crear material')
 
-@section('content_header')
-    <h1>Crear Material</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.materials.create') }}
 @stop
 
 @section('content')

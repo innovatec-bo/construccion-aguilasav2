@@ -15,6 +15,6 @@
 @stop
 
 @section('js')
-    @stack('scripts')
-{{-- <script> console.log('Hi!'); </script> --}}
+    <script src="{{asset('bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.js')}}"></script>
+    
 @stop

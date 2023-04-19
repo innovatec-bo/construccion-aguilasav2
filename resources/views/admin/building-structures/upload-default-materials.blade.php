@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Establecer materiales')
 
-@section('content_header')
-    <h1>Establecer materiales</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.building-structures.upload-default-materials') }}
 @stop
 
 @section('content')

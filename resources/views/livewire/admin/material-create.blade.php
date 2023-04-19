@@ -5,7 +5,7 @@
                 <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
             </div>
             <div class="card-header">
-                <h3 class="card-title">Cada material debe ser &uacute;nico en c&oacute;digo y descripci&oacute;n</h3>
+                <h4 class="card-title">Cada material debe ser &uacute;nico en c&oacute;digo y descripci&oacute;n</h4>
             </div>
             <form wire:submit.prevent="save">
                 <div class="card-body">

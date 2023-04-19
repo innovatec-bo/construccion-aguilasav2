@@ -5,7 +5,7 @@
                 <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
             </div>
             <div class="card-header">
-                <h3 class="card-title">Debe cargar un archivo que contenga la asociacion de estructuras con sus respectivos materiales</h3>
+                <h4 class="card-title">Debe cargar un archivo que contenga la asociacion de estructuras con sus respectivos materiales</h4>
             </div>
             <form wire:submit.prevent="save()">
                 <div class="card-body">

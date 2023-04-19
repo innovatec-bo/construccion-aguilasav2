@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card shadow-lg">
             <div class="card-header">
                 @can('admin.external-observations.create')
@@ -17,7 +17,7 @@
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover table-sm">
+                    <table class="table table-bordered table-striped table-hover table-sm small">
                         <thead>
                             <tr>
                                 <th>Proyecto</th>
@@ -38,7 +38,7 @@
                                 <tr>
                                     <td>{{ $externalObservation->project->code_pro }}</td>
                                     <td>{{ $externalObservation->status->status_name_pst }}</td>
-                                    <td class="text-sm"><i>{{$externalObservation->observation_efo}}</i></td>
+                                    <td class="text-sm"><i>{!!$externalObservation->observation_efo!!}</i></td>
                                     <td>
                                         @if ($externalObservation->externalObservationType)
                                             {{ $externalObservation->externalObservationType->name }}    
@@ -62,36 +62,32 @@
                                     <td>
                                         @if ($externalObservation->fixed_date_efo)
                                             {{ $externalObservation->fixed_date_efo->format('d-m-Y H:i:s')}}
-                                            <small class="badge badge-primary">{{ $externalObservation->fixed_date_efo->diffForHumans() }}</small>    
+                                            <br><small class="text-info">{{ $externalObservation->fixed_date_efo->diffForHumans() }}</small>    
                                         @else
                                             <span class="text-danger">Sin corregir</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <div class="btn-group btn-group-sm">
-                                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-cogs"></i>
-                                            </button>
-                                            <div class="dropdown-menu" role="menu" style="">
-                                                @can('admin.external-observations.edit')
-                                                    @if (!$externalObservation->fixed_efo)
-                                                        {{-- <a  wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.edit', $externalObservation)}}'"><i class="fas fa-pen fa-fw"></i> Editar</a> --}}
-                                                    @endif
-                                                @endcan
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdownMenuButton" type="button" data-coreui-toggle="dropdown" aria-expanded="false"><i class="fas fa-cogs"></i></button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="">
+                                                @if (!$externalObservation->fixed_efo)
+                                                        {{-- <li><a  wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.edit', $externalObservation)}}'"><i class="fas fa-pen fa-fw"></i> Editar</a></li> --}}
+                                                @endif
                                                 @can('admin.external-observations.show')
-                                                    <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.show', $externalObservation)}}'"><i class="fas fa-eye fa-fw"></i> Ver</a>    
+                                                    <li><a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.show', $externalObservation)}}'"><i class="fas fa-eye fa-fw"></i> Ver</a>    
                                                 @endcan
                                                 @can('admin.external-observations.mark-as-fixed')
                                                     @if (!$externalObservation->fixed_efo)
-                                                        <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.mark-as-fixed', $externalObservation)}}'"><i class="fas fa-check fa-fw"></i> Marcar como corregido</a>
+                                                        <li><a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.mark-as-fixed', $externalObservation)}}'"><i class="fas fa-check fa-fw"></i> Marcar como corregido</a>
                                                     @endif
                                                 @endcan
                                                 @can('admin.external-observations.destroy')
                                                     @if (!$externalObservation->fixed_efo)
-                                                        {{-- <a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.destroy', $externalObservation)}}'"><i class="fas fa-trash-alt fa-fw"></i> Eliminar</a>     --}}
+                                                        {{-- <li><a wire:loading.class="disabled" class="dropdown-item" href='{{route('admin.external-observations.destroy', $externalObservation)}}'"><i class="fas fa-trash-alt fa-fw"></i> Eliminar</a></li>     --}}
                                                     @endif
                                                 @endcan
-                                            </div>
+                                            </ul>
                                         </div>
                                     </td>
                                 </tr>

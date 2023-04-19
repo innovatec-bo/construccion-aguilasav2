@@ -1,16 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Detalle de observacion')
 
-@section('content_header')
-    <div class="row">
-        <div class="col-sm-6">
-            <h1>Detalle de observacion</h1>
-        </div>
-        <div class="col-sm-6">
-            {{ Breadcrumbs::render('admin.external-observations.show', $externalObservation) }}
-        </div>
-    </div>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.external-observations.show', $externalObservation) }}
 @stop
 
 @section('content')
@@ -21,22 +14,22 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="firstName">Proyecto</label>
+                                <label for="firstName" class="fw-bold">Proyecto</label>
                                 <p>{{$externalObservation->project->code_pro}}</p>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Estado en observacion</label>
+                                <label for="lastName" class="fw-bold">Estado en observacion</label>
                                 <p>{{$externalObservation->status->status_name_pst}}</p>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Fecha de observacion</label>
+                                <label for="lastName" class="fw-bold">Fecha de observacion</label>
                                 <p>
                                     {{ $externalObservation->entry_date_efo->format('d-m-Y H:i:s')}}
-                                    <small class="badge badge-primary">{{ $externalObservation->entry_date_efo->diffForHumans() }}</small>
+                                    <small class="text-info">{{ $externalObservation->entry_date_efo->diffForHumans() }}</small>
                                 </p>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Tipo</label>
+                                <label for="lastName" class="fw-bold">Tipo</label>
                                 @if ($externalObservation->externalObservationType)
                                     <p>{{$externalObservation->externalObservationType->name}}</p>    
                                 @endif                                

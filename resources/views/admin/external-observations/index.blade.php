@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Observaciones externas')
 
-@section('content_header')
-    <h1>Observaciones externas</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.external-observations.index') }}
 @stop
 
 @section('content')
