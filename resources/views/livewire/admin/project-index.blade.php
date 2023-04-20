@@ -11,7 +11,6 @@
                         {{-- @can('admin.projects.export')
                             <button class="btn btn-primary btn-xs" wire:click="export"><i class="far fa-file-excel"></i> Exportar</button>
                         @endcan --}}
-                        
                     </div>
                 </div>
             </div>

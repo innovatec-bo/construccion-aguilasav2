@@ -117,17 +117,17 @@ class DashboardMenu extends Component
                         'can'         => ['admin.materials-summary.duplicate-outputs'],
                         'icon'        => 'fas fa-fw fa-exclamation-triangle',
                     ],
-                    // [
-                    //     'text'        => 'Depurar materiales',
-                    //     'route'       => 'admin.materials.debug',
-                    //     // 'can'         => ['admin.materials.debug'],
-                    //     'icon'        => 'fas fa-fw fa-bug',
-                    // ],
                     [
                         'text'        => 'Resumen de materiales',
                         'route'       => 'admin.materials.material-summary',
                         'can'         => ['admin.materials.material-summary'],
                         'icon'        => 'fas fa-fw fa-table',
+                    ],
+                    [
+                        'text'        => 'Depurar materiales',
+                        'route'       => 'admin.materials.debug-pending-in-cre',
+                        'can'         => ['admin.materials.debug-pending-in-cre'],
+                        'icon'        => 'fas fa-fw fa-bug',
                     ],
                     [
                         'text'        => 'Registro 221 - 222',

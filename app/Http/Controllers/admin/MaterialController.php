@@ -88,4 +88,9 @@ class MaterialController extends Controller
     {
         return view('admin.materials.material-summary');
     }
+
+    public function debugPendingInCRE()
+    {
+        return view('admin.materials.debug-pending-in-cre');
+    }
 }

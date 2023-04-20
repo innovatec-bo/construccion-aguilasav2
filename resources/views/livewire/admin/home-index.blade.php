@@ -1,6 +1,11 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="card mb-4">
+        <div class="card mb-4 position-relative">
+            <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, search">
+                <div class="spinner-grow" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+            </div>
             <div class="card-header">{{$lastIncident->created_at->diffInDays(\Carbon\Carbon::now())}} dias sin incidentes</div>
             <div class="card-body p-0">
                 <!-- /.row-->

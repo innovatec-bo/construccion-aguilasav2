@@ -76,6 +76,12 @@ Breadcrumbs::for('admin.materials.material-summary', function (BreadcrumbTrail $
     $trail->push('Resumen de materiales', route('admin.materials.material-summary'));
 });
 
+// Materials
+Breadcrumbs::for('admin.materials.debug-pending-in-cre', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Depurar materiales pendientes en CRE', route('admin.materials.debug-pending-in-cre'));
+});
+
 // Materials summary
 Breadcrumbs::for('admin.materials-summary.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');

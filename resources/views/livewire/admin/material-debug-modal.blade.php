@@ -11,8 +11,14 @@
         </div>
         <div class="modal-body">
             <p>
-                Esta operaci&oacute;n crea un movimiento llamado <strong>Depuraci&oacute;n</strong> que resta los materiales pendientes para proyectos desde <strong>Material devuelto a CRE</strong> en adelante
+                Esta operaci&oacute;n crea un movimiento llamado <strong>Depuraci&oacute;n</strong> que pone en cero los materiales pendientes de retiro en CRE
             </p>
+            <p>Se depuraran los proyectos que se encuentren en los siguientes estados:</p>
+            <ol>
+                @foreach ($statusToDebug as $status)
+                    <li>{{$status->status_name_pst}}</li>                
+                @endforeach
+            </ol>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
