@@ -5,11 +5,18 @@ namespace App\Http\Livewire\Admin;
 use App\CustomLibraries\MaterialSummaryPaginationHandler;
 use App\Models\ProjectStatus;
 use Livewire\Component;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Livewire\WithPagination;
+use Illuminate\Pagination\Paginator;
 
 class MaterialDebugPendingInCre extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
     public $statusKeywords;
     public $statusToDebug;
+    public $toDebug;
 
     public function mount()
     {
@@ -35,26 +42,30 @@ class MaterialDebugPendingInCre extends Component
         $list = new MaterialSummaryPaginationHandler(100000, 0,'project_code');
         $list->setAdditionalParameters($additionalParameters);
         $data = $list->getAll();
-        $toSave = [];
+        $this->toDebug = [];
         foreach ($data as $key => $value) 
         {
-            if (!isset($toSave[$value->project_id])) 
+            if (!isset($this->toDebug[$value->project_id])) 
             {
-                $toSave[$value->project_id]['project'] = $value;
-                $toSave[$value->project_id]['list'][] = $value;
-                $toSave[$value->project_id]['string'] = $value->project_id.',';
+                $this->toDebug[$value->project_id]['project'] = $value;
+                $this->toDebug[$value->project_id]['list'][] = $value;
+                $this->toDebug[$value->project_id]['string'] = $value->project_id.',';
             }
             else
             {
-                $toSave[$value->project_id]['list'][] = $value;
-                $toSave[$value->project_id]['string'] .= $value->project_id.',';
+                $this->toDebug[$value->project_id]['list'][] = $value;
+                $this->toDebug[$value->project_id]['string'] .= $value->project_id.',';
             }
         }
-        dd($toSave);
+        $this->toDebug = collect($this->toDebug);
+        // dd(collect($toPaginate)->paginate(6));
     }
 
     public function render()
     {
-        return view('livewire.admin.material-debug-pending-in-cre');
+        $page = $this->page;
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $data = new LengthAwarePaginator($this->toDebug->forPage($page,5), $this->toDebug->count(), 5, $page);
+        return view('livewire.admin.material-debug-pending-in-cre', compact('data'));
     }
 }
