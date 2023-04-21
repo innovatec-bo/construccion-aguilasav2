@@ -57,14 +57,8 @@
                                         {{count($row['list'])}}
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-secondary" type="button">Depurar</button>
-                                        {{-- <div class="dropdown">
-                                            <button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdownMenuButton" type="button" data-coreui-toggle="dropdown" aria-expanded="false"><i class="fa fa-cogs"></i></button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="">
-                                                <li><a class="dropdown-item" href="#">Ver materiales</a></li>
-                                                <li><a class="dropdown-item" href="#">Depurar</a></li>
-                                            </ul>
-                                        </div> --}}
+                                        {{-- <button type="button" class="btn btn-secondary" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar todos</button> --}}
+                                        <button class="btn btn-sm btn-secondary" wire:click="$emit('showModal', 'admin.material-debug-single-project-modal', {{$row['project_id']}})" type="button">Depurar</button>
                                     </td>
                                 </tr>
                             @endforeach
