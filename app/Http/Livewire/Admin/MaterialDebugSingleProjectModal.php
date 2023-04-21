@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\CustomLibraries\MaterialSummaryPaginationHandler;
 use App\Models\MaterialSummary;
 use App\Models\Project;
+use App\Models\ProjectMaterial;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -32,33 +33,27 @@ class MaterialDebugSingleProjectModal extends Component
 
     public function debug()
     {
-        $materialSummary = new MaterialSummary([
-            'project_status_log_id_msu' => NULL,
-            'tension_level_msu' => 'TODOS',
-            'project_id_msu' => $this->projectId,
-            'applicant_project_id_msu' => $this->projectId,
-            'graph_number_msu' => NULL,
-            'destiny_msu' => '',
-            'entry_date_msu' => date('d-m-y H:i:s'),
-            'detail_msu' => 'Depuracion realizada por el usuario '. Auth::user()->fullName,
-            'builder_responsible_msu' => '',
-            'summary_type_id_msu',
-            'reservation_number_msu',
-            'file_id_msu',
-            'parent_summary_id_msu',
-            'is_loan_msu',
-            'loan_closed_msu',
-            'loan_closed_date_msu',
-            'correlative_counter_msu',
-            'fiscal_responsible_msu',
-            'deleted_msu',
-            'createdon_msu',
-            'createdby_msu',
-            'editedon_msu',
-            'status_id_msu',
-            'canceled_on_msu',
-            'withdrawn_on_msu',
-            'canceledby_msu',
-        ]);
+        $materialSummary = MaterialSummary::where('project_id_msu', $this->projectId)->where('summary_type_id_msu',1)->first()->duplicate();
+        $materialSummary->project_status_log_id_msu = null;
+        $materialSummary->graph_number_msu = null;
+        $materialSummary->entry_date_msu = date('Y-m-d H:i:s');
+        $materialSummary->detail_msu = 'Depuracion realizada por el usuario '. Auth::user()->fullName;
+        $materialSummary->correlative_counter_msu = 0;
+        $materialSummary->deleted_msu = 0;
+        $materialSummary->createdon_msu = date('Y-m-d H:i:s');
+        $materialSummary->createdby_msu = Auth::user()->fullName;
+        $materialSummary->save();
+
+        $toSave = [];
+        foreach ($this->materialSummaries as $key => $value) 
+        {
+            $toSave[] = new ProjectMaterial([
+                // 'material_id'
+            ]);
+        }
+
+        $materialSummary->projectMaterials()->saveMany();
+
+
     }
 }

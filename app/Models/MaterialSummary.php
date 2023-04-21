@@ -12,6 +12,7 @@ class MaterialSummary extends Model
     use HasFactory;
     use SoftDeletes;
     use Blameable;
+    use \Bkwld\Cloner\Cloneable;
 
     protected $table = "mat_materials_summary";
     protected $primaryKey = "id_msu";

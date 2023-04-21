@@ -9,6 +9,7 @@
         "bastinald/laravel-livewire-modals": "^3.0",
         "binarytorch/larecipe": "^2.5",
         "binarytorch/larecipe-dark-theme": "^0.1.5",
+        "bkwld/cloner": "^3.11",
         "diglactic/laravel-breadcrumbs": "^7.2",
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
