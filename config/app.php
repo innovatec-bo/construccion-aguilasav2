@@ -167,6 +167,7 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Bkwld\Cloner\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

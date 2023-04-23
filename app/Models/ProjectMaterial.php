@@ -15,6 +15,12 @@ class ProjectMaterial extends Model
     
     protected $table = "mat_projects_materials";
     protected $primaryKey = "id_prm";
+    protected $fillable = [
+        'material_id_prm',
+        'quantity_prm',
+        'status_id_prm',
+        'tension_id_prm'
+    ];
 
     const CREATED_AT = 'createdon_prm';
     const UPDATED_AT = 'editedon_prm';

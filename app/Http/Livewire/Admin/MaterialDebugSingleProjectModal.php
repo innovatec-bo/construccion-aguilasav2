@@ -38,6 +38,7 @@ class MaterialDebugSingleProjectModal extends Component
         $materialSummary->graph_number_msu = null;
         $materialSummary->entry_date_msu = date('Y-m-d H:i:s');
         $materialSummary->detail_msu = 'Depuracion realizada por el usuario '. Auth::user()->fullName;
+        $materialSummary->summary_type_id_msu = 19;//debug_pending_in_cre
         $materialSummary->correlative_counter_msu = 0;
         $materialSummary->deleted_msu = 0;
         $materialSummary->createdon_msu = date('Y-m-d H:i:s');
@@ -48,12 +49,19 @@ class MaterialDebugSingleProjectModal extends Component
         foreach ($this->materialSummaries as $key => $value) 
         {
             $toSave[] = new ProjectMaterial([
-                // 'material_id'
+                'material_id_prm' => $value['material_id'],
+                'quantity_prm' => $value['pending_material_in_cre'],
+                'status_id_prm' => $value['status_id_prm'],
+                'tension_id_prm' => $value['tension_id_prm']
             ]);
         }
-
-        $materialSummary->projectMaterials()->saveMany();
-
-
+        // dd($toSave);
+        if(count($toSave) > 0)
+        {
+            $materialSummary->projectMaterials()->saveMany($toSave);
+        }
+        
+        $this->emit('refreshMaterialDebugPendingInCre');
+        $this->emit('hideModal');
     }
 }

@@ -29,6 +29,7 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 			IFNULL(assigned_materials.quantity,0) quantity_assigned_materials,
 			IFNULL(additional_materials.quantity,0) quantity_additional_materials,
 			IFNULL(materials_picked_up_from_cre.quantity,0) quantity_picked_up_from_cre,
+			IFNULL(debug_pending_in_cre.quantity,0) quantity_debug_pending_in_cre,
 			(IFNULL(materials_delivered_to_builder.quantity,0) + IFNULL(materials_delivered_to_builder_loan.quantity,0) )- IFNULL(non_used_materials.quantity,0) quantity_materials_delivered_to_builder,
 			IFNULL(materials_delivered_to_cre.quantity,0) quantity_materials_delivered_to_cre,
 			IFNULL(builder_returns_new_materials.quantity,0) quantity_new_materials_returned_by_builder,
@@ -38,7 +39,7 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 			IFNULL(entry_by_conciliation_221.quantity,0) quantity_entry_by_conciliation_221,
 			IFNULL(non_used_materials.quantity,0) quantity_non_used_materials,
 			IFNULL(material_removed_from_construction.quantity,0) quantity_material_removed_from_construction,
-			IFNULL(assigned_materials.quantity,0) - IFNULL(materials_picked_up_from_cre.quantity,0) pending_material_in_cre,
+			IFNULL(assigned_materials.quantity,0) - IFNULL(materials_picked_up_from_cre.quantity,0) - IFNULL(debug_pending_in_cre.quantity,0) pending_material_in_cre,
 			IFNULL(request_materials.quantity,0) request_materials_quantity,
 		";
 		if(isset($this->_additionalParameters['grouping-criteria']) && trim($this->_additionalParameters['grouping-criteria']) == 'project_id_msu')
@@ -48,6 +49,7 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 				sum(IFNULL(assigned_materials.quantity,0)) quantity_assigned_materials,
 				sum(IFNULL(additional_materials.quantity,0)) quantity_additional_materials,
 				sum(IFNULL(materials_picked_up_from_cre.quantity,0)) quantity_picked_up_from_cre,
+				sum(IFNULL(debug_pending_in_cre.quantity,0)) quantity_debug_pending_in_cre,
 				sum((IFNULL(materials_delivered_to_builder.quantity,0) + IFNULL(materials_delivered_to_builder_loan.quantity,0) )- IFNULL(non_used_materials.quantity,0)) quantity_materials_delivered_to_builder,
 				sum(IFNULL(materials_delivered_to_cre.quantity,0)) quantity_materials_delivered_to_cre,
 				sum(IFNULL(builder_returns_new_materials.quantity,0)) quantity_new_materials_returned_by_builder,
@@ -57,7 +59,7 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 				sum(IFNULL(entry_by_conciliation_221.quantity,0)) quantity_entry_by_conciliation_221,
 				sum(IFNULL(non_used_materials.quantity,0)) quantity_non_used_materials,
 				sum(IFNULL(material_removed_from_construction.quantity,0)) quantity_material_removed_from_construction,
-				sum(IFNULL(assigned_materials.quantity,0) - IFNULL(materials_picked_up_from_cre.quantity,0)) pending_material_in_cre,
+				sum(IFNULL(assigned_materials.quantity,0) - IFNULL(materials_picked_up_from_cre.quantity,0) - IFNULL(debug_pending_in_cre.quantity,0) ) pending_material_in_cre,
 				sum(IFNULL(request_materials.quantity,0)) request_materials_quantity,
 			";
 		}
@@ -70,6 +72,7 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 					{$mainColumns}
 					(
 						IFNULL(materials_picked_up_from_cre.quantity,0) +
+						IFNULL(debug_pending_in_cre.quantity,0) +
 						IFNULL(entry_by_conciliation_221.quantity,0) +
 						IFNULL(non_used_materials.quantity,0) +
 						IFNULL(material_removed_from_construction.quantity,0) + 
@@ -194,6 +197,9 @@ class MaterialSummaryPaginationHandler extends BasePaginationHandler
 				LEFT JOIN (
 					{$this->_subQueryQuantity('18')}
 				) builder_returns_materials on builder_returns_materials.material_id = working_materials.material_id and builder_returns_materials.project_id = working_materials.project_id
+				LEFT JOIN (
+					{$this->_subQueryQuantity('19')}
+				) debug_pending_in_cre on debug_pending_in_cre.material_id = working_materials.material_id and debug_pending_in_cre.project_id = working_materials.project_id
 					{$groupBy}
 			) ".static::TABLE_NAME."_master_detail
 		";//echo"<pre>";var_dump($this->_applyNestedFilters($coreQuery));exit;

@@ -41,6 +41,12 @@
                     </thead>
                     <tbody>
                         @foreach ($materialSummaries as $materialSummary)
+                            @php
+                                if(is_array($materialSummary))
+                                {
+                                    $materialSummary = (object)$materialSummary;
+                                }
+                            @endphp
                             <tr>
                                 <td class="stacked-info text-end">
                                     {{ $materialSummary->material_code }}

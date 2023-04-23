@@ -55,6 +55,7 @@
                                     </td>
                                     <td class="text-end"> 
                                         {{count($row['list'])}}
+                                         {{-- ({{$row['quantity_debug_pending_in_cre']}}) --}}
                                     </td>
                                     <td class="text-center">
                                         {{-- <button type="button" class="btn btn-secondary" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar todos</button> --}}

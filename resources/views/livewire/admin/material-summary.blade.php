@@ -174,6 +174,7 @@
                                     </td>
                                     <td class="text-end"> 
                                         {{ number_format($materialSummary->pending_material_in_cre,'2','.',',') }}
+                                        {{-- ({{$materialSummary->quantity_debug_pending_in_cre}}) --}}
                                     </td>
                                     <td class="text-end"> 
                                         {{ number_format($materialSummary->quantity_materials_delivered_to_builder,'2','.',',') }} 
