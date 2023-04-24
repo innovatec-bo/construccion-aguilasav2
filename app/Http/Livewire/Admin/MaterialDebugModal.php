@@ -32,6 +32,11 @@ class MaterialDebugModal extends Component
     }
 
     public function debug()
+    {
+        dd('Aun en desarrollo');
+    }
+
+    public function debug_()
     {        
         $ids = [];
         foreach ($this->statusToDebug as $value) 

@@ -14977,3 +14977,8 @@ html:not([dir=rtl]) .wrapper {
   top: 0;
   width: 100%;
 }
+
+.stacked-info {
+  padding-top: 7px !important;
+  line-height: 0.94;
+}

@@ -80,9 +80,4 @@ class MaterialDebugPendingInCre extends Component
         // dd($data);
         return view('livewire.admin.material-debug-pending-in-cre', compact('data'));
     }
-
-    public function execute()
-    {
-
-    }
 }

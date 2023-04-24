@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-md-12">
         <div class="card shadow-lg">
-            <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, search">
+            <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, search,groupByProject,projectCode,projectStatusId,materialCode">
                 <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
@@ -38,7 +38,6 @@
                     <div class="form-group col">
                         <div class="d-grid gap-2 d-md-block">
                             <button type="button" wire:click="resetFilters" class="btn btn-primary mt-4">Quitar filtros</button>
-                            <button type="button" class="btn btn-danger mt-4 ms-2" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar</button>
                         </div>
                     </div>
                 </div>
