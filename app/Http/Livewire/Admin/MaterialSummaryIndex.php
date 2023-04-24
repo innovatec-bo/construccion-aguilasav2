@@ -26,6 +26,7 @@ class MaterialSummaryIndex extends Component
     public $materialSummaryTypes;
     protected $queryString = [
         'idMSU' => ['except' => '', 'as' => 'id-de-movimiento'],
+        'projectCode' => ['except' => '', 'as' => 'codigo'],
         'materialSummaryTypeSelected' => ['except' => '', 'as' => 'tipo-de-movimiento'],
         'from' => ['except' => '', 'as' => 'desde'],
         'to' => ['except' => '', 'as' => 'hasta']
@@ -70,8 +71,8 @@ class MaterialSummaryIndex extends Component
             $query->where('id_msu', $this->idMSU);
         })
         ->when($this->projectCode, function(Builder $query, $projectCode){
-            $query->orWhereHas('project', function(Builder $query){
-                $query->where('code_pro','like', '%'.$this->projectCode.'%');
+            $query->whereHas('project', function(Builder $query){
+                $query->where('code_pro','like', '%'.$this->projectCode);
             });
         })
         ->when($this->from, function(Builder $query, $from){

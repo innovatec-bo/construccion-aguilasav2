@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\admin;
 
+use App\CustomLibraries\MaterialSummaryPaginationHandler;
 use App\Models\Material;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -24,7 +25,9 @@ class MaterialIndex extends Component
 
     public function render()
     {
+        $materialSummary = new MaterialSummaryPaginationHandler(20);
 
+        dd($materialSummary->getAll());
         $materials = Material::Where(function($query){
             $query->where('code_mat','like','%'.$this->search.'%')
             ->orWhere('name_mat','like','%'.$this->search.'%')

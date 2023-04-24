@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="card mb-4 position-relative">
+        <div class="card mb-4 position-relative shadow-lg">
             <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, search">
                 <div class="spinner-grow" role="status">
                     <span class="visually-hidden">Loading...</span>

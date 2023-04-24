@@ -12,6 +12,15 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>COD Proyecto</label>
+                            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="projectCode">
+                            @error('projectCode')
+                                <span class="text-danger small">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Tipo de movimiento</label>
