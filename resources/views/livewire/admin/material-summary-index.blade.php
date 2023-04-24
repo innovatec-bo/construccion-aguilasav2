@@ -50,13 +50,13 @@
                 </div>
             </div>
 
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="overlay dark d-none" wire:loading.class="d-flex"
                     wire:target="delete, previousPage, nextPage, gotoPage, idMSU">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-sm table-hover table-striped">
+                    <table class="table table-bordered table-sm table-hover table-striped mb-0">
                         <thead>
                             <tr>
                                 <th style="width: 10px">ID</th>
@@ -101,12 +101,12 @@
                                     <td class="text-center">
                                         @can('admin.materials-summary.edit')
                                             @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
-                                                <a wire:loading.class="disabled" class="btn btn-primary btn-sm my-2" href="{{ route('admin.materials-summary.edit', $materialSummary) }}"><i class="fas fa-pen"></i></a>
+                                                <a wire:loading.class="disabled" class="btn btn-primary btn-sm" href="{{ route('admin.materials-summary.edit', $materialSummary) }}"><i class="fas fa-pen"></i></a>
                                             @endif
                                         @endcan
-                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-sm my-2" href='{{ route('admin.materials-summary.show', $materialSummary) }}'><i class="fas fa-eye"></i></a>
+                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-sm" href='{{ route('admin.materials-summary.show', $materialSummary) }}'><i class="fas fa-eye"></i></a>
                                         @if (Auth::user()->email == 'jair@twiiti.com')
-                                            <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-sm lv-confirm-action my-2"><i class="fas fa-trash"></i></a>
+                                            <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-sm lv-confirm-action"><i class="fas fa-trash"></i></a>
                                         @endif
                                     </td>
                                 </tr>
