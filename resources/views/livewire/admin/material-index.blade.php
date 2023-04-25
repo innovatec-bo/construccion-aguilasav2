@@ -28,7 +28,7 @@
                                     <td>{{$material->code_mat}}</td>
                                     <td>{{$material->description_mat}}</td>
                                     <td>{{$material->unit_of_measurement_mat}}</td>
-                                    <td></td>
+                                    <td>{{number_format($materialQuantity[$material->id_mat]??0.00,2,'.',',')}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

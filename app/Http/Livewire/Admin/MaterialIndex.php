@@ -25,9 +25,7 @@ class MaterialIndex extends Component
 
     public function render()
     {
-        $materialSummary = new MaterialSummaryPaginationHandler(20);
-
-        dd($materialSummary->getAll());
+        
         $materials = Material::Where(function($query){
             $query->where('code_mat','like','%'.$this->search.'%')
             ->orWhere('name_mat','like','%'.$this->search.'%')
@@ -36,7 +34,27 @@ class MaterialIndex extends Component
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
 
-        return view('livewire.admin.material-index', compact('materials'));
+        $itemsID = [];
+        foreach ($materials->items() as $key => $value) 
+        {
+            $itemsID[] = $value->id_mat;
+        }
+        $itemsID = implode(" ",$itemsID);
+        $materialSummary = new MaterialSummaryPaginationHandler(20);
+        $additionalParameters = [
+            'grouping-criteria' => 'material_id_prm',
+            'material-ids'  => $itemsID
+        ];
+        $materialSummary->setAdditionalParameters($additionalParameters);
+        
+        $summaryList = $materialSummary->getAll();
+        $materialQuantity = [];
+        foreach ($summaryList as $value) 
+        {
+            $materialQuantity[$value->material_id] = $value->quantity_in_warehouse;
+        }
+
+        return view('livewire.admin.material-index', compact('materials','materialQuantity'));
     }
 
     public function order($sort)
