@@ -6,6 +6,7 @@ use App\CustomLibraries\MaterialSummaryPaginationHandler;
 use App\Models\Material;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class MaterialIndex extends Component
 {
@@ -39,21 +40,46 @@ class MaterialIndex extends Component
         {
             $itemsID[] = $value->id_mat;
         }
-        $itemsID = implode(" ",$itemsID);
-        $materialSummary = new MaterialSummaryPaginationHandler(20);
-        $additionalParameters = [
-            'grouping-criteria' => 'material_id_prm',
-            'material-ids'  => $itemsID
-        ];
-        $materialSummary->setAdditionalParameters($additionalParameters);
+        $itemsID = implode(",",$itemsID);
+        $sql = "
+        select material_id_prm material_id, x.entry, x.exit, x.entry-x.exit 'stock' from (
+            select
+                mat_materials_summary.id_msu,
+                movement_type_mqt,
+                SUM(CASE 
+                WHEN movement_type_mqt = 'in' 
+                THEN quantity_prm
+                ELSE 0 
+                END) AS 'entry',
+                SUM(CASE 
+                WHEN movement_type_mqt = 'out' 
+                THEN quantity_prm
+                ELSE 0 
+                END) AS 'exit',
+                mat_projects_materials.*
+            from 
+                mat_projects_materials 
+                LEFT join mat_materials_summary on id_msu = materials_summary_id_prm
+                left join mat_materials_summary_types on mat_materials_summary.summary_type_id_msu = id_mqt
+                where 
+                movement_type_mqt in ('in','out')
+                and material_id_prm in ($itemsID)
+                and deleted_prm != 1
+                and mat_projects_materials.deleted_at is null
+                and deleted_msu != 1
+                and mat_materials_summary.deleted_at is null
+                group by material_id_prm
+            ) x
+        order by stock;
+        ";
+        $result = DB::select($sql);
+        $summaryList = $result;
         
-        $summaryList = $materialSummary->getAll();
         $materialQuantity = [];
         foreach ($summaryList as $value) 
         {
-            $materialQuantity[$value->material_id] = $value->quantity_in_warehouse;
+            $materialQuantity[$value->material_id] = $value->stock;
         }
-
         return view('livewire.admin.material-index', compact('materials','materialQuantity'));
     }
 

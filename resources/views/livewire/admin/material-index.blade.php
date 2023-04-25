@@ -11,14 +11,17 @@
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover">
+                    <table class="table table-bordered table-striped table-hover  m-0">
                         <thead>
                             <tr>
                                 <th style="width: 10px">ID</th>
                                 <th>Codigo</th>
                                 <th>Descripcion</th>
                                 <th>Unidad de medida</th>
-                                <th>Cantidad en Almac&eacute;n</th>
+                                <th class="stacked-info">
+                                    Cantidad en Almac&eacute;n<br>
+                                    <small class="text-warning">A&uacute;n en analisis</small>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,8 +30,8 @@
                                     <td>{{$material->id_mat}}</td>
                                     <td>{{$material->code_mat}}</td>
                                     <td>{{$material->description_mat}}</td>
-                                    <td>{{$material->unit_of_measurement_mat}}</td>
-                                    <td>{{number_format($materialQuantity[$material->id_mat]??0.00,2,'.',',')}}</td>
+                                    <td class="text-center">{{$material->unit_of_measurement_mat}}</td>
+                                    <td class="text-end">{{number_format($materialQuantity[$material->id_mat]??0.00,2,'.',',')}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
