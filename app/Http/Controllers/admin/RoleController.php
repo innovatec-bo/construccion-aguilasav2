@@ -81,9 +81,18 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $permissionsGrouping = [];
         $permissions = Permission::orderBy('detail')->get()->pluck('detail','id');
         $permissionInRole = $role->permissions->pluck('id');
-        return view('admin.roles.edit', compact('role','permissions', 'permissionInRole'));
+        foreach ($permissions as $key => $value) 
+        {
+            $explode = explode(':',$value);
+            $group = trim($explode[0]);
+            $permission = trim($explode[1]);
+            $permissionsGrouping[$group][$key] = $permission;
+        }
+        // dd($permissionsGrouping);
+        return view('admin.roles.edit', compact('role','permissions', 'permissionInRole', 'permissionsGrouping'));
     }
 
     /**
