@@ -64,6 +64,9 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::post('observaciones-externas/marcar-como-resuelto-actualizar/{external_observation}', 'ExternalObservationController@markAsFixedUpdate')->name('external-observations.mark-as-fixed-update');
     Route::get('observaciones-externas/marcar-como-resuelto/{external_observation}', 'ExternalObservationController@markAsFixed')->name('external-observations.mark-as-fixed');
     Route::resource('observaciones-externas', 'ExternalObservationController')->parameters(['observaciones-externas' => 'external_observation'])->names('external-observations');
+
+    //External balance material
+    Route::resource('balance-externo-de-materiales', 'ExternalBalanceMaterialController')->parameters(['balance-externo-de-materiales' => 'external_balance_material'])->names('external-balance-material');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');

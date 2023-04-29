@@ -1,9 +1,9 @@
 @extends('layouts.dashboard-layout')
 
-@section('title', 'Balance externo de materiales')
+@section('title', 'Usuarios')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('admin.external-balance-material.index') }}
+    {{ Breadcrumbs::render('admin.users.index') }}
 @stop
 
 @section('content')

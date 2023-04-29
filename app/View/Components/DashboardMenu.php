@@ -130,9 +130,9 @@ class DashboardMenu extends Component
                         'icon'        => 'fas fa-fw fa-bug',
                     ],
                     [
-                        'text'        => 'Registro 221 - 222',
-                        'route'       => 'admin.materials.material-summary',
-                        'can'         => ['admin.materials.material-summary'],
+                        'text'        => 'Balance externo de materiales',
+                        'route'       => 'admin.external-balance-material.index',
+                        'can'         => ['admin.external-balance-material.index'],
                         'icon'        => 'fas fa-fw fa-table',
                     ],
                     

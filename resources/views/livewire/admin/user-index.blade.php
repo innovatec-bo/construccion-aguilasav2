@@ -15,13 +15,13 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="overlay dark d-none" wire:loading.class="d-flex"
                     wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover table-sm">
+                    <table class="table table-bordered table-striped table-hover mb-0">
                         <thead>
                             <tr>
                                 <th style="width: 10px">ID</th>

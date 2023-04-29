@@ -1,13 +1,13 @@
 @extends('layouts.dashboard-layout')
 
-@section('title', 'Balance externo de materiales')
+@section('title', 'Nuevo usuario')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('admin.external-balance-material.index') }}
+    {{ Breadcrumbs::render('admin.users.create') }}
 @stop
 
 @section('content')
-    @livewire('admin.user-index')
+    @livewire('admin.user-create')
 @stop
 
 @section('css')

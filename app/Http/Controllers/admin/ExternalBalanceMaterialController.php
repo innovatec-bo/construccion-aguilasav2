@@ -1,0 +1,95 @@
+<?php
+
+namespace App\Http\Controllers\admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\ExternalBalanceMaterial;
+use Illuminate\Http\Request;
+
+class ExternalBalanceMaterialController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('permission:admin.external-balance-material.index', ['only' => ['index']]);
+        $this->middleware('permission:admin.external-balance-material.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:admin.external-balance-material.edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:admin.external-balance-material.show', ['only' => ['show']]); 
+        $this->middleware('permission:admin.external-balance-material.delete', ['only' => ['destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('admin.user.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\ExternalBalanceMaterial  $externalBalanceMaterial
+     * @return \Illuminate\Http\Response
+     */
+    public function show(ExternalBalanceMaterial $externalBalanceMaterial)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ExternalBalanceMaterial  $externalBalanceMaterial
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(ExternalBalanceMaterial $externalBalanceMaterial)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\ExternalBalanceMaterial  $externalBalanceMaterial
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, ExternalBalanceMaterial $externalBalanceMaterial)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\ExternalBalanceMaterial  $externalBalanceMaterial
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ExternalBalanceMaterial $externalBalanceMaterial)
+    {
+        //
+    }
+}
