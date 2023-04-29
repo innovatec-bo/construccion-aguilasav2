@@ -35,8 +35,16 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $permissionsGrouping = [];
         $permissions = Permission::orderBy('detail')->get()->pluck('detail','id');
-        return view('admin.roles.create', compact('permissions'));
+        foreach ($permissions as $key => $value) 
+        {
+            $explode = explode(':',$value);
+            $group = trim($explode[0]);
+            $permission = trim($explode[1]);
+            $permissionsGrouping[$group][$key] = $permission;
+        }
+        return view('admin.roles.create', compact('permissions', 'permissionsGrouping'));
     }
 
     /**
