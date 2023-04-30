@@ -59,12 +59,22 @@
                                                         data-bs-placement="top" class="avatar avatar-sm pull-up" title="{{ $user->fullName }}"
                                                         aria-label="{{ $user->fullName }}" data-bs-original-title="{{ $user->fullName }}">
                                                         <img class="rounded-circle" src="https://dummyimage.com/32x32/f0f0f0.jpg&text={{$abbreviature}}" alt="Avatar">
-                                                    </li>    
+                                                    </li>
+                                                @else
+                                                    @php
+                                                        $count++
+                                                    @endphp
                                                 @endif
-
-                                                {{-- $count++ --}}
                                             @endforeach
+                                            @if ($count > 0)
+                                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                                    data-bs-placement="top" class="avatar avatar-sm pull-up" title="+{{$count}}"
+                                                    aria-label="+{{$count}}" data-bs-original-title="+{{$count}}">
+                                                    <img class="rounded-circle" src="https://dummyimage.com/32x32/f0f0f0.jpg&text={{'+'.$count}}" alt="Avatar">
+                                                </li>
+                                            @endif
                                         </ul>
+                                        
                                     </div>
                                     <div class="d-flex justify-content-between align-items-end mt-1">
                                         <div class="role-heading">
