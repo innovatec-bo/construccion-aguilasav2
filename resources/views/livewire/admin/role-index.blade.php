@@ -35,26 +35,51 @@
                     wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
+
                 <div class="row">
                     @foreach ($roles as $role)
                         <div class="col-md-4">
                             <div class="card border-top-light border-top-3 mb-3">
-                                <div class="card-header">Total: 5 usuarios</div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $role->name }}</h5>
-                                    {{-- <p class="card-text">Editar rol</p> --}}
-                                    @can('admin.roles.edit')
-                                            <a class="" href='{{ route('admin.roles.edit', $role) }}'">Editar</a>
-                                        @endcan
-                                    @can('admin.roles.show')
-                                        <a class="ms-2" href='{{ route('admin.roles.show', $role) }}'">Ver</a>
-                                    @endcan
+                                @php
+                                    $users = App\Models\User::role($role->name)->get();
+                                @endphp
+                                <div class="card-body position-relative">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="fw-normal mb-2">Total: {{ count($users) }} usuarios</h6>
+                                        <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
+                                            @php
+                                                $count = 0;
+                                            @endphp
+                                            @foreach ($users as $key => $user)
+                                                @if ($key < 5)
+                                                    @php
+                                                        $abbreviature = strtoupper(substr($user->firstname_usr, 0, 1) . substr($user->lastname_usr, 0, 1));
+                                                    @endphp
+                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                                        data-bs-placement="top" class="avatar avatar-sm pull-up" title="{{ $user->fullName }}"
+                                                        aria-label="{{ $user->fullName }}" data-bs-original-title="{{ $user->fullName }}">
+                                                        <img class="rounded-circle" src="https://dummyimage.com/32x32/f0f0f0.jpg&text={{$abbreviature}}" alt="Avatar">
+                                                    </li>    
+                                                @endif
+
+                                                {{-- $count++ --}}
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-end mt-1">
+                                        <div class="role-heading">
+                                            <h4 class="mb-1">{{$role->name}}</h4>
+                                            @can('admin.roles.edit')
+                                                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addRoleModal" class="role-edit-modal"><span>Edit Role</span></a>
+                                            @endcan
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive d-none">
                     <table class="table table-bordered table-hover table-striped table-sm">
                         <thead>
                             <tr>
@@ -90,28 +115,6 @@
             <div class="card-footer clearfix">
                 <div class="table-responsive">
                     {{ $roles->links() }}
-                    <ul class="list-unstyled avatar-group">
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                            title="Vinnie Mostowy" class="avatar pull-up">
-                            <img class="rounded-circle" src="https://dummyimage.com/40x40/f0f0f0.jpg&text=JC"
-                                alt="Avatar">
-                        </li>
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                            title="Allen Rieske" class="avatar pull-up">
-                            <img class="rounded-circle" src="https://dummyimage.com/40x40/f0f0f0.jpg&text=JC"
-                                alt="Avatar">
-                        </li>
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                            title="Julee Rossignol" class="avatar pull-up">
-                            <img class="rounded-circle" src="https://dummyimage.com/40x40/f0f0f0.jpg&text=JC"
-                                alt="Avatar">
-                        </li>
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                            title="Darcey Nooner" class="avatar pull-up">
-                            <img class="rounded-circle" src="https://dummyimage.com/40x40/f0f0f0.jpg&text=JC"
-                                alt="Avatar">
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

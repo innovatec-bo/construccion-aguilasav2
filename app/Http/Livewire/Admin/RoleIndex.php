@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\admin;
 
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
@@ -30,7 +31,7 @@ class RoleIndex extends Component
         })
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
-
+        
         return view('livewire.admin.role-index', compact('roles'));
     }
 
