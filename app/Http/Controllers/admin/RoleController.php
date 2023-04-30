@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -100,7 +101,8 @@ class RoleController extends Controller
             $permissionsGrouping[$group][$key] = $permission;
         }
         // dd($permissionsGrouping);
-        return view('admin.roles.edit', compact('role','permissions', 'permissionInRole', 'permissionsGrouping'));
+        $users = User::role($role->name)->orderby('firstname_usr')->get();
+        return view('admin.roles.edit', compact('role','permissions', 'permissionInRole', 'permissionsGrouping', 'users'));
     }
 
     /**

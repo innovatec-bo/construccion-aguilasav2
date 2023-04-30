@@ -23,6 +23,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                @if (count($users) > 0)
+                                    @foreach ($users as $user)
+                                        <span class="badge bg-primary">{{$user->fullName}}</span>    
+                                    @endforeach    
+                                @else
+                                    No existen usuarios con el rol de {{$role->name}}                                    
+                                @endif
+                            </div>
+                        </div>
                         <div class="row">
                             @foreach ($permissionsGrouping as $title => $permissions)
                                 <div class="col-md-4">

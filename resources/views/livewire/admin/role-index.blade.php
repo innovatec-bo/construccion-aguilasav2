@@ -80,7 +80,7 @@
                                         <div class="role-heading">
                                             <h4 class="mb-1">{{$role->name}}</h4>
                                             @can('admin.roles.edit')
-                                                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addRoleModal" class="role-edit-modal"><span>Edit Role</span></a>
+                                                <a href="{{ route('admin.roles.edit', $role) }}" class="role-edit-modal"><span>Edit Role</span></a>
                                             @endcan
                                         </div>
                                     </div>
