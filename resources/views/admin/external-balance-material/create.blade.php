@@ -84,11 +84,11 @@
                           </div> --}}
                         </div>
                         <div class="col mb-sm-2 mb-0">
-                          <div class="text-medium-emphasis">Ingresos(221)</div>
+                          <div class="text-medium-emphasis">Registros 221</div>
                           <div class="fw-semibold">24.093 Users (20%)</div>
                         </div>
                         <div class="col mb-sm-2 mb-0">
-                          <div class="text-medium-emphasis">Egresos(222)</div>
+                          <div class="text-medium-emphasis">Registros 222</div>
                           <div class="fw-semibold">78.706 Views (60%)</div>
                         </div>
                         <div class="col mb-sm-2 mb-0">
