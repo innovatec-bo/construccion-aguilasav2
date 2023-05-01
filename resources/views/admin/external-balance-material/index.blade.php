@@ -1,19 +1,21 @@
 @extends('layouts.dashboard-layout')
 
-@section('title', 'Usuarios')
+@section('title', 'Balance externo de materiales')
 
 @section('breadcrumb')
     {{ Breadcrumbs::render('admin.users.index') }}
 @stop
 
 @section('content')
-    @livewire('admin.user-index')
+    Aqui ira una lista de todos los archivos cargados
+    
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    
 @stop
 
 @section('js')
+    
     {{-- <script> console.log('Hi!'); </script> --}}
 @stop

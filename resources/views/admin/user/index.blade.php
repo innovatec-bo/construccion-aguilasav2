@@ -1,9 +1,9 @@
 @extends('layouts.dashboard-layout')
 
-@section('title', 'Balance externo de materiales')
+@section('title', 'Usuarios')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('admin.external-balance-material.index') }}
+    {{ Breadcrumbs::render('admin.users.index') }}
 @stop
 
 @section('content')
@@ -11,9 +11,9 @@
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @stop
 
 @section('js')
-    {{-- <script> console.log('Hi!'); </script> --}}
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 @stop

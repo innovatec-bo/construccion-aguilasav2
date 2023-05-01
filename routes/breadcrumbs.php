@@ -203,8 +203,13 @@ Breadcrumbs::for('admin.roles.edit', function (BreadcrumbTrail $trail, $role) {
     $trail->push('Editar rol', route('admin.roles.edit', $role->id));
 });
 
-// External balance material
+// External balance material - index
 Breadcrumbs::for('admin.external-balance-material.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');
     $trail->push('Balance externo de materiales', route('admin.external-balance-material.index'));
+});
+// External balance material - create
+Breadcrumbs::for('admin.external-balance-material.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Importar balance externo de materiales', route('admin.external-balance-material.create'));
 });

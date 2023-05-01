@@ -24,7 +24,7 @@ class ExternalBalanceMaterialController extends Controller
      */
     public function index()
     {
-        return view('admin.user.index');
+        return view('admin.external-balance-material.index');
     }
 
     /**
@@ -34,7 +34,7 @@ class ExternalBalanceMaterialController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.external-balance-material.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class ExternalBalanceMaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
