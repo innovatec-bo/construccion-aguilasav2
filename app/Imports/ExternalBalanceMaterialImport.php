@@ -2,20 +2,15 @@
 
 namespace App\Imports;
 
-use App\Models\ExternalBalanceMaterial;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class ExternalBalanceMaterialImport implements ToModel
+class ExternalBalanceMaterialImport implements WithMultipleSheets
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    public function sheets(): array
     {
-        return new ExternalBalanceMaterial([
-            //
-        ]);
+        return [
+            0 => new ExternalBalanceMaterialDataImport(),
+        ];
     }
 }

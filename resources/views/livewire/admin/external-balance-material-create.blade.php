@@ -8,8 +8,8 @@
                 {{-- <h5 class="card-title">Special title treatment</h5> --}}
                 <p class="card-text">El balance externo de materiales contiene un resumen de los materiales que ya se han
                     devuelto y que aun deben devolverse a CRE</p>
-                <p class="card-text">La importacion del archivo excel consta de 3 pasos:</p>
-                <ol>
+                {{-- <p class="card-text">La importacion del archivo excel consta de 3 pasos:</p> --}}
+                {{-- <ol>
                     <li>Cuando se selecciona el archivo, este es leido por el sistema y arroja un breve detalle, sobre
                         el nombre y el peso del mismo</li>
                     <li>Cuando el achivo es seleccionado, aparece un boton llamado "Pre cargar", que nos da un detalle
@@ -17,7 +17,7 @@
                     <li>Si la informacion observada con el boton "Pre cargar" es satisfactoria, entonces procedemos a
                         cargar el archivo. Nota: debido a que el archivo es bastante pesado, no se almacena en el
                         servidor.</li>
-                </ol>
+                </ol> --}}
                 <p class="text-center">
                     <a class="btn btn-primary fileinput-button" href="javascript:void(0);">Cargar Balance externo de materiales</a>
                     {{-- <a class="btn btn-primary start" href="javascript:void(0);">Cargar</a> --}}
@@ -46,7 +46,7 @@
                                             </td>
                                             <td>
                                                 <a class="btn btn-danger" data-dz-remove href="javascript:void(0);">Cancelar</a>
-                                                <a class="btn btn-primary start" href="javascript:void(0)">Pre cargar</a>
+                                                <a class="btn btn-primary start" href="javascript:void(0)">Cargar</a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -130,8 +130,16 @@
 
             myDropzone.on("complete", function(file) {
                 // Hookup the start button
-                // myDropzone.removeFile(file);
+                // console.log(file);
+                myDropzone.removeFile(file);
                 // @this.refreshPost();
+                
+            });
+
+            myDropzone.on("success", function(file, responseText) {
+                var responseText = file.id // or however you would point to your assigned file ID here;
+                console.log(responseText); // console should show the ID you pointed to
+                // do stuff with file.id ...
             });
         });
     </script>

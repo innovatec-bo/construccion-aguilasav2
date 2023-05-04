@@ -33,7 +33,6 @@ class CreateExternalBalanceMaterialsTable extends Migration
             $table->string('Registrado');
             $table->string('EjMat');
             $table->string('Cecoste');
-            $table->string('Grafo');
             $table->timestamps();
         });
     }

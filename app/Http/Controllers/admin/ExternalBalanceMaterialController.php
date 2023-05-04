@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ExternalBalanceMaterialImport;
 use App\Models\ExternalBalanceMaterial;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExternalBalanceMaterialController extends Controller
 {
@@ -45,7 +48,15 @@ class ExternalBalanceMaterialController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        ini_set('memory_limit', '512M');
+        $data = Excel::import(new ExternalBalanceMaterialImport, $request->file('file'));
+        dd($data);
+        $response['var1'] = 'var 1';
+        $response['var2'] = 'var 2';
+        $response['data'] = $data;
+        return response()->json(
+            $response
+        );
     }
 
     /**
