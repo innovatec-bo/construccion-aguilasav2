@@ -49,7 +49,7 @@ class ExternalBalanceMaterialController extends Controller
      */
     public function store(Request $request)
     {
-        set_time_limit(180);
+        set_time_limit(300);
         ini_set('memory_limit', '750M');
         
         $import = new ExternalBalanceMaterialImport();
