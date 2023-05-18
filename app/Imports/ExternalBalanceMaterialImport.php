@@ -10,7 +10,7 @@ class ExternalBalanceMaterialImport implements WithMultipleSheets
     public function sheets(): array
     {
         return [
-            0 => new ExternalBalanceMaterialDataImport(),
+            new ExternalBalanceMaterialDataImport(),
         ];
     }
 }

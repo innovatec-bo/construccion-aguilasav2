@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ExternalBalanceMaterialDataImport;
 use App\Imports\ExternalBalanceMaterialImport;
 use App\Models\ExternalBalanceMaterial;
 use Illuminate\Http\Request;
@@ -48,12 +49,26 @@ class ExternalBalanceMaterialController extends Controller
      */
     public function store(Request $request)
     {
-        ini_set('memory_limit', '512M');
-        $data = Excel::import(new ExternalBalanceMaterialImport, $request->file('file'));
-        dd($data);
+        set_time_limit(120);
+        ini_set('memory_limit', '750M');
+        
+        $import = new ExternalBalanceMaterialImport();
+        $array = Excel::import($import, $request->file('file'));
+        
+        // dd('toc toc',$array->total);
+        // foreach ($array as $row) 
+        // {
+            
+        // }
+        // dd($import->data);
+        // foreach($data as $key => $row)
+        // {
+        //     dd('toc toc2',$key,$row);
+        // }
+        
         $response['var1'] = 'var 1';
         $response['var2'] = 'var 2';
-        $response['data'] = $data;
+        // $response['data'] = $data;
         return response()->json(
             $response
         );
