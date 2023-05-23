@@ -7,17 +7,36 @@
 @stop
 
 @section('content')
-    <div class="row row justify-content-around mb-4">
+    <div class="row row-cols-1 justify-content-center row-cols-md-5 text-center mb-2">
+        <div class="col mb-sm-2 mb-0">
+        <div class="text-medium-emphasis">Proyecto</div>
+        <div class="fw-semibold">RA.23.0098</div>
+        </div>
+        <div class="col mb-sm-2 mb-0">
+        <div class="text-medium-emphasis">Producci&oacute;n</div>
+        <div class="fw-semibold">24.093 Users (20%)</div>
+        </div>
+        <div class="col mb-sm-2 mb-0">
+        <div class="text-medium-emphasis">Estado</div>
+        <div class="fw-semibold">78.706 Views (60%)</div>
+        </div>
+    </div>
+    <div class="row justify-content-around mb-4">
         <div class="col-sm-6 col-md-2">
             <div class="card">
                 <div class="card-body">
-                <div class="text-medium-emphasis text-end mb-4">
+                <div class="text-medium-emphasis text-end mb-3">
                     <svg class="icon icon-xxl">
                         <x-coreui-icon svgClass="nav-icon" icon="cil-dollar"/>
                     </svg>
                 </div>
-                <div class="fs-4 fw-semibold">12,813.63</div><small class="text-medium-emphasis text-uppercase fw-semibold">Importe</small>
+                <div class="fs-4 fw-semibold">12,813.63</div>
+                <small class="text-medium-emphasis text-uppercase fw-semibold">Importe</small>
+                <div class="progress progress-thin mt-0 mb-0">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
+                </div>
+                
             </div>
             </div>
         <div class="col-sm-6 col-md-2">
@@ -85,6 +104,11 @@
         </div>
         </div>
         <!-- /.col-->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            
+        </div>
     </div>
     <div class="row justify-content-center">
         <style>
