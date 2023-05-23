@@ -14,14 +14,14 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, search">
                     <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
                         <span class="visually-hidden">Loading...</span>
                       </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover table-sm small">
+                    <table class="table table-bordered table-striped table-hover table-sm small mb-0">
                         <thead>
                             <tr class="text-center">
                                 <th>C&oacute;digo</th>
@@ -65,7 +65,7 @@
                                             <span class="text-danger">Sin asignar</span>
                                         @endif    
                                     </td>
-                                    <td> {{ $project->cre_fiscal_pro }} </td>
+                                    <td> {{ ucwords(strtolower($project->cre_fiscal_pro)) }} </td>
                                     <td> {{ $project->stake_responsible }} </td>
                                     <td> {{ $project->assign_to_responsible }} </td>
                                     <td> {{ $project->address_pro }} </td>

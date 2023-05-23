@@ -213,3 +213,15 @@ Breadcrumbs::for('admin.external-balance-material.create', function (BreadcrumbT
     $trail->parent('admin.home.index');
     $trail->push('Importar balance externo de materiales', route('admin.external-balance-material.create'));
 });
+
+// Projects - status management
+Breadcrumbs::for('admin.projects.status-management', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Administracion de estados', route('admin.projects.status-management'));
+});
+
+// Projects - rectify manpower
+Breadcrumbs::for('admin.projects.rectify-manpower', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Rectificar mano de obra', route('admin.projects.rectify-manpower'));
+});

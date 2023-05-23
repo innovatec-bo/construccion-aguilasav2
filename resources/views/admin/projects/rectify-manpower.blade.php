@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
 @section('title', 'Rectificar mano de obra')
 
-@section('content_header')
-    <h1>Rectificar mano de obra</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.projects.rectify-manpower') }}
 @stop
 
 @section('content')

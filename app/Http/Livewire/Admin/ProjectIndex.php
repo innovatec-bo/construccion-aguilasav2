@@ -37,7 +37,7 @@ class ProjectIndex extends Component
 
     public function _paginate($options = [])
     {
-        $perPage = 5;
+        $perPage = 10;
         $page = $this->page;
         $additionalParameters = [];
         $cols = [
