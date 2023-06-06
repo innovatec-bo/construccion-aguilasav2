@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@coreui/coreui": "^4.2.6",
+        "jscharting": "^3.4.0",
         "moment": "^2.29.4",
         "popper": "^1.0.1",
         "toastr": "^2.1.4"

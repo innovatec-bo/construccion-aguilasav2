@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <div class="row row-cols-1 justify-content-center row-cols-md-5 text-center mb-2">
+    <div class="row row-cols-1 justify-content-center row-cols-md-5 text-center mb-2 d-none">
         <div class="col mb-sm-2 mb-0">
             <div class="text-medium-emphasis">Proyecto</div>
             <div class="fw-semibold">RA.23.0098</div>
@@ -21,7 +21,7 @@
             <div class="fw-semibold">78.706 Views (60%)</div>
         </div>
     </div>
-    <div class="row justify-content-around mb-4">
+    <div class="row justify-content-around mb-4 d-none">
         <div class="col-sm-6 col-md-2">
             <div class="card shadow">
                 <div class="card-body">
@@ -31,7 +31,7 @@
                         </svg>
                     </div>
                     <div class="fs-4 fw-semibold">12,813.63</div>
-                    <small class="text-medium-emphasis text-uppercase fw-semibold">Importe</small>
+                    <small class="text-medium-emphasis fw-semibold">Importe(Produccion: 45%)</small>
                     <div class="progress progress-thin mt-0 mb-0">
                         <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25"
                             aria-valuemin="0" aria-valuemax="100"></div>
@@ -111,8 +111,72 @@
         </div>
         <!-- /.col-->
     </div>
+    <style>
+        .breadcrumbs {
+            border: 1px solid #cbd2d9;
+            border-radius: 0.3rem;
+            display: inline-flex;
+            overflow: hidden;
+        }
+
+        .breadcrumbs__item {
+            background: #fff;
+            color: #333;
+            outline: none;
+            padding: 0.75em 0.75em 0.75em 1.25em;
+            position: relative;
+            text-decoration: none;
+            transition: background 0.2s linear;
+        }
+
+        .breadcrumbs__item:focus:after,
+        .breadcrumbs__item:focus,
+        .breadcrumbs__item.is-active:focus {
+            background: #323f4a;
+            color: #fff;
+        }
+
+        .breadcrumbs__item:after,
+        .breadcrumbs__item:before {
+            background: white;
+            bottom: 0;
+            clip-path: polygon(50% 50%, -50% -50%, 0 100%);
+            content: "";
+            left: 100%;
+            position: absolute;
+            top: 0;
+            transition: background 0.2s linear;
+            width: 1em;
+            z-index: 1;
+        }
+
+        .breadcrumbs__item:before {
+            background: #cbd2d9;
+            margin-left: 1px;
+        }
+
+        .breadcrumbs__item:last-child {
+            border-right: none;
+        }
+
+        .breadcrumbs__item.is-active {
+            background: #edf1f5;
+        }
+
+        /* Some styles to make the page look a little nicer */
+    </style>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mb-4">
+            <button class="btn btn-primary shadow-lg" type="button">
+                <x-coreui-icon svgClass="icon" icon="cil-plus" />
+            </button>
+            <nav class="breadcrumbs small shadow-lg">
+                <span href="javascript:void(0);" class="breadcrumbs__item">Proyecto creado</span>
+                <span href="javascript:void(0);" class="breadcrumbs__item">Estqueado</span>
+                <span href="javascript:void(0);" class="breadcrumbs__item">Dibujo</span>
+                <span href="javascript:void(0);" class="breadcrumbs__item">Digitalizacion</span>
+                <span href="javascript:void(0);" class="breadcrumbs__item is-active">Checkout</span>
+            </nav>
 
         </div>
     </div>
@@ -143,243 +207,10 @@
         </style>
         <div class="col-md-9">
             <div class="card mb-4 shadow">
-                <div class="card-header">Traffic &amp; Sales</div>
+                <div class="card-header">Descripci&oacute;n general</div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="border-start border-start-4 border-start-info px-3 mb-3"><small
-                                            class="text-medium-emphasis">New Clients</small>
-                                        <div class="fs-5 fw-semibold">9.123</div>
-                                    </div>
-                                </div>
-                                <!-- /.col-->
-                                <div class="col-6">
-                                    <div class="border-start border-start-4 border-start-danger px-3 mb-3"><small
-                                            class="text-medium-emphasis">Recuring Clients</small>
-                                        <div class="fs-5 fw-semibold">22.643</div>
-                                    </div>
-                                </div>
-                                <!-- /.col-->
-                            </div>
-                            <!-- /.row-->
-                            <hr class="mt-0">
-                            <div class="progress-group mb-4">
-                                <div class="progress-group-prepend"><span class="text-medium-emphasis small">Monday</span>
-                                </div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 34%"
-                                            aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 78%"
-                                            aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group mb-4">
-                                <div class="progress-group-prepend"><span
-                                        class="text-medium-emphasis small">Tuesday</span></div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 56%"
-                                            aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 94%"
-                                            aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group mb-4">
-                                <div class="progress-group-prepend"><span
-                                        class="text-medium-emphasis small">Wednesday</span></div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 12%"
-                                            aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 67%"
-                                            aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group mb-4">
-                                <div class="progress-group-prepend"><span
-                                        class="text-medium-emphasis small">Thursday</span></div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 43%"
-                                            aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 91%"
-                                            aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group mb-4">
-                                <div class="progress-group-prepend"><span class="text-medium-emphasis small">Friday</span>
-                                </div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 22%"
-                                            aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 73%"
-                                            aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group mb-4">
-                                <div class="progress-group-prepend"><span
-                                        class="text-medium-emphasis small">Saturday</span></div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 53%"
-                                            aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 82%"
-                                            aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group mb-4">
-                                <div class="progress-group-prepend"><span class="text-medium-emphasis small">Sunday</span>
-                                </div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 9%"
-                                            aria-valuenow="9" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 69%"
-                                            aria-valuenow="69" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-->
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="border-start border-start-4 border-start-warning px-3 mb-3"><small
-                                            class="text-medium-emphasis">Pageviews</small>
-                                        <div class="fs-5 fw-semibold">78.623</div>
-                                    </div>
-                                </div>
-                                <!-- /.col-->
-                                <div class="col-6">
-                                    <div class="border-start border-start-4 border-start-success px-3 mb-3"><small
-                                            class="text-medium-emphasis">Organic</small>
-                                        <div class="fs-5 fw-semibold">49.123</div>
-                                    </div>
-                                </div>
-                                <!-- /.col-->
-                            </div>
-                            <!-- /.row-->
-                            <hr class="mt-0">
-                            <div class="progress-group">
-                                <div class="progress-group-header">
-                                    <svg class="icon icon-lg me-2">
-                                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
-                                    </svg>
-                                    <div>Male</div>
-                                    <div class="ms-auto fw-semibold">43%</div>
-                                </div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 43%"
-                                            aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group mb-5">
-                                <div class="progress-group-header">
-                                    <svg class="icon icon-lg me-2">
-                                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user-female"></use>
-                                    </svg>
-                                    <div>Female</div>
-                                    <div class="ms-auto fw-semibold">37%</div>
-                                </div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 43%"
-                                            aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group">
-                                <div class="progress-group-header">
-                                    <svg class="icon icon-lg me-2">
-                                        <use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-google"></use>
-                                    </svg>
-                                    <div>Organic Search</div>
-                                    <div class="ms-auto fw-semibold me-2">191.235</div>
-                                    <div class="text-medium-emphasis small">(56%)</div>
-                                </div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 56%"
-                                            aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group">
-                                <div class="progress-group-header">
-                                    <svg class="icon icon-lg me-2">
-                                        <use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-facebook-f"></use>
-                                    </svg>
-                                    <div>Facebook</div>
-                                    <div class="ms-auto fw-semibold me-2">51.223</div>
-                                    <div class="text-medium-emphasis small">(15%)</div>
-                                </div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 15%"
-                                            aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group">
-                                <div class="progress-group-header">
-                                    <svg class="icon icon-lg me-2">
-                                        <use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-twitter"></use>
-                                    </svg>
-                                    <div>Twitter</div>
-                                    <div class="ms-auto fw-semibold me-2">37.564</div>
-                                    <div class="text-medium-emphasis small">(11%)</div>
-                                </div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 11%"
-                                            aria-valuenow="11" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="progress-group">
-                                <div class="progress-group-header">
-                                    <svg class="icon icon-lg me-2">
-                                        <use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-linkedin"></use>
-                                    </svg>
-                                    <div>LinkedIn</div>
-                                    <div class="ms-auto fw-semibold me-2">27.319</div>
-                                    <div class="text-medium-emphasis small">(8%)</div>
-                                </div>
-                                <div class="progress-group-bars">
-                                    <div class="progress progress-thin">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 8%"
-                                            aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-->
+                    <div class="row justify-content-center">
+                        <div id="chartDiv1" class="chartDiv" style="max-width: 770px;height: 560px"></div>
                     </div>
                 </div>
             </div>
@@ -390,9 +221,11 @@
                 position: relative;
                 padding-left: 1.5rem;
             }
+
             li.timeline-item {
                 margin: 20px 0;
             }
+
             .timeline-arrow {
                 border-top: 0.5rem solid transparent;
                 border-right: 0.5rem solid #fff;
@@ -401,6 +234,7 @@
                 position: absolute;
                 left: 2rem;
             }
+
             ul.timeline:before {
                 content: ' ';
                 background: #cbcbcf;
@@ -412,6 +246,7 @@
                 z-index: 400;
                 border-radius: 1rem;
             }
+
             li.timeline-item::before {
                 content: ' ';
                 background: #cbcbcf;
@@ -430,106 +265,29 @@
             <ul class="timeline small">
                 <li class="timeline-item bg-white rounded ms-3 p-3 shadow">
                     <div class="timeline-arrow"></div>
-                    <h2 class="h6 mb-0 fw-semibold">Enviado</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>21 de mazo del 2023, hace 20 dias</span>
+                    <h2 class="h6 mb-0 fw-semibold">Enviado</h2><span class="small text-gray"><i
+                            class="fa fa-clock-o mr-1"></i>21 de mazo del 2023, hace 20 dias</span>
                     <p class="text-small mt-1 font-weight-light"><strong>Responsable:</strong> Mario Aguilera</p>
                 </li>
                 <li class="timeline-item bg-white rounded ms-3 p-3 shadow">
                     <div class="timeline-arrow"></div>
-                    <h2 class="h6 mb-0 fw-semibold">Enviado</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>21 de mazo del 2023, hace 20 dias</span>
+                    <h2 class="h6 mb-0 fw-semibold">Enviado</h2><span class="small text-gray"><i
+                            class="fa fa-clock-o mr-1"></i>21 de mazo del 2023, hace 20 dias</span>
                     <p class="text-small mt-1 font-weight-light"><strong>Responsable:</strong> Mario Aguilera</p>
                 </li>
                 <li class="timeline-item bg-white rounded ms-3 p-3 shadow">
                     <div class="timeline-arrow"></div>
-                    <h2 class="h6 mb-0 fw-semibold">Enviado</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>21 de mazo del 2023, hace 20 dias</span>
+                    <h2 class="h6 mb-0 fw-semibold">Enviado</h2><span class="small text-gray"><i
+                            class="fa fa-clock-o mr-1"></i>21 de mazo del 2023, hace 20 dias</span>
                     <p class="text-small mt-1 font-weight-light"><strong>Responsable:</strong> Mario Aguilera</p>
                 </li>
                 <li class="timeline-item bg-white rounded ms-3 p-3 shadow">
                     <div class="timeline-arrow"></div>
-                    <h2 class="h6 mb-0 fw-semibold">Enviado</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>21 de mazo del 2023, hace 20 dias</span>
+                    <h2 class="h6 mb-0 fw-semibold">Enviado</h2><span class="small text-gray"><i
+                            class="fa fa-clock-o mr-1"></i>21 de mazo del 2023, hace 20 dias</span>
                     <p class="text-small mt-1 font-weight-light"><strong>Responsable:</strong> Mario Aguilera</p>
                 </li>
             </ul>
-        </div>
-        <div class="col-md-3 d-none">
-            <div class="card notification-card border-0 shadow">
-                <div class="card-header d-flex align-items-center">
-                    <h2 class="fs-5 fw-bold mb-0">Actividad</h2>
-                </div>
-                <div class="card-body">
-                    <div class="list-group list-group-flush list-group-timeline">
-                        <div class="list-group-item border-0">
-                            <div class="row ps-lg-1">
-                                <div class="col ms-n2 mb-3">
-                                    <h3 class="fs-6 fw-bold mb-1">You sold an item</h3>
-                                    <p class="mb-1">Bonnie Green just purchased "Volt - Admin Dashboard"!</p>
-                                    <div class="d-flex align-items-center"><svg class="icon icon-xxs text-gray-400 me-1"
-                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                                clip-rule="evenodd"></path>
-                                        </svg> <span class="small">1 minute ago</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item border-0">
-                            <div class="row ps-lg-1">
-                                <div class="col ms-n2 mb-3">
-                                    <h3 class="fs-6 fw-bold mb-1">New message</h3>
-                                    <p class="mb-1">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                                    <div class="d-flex align-items-center"><svg class="icon icon-xxs text-gray-400 me-1"
-                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                                clip-rule="evenodd"></path>
-                                        </svg> <span class="small">8 minutes ago</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item border-0">
-                            <div class="row ps-lg-1">
-                                <div class="col ms-n2 mb-3">
-                                    <h3 class="fs-6 fw-bold mb-1">Product issue</h3>
-                                    <p class="mb-0">A new issue has been reported for Pixel Pro.</p>
-                                    <div class="d-flex align-items-center"><svg class="icon icon-xxs text-gray-400 me-1"
-                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                                clip-rule="evenodd"></path>
-                                        </svg> <span class="small">10 minutes ago</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item border-0">
-                            <div class="row ps-lg-1">
-                                <div class="col ms-n2 mb-3">
-                                    <h3 class="fs-6 fw-bold mb-1">Product update</h3>
-                                    <p class="mb-0">Spaces - Listings Template has been updated</p>
-                                    <div class="d-flex align-items-center"><svg class="icon icon-xxs text-gray-400 me-1"
-                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                                clip-rule="evenodd"></path>
-                                        </svg> <span class="small">4 hours ago</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item border-0">
-                            <div class="row ps-lg-1">
-                                <div class="col ms-n2">
-                                    <h3 class="fs-6 fw-bold mb-1">Product update</h3>
-                                    <p class="mb-0">Volt - Admin Dashboard has been updated</p>
-                                    <div class="d-flex align-items-center"><svg class="icon icon-xxs text-gray-400 me-1"
-                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                                                clip-rule="evenodd"></path>
-                                        </svg> <span class="small">8 hours ago</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -537,8 +295,280 @@
 
 @section('css')
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <style>
+        .chartDiv {
+            margin: 8px auto;
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+
 @stop
 
 @section('js')
     {{-- <script> console.log('Hi!'); </script> --}}
+    <script type="text/javascript" src="https://code.jscharting.com/latest/jscharting.js"></script>
+    <script>
+        // JS 
+        var selectedPoint;
+        var highlightColor = '#5C6BC0',
+            mutedHighlightColor = '#9FA8DA',
+            mutedFill = '#f3f4fa',
+            selectedFill = '#E8EAF6',
+            normalFill = 'white';
+
+        var points = [
+            //Level 1
+            {
+                x: 'Proyecto creado',
+                id: 'project_has_been_created',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+            //Level 2
+            {
+                x: 'Estaqueado',
+                id: 'stakes',
+                parent: 'project_has_been_created',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+            //Level 3 
+            {
+                x: 'Digitalizacion',
+                id: 'digitization',
+                parent: 'stakes',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+            {
+                x: 'Dibujo',
+                id: 'drawing',
+                parent: 'stakes',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+            {
+                x: 'No factible',
+                id: 'returned',
+                parent: 'stakes',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+            //Level 4
+            {
+                x: 'Dibujo',
+                id: 'drawing1',
+                parent: 'digitization',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+            {
+                x: 'Digitalizacion',
+                id: 'digitization1',
+                parent: 'drawing',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+            {
+                x: 'Cancelado',
+                id: 'canceled',
+                parent: 'returned',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+            //Level 5
+            {
+                x: 'Cronograma',
+                id: 'Schedule',
+                parent: 'drawing1',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+            {
+                x: 'Cronograma',
+                id: 'Schedule1',
+                parent: 'digitization1',
+                attributes: {
+                    role: '',
+                    photo: ''
+                }
+            },
+        ];
+
+        var chart = JSC.chart('chartDiv1', {
+            debug: true,
+            type: 'organizational',
+            defaultTooltip_enabled: false,
+
+            /* These options will apply to all annotations including point nodes. */
+            defaultAnnotation: {
+                padding: [5, 10],
+                margin: 6
+            },
+            annotations: [{
+                position: 'bottom',
+                label_text: 'Click on a node to select all nodes up the tree or click again to deselect.'
+            }],
+
+            defaultSeries: {
+                color: normalFill,
+                /* Point selection is disabled because it is managed manually with point click events. */
+                pointSelection: false
+            },
+            defaultPoint: {
+                focusGlow: false,
+                connectorLine: {
+                    color: '#e0e0e0',
+                    radius: [10, 3]
+                },
+                label: {
+                    text: '%photo%name<br><span style="color:#9E9E9E">%role</span>',
+                    style_color: 'black'
+                },
+                outline: {
+                    color: '#e0e0e0',
+                    width: 1
+                },
+                annotation: {
+                    syncHeight_with: 'level'
+                },
+                states: {
+                    mute: {
+                        opacity: 0.8,
+                        outline: {
+                            color: mutedHighlightColor,
+                            opacity: 0.9,
+                            width: 2
+                        }
+                    },
+                    select: {
+                        enabled: true,
+                        outline: {
+                            color: highlightColor,
+                            width: 2
+                        },
+                        color: selectedFill
+                    },
+                    hover: {
+                        outline: {
+                            color: mutedHighlightColor,
+                            width: 2
+                        },
+                        color: mutedFill
+                    }
+                },
+                events: {
+                    click: pointClick,
+                    mouseOver: pointMouseOver,
+                    mouseOut: pointMouseOut
+                }
+            },
+            series: [{
+                points: points
+            }]
+        });
+
+        /** 
+         * Event Handlers 
+         */
+
+        function pointClick() {
+            var point = this,
+                chart = point.chart;
+            resetStyles(chart);
+            if (point.id === selectedPoint) {
+                selectedPoint = undefined;
+                return;
+            }
+            selectedPoint = point.id;
+            styleSelectedPoint(chart);
+        }
+
+        function pointMouseOver() {
+            var point = this,
+                chart = point.chart;
+            chart.connectors([point.id, 'up'], {
+                color: mutedHighlightColor,
+                width: 2
+            });
+            chart
+                .series()
+                .points([point.id, 'up'])
+                .options({
+                    muted: true
+                });
+        }
+
+        function pointMouseOut() {
+            var point = this,
+                chart = point.chart;
+            // Reset point and line styling. 
+            resetStyles(chart);
+            // Style clicked points 
+            styleSelectedPoint(chart);
+            return false;
+        }
+
+        /** 
+         * Styling helper functions 
+         */
+
+        function styleSelectedPoint(chart) {
+            if (selectedPoint) {
+                chart.connectors([selectedPoint, 'up'], {
+                    color: highlightColor,
+                    width: 2
+                });
+                chart
+                    .series()
+                    .points([selectedPoint, 'up'])
+                    .options({
+                        selected: true,
+                        muted: false
+                    });
+            }
+        }
+
+        /** 
+         * Clears connectors and point states. 
+         * @param chart Chart object 
+         */
+        function resetStyles(chart) {
+            chart.connectors();
+            chart
+                .series()
+                .points()
+                .options({
+                    selected: false,
+                    muted: false
+                });
+        }
+
+        function getImgText(name) {
+            return (
+                '<img width=50 height=50 align=center margin_bottom=4 margin_top=4 src=' +
+                name +
+                '><br>'
+            );
+        }
+    </script>
 @stop
