@@ -7,22 +7,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProjectRealBudget extends Model
+class ProjectBudget extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use Blameable;
 
-    protected $table = "wfl_project_real_budgets";
-    protected $primaryKey = "id_reb";
+    protected $table = "wfl_project_budgets";
+    protected $primaryKey = "id_prb";
 
-    const CREATED_AT = 'createdon_reb';
-    const UPDATED_AT = 'editedon_reb';
-    const UPDATED_BY = 'editedby_reb';
+    const CREATED_AT = 'createdon_prb';
+    const UPDATED_AT = 'editedon_prb';
+    const UPDATED_BY = 'editedby_prb';
 
     protected $guarded = [
-        'createdon_reb',
-        'editedon_reb',
+        'createdon_prb',
+        'editedon_prb',
         'created_at',
         'updated_at',
         'created_by',
@@ -32,6 +32,6 @@ class ProjectRealBudget extends Model
 
     public function projectStatusLog()
     {
-        return $this->belongsTo(ProjectStatusLog::class, 'status_log_id_reb');
+        return $this->belongsTo(ProjectStatusLog::class, 'status_log_id_prb');
     }
 }

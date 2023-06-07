@@ -52,7 +52,7 @@
     </style>
     <ul class="timeline small">
         @foreach ($logs as $log)
-            <li class="timeline-item bg-white rounded ms-3 p-3 shadow">
+            <li class="timeline-item bg-white rounded ms-3 p-3 shadow" data-keyword="{{$log->status->keyword_pst}}">
                 <div class="timeline-arrow"></div>
                 <h2 class="h6 mb-0 fw-semibold">
                     @if ($log->status)
@@ -66,23 +66,67 @@
                         {{$log->manual_entry_date_psl->diffForHumans()}}
                     @endif
                 </span>
-                <p class="text-small mt-1 font-weight-light"><strong>Responsable:</strong>
+                @php
+                    $responsibles = '';
+                @endphp
+                @foreach ($log->statusLogResponsible as $statusLogResponsible)
                     @php
-                        $responsibles = '';
+                        $responsibles .= $statusLogResponsible->responsible->user->fullName.', '
                     @endphp
-                    @foreach ($log->statusLogResponsible as $statusLogResponsible)
-                        @php
-                            $responsibles .= $statusLogResponsible->responsible->user->fullName.', '
-                        @endphp
-                    @endforeach
-                    {{substr($responsibles,0,-2)}}
-                </p>
+                @endforeach
+                <dl>
+                    <dt>Responsable</dt>
+                    <dd class="">{{substr($responsibles,0,-2)}}</dd>
+                    @if (!is_null($log->log_detail_psl) && $log->log_detail_psl != "")
+                        <dt>Observaciones</dt>
+                        <dd class="">{{$log->log_detail_psl}}</dd>
+                    @endif
+                </dl>
+                @if ($log->status->keyword_pst == 'approved' && $log->projectBudget)
+                        <div class="d-flex justify-content-between border-bottom">
+                            <span class="fw-semibold">Total</span>
+                            @php
+                                $total = $log->projectBudget->design_prb + $log->projectBudget->building_prb + $log->projectBudget->transportation_prb + $log->projectBudget->live_line_prb + $log->projectBudget->right_of_way_prb;
+                            @endphp
+                            <span class="">{{number_format($total,2,'.',',')}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom">
+                            <span class="fw-semibold">Dise&ntilde;o</span>
+                            <span class="">{{number_format($log->projectBudget->design_prb,2,'.',',')}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom">
+                            <span class="fw-semibold">Construcci&oacute;n</span>
+                            <span class="">{{number_format($log->projectBudget->building_prb,2,'.',',')}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom">
+                            <span class="fw-semibold">Transporte</span>
+                            <span class="">{{number_format($log->projectBudget->transportation_prb,2,'.',',')}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom">
+                            <span class="fw-semibold">Linea viva</span>
+                            <span class="">{{number_format($log->projectBudget->live_line_prb,2,'.',',')}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom">
+                            <span class="fw-semibold">Derecho de via</span>
+                            <span class="">{{number_format($log->projectBudget->right_of_way_prb,2,'.',',')}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom">
+                            <span class="fw-semibold">Nro. Grafo</span>
+                            <span class="">{{$log->projectBudget->graph_number_prb}}</span>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom">
+                            <span class="fw-semibold">Nro. Reserva</span>
+                            <span class="">{{$log->projectBudget->reservation_number_prb}}</span>
+                        </div>    
+                    @endif
             </li>    
         @endforeach
     </ul>
-    <div class="d-grid gap-2">
-        <button class="btn btn-primary btn-sm" wire:click="loadLogs">
-            Cargar m&aacute;s
-        </button>
-    </div>
+    @if ($hasMorePages)
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary btn-sm" wire:click="loadLogs">
+                Cargar m&aacute;s
+            </button>
+        </div>
+    @endif
 </div>

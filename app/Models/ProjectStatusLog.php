@@ -37,4 +37,9 @@ class ProjectStatusLog extends Model
     {
         return $this->hasMany(StatusLogResponsible::class, 'status_log_id_slr');
     }
+
+    public function projectBudget()
+    {
+        return $this->hasOne(ProjectBudget::class, 'status_log_id_prb');
+    }
 }

@@ -61,12 +61,6 @@ class DashboardMenu extends Component
                         'can'         => ['admin.projects.create'],
                         'icon'        => 'cil-speedometer',
                     ],
-                    [
-                        'text'        => 'Administracion de estados',
-                        'route'       => 'admin.projects.status-management',
-                        'can'         => ['admin.projects.status-management'],
-                        'icon'        => 'cil-speedometer',
-                    ]
                 ]
             ],
             [

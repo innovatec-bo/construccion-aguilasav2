@@ -70,7 +70,16 @@
                                     <td> {{ $project->assign_to_responsible }} </td>
                                     <td> {{ $project->address_pro }} </td>
                                     <td class="text-end"> {{ number_format($project->project_current_budget,2,'.',',')  }} </td>
-                                    <td></td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a class="btn btn-primary btn-sm dropdown-toggle" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
+                                            <x-coreui-icon svgClass="icon" icon="cil-options"/>
+                                        </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
+                                                <li><a class="dropdown-item" href="{{route('admin.projects.status-management', $project->id_pro)}}">Administracion de estados</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

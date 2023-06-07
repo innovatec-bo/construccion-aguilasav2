@@ -215,9 +215,9 @@ Breadcrumbs::for('admin.external-balance-material.create', function (BreadcrumbT
 });
 
 // Projects - status management
-Breadcrumbs::for('admin.projects.status-management', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('admin.projects.status-management', function (BreadcrumbTrail $trail, $project) {
     $trail->parent('admin.home.index');
-    $trail->push('Administracion de estados', route('admin.projects.status-management'));
+    $trail->push('Administracion de estados: '.$project->code_pro, route('admin.projects.status-management', $project));
 });
 
 // Projects - rectify manpower

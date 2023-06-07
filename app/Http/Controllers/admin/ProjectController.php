@@ -103,8 +103,8 @@ class ProjectController extends Controller
         dd($project);
     }
 
-    public function statusManagement()
+    public function statusManagement(Project $project)
     {
-        return view('admin.projects.status-management');
+        return view('admin.projects.status-management', compact('project'));
     }
 }

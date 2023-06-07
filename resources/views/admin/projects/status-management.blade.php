@@ -3,7 +3,7 @@
 @section('title', 'Administracion de estados')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('admin.projects.status-management') }}
+    {{ Breadcrumbs::render('admin.projects.status-management', $project) }}
 @stop
 
 @section('content')
@@ -262,7 +262,7 @@
             }
         </style> --}}
         <div class="col-md-3">
-            @livewire('admin.project-status-log-quick-view')
+            @livewire('admin.project-status-log-quick-view', ['project' => $project])
             {{-- <ul class="timeline small">
                 <li class="timeline-item bg-white rounded ms-3 p-3 shadow">
                     <div class="timeline-arrow"></div>
