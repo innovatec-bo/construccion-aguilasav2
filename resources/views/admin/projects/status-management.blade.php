@@ -215,7 +215,7 @@
                 </div>
             </div>
         </div>
-        <style>
+        {{-- <style>
             ul.timeline {
                 list-style-type: none;
                 position: relative;
@@ -260,9 +260,10 @@
                 z-index: 400;
                 box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             }
-        </style>
+        </style> --}}
         <div class="col-md-3">
-            <ul class="timeline small">
+            @livewire('admin.project-status-log-quick-view')
+            {{-- <ul class="timeline small">
                 <li class="timeline-item bg-white rounded ms-3 p-3 shadow">
                     <div class="timeline-arrow"></div>
                     <h2 class="h6 mb-0 fw-semibold">Enviado</h2><span class="small text-gray"><i
@@ -287,7 +288,7 @@
                             class="fa fa-clock-o mr-1"></i>21 de mazo del 2023, hace 20 dias</span>
                     <p class="text-small mt-1 font-weight-light"><strong>Responsable:</strong> Mario Aguilera</p>
                 </li>
-            </ul>
+            </ul> --}}
         </div>
     </div>
 

@@ -32,4 +32,9 @@ class ProjectStatusLog extends Model
     {
         return $this->belongsTo(ProjectStatus::class, 'status_id_psl');
     }
+
+    public function statusLogResponsible()
+    {
+        return $this->hasMany(StatusLogResponsible::class, 'status_log_id_slr');
+    }
 }
