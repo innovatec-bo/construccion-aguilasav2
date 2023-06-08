@@ -76,7 +76,7 @@
                                             <x-coreui-icon svgClass="icon" icon="cil-options"/>
                                         </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
-                                                <li><a class="dropdown-item" href="{{route('admin.projects.status-management', $project->id_pro)}}">Administracion de estados</a></li>
+                                                <li><a class="dropdown-item" target="_blank" href="{{route('admin.projects.status-management', $project->id_pro)}}">Administracion de estados</a></li>
                                             </ul>
                                         </div>
                                     </td>
