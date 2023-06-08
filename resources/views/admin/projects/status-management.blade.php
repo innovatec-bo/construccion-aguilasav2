@@ -7,110 +7,6 @@
 @stop
 
 @section('content')
-    <div class="row row-cols-1 justify-content-center row-cols-md-5 text-center mb-2 d-none">
-        <div class="col mb-sm-2 mb-0">
-            <div class="text-medium-emphasis">Proyecto</div>
-            <div class="fw-semibold">RA.23.0098</div>
-        </div>
-        <div class="col mb-sm-2 mb-0">
-            <div class="text-medium-emphasis">Producci&oacute;n</div>
-            <div class="fw-semibold">24.093 Users (20%)</div>
-        </div>
-        <div class="col mb-sm-2 mb-0">
-            <div class="text-medium-emphasis">Estado</div>
-            <div class="fw-semibold">78.706 Views (60%)</div>
-        </div>
-    </div>
-    <div class="row justify-content-around mb-4 d-none">
-        <div class="col-sm-6 col-md-2">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="text-medium-emphasis text-end mb-3">
-                        <svg class="icon icon-xxl">
-                            <x-coreui-icon svgClass="nav-icon" icon="cil-dollar" />
-                        </svg>
-                    </div>
-                    <div class="fs-4 fw-semibold">12,813.63</div>
-                    <small class="text-medium-emphasis fw-semibold">Importe(Produccion: 45%)</small>
-                    <div class="progress progress-thin mt-0 mb-0">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25"
-                            aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-2">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="text-medium-emphasis text-end mb-4">
-                        <svg class="icon icon-xxl">
-                            <x-coreui-icon svgClass="nav-icon" icon="cil-cog" />
-                        </svg>
-                    </div>
-                    <div class="fs-4 fw-semibold">87.500</div><small
-                        class="text-medium-emphasis text-uppercase fw-semibold">Sistema</small>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-->
-        <div class="col-sm-6 col-md-2">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="text-medium-emphasis text-end mb-4">
-                        <svg class="icon icon-xxl">
-                            <x-coreui-icon svgClass="nav-icon" icon="cil-calendar" />
-                        </svg>
-                    </div>
-                    <div class="fs-4 fw-semibold">385</div><small
-                        class="text-medium-emphasis text-uppercase fw-semibold">Ingreso</small>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-->
-        <div class="col-sm-6 col-md-2">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="text-medium-emphasis text-end mb-4">
-                        <svg class="icon icon-xxl">
-                            <x-coreui-icon svgClass="nav-icon" icon="cil-user" />
-                        </svg>
-                    </div>
-                    <div class="fs-4 fw-semibold">1238</div><small
-                        class="text-medium-emphasis text-uppercase fw-semibold">Fiscal</small>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-->
-        <div class="col-sm-6 col-md-2">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="text-medium-emphasis text-end mb-4">
-                        <svg class="icon icon-xxl">
-                            <x-coreui-icon svgClass="nav-icon" icon="cil-location-pin" />
-                        </svg>
-                    </div>
-                    <div class="fs-4 fw-semibold">28%</div><small
-                        class="text-medium-emphasis text-uppercase fw-semibold">Direcci&oacute;n</small>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-->
-        <div class="col-sm-6 col-md-2">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="text-medium-emphasis text-end mb-4">
-                        <svg class="icon icon-xxl">
-                            <x-coreui-icon svgClass="nav-icon" icon="cil-text-shapes" />
-                        </svg>
-                    </div>
-                    <div class="fs-4 fw-semibold">5:34:11</div>
-                    <small class="text-medium-emphasis text-uppercase fw-semibold">Area</small>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-->
-    </div>
     <style>
         .breadcrumbs {
             border: 1px solid #cbd2d9;
@@ -167,8 +63,9 @@
     </style>
     <div class="row">
         <div class="col-md-12 mb-4">
-            <button class="btn btn-primary shadow-lg" type="button">
-                <x-coreui-icon svgClass="icon" icon="cil-plus" />
+            <button class="btn btn-danger text-white btn-sm shadow-lg float-end" type="button" style="line-height: 0.94">
+                {{-- <x-coreui-icon svgClass="icon" icon="cil-plus" /> --}}
+                Avanzar al<br>siguiente estado
             </button>
             <nav class="breadcrumbs small shadow-lg">
                 <span href="javascript:void(0);" class="breadcrumbs__item">Proyecto creado</span>
@@ -207,12 +104,130 @@
         </style>
         <div class="col-md-9">
             <div class="card mb-4 shadow">
-                <div class="card-header">Descripci&oacute;n general</div>
+                {{-- <div class="card-header">Descripci&oacute;n general</div> --}}
                 <div class="card-body">
-                    <div class="row justify-content-center">
+                    <div class="row">
+                        <div class="col-4">
+                          <div class="border-start border-start-4 border-start-info px-3 mb-0"><small class="text-medium-emphasis text-truncate">Proyecto</small>
+                            <div class="fs-5 fw-semibold">9.123</div>
+                          </div>
+                        </div>
+                        <!-- /.col-->
+                        <div class="col-4">
+                          <div class="border-start border-start-4 border-start-danger px-3 mb-0"><small class="text-medium-emphasis text-truncate">Producci&oacute;n</small>
+                            <div class="fs-5 fw-semibold">22.643</div>
+                          </div>
+                        </div><div class="col-4">
+                          <div class="border-start border-start-4 border-start-danger px-3 mb-0"><small class="text-medium-emphasis text-truncate">Estado</small>
+                            <div class="fs-5 fw-semibold">22.643</div>
+                          </div>
+                        </div>
+                        <!-- /.col-->
+                      </div>
+                    {{-- <div class="row row-cols-1 justify-content-center row-cols-md-5 text-center mb-2">
+                        <div class="col mb-sm-2 mb-0">
+                            <div class="text-medium-emphasis">Proyecto</div>
+                            <div class="fw-semibold">RA.23.0098</div>
+                        </div>
+                        <div class="col mb-sm-2 mb-0">
+                            <div class="text-medium-emphasis">Producci&oacute;n</div>
+                            <div class="fw-semibold">24.093 Users (20%)</div>
+                        </div>
+                        <div class="col mb-sm-2 mb-0">
+                            <div class="text-medium-emphasis">Estado</div>
+                            <div class="fw-semibold">78.706 Views (60%)</div>
+                        </div>
+                    </div> --}}
+                    {{-- <div class="row justify-content-center">
                         <div id="chartDiv1" class="chartDiv" style="max-width: 770px;height: 560px"></div>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="row justify-content-around mb-4">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card shadow mb-3">
+                        <div class="card-body">
+                            <div class="text-medium-emphasis text-end mb-4">
+                                <svg class="icon icon-xxl">
+                                    <x-coreui-icon svgClass="nav-icon" icon="cil-dollar" />
+                                </svg>
+                            </div>
+                            <div class="fs-4 fw-semibold">12,813.63</div>
+                            <small class="text-medium-emphasis text-uppercase fw-semibold">Importe</small>
+                        </div>
+        
                     </div>
                 </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card shadow mb-3">
+                        <div class="card-body">
+                            <div class="text-medium-emphasis text-end mb-4">
+                                <svg class="icon icon-xxl">
+                                    <x-coreui-icon svgClass="nav-icon" icon="cil-cog" />
+                                </svg>
+                            </div>
+                            <div class="fs-4 fw-semibold">87.500</div><small
+                                class="text-medium-emphasis text-uppercase fw-semibold">Sistema</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
+                <div class="col-sm-6 col-md-4">
+                    <div class="card shadow mb-3">
+                        <div class="card-body">
+                            <div class="text-medium-emphasis text-end mb-4">
+                                <svg class="icon icon-xxl">
+                                    <x-coreui-icon svgClass="nav-icon" icon="cil-calendar" />
+                                </svg>
+                            </div>
+                            <div class="fs-4 fw-semibold">385</div><small
+                                class="text-medium-emphasis text-uppercase fw-semibold">Ingreso</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
+                <div class="col-sm-6 col-md-4">
+                    <div class="card shadow mb-3">
+                        <div class="card-body">
+                            <div class="text-medium-emphasis text-end mb-4">
+                                <svg class="icon icon-xxl">
+                                    <x-coreui-icon svgClass="nav-icon" icon="cil-user" />
+                                </svg>
+                            </div>
+                            <div class="fs-4 fw-semibold">1238</div><small
+                                class="text-medium-emphasis text-uppercase fw-semibold">Fiscal</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
+                <div class="col-sm-6 col-md-4">
+                    <div class="card shadow mb-3">
+                        <div class="card-body">
+                            <div class="text-medium-emphasis text-end mb-4">
+                                <svg class="icon icon-xxl">
+                                    <x-coreui-icon svgClass="nav-icon" icon="cil-location-pin" />
+                                </svg>
+                            </div>
+                            <div class="fs-4 fw-semibold">28%</div><small
+                                class="text-medium-emphasis text-uppercase fw-semibold">Direcci&oacute;n</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
+                <div class="col-sm-6 col-md-4">
+                    <div class="card shadow mb-3">
+                        <div class="card-body">
+                            <div class="text-medium-emphasis text-end mb-4">
+                                <svg class="icon icon-xxl">
+                                    <x-coreui-icon svgClass="nav-icon" icon="cil-text-shapes" />
+                                </svg>
+                            </div>
+                            <div class="fs-4 fw-semibold">5:34:11</div>
+                            <small class="text-medium-emphasis text-uppercase fw-semibold">Area</small>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-->
             </div>
         </div>
         {{-- <style>
