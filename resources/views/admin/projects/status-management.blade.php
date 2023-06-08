@@ -63,11 +63,11 @@
     </style>
     <div class="row">
         <div class="col-md-12 mb-4">
-            <button class="btn btn-danger text-white btn-sm shadow-lg float-end" type="button" style="line-height: 0.94">
+            <button class="btn btn-danger text-white btn-sm shadow-lg float-end fw-semibold" type="button" style="line-height: 0.94">
                 {{-- <x-coreui-icon svgClass="icon" icon="cil-plus" /> --}}
                 Avanzar al<br>siguiente estado
             </button>
-            <nav class="breadcrumbs small shadow-lg">
+            <nav class="breadcrumbs small shadow-lg d-none">
                 <span href="javascript:void(0);" class="breadcrumbs__item">Proyecto creado</span>
                 <span href="javascript:void(0);" class="breadcrumbs__item">Estqueado</span>
                 <span href="javascript:void(0);" class="breadcrumbs__item">Dibujo</span>
@@ -109,7 +109,7 @@
                     <div class="row">
                         <div class="col-4">
                           <div class="border-start border-start-4 border-start-info px-3 mb-0"><small class="text-medium-emphasis text-truncate">Proyecto</small>
-                            <div class="fs-5 fw-semibold">9.123</div>
+                            <div class="fs-5 fw-semibold">{{$project->code_pro}}</div>
                           </div>
                         </div>
                         <!-- /.col-->
@@ -119,7 +119,7 @@
                           </div>
                         </div><div class="col-4">
                           <div class="border-start border-start-4 border-start-danger px-3 mb-0"><small class="text-medium-emphasis text-truncate">Estado</small>
-                            <div class="fs-5 fw-semibold">22.643</div>
+                            <div class="fs-5 fw-semibold">{{$project->status->status_name_pst}}</div>
                           </div>
                         </div>
                         <!-- /.col-->
@@ -166,7 +166,7 @@
                                     <x-coreui-icon svgClass="nav-icon" icon="cil-cog" />
                                 </svg>
                             </div>
-                            <div class="fs-4 fw-semibold">87.500</div><small
+                            <div class="fs-4 fw-semibold">{{$project->system->name}}</div><small
                                 class="text-medium-emphasis text-uppercase fw-semibold">Sistema</small>
                         </div>
                     </div>
@@ -180,7 +180,12 @@
                                     <x-coreui-icon svgClass="nav-icon" icon="cil-calendar" />
                                 </svg>
                             </div>
-                            <div class="fs-4 fw-semibold">385</div><small
+                            <div class="fs-6 fw-semibold">
+                                @if ($project->entry_date_pro)
+                                    {{$project->entry_date_pro->translatedFormat('D d M Y')}},
+                                    {{$project->entry_date_pro->diffForHumans()}}
+                                @endif
+                            </div><small
                                 class="text-medium-emphasis text-uppercase fw-semibold">Ingreso</small>
                         </div>
                     </div>
@@ -194,7 +199,7 @@
                                     <x-coreui-icon svgClass="nav-icon" icon="cil-user" />
                                 </svg>
                             </div>
-                            <div class="fs-4 fw-semibold">1238</div><small
+                            <div class="fs-4 fw-semibold">{{$project->creFiscal->fullName}}</div><small
                                 class="text-medium-emphasis text-uppercase fw-semibold">Fiscal</small>
                         </div>
                     </div>
@@ -208,7 +213,7 @@
                                     <x-coreui-icon svgClass="nav-icon" icon="cil-location-pin" />
                                 </svg>
                             </div>
-                            <div class="fs-4 fw-semibold">28%</div><small
+                            <div class="fs-5 fw-semibold">{{$project->address_pro}}</div><small
                                 class="text-medium-emphasis text-uppercase fw-semibold">Direcci&oacute;n</small>
                         </div>
                     </div>
@@ -222,7 +227,7 @@
                                     <x-coreui-icon svgClass="nav-icon" icon="cil-text-shapes" />
                                 </svg>
                             </div>
-                            <div class="fs-4 fw-semibold">5:34:11</div>
+                            <div class="fs-4 fw-semibold">{{$project->points_pro}}p/{{$project->distance_pro}}Km</div>
                             <small class="text-medium-emphasis text-uppercase fw-semibold">Area</small>
                         </div>
                     </div>

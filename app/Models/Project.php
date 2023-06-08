@@ -20,9 +20,9 @@ class Project extends Model
     const CREATED_AT = 'createdon_pro';
     const UPDATED_AT = 'editedon_pro';
 
-    // protected $casts = [
-    //     'createdon_pro' => 'datetime'
-    // ];
+    protected $casts = [
+        'entry_date_pro' => 'datetime'
+    ];
 
     public function materialSummaries()
     {
@@ -280,4 +280,19 @@ class Project extends Model
         ";
 		return $sql;
 	}
+
+    public function system()
+    {
+        return $this->belongsTo(ProjectSystem::class, 'system_pro');
+    }
+
+    public function managementBy()
+    {
+        return $this->belongsTo(ProjectManagement::class, 'management_by_pro');
+    }
+
+    public function creFiscal()
+    {
+        return $this->belongsTo(User::class, 'cre_fiscal_pro');
+    }
 }
