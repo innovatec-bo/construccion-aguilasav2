@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\NextStatus;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -105,6 +106,7 @@ class ProjectController extends Controller
 
     public function statusManagement(Project $project)
     {
-        return view('admin.projects.status-management', compact('project'));
+        $nextStatusList = NextStatus::where('parent_status_id', $project->status_pro)->get();
+        return view('admin.projects.status-management', compact('project', 'nextStatusList'));
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\NextStatus;
+use App\Models\ProjectStatus;
 use Illuminate\Database\Seeder;
 
 class NextStatusSeeder extends Seeder
@@ -68,7 +70,19 @@ class NextStatusSeeder extends Seeder
             ['parent_status_id' => 'completed', 'next_status_id' => 'as_built'],
             ['parent_status_id' => 'cre_return_order', 'next_status_id' => 'project_return_materials'],
             ['parent_status_id' => 'paused', 'next_status_id' => 'stopped'],
-            ['parent_status_id' => 'in_progress', 'next_status_id' => 'completed'],
+            ['parent_status_id' => 'in_progress', 'next_status_id' => 'completed']
         ];
+
+        $status = ProjectStatus::all();
+
+        foreach ($data as &$row) 
+        {
+            $parentStatusId = $status->where('keyword_pst', $row['parent_status_id'])->first()->id_pst;
+            $nextStatusId = $status->where('keyword_pst', $row['next_status_id'])->first()->id_pst;
+            
+            $row['parent_status_id'] = $parentStatusId;
+            $row['next_status_id'] = $nextStatusId;
+        }
+        NextStatus::insert($data);
     }
 }

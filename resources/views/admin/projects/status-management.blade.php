@@ -63,18 +63,15 @@
     </style>
     <div class="row">
         <div class="col-md-12 mb-4">
-            <button class="btn btn-danger text-white btn-sm shadow-lg float-end fw-semibold" type="button" style="line-height: 0.94">
-                {{-- <x-coreui-icon svgClass="icon" icon="cil-plus" /> --}}
-                Avanzar al<br>siguiente estado
-            </button>
-            <nav class="breadcrumbs small shadow-lg d-none">
-                <span href="javascript:void(0);" class="breadcrumbs__item">Proyecto creado</span>
-                <span href="javascript:void(0);" class="breadcrumbs__item">Estqueado</span>
-                <span href="javascript:void(0);" class="breadcrumbs__item">Dibujo</span>
-                <span href="javascript:void(0);" class="breadcrumbs__item">Digitalizacion</span>
-                <span href="javascript:void(0);" class="breadcrumbs__item is-active">Checkout</span>
-            </nav>
-
+            <div class="dropdown me-3 d-inline-flex">
+                <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-coreui-toggle="dropdown" aria-expanded="false">Avanzar a..</button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="">
+                    @foreach ($nextStatusList as $row)
+                        <li><a class="dropdown-item" href="#">{{$row->nextStatus->status_name_pst}}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            <button class="btn btn-danger" type="button">Registrar incidencia</button>
         </div>
     </div>
     <div class="row justify-content-center">
