@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Project extends Model
 {
@@ -294,5 +295,29 @@ class Project extends Model
     public function creFiscal()
     {
         return $this->belongsTo(User::class, 'cre_fiscal_pro');
+    }
+
+    public function getProductionAmountAttribute()
+    {
+        $sql = '
+            SELECT
+                project_id_lad,
+                sum(ROUND(worked_up_wus * price_wus,2)) total_bs
+            FROM
+                bui_worked_up_structures
+            LEFT JOIN bui_labor_cost on id_lac = labor_cost_id_wus
+            LEFT JOIN bui_building_structures on building_structure_id_lac = id_bus
+            LEFT JOIN bui_labor_details on id_lad = labor_detail_id_lac
+            LEFT JOIN bui_labor_cost_log on id_lal = labor_cost_log_id_wus
+            LEFT JOIN bui_building_points on point_id_lal = id_bpo
+            where
+                deleted_wus != 1
+                and deleted_lal != 1 
+                and project_id_lad = 3190
+                and status_id_lad = 11
+            GROUP BY project_id_lad;
+        ';
+        $response = DB::select($sql)[0];
+        return $response->total_bs;
     }
 }

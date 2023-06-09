@@ -114,8 +114,9 @@
                         </div>
                         <!-- /.col-->
                         <div class="col-4">
-                          <div class="border-start border-start-4 border-start-danger px-3 mb-0"><small class="text-medium-emphasis text-truncate">Producci&oacute;n</small>
-                            <div class="fs-5 fw-semibold">22.643</div>
+                          <div class="border-start border-start-4 border-start-danger px-3 mb-0">
+                            <small class="text-medium-emphasis text-truncate">Producci&oacute;n (No incluye dise&ntilde;o)</small>
+                            <div class="fs-5 fw-semibold">{{number_format($project->productionAmount,2,'.',',')}}</div>
                           </div>
                         </div><div class="col-4">
                           <div class="border-start border-start-4 border-start-danger px-3 mb-0"><small class="text-medium-emphasis text-truncate">Estado</small>
