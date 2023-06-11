@@ -58,47 +58,48 @@
         .breadcrumbs__item.is-active {
             background: #edf1f5;
         }
-
         /* Some styles to make the page look a little nicer */
+        .list-group-timeline .list-group-item::after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 8px;
+            width: 10px;
+            height: 10px;
+            margin-top: 0.425rem;
+            margin-left: -0.5rem;
+            border: 2px solid #cbcbcf;
+            background: #fff;
+            border-radius: 0.5rem;
+        }
+
+        .list-group-timeline .list-group-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 4px;
+            height: 100%;
+            border-left: 2px solid #cbcbcf;
+        }
     </style>
     <div class="row">
         <div class="col-md-12 mb-4">
-            <div class="dropdown me-3 d-inline-flex">
-                <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-coreui-toggle="dropdown" aria-expanded="false">Mover a..</button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="">
-                    @foreach ($nextStatusList as $row)
-                        <li><a class="dropdown-item" href="javascript:void(0);" onclick="Livewire.emit('showModal', 'admin.status-form',{{$project->id_pro}},{{$row->nextStatus->id_pst}});">{{$row->nextStatus->status_name_pst}}</a></li>
-                    @endforeach
-                </ul>
-            </div>
+            @if (count($nextStatusList) > 1)
+                <div class="dropdown me-3 d-inline-flex">
+                    <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-coreui-toggle="dropdown" aria-expanded="false">Mover a..</button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="">
+                        @foreach ($nextStatusList as $row)
+                            <li><a class="dropdown-item" href="javascript:void(0);" onclick="Livewire.emit('showModal', 'admin.status-form',{{$project->id_pro}},{{$row->nextStatus->id_pst}});">{{$row->nextStatus->status_name_pst}}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @else
+                <button class="btn btn-primary me-3"  onclick="Livewire.emit('showModal', 'admin.status-form',{{$project->id_pro}},{{$nextStatusList[0]->nextStatus->id_pst}});" type="button">Mover a {{$nextStatusList[0]->nextStatus->status_name_pst}}</button>
+            @endif
             <button class="btn btn-danger text-white" type="button">Registrar incidencia</button>
         </div>
     </div>
     <div class="row justify-content-center">
-        <style>
-            .list-group-timeline .list-group-item::after {
-                content: "";
-                position: absolute;
-                top: 15px;
-                left: 8px;
-                width: 10px;
-                height: 10px;
-                margin-top: 0.425rem;
-                margin-left: -0.5rem;
-                border: 2px solid #cbcbcf;
-                background: #fff;
-                border-radius: 0.5rem;
-            }
-
-            .list-group-timeline .list-group-item::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 4px;
-                height: 100%;
-                border-left: 2px solid #cbcbcf;
-            }
-        </style>
         <div class="col-md-9">
             <div class="card mb-4 shadow">
                 {{-- <div class="card-header">Descripci&oacute;n general</div> --}}
@@ -224,9 +225,10 @@
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <link rel="stylesheet" href="{{asset('js/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker3.css')}}">
 @stop
 
 @section('js')
-    {{-- <script> console.log('Hi!'); </script> --}}
+    <script src="{{asset('js/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('js/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.es.min.js')}}"></script>
 @stop

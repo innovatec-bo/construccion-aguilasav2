@@ -331,7 +331,7 @@ return [
                 ],
                 [
                     'text'        => 'Depurar materiales',
-                    'route'       => 'admin.materials.debug',
+                    // 'route'       => 'admin.materials.debug',
                     // 'can'         => 'admin.materials.debug',
                     'icon'        => 'fas fa-fw fa-bug',
                     'shift' => 'pl-4',

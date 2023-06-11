@@ -29,7 +29,6 @@ return [
             'rectify_illustration',
             'ri_digitization',
             'ri_drawing',
-            'ri_drawing',
             'ri_digitization'
         ],
         'approvement' => [

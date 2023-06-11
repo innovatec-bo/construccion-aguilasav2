@@ -313,11 +313,18 @@ class Project extends Model
             where
                 deleted_wus != 1
                 and deleted_lal != 1 
-                and project_id_lad = 3190
+                and project_id_lad = '.$this->id_pro.'
                 and status_id_lad = 11
             GROUP BY project_id_lad;
         ';
-        $response = DB::select($sql)[0];
-        return $response->total_bs;
+        $response = DB::select($sql)[0]->total_bs??0;
+        return $response;
+    }
+
+    public function moveToStatus($statusKeyword, $data)
+    {
+        $status = ProjectStatus::where('keyword_pst', $statusKeyword)->first();
+        $this->status_pro = $status->id_pst;
+        $this->save();
     }
 }
