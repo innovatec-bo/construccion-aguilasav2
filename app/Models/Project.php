@@ -326,5 +326,26 @@ class Project extends Model
         $status = ProjectStatus::where('keyword_pst', $statusKeyword)->first();
         $this->status_pro = $status->id_pst;
         $this->save();
+        $this->addStatusToLog();
+    }
+
+    public function addStatusToLog($statusId, $detail = "", $manualEntryDate = "", $responsibleList = array(), $fileIds = array()) : void
+    {
+        //Lets create a new log
+        // $projectStatus = new Model_project_status_log($this->_id, $statusId, $detail, $manualEntryDate);
+        // $projectStatus->save();
+        //Updating project
+        $this->status_pro = $statusId;
+        $this->save();
+        //Saving log
+        $projectStatusLog = new ProjectStatusLog;
+        $projectStatusLog->status_id_psl = $statusId;
+        $projectStatusLog->project_id_psl = $this->id_pro;
+        $projectStatusLog->manual_entry_date_psl = $manualEntryDate;
+        $projectStatusLog->save();
+        //Each statusLog needs to have one or more responsible by log
+        // Model_status_log_responsible::addResponsible($projectStatus->getId(), $responsibleList);
+        //If there is file ids added to status log, then let's save these
+        // Model_project_status_file::addFiles($projectStatus->getId(), $fileIds, $this->_id, $statusId);
     }
 }
