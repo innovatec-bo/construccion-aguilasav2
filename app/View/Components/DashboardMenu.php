@@ -79,7 +79,13 @@ class DashboardMenu extends Component
                         'route'       => 'admin.projects.rectify-manpower',
                         'can'         => ['admin.projects.rectify-manpower'],
                         'icon'        => 'fas fa-fw fa-edit',
-                    ]
+                    ],
+                    [
+                        'text'        => 'Registro de avance',
+                        'route'       => 'admin.labor-cost-log.index',
+                        // 'can'         => ['admin.labor-cost-log.index'],
+                        'icon'        => 'fas fa-fw fa-edit',
+                    ],
                 ]
             ],
             [

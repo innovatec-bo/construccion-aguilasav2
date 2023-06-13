@@ -20,6 +20,10 @@ class ProjectStatusLog extends Model
         'manual_entry_date_psl' => 'datetime'
     ];
 
+    protected $fillable = [
+        
+    ];
+
     const CREATED_AT = 'createdon_psl';
     const UPDATED_AT = 'editedon_psl';
 

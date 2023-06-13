@@ -225,3 +225,9 @@ Breadcrumbs::for('admin.projects.rectify-manpower', function (BreadcrumbTrail $t
     $trail->parent('admin.home.index');
     $trail->push('Rectificar mano de obra', route('admin.projects.rectify-manpower'));
 });
+
+// Labor cost log - index
+Breadcrumbs::for('admin.labor-cost-log.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Registros de avance', route('admin.labor-cost-log.index'));
+});

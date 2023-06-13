@@ -27,7 +27,6 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::resource('proyectos','ProjectController')->names('projects');
 
     //Materials Summary
-    
     Route::get('movimientos/movimientos-duplicados', 'MaterialSummaryController@duplicateOutputs')->name('materials-summary.duplicate-outputs');
     Route::get('movimientos/movimientos-agrupados/{project}','MaterialSummaryController@groupedMovementDetails')->name('materials-summary.grouped-movement-details');
     Route::get('movimientos/movimientos-agrupados','MaterialSummaryController@groupedMovements')->name('materials-summary.grouped-movements');
@@ -57,6 +56,9 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
 
     //Labor costs
     Route::resource('labor-costs', 'LaborCostController')->names('labor-costs');
+
+    //Labor cost log
+    Route::resource('labor-cost-log', 'LaborCostLogController')->names('labor-cost-log');
 
     //Project materials
     Route::resource('project-materials','ProjectMaterialController')->names('project-materials');
