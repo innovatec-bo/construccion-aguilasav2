@@ -134,7 +134,7 @@
                                     <x-coreui-icon svgClass="nav-icon" icon="cil-dollar" />
                                 </svg>
                             </div>
-                            <div class="fs-4 fw-semibold">12,813.63</div>
+                            <div class="fs-4 fw-semibold">{{number_format($project->currentBudget,2,'.',',')}}</div>
                             <small class="text-medium-emphasis text-uppercase fw-semibold">Importe</small>
                         </div>
         

@@ -7,7 +7,8 @@
 @stop
 
 @section('content')
-    @livewire('admin.project-index')
+    {{-- @livewire('admin.project-index') --}}
+    @livewire('admin.project-index2')
 @stop
 
 @section('css')

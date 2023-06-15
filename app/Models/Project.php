@@ -37,7 +37,7 @@ class Project extends Model
 
     public function statusLog()
     {
-        return $this->hasMany(ProjectStatusLog::class, 'project_id_psl');
+        return $this->hasMany(ProjectStatusLog::class, 'project_id_psl')->orderBy('manual_entry_date_psl', 'desc');
     }
 
     public function contract()
@@ -347,5 +347,114 @@ class Project extends Model
         // Model_status_log_responsible::addResponsible($projectStatus->getId(), $responsibleList);
         //If there is file ids added to status log, then let's save these
         // Model_project_status_file::addFiles($projectStatus->getId(), $fileIds, $this->_id, $statusId);
+    }
+
+    public function getCurrentBudgetAttribute()
+    {
+        $budget = 0;
+        switch ($this->status->keyword_pst) 
+        {
+            case 'project_has_been_created':
+            case 'drawing':
+            case 'stakes':
+            case 'digitization':
+            case 'returned':
+                $budget = $this->initial_design_budget_pro + $this->initial_building_budget_pro;
+                break;
+            case 'schedule':
+            case 'ready_to_send':
+            case 'already_sent':
+            case 'rectify_design':
+            case 'rectify_illustration':
+            case 'rd_stakes':
+            case 'rd_digitization':
+            case 'rd_drawing':
+            case 'ri_digitization':
+            case 'ri_drawing':
+                $schedule = $this->statusLog->where('status_id_psl',6)->first();
+                if(is_null($schedule->projectBudget))
+                {
+                    $budget = 0;
+                }
+                else
+                {
+                    $budget = !is_null($schedule->projectBudget->tentative_total_budget_prb) && $schedule->projectBudget->tentative_total_budget_prb > 0?$schedule->projectBudget->tentative_total_budget_prb:$schedule->projectBudget->design_prb;
+                }
+                break;
+            case 'canceled':
+                $canceled = $this->statusLog->where('status_id_psl',12)->first();
+                if(is_null($canceled->projectBudget))
+                {
+                    $budget = 0;
+                }
+                else
+                {
+                    $budget = $canceled->projectBudget->design_prb;
+                }
+                break;
+                case 'approved': 
+                case 'assign_to': 
+                case 'in_progress': 
+                case 'paused': 
+                case 'stopped': 
+                case 'completed': 
+                case 'project_energized': 
+                case 'as_built':
+                    $approved = $this->statusLog->where('status_id_psl',11)->first();
+                    if(is_null($approved->projectBudget))
+                    {
+                        $budget = 0;
+                    }
+                    else
+                    {
+                        $budget = $approved->projectBudget->design_prb + $approved->projectBudget->building_prb + $approved->projectBudget->transportation_prb + $approved->projectBudget->live_line_prb + $approved->projectBudget->right_of_way_prb;
+                    }
+                break;
+                case 'conciliation_reception': 
+                case 'conciliation_shipment': 
+                case 'cre_return_order': 
+                case 'project_return_materials':
+                case 'project_real_budget_confirmation':
+                    if($this->paymentOrderProject)
+                    {
+                        $budget = $this->paymentOrderProject->design_budget_pop + 
+                                    $this->paymentOrderProject->transportation_budget_pop +
+                                    $this->paymentOrderProject->live_line_budget_pop +
+                                    $this->paymentOrderProject->building_budget_pop +
+                                    $this->paymentOrderProject->right_of_way_budget_pop +
+                                    $this->paymentOrderProject->total_real_budget;
+                    }
+                    else
+                    {
+                        $conciliationReception = $this->statusLog->where('status_id_psl',34)->first();
+                        // dd($conciliationReception);
+                        if ($conciliationReception->projectRealBudget) 
+                        {
+                            $budget = $conciliationReception->projectRealBudget->design_reb + 
+                                    $conciliationReception->projectRealBudget->building_reb + 
+                                    $conciliationReception->projectRealBudget->transportation_reb + 
+                                    $conciliationReception->projectRealBudget->live_line_reb + 
+                                    $conciliationReception->projectRealBudget->right_of_way_reb;
+                        }
+                        
+
+                    }
+                break;
+            default:
+                $budget = 0;
+                break;
+        }
+        return $budget;
+    }
+
+    public function getCurrentStatusLogAttribute()
+    {
+        $currentStatusData = $this->statusLog->where('status_id_psl',$this->status_pro)->first();
+        return $currentStatusData;
+    }
+
+    public function paymentOrderProject()
+    {
+        return $this->hasOne(PaymentOrderProject::class, 'project_id_pop');
     }
 }
