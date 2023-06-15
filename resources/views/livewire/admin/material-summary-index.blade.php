@@ -106,11 +106,10 @@
                                                 <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href='{{ route('admin.materials-summary.show', $materialSummary) }}'">Ver</a></li>
                                                 @can('admin.materials-summary.edit')
                                                     @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
-                                                        <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href='{{ route('admin.materials-summary.edit', $materialSummary) }}'">Editar</a></li>
+                                                        <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href="{{ route('admin.materials-summary.edit', $materialSummary) }}">Editar</a></li>
                                                     @endif
                                                 @endcan
                                                 @if (Auth::user()->email == 'jair@twiiti.com')
-                                                    {{-- <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-sm lv-confirm-action"><i class="fas fa-trash"></i></a> --}}
                                                     <li><a href="javascript:void(0)" wire:loading.class="disabled" class="dropdown-item lv-confirm-action" data-record="{{$materialSummary}}">Eliminar</a></li>
                                                 @endif
                                             </ul>
