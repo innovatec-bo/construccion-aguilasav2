@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row position-relative">
     <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, projectCode, workAreaSelected, statusSelected">
         <div class="spinner-grow" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -119,7 +119,7 @@
                                     <td class="text-end">{{number_format($project->currentBudget, 2,'.',',')}}</td>
                                     <td class="text-center">
                                         <div class="dropdown">
-                                            <a class="btn btn-primary btn-sm dropdown-toggle" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
+                                            <a class="btn btn-primary btn-sm dropdown-toggle" wire:loading.class="disabled" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
                                                 <x-coreui-icon svgClass="icon" icon="cil-options"/>
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">

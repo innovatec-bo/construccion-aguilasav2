@@ -1,55 +1,51 @@
-<div class="row justify-content-center">
+<div class="row position-relative">
+    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, projectCode, structureCode, triggerLoading">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>COD Proyecto</label>
+            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="projectCode">
+            @error('projectCode')
+                <span class="text-danger small">{{$message}}</span>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>COD Estructura</label>
+            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="structureCode">
+            @error('structureCode')
+                <span class="text-danger small">{{$message}}</span>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-2">
+        <label>Desde</label>
+        <div class="input-group input-group-sm date mb-3 from">
+            <input class="form-control" type="text" value="{{$from}}" placeholder="dd-mm-yyyy">
+            <span class="input-group-text input-group-append" role="button" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+            </div>
+    </div>
+    <div class="col-md-2">
+        <label>Hasta</label>
+        <div class="input-group input-group-sm date mb-3 to">
+            <input class="form-control" type="text" value="{{$to}}" placeholder="dd-mm-yyyy">
+            <span class="input-group-text input-group-append" role="button" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>&nbsp;</label>
+            <button class="btn btn-primary btn-sm form-control" type="button">Decargar</button>
+        </div>
+    </div>
     <div class="col-md-12">
         <div class="card shadow-lg">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label>COD Proyecto</label>
-                            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="projectCode">
-                            @error('projectCode')
-                                <span class="text-danger small">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label>COD Estructura</label>
-                            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="structureCode">
-                            @error('structureCode')
-                                <span class="text-danger small">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Desde</label>
-                        <div class="input-group input-group-sm date mb-3 from">
-                            <input class="form-control" type="text" value="{{$from}}" placeholder="dd-mm-yyyy">
-                            <span class="input-group-text input-group-append" role="button" id="basic-addon2"><i class="fa fa-calendar"></i></span>
-                          </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Hasta</label>
-                        <div class="input-group input-group-sm date mb-3 to">
-                            <input class="form-control" type="text" value="{{$to}}" placeholder="dd-mm-yyyy">
-                            <span class="input-group-text input-group-append" role="button" id="basic-addon2"><i class="fa fa-calendar"></i></span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label>&nbsp;</label>
-                            <button class="btn btn-primary btn-sm form-control" type="button">Decargar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="card-body p-0">
-                <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, projectCode, structureCode, triggerLoading">
-                    <div class="spinner-grow" role="status">
-                        <span class="visually-hidden">Cargando...</span>
-                      </div>
-                </div>
+                
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm table-hover table-striped mb-0">
                         <thead>
@@ -102,7 +98,7 @@
                                         </p>
                                     </td>
                                     <td class="text-center">
-                                        
+                                        {{number_format($workedUpStructure->laborCost->laborDetail->project->currentBudget,2,'.',',')}}
                                     </td>
                                 </tr>    
                             @endforeach
