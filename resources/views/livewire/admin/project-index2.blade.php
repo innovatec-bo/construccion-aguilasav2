@@ -81,7 +81,7 @@
                                 <th>Fiscal<br>de CRE</th>
                                 <th>Direcci&oacute;n</th>
                                 <th>Importe</th>
-                                <th style="width: 130px">Opciones</th>
+                                <th class="text-center">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,7 +119,7 @@
                                     <td class="text-end">{{number_format($project->currentBudget, 2,'.',',')}}</td>
                                     <td class="text-center">
                                         <div class="dropdown">
-                                            <a class="btn btn-primary btn-sm dropdown-toggle" wire:loading.class="disabled" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
+                                            <a class="btn btn-transparent btn-sm" wire:loading.class="disabled" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
                                                 <x-coreui-icon svgClass="icon" icon="cil-options"/>
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">

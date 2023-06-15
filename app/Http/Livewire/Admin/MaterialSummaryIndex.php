@@ -47,7 +47,7 @@ class MaterialSummaryIndex extends Component
 
     public function updating($attribute)
     {
-        $toValidate = ['idMSU','from', 'to'];
+        $toValidate = ['idMSU','projectCode','materialSummaryTypeSelected','from', 'to'];
         // dd(array_search($attribute, $toValidate) !== FALSE);
         if (array_search($attribute, $toValidate) !== FALSE) 
         {
@@ -72,7 +72,7 @@ class MaterialSummaryIndex extends Component
         })
         ->when($this->projectCode, function(Builder $query, $projectCode){
             $query->whereHas('project', function(Builder $query){
-                $query->where('code_pro','like', '%'.$this->projectCode);
+                $query->where('code_pro','like', '%'.$this->projectCode.'%');
             });
         })
         ->when($this->from, function(Builder $query, $from){

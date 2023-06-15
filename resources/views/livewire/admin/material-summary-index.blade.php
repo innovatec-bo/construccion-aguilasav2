@@ -1,61 +1,56 @@
-<div class="row justify-content-center">
+<div class="row position-relative">
+    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="delete, previousPage, nextPage, gotoPage, idMSU, projectCode, materialSummaryTypeSelected, from, to">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>ID de movimiento</label>
+            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="idMSU">
+            @error('idMSU')
+                <span class="text-danger small">{{$message}}</span>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>COD Proyecto</label>
+            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="projectCode">
+            @error('projectCode')
+                <span class="text-danger small">{{$message}}</span>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Tipo de movimiento</label>
+            <select class="form-control form-control-sm" wire:model="materialSummaryTypeSelected">
+                <option value=""></option>
+                @foreach ($materialSummaryTypes as $materialSummaryType)
+                    <option value="{{$materialSummaryType->id_mqt}}">{{$materialSummaryType->name_mqt}}</option>
+                @endforeach
+            </select>
+            
+        </div>
+    </div>
+    <div class="col-md-2">
+        <label>Desde</label>
+        <div class="input-group input-group-sm date mb-3 from">
+            <input class="form-control" type="text" value="{{$from}}" placeholder="dd/mm/yyyy">
+            <span class="input-group-text input-group-append" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+          </div>
+    </div>
+    <div class="col-md-2">
+        <label>Hasta</label>
+        <div class="input-group input-group-sm date mb-3 to">
+            <input class="form-control" type="text" value="{{$to}}" placeholder="dd/mm/yyyy">
+            <span class="input-group-text input-group-append" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
     <div class="col-md-12">
         <div class="card shadow-lg">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label>ID de movimiento</label>
-                            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="idMSU">
-                            @error('idMSU')
-                                <span class="text-danger small">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label>COD Proyecto</label>
-                            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="projectCode">
-                            @error('projectCode')
-                                <span class="text-danger small">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Tipo de movimiento</label>
-                            <select class="form-control form-control-sm" wire:model="materialSummaryTypeSelected">
-                                <option value=""></option>
-                                @foreach ($materialSummaryTypes as $materialSummaryType)
-                                    <option value="{{$materialSummaryType->id_mqt}}">{{$materialSummaryType->name_mqt}}</option>
-                                @endforeach
-                            </select>
-                            
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Desde</label>
-                        <div class="input-group input-group-sm date mb-3 from">
-                            <input class="form-control" type="text" value="{{$from}}" placeholder="dd/mm/yyyy">
-                            <span class="input-group-text input-group-append" id="basic-addon2"><i class="fa fa-calendar"></i></span>
-                          </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Hasta</label>
-                        <div class="input-group input-group-sm date mb-3 to">
-                            <input class="form-control" type="text" value="{{$to}}" placeholder="dd/mm/yyyy">
-                            <span class="input-group-text input-group-append" id="basic-addon2"><i class="fa fa-calendar"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="card-body p-0">
-                <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="delete, previousPage, nextPage, gotoPage, idMSU">
-                    <div class="spinner-grow" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                      </div>
-                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm table-hover table-striped mb-0">
                         <thead>
@@ -100,15 +95,26 @@
                                         {{$materialSummary->projectMaterials->count()}}
                                     </td>
                                     <td class="text-center">
-                                        @can('admin.materials-summary.edit')
-                                            @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
-                                                <a wire:loading.class="disabled" class="btn btn-primary btn-sm" href="{{ route('admin.materials-summary.edit', $materialSummary) }}"><i class="fas fa-pen"></i></a>
-                                            @endif
-                                        @endcan
-                                        <a wire:loading.class="disabled" class="btn btn-secondary btn-sm" href='{{ route('admin.materials-summary.show', $materialSummary) }}'><i class="fas fa-eye"></i></a>
-                                        @if (Auth::user()->email == 'jair@twiiti.com')
-                                            <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-sm lv-confirm-action"><i class="fas fa-trash"></i></a>
-                                        @endif
+                                        
+                                        
+                                        <div class="dropdown">
+                                            
+                                            <a class="btn btn-transparent btn-sm" wire:loading.class="disabled" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
+                                                <x-coreui-icon svgClass="icon" icon="cil-options"/>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
+                                                <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href='{{ route('admin.materials-summary.show', $materialSummary) }}'">Ver</a></li>
+                                                @can('admin.materials-summary.edit')
+                                                    @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
+                                                        <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href='{{ route('admin.materials-summary.edit', $materialSummary) }}'">Editar</a></li>
+                                                    @endif
+                                                @endcan
+                                                @if (Auth::user()->email == 'jair@twiiti.com')
+                                                    {{-- <a href="javascript:void(0)" wire:loading.class="disabled" data-record="{{$materialSummary}}" class="btn btn-danger btn-sm lv-confirm-action"><i class="fas fa-trash"></i></a> --}}
+                                                    <li><a href="javascript:void(0)" wire:loading.class="disabled" class="dropdown-item lv-confirm-action" data-record="{{$materialSummary}}">Eliminar</a></li>
+                                                @endif
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -116,12 +122,11 @@
                     </table>
                 </div>
             </div>
-
-            <div class="card-footer clearfix">
-                <div class="table-responsive">
-                    {{ $materialSummaryList->links() }}
-                </div>
-            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mt-4">
+        <div class="table-responsive">
+            {{ $materialSummaryList->links() }}
         </div>
     </div>
 </div>
