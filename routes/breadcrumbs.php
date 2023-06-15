@@ -214,6 +214,12 @@ Breadcrumbs::for('admin.external-balance-material.create', function (BreadcrumbT
     $trail->push('Importar balance externo de materiales', route('admin.external-balance-material.create'));
 });
 
+// Projects - index
+Breadcrumbs::for('admin.projects.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Proyectos', route('admin.projects.index'));
+});
+
 // Projects - status management
 Breadcrumbs::for('admin.projects.status-management', function (BreadcrumbTrail $trail, $project) {
     $trail->parent('admin.home.index');
@@ -231,3 +237,4 @@ Breadcrumbs::for('admin.labor-cost-log.index', function (BreadcrumbTrail $trail)
     $trail->parent('admin.home.index');
     $trail->push('Registros de avance', route('admin.labor-cost-log.index'));
 });
+

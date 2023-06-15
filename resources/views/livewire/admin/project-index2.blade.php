@@ -1,13 +1,65 @@
-<div class="row justify-content-center">
-    <div class="col-md-12">
+<div class="row">
+    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, projectCode, workAreaSelected, statusSelected">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </div>
+    
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>COD Proyecto</label>
+            <input type="text" name="table_search" class="form-control form-control-sm" wire:model.debounce.1500ms="projectCode" placeholder="Buscar..">
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Area de trabajo</label>
+            <select class="form-control form-control-sm" wire:model="workAreaSelected">
+                <option value="">--Todos--</option>
+                <option value="gir">GIR</option>
+                <option value="gis">GIS</option>
+            </select>    
+        </div>
+    </div>
+    {{-- <div class="col-md-2">
+        <div class="form-group">
+            <label>Fiscal</label>
+            <select class="form-control" wire:model="fiscalSelected">
+                <option value="">--Todos--</option>
+                @foreach ($fiscalList as $user)
+                    <option value="{{$user->id_usr}}">{{$user->fullName}}</option>
+                @endforeach
+            </select>    
+        </div>
+    </div> --}}
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>Estado</label>
+            <select class="form-control form-control-sm" wire:model="statusSelected">
+                <option value="">--Todos--</option>
+                @foreach ($statusList as $status)
+                    <option value="{{$status->id_pst}}">{{$status->status_name_pst}}</option>
+                @endforeach
+            </select>    
+        </div>
+    </div>
+    @can('admin.projects.create')
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <a href="{{route('admin.projects.create')}}" class="btn btn-primary btn-sm form-control" type="button">Nuevo proyecto</a>
+            </div>
+        </div>
+    @endcan
+    <div class="col-md-12 mt-4">
         <div class="card shadow-lg">
-            <div class="card-header">
+            <div class="card-header d-none">
                 @can('admin.projects.create')
                     <a href="{{route('admin.projects.create')}}" class="btn btn-xs btn-primary">Nuevo</a>    
                 @endcan
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="">
-                        <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.1500ms="projectCode" placeholder="Buscar..">
+                        
                         @can('admin.users.export')
                             <button class="btn btn-primary btn-xs" wire:click="export"><i class="far fa-file-excel"></i> Exportar</button>
                         @endcan
@@ -16,16 +68,12 @@
                 </div>
             </div>
             <div class="card-body p-0">
-                <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, projectCode">
-                    <div class="spinner-grow" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                      </div>
-                </div>
+                
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover table-sm small mb-0">
                         <thead>
                             <tr>
-                                <th style="width: 10px">C&oacute;digo</th>
+                                <th>C&oacute;digo</th>
                                 <th>Ingreso<br>en sistema</th>
                                 <th>Ingreso<br>en estado</th>
                                 <th>Sistema</th>
@@ -70,21 +118,19 @@
                                     @endif
                                     <td class="text-end">{{number_format($project->currentBudget, 2,'.',',')}}</td>
                                     <td class="text-center">
-                                        @can('admin.projects.edit')
-                                            <a wire:loading.class="disabled" class="btn btn-primary btn-sm" href='{{ route('admin.projects.edit', $project) }}'"><i class="fas fa-pen"></i></a>    
-                                        @endcan
-                                        @can('admin.projects.show')
-                                            <a wire:loading.class="disabled" class="btn btn-secondary btn-sm" href='{{ route('admin.projects.show', $project) }}'"><i class="fas fa-eye"></i></a>    
-                                        @endcan
-                                        @can('admin.projects.destroy')
-                                            <form method="post" action="{{ route('admin.projects.destroy', $project) }}"
-                                                class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                <button wire:loading.class="disabled" type="submit" onclick="return confirm('Eliminar?')" class="btn btn-danger btn-sm"><i
-                                                        class="fas fa-trash-alt"></i></button>
-                                            </form>    
-                                        @endcan
+                                        <div class="dropdown">
+                                            <a class="btn btn-primary btn-sm dropdown-toggle" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
+                                                <x-coreui-icon svgClass="icon" icon="cil-options"/>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
+                                                @can('admin.projects.edit')
+                                                    <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href='{{ route('admin.projects.edit', $project) }}'">Editar</a></li>
+                                                @endcan
+                                                @can('admin.projects.status-management')
+                                                    <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href="{{route('admin.projects.status-management', $project->id_pro)}}">Administracion de estados</a></li>
+                                                @endcan
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -93,11 +139,14 @@
                 </div>
             </div>
 
-            <div class="card-footer clearfix">
-                <div class="table-responsive">
-                    {{ $projects->links() }}
-                </div>
-            </div>
+            {{-- <div class="card-footer clearfix">
+                
+            </div> --}}
+        </div>
+    </div>
+    <div class="col-md-12 mt-4">
+        <div class="table-responsive">
+            {{ $projects->links() }}
         </div>
     </div>
 </div>
