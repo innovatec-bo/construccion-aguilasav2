@@ -1,14 +1,24 @@
-<div class="row justify-content-center">
-    <div class="col-md-12">
+<div class="row position-relative">
+    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, search">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <input type="text" name="table_search" class="form-control form-control-sm" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+        </div>
+    </div>
+    <div class="col-md-12 mt-4">
         <div class="card shadow-lg">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
-            </div>
-            <div class="card-body">
+            </div> --}}
+            <div class="card-body p-0">
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
-                <table class="table table-bordered table-sm table-hover table-striped">
+                <table class="table table-bordered table-striped table-hover table-sm small mb-0">
                     <thead>
                         <tr>
                             <th style="width: 10px">ID</th>
@@ -45,17 +55,18 @@
                                     {{$project->materialSummaries->count()}}
                                 </td>
                                 <td class="text-center">
-                                    <a  wire:loading.class="disabled" class="btn btn-primary btn-sm my-2" href='{{route('admin.materials-summary.grouped-movement-details', $project)}}'"><i class="fas fa-eye"></i></a>
+                                    <a  wire:loading.class="disabled" class="btn btn-primary btn-sm" href='{{route('admin.materials-summary.grouped-movement-details', $project)}}'"><i class="fas fa-eye"></i></a>
                                 </td>
                             </tr>    
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
-            <div class="card-footer clearfix">
-                {{ $projects->links() }}
-            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mt-4">
+        <div class="table-responsive">
+            {{ $projects->links() }}
         </div>
     </div>
 </div>
