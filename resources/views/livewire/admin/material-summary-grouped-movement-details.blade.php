@@ -1,15 +1,19 @@
-<div class="row justify-content-center">
-    <div class="col-md-12">
+<div class="row position-relative">
+    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, search">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <input type="text" name="table_search" class="form-control form-control-sm" wire:model.debounce.1500ms="search" placeholder="Buscar por codigo de material..">
+        </div>
+    </div>
+    <div class="col-md-12 mt-4">
         <div class="card shadow-lg">
-            <div class="card-header">
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar por codigo de material..">
-            </div>
-            <div class="card-body">
-                <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                </div>
+            <div class="card-body p-0">
                 {{$search}}
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped table-hover table-sm small mb-0">
                     <thead>
                         <tr>
                             <th style="width: 10px">ID<br>Movimiento</th>
@@ -30,7 +34,7 @@
                                     @if ($search == $projectMaterial->material->code_mat)
                                         <tr>
                                             <td>{{$materialSummary->id_msu}}</td>
-                                            <td>
+                                            <td class="stacked-info">
                                                 {{$materialSummary->entry_date_msu->format('d/m/Y H:i:s')}}<br>
                                                 {{$materialSummary->entry_date_msu->diffForHumans()}}
                                             </td>
@@ -58,7 +62,7 @@
                                 @else
                                     <tr>
                                         <td>{{$materialSummary->id_msu}}</td>
-                                        <td>
+                                        <td class="stacked-info">
                                             {{$materialSummary->entry_date_msu->format('d/m/Y H:i:s')}}<br>
                                             <span class="text-info">{{$materialSummary->entry_date_msu->diffForHumans()}}</span>
                                         </td>

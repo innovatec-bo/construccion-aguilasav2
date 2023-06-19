@@ -1,31 +1,32 @@
-<div class="row justify-content-center">
-    <div class="col-md-10">
+<div class="row position-relative">
+    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, builderSelected, statusSelected, search">
+        <div class="spinner-grow" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {!! Form::label('builders', 'Constructor') !!}
+            {!! Form::select('builders', $builders, null, ['id' => 'builders', 'class' => 'form-control form-control-sm', 'required' => 'required', 'wire:model' => 'builderSelected']) !!}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            {!! Form::label('statusSelected', 'Estado del proyecto') !!}
+            {!! Form::select('statusSelected', $statusToVerify, null, ['id' => 'statusSelected', 'class' => 'form-control form-control-sm', 'wire:model' => 'statusSelected']) !!}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <input class="form-control form-control-sm mt-4" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+    </div>
+    <div class="col-md-12 mt-4">
         <div class="card shadow-lg">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            {!! Form::label('builders', 'Constructor') !!}
-                            {!! Form::select('builders', $builders, null, ['id' => 'builders', 'class' => 'form-control form-control-sm', 'required' => 'required', 'wire:model' => 'builderSelected']) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            {!! Form::label('statusSelected', 'Estado del proyecto') !!}
-                            {!! Form::select('statusSelected', $statusToVerify, null, ['id' => 'statusSelected', 'class' => 'form-control form-control-sm', 'wire:model' => 'statusSelected']) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <input class="form-control form-control-sm mt-4" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search, builderSelected, statusSelected">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-sm table-hover table-striped">
+                    <table class="table table-bordered table-striped table-hover table-sm small mb-0">
                         <thead>
                             <tr>
                                 <th style="width: 10px">ID</th>
@@ -50,8 +51,8 @@
                                         @endforeach
                                     </td>
                                     <td class="text-center">
-                                        <a wire:loading.class="disabled" class="btn btn-info btn-sm my-2" href='{{route('admin.labor-details.internal-conciliation', $project->laborDetailDesign)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna"><i class="fas fa-clipboard-list"></i></a>
-                                        <a wire:loading.class="disabled" class="btn btn-warning btn-sm my-2" href='{{route('admin.labor-details.internal-conciliation-builder', $project->laborDetailDesign)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna(Constructor)"><i class="fas fa-clipboard-list"></i></a>
+                                        <a wire:loading.class="disabled" class="btn btn-info btn-sm" href='{{route('admin.labor-details.internal-conciliation', $project->laborDetailDesign)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna"><i class="fas fa-clipboard-list"></i></a>
+                                        <a wire:loading.class="disabled" class="btn btn-warning btn-sm" href='{{route('admin.labor-details.internal-conciliation-builder', $project->laborDetailDesign)}}'" data-toggle="tooltip" data-placement="top" title="Conciliacion interna(Constructor)"><i class="fas fa-clipboard-list"></i></a>
                                     </td>
                                 </tr>    
                             @endforeach
@@ -59,12 +60,11 @@
                     </table>
                 </div>
             </div>
-
-            <div class="card-footer clearfix">
-                <div class="table-responsive">
-                    {{ $projects->links() }}
-                </div>
-            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mt-4">
+        <div class="table-responsive">
+            {{ $projects->links() }}
         </div>
     </div>
 </div>
