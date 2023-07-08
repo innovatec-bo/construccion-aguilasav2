@@ -18,4 +18,9 @@ class Contract extends Model
 
     const CREATED_AT = 'createdon_con';
     const UPDATED_AT = 'editedon_con';
+
+    protected $casts = [
+        'start_date_con' => 'datetime',
+        'expiration_date_con' => 'datetime'
+    ];
 }

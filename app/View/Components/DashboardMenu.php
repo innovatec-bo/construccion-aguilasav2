@@ -201,6 +201,12 @@ class DashboardMenu extends Component
                     ]
                 ]
             ],
+            [
+                'text'        => 'Contratos',
+                'icon'        => 'cil-notes',
+                'route'       => 'admin.contracts.index',
+                'can'         => ['admin.contracts.index', 'admin.contracts.create'],
+            ],
             ['header' => 'SEGURIDAD', 'can' => ['admin.users.index', 'admin.users.create', 'admin.permissions.index', 'admin.permissions.create','admin.roles.index', 'admin.roles.create']],
             [
                 'text'        => 'Usuarios',

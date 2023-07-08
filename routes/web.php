@@ -70,6 +70,9 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
 
     //External balance material
     Route::resource('balance-externo-de-materiales', 'ExternalBalanceMaterialController')->parameters(['balance-externo-de-materiales' => 'external_balance_material'])->names('external-balance-material');
+
+    //Contracts
+    Route::resource('contratos','ContractController')->parameters(['contratos' => 'contract'])->names('contracts');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');

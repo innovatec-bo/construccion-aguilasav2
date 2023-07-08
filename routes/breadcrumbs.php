@@ -238,3 +238,7 @@ Breadcrumbs::for('admin.labor-cost-log.index', function (BreadcrumbTrail $trail)
     $trail->push('Registros de avance', route('admin.labor-cost-log.index'));
 });
 
+// Contract
+Breadcrumbs::for('admin.contracts.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Contratos', route('admin.contracts.index'));
+});
