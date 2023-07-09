@@ -203,7 +203,7 @@ class DashboardMenu extends Component
             ],
             [
                 'text'        => 'Contratos',
-                'icon'        => 'cil-notes',
+                'icon'        => 'cil-file',
                 'route'       => 'admin.contracts.index',
                 'can'         => ['admin.contracts.index', 'admin.contracts.create'],
             ],

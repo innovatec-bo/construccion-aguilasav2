@@ -240,5 +240,12 @@ Breadcrumbs::for('admin.labor-cost-log.index', function (BreadcrumbTrail $trail)
 
 // Contract
 Breadcrumbs::for('admin.contracts.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
     $trail->push('Contratos', route('admin.contracts.index'));
+});
+
+Breadcrumbs::for('admin.contracts.edit', function (BreadcrumbTrail $trail, $contract) {
+    $trail->parent('admin.home.index');
+    $trail->push('Contratos', route('admin.contracts.index'));
+    $trail->push('Editar contrato '.$contract->contract_number_con, route('admin.contracts.edit', $contract));
 });

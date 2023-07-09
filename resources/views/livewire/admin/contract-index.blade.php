@@ -1,85 +1,60 @@
 <div class="row position-relative">
-    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, projectCode, workAreaSelected, statusSelected">
+    <div class="overlay d-none" wire:loading.class.remove="d-none"
+        wire:target="previousPage, nextPage, gotoPage, projectCode, workAreaSelected, statusSelected">
         <div class="spinner-grow" role="status">
             <span class="visually-hidden">Loading...</span>
-          </div>
+        </div>
     </div>
     @can('admin.contracts.create')
         <div class="col-md-2">
             <div class="form-group">
                 <label>&nbsp;</label>
-                <a href="{{route('admin.contracts.create')}}" class="btn btn-primary btn-sm form-control" type="button">Nuevo contrato</a>
+                <a href="javascript:void(0);" wire:click="$emit('showModal','admin.contract-create-modal')" class="btn btn-primary btn-sm form-control"
+                    type="button">Nuevo contrato</a>
             </div>
         </div>
     @endcan
     <div class="col-md-12 mt-4">
-        <div class="card shadow-lg">
-            <div class="card-header d-none">
-                @can('admin.contracts.create')
-                    <a href="{{route('admin.contracts.create')}}" class="btn btn-xs btn-primary">Nuevo</a>    
-                @endcan
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="">
-                        
-                        @can('admin.users.export')
-                            <button class="btn btn-primary btn-xs" wire:click="export"><i class="far fa-file-excel"></i> Exportar</button>
+        <div class="row">
+            @foreach ($contracts as $contract)
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card text-white bg-info shadow-lg">
+                        <div class="card-body">
+                            <div class="fs-4 fw-semibold">Bs.
+                                {{ number_format($contract->amount_con, 2, '.', ',') }}</div>
+                            <div>Nro. {{ $contract->contract_number_con }}</div>
+                            <div class="d-flex justify-content-between">
+                                <div class="float-end ms-1">
+                                    <small class="">
+                                        Desde el {{$contract->start_date_con->translatedFormat('l d F Y')}} hasta el
+                                        {{$contract->expiration_date_con->translatedFormat('l d F Y')}}
+                                    </small>
+                                </div>
+                            </div>
+                            @php
+                                $start = $contract->start_date_con->timestamp;
+                                $end = $contract->expiration_date_con->timestamp;
+                                $timespan = $end - $start;
+                                $current = Carbon\Carbon::now()->timestamp - $start;
+                                $progress = $current / $timespan;
+                                $remaining = (1 - $progress) * 100;
+                            @endphp
+                            <div class="progress progress-white progress-thin my-2">
+                                <div class="progress-bar" role="progressbar" style="width: {{100-$remaining}}%"
+                                    aria-valuenow="{{100-$remaining}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        @can('admin.contracts.edit')
+                            <div class="card-footer px-3 py-2">
+                                <a class="btn-block text-medium-emphasis-inverse d-flex justify-content-between align-items-center" href="javascript:void(0);" wire:click="$emit('showModal','admin.contract-edit-modal', {{$contract}})">
+                                    <span class="small fw-semibold">Editar</span>
+                                    <x-coreui-icon svgClass="icon" icon="cil-pencil"/>
+                                </a>
+                            </div>    
                         @endcan
-                        
                     </div>
                 </div>
-            </div>
-            <div class="card-body p-0">
-                
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover table-sm small mb-0">
-                        <thead>
-                            <tr>
-                                <th>N&uacute;mero</th>
-                                <th>Monto</th>
-                                <th>Fecha de inicio</th>
-                                <th>Fecha de fin</th>
-                                <th class="text-center">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($contracts as $contract)
-                                <tr>
-                                    <td>
-                                        {{$contract->contract_number_con}}
-                                    </td>
-                                    <td>
-                                        {{number_format($contract->amount_con,2,'.',',')}}
-                                    </td>
-                                    <td class="stacked-info">
-                                        {{ $contract->start_date_con->format('d/m/Y') }}
-                                        <p class="mb-0 text-info small">{{ $contract->start_date_con->diffForHumans() }}</p>
-                                    </td>
-                                    <td class="stacked-info">
-                                        {{$contract->expiration_date_con->format('d/m/Y')}}
-                                        <p class="mb-0 text-info small">{{ $contract->expiration_date_con->diffForHumans() }}</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="dropdown">
-                                            <a class="btn btn-transparent btn-sm" wire:loading.class="disabled" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
-                                                <x-coreui-icon svgClass="icon" icon="cil-options"/>
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
-                                                @can('admin.contracts.edit')
-                                                    <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href='{{ route('admin.contracts.edit', $contract) }}'">Editar</a></li>
-                                                @endcan
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            {{-- <div class="card-footer clearfix">
-                
-            </div> --}}
+            @endforeach
         </div>
     </div>
     <div class="col-md-12 mt-4">
