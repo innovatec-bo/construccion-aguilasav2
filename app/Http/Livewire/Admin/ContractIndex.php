@@ -16,6 +16,7 @@ class ContractIndex extends Component
     public $projectCode;
     public $sort = 'id_con';
     public $direction = 'desc';
+    public $listeners = ['reloadContractIndex' => 'render'];
 
     public function render()
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Contract;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class ContractEditModal extends Component
@@ -13,6 +14,7 @@ class ContractEditModal extends Component
     public $from;
     public $to;
     public $umbo;
+    public $listeners = ['fromChanged','toChanged'];
 
     public function mount(Contract $contract)
     {
@@ -21,6 +23,7 @@ class ContractEditModal extends Component
         $this->amount = $contract->amount_con;
         $this->from = $contract->start_date_con->format('d/m/Y');
         $this->to = $contract->expiration_date_con->format('d/m/Y');
+        $this->umbo = $contract->umbo;
     }
     public function render()
     {
@@ -34,7 +37,7 @@ class ContractEditModal extends Component
             'amount' => ['required'],
             'from' => ['required', 'date_format:d/m/Y'],
             'to' => ['required', 'date_format:d/m/Y'],
-            'umbo' => ['required']
+            'umbo' => ['required', 'numeric']
         ];
     }
 
@@ -48,10 +51,12 @@ class ContractEditModal extends Component
         $this->validate();
         $this->contract->contract_number_con = $this->number;
         $this->contract->amount_con = $this->amount;
-        $this->contract->start_date_con = $this->from;
-        $this->contract->expiration_date_con = $this->to;
-        // $this->
+        $this->contract->start_date_con = Carbon::createFromFormat('d/m/Y',$this->from)->format('Y-m-d 00:00:00');
+        $this->contract->expiration_date_con = Carbon::createFromFormat('d/m/Y',$this->to)->format('Y-m-d 23:59:59');
+        $this->contract->umbo = $this->umbo;
         $this->contract->save();
+        $this->emit('hideModal');
+        $this->emit('reloadContractIndex');
     }
 
     public function fromChanged($date)

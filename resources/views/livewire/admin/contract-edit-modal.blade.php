@@ -30,7 +30,7 @@
                 @enderror
                 
                 <label>Hasta</label>
-                <div class="input-group date from">
+                <div class="input-group date to">
                     <input class="form-control" type="text" value="{{$contract->expiration_date_con->format('d/m/Y')}}" placeholder="dd/mm/yyyy">
                     <span class="input-group-text input-group-append" id="basic-addon2"><i class="fa fa-calendar"></i></span>
                 </div>
@@ -39,7 +39,7 @@
                 @enderror
                 <div class="form-group">
                     <label for="amount">UMBO</label>
-                    <input type="text" id="umbo" class="form-control" value="" placeholder="umbo">
+                    <input type="text" id="umbo" class="form-control" wire:model="umbo" placeholder="umbo">
                     @error('umbo')
                         <span class="text-danger small"> {{$message}} </span>
                     @enderror
@@ -68,12 +68,12 @@
                 }
                 if ($(this).hasClass('from')) 
                 {
-                    Livewire.emit('fromChanged', date); 
-                    console.log(date);  
+                    window.livewire.emit('fromChanged', date); 
+                    console.log(date);
                 } 
                 else 
                 {
-                    Livewire.emit('toChanged', date);
+                    window.livewire.emit('toChanged', date);
                 }
             });
         });

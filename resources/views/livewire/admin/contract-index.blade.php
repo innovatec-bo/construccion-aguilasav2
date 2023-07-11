@@ -22,7 +22,10 @@
                         <div class="card-body">
                             <div class="fs-4 fw-semibold">Bs.
                                 {{ number_format($contract->amount_con, 2, '.', ',') }}</div>
-                            <div>Nro. {{ $contract->contract_number_con }}</div>
+                            <div>
+                                <strong>Nro.</strong> {{ $contract->contract_number_con }}<br>
+                                <strong>UMBO: </strong>{{$contract->umbo}}
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <div class="float-end ms-1">
                                     <small class="">
