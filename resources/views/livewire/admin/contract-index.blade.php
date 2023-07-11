@@ -27,7 +27,7 @@
                                 <strong>UMBO: </strong>{{$contract->umbo}}
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div class="float-end ms-1">
+                                <div class="float-end ms-1 stacked-info">
                                     <small class="">
                                         Desde el {{$contract->start_date_con->translatedFormat('l d F Y')}} hasta el
                                         {{$contract->expiration_date_con->translatedFormat('l d F Y')}}
