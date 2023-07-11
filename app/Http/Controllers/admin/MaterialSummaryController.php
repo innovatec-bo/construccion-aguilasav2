@@ -29,7 +29,7 @@ class MaterialSummaryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.materials-summary.create');
     }
 
     /**

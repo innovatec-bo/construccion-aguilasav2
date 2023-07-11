@@ -4,6 +4,19 @@
             <span class="visually-hidden">Loading...</span>
           </div>
     </div>
+    <div class="col-md-12 mb-2">
+        <div class="row">
+            @can('admin.contracts.create')
+            <div class="col-md-2 d-block">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <a href="{{route('admin.materials-summary.create')}}" class="btn btn-primary form-control"
+                        type="button">Registrar movimiento</a>
+                </div>
+            </div>
+        @endcan        
+        </div>
+    </div>
     <div class="col-md-2">
         <div class="form-group">
             <label>ID de movimiento</label>

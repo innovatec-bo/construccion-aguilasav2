@@ -1,42 +1,20 @@
-@extends('adminlte::page')
+@extends('layouts.dashboard-layout')
 
-@section('title', 'Nuevo rol')
+@section('title', 'Registrar movimiento')
 
-@section('content_header')
-    <h1>Nuevo Rol</h1>
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin.materials-summary.create') }}
 @stop
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card card-primary">
-            <form method="post" action="{{route('admin.roles.store')}}">
-                @csrf
-                @method('post')
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" id="name" class="form-control" placeholder="Nombre" name="name">
-                        @error('name')
-                            <span class="text-warning small"> {{$message}} </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="{{route('admin.roles.index')}}" class="btn btn-secondary">Cancelar</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
+    @livewire('admin.material-summary-create')
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <link rel="stylesheet" href="{{asset('js/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker3.css')}}">
 @stop
 
 @section('js')
-    {{-- <script> console.log('Hi!'); </script> --}}
+    <script src="{{asset('js/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('js/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.es.min.js')}}"></script>
 @stop

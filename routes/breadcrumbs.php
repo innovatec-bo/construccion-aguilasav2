@@ -100,6 +100,12 @@ Breadcrumbs::for('admin.materials-summary.edit', function (BreadcrumbTrail $trai
     $trail->push('Editar movimiento '.$materialsSummary->id_msu, route('admin.materials-summary.edit', $materialsSummary));
 });
 
+// Materials summary - create
+Breadcrumbs::for('admin.materials-summary.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.materials-summary.index');
+    $trail->push('Registrar movimiento', route('admin.materials-summary.create'));
+});
+
 // Load initial list
 Breadcrumbs::for('admin.materials-summary.load-initial-list', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');
