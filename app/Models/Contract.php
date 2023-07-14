@@ -21,6 +21,7 @@ class Contract extends Model
 
     protected $casts = [
         'start_date_con' => 'datetime',
-        'expiration_date_con' => 'datetime'
+        'expiration_date_con' => 'datetime',
+        'active' => 'boolean'
     ];
 }

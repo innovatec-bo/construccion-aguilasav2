@@ -44,6 +44,16 @@
                         <span class="text-danger small"> {{$message}} </span>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="amount">Activo<br><em class="text-muted">Si establece este contrato como activo, cualquier otro que haya estado activo, dejara de estarlo</em></label>
+                    <select class="form-select form-select-sm" wire:model="active">
+                        <option value="true">Si</option>
+                        <option value="false">No</option>
+                      </select>
+                    @error('umbo')
+                        <span class="text-danger small"> {{$message}} </span>
+                    @enderror
+                </div>
             </form>
         </div>
         <div class="modal-footer">

@@ -14,6 +14,7 @@ class ContractEditModal extends Component
     public $from;
     public $to;
     public $umbo;
+    public $active;
     public $listeners = ['fromChanged','toChanged'];
 
     public function mount(Contract $contract)
@@ -24,6 +25,7 @@ class ContractEditModal extends Component
         $this->from = $contract->start_date_con->format('d/m/Y');
         $this->to = $contract->expiration_date_con->format('d/m/Y');
         $this->umbo = $contract->umbo;
+        $this->active = $contract->active;
     }
     public function render()
     {
@@ -54,7 +56,12 @@ class ContractEditModal extends Component
         $this->contract->start_date_con = Carbon::createFromFormat('d/m/Y',$this->from)->format('Y-m-d 00:00:00');
         $this->contract->expiration_date_con = Carbon::createFromFormat('d/m/Y',$this->to)->format('Y-m-d 23:59:59');
         $this->contract->umbo = $this->umbo;
+        $this->contract->active = (bool)$this->active;
         $this->contract->save();
+    
+        if($this->active)
+            Contract::where('id_con','!=',$this->contract->id_con)->update(['active' => false]);
+
         $this->emit('hideModal');
         $this->emit('reloadContractIndex');
     }

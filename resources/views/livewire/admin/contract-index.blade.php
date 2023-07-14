@@ -18,7 +18,7 @@
         <div class="row">
             @foreach ($contracts as $contract)
                 <div class="col-sm-6 col-lg-3">
-                    <div class="card text-white bg-info shadow-lg">
+                    <div class="card text-white {{$contract->active?'bg-primary':'bg-info'}} shadow-lg">
                         <div class="card-body">
                             <div class="fs-4 fw-semibold">Bs.
                                 {{ number_format($contract->amount_con, 2, '.', ',') }}</div>
