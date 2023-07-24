@@ -50,7 +50,7 @@
                         <option value="true">Si</option>
                         <option value="false">No</option>
                       </select>
-                    @error('umbo')
+                    @error('active')
                         <span class="text-danger small"> {{$message}} </span>
                     @enderror
                 </div>
