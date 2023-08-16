@@ -93,8 +93,10 @@
                         @endforeach
                     </ul>
                 </div>
-            @else
+            @elseif(count($nextStatusList) == 1)
                 <button class="btn btn-primary me-3"  onclick="Livewire.emit('showModal', 'admin.status-form',{{$project->id_pro}},{{$nextStatusList[0]->nextStatus->id_pst}});" type="button">Mover a {{$nextStatusList[0]->nextStatus->status_name_pst}}</button>
+            @else
+                <button class="btn btn-primary me-3 disabled" disabled role="button">Mover a ..</button>
             @endif
             <button class="btn btn-danger text-white" type="button">Registrar incidencia</button>
         </div>
