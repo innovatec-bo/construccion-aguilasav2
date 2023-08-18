@@ -265,11 +265,24 @@ class DashboardMenu extends Component
                     ]       
                 ]
             ],
-            // [
-            //     'text'        => 'Documentacion',
-            //     'icon'        => 'fas fa-fw fa-book',
-            //     'url'         => 'docs'
-            // ],
+            [
+                'text'        => 'Configuracion',
+                'icon'        => 'cil-settings',
+                'can'         => ['admin.roles.index', 'admin.roles.create'],
+                'submenu'     => [
+                    [
+                        'text'        => 'Administracion de estados',
+                        'route'       => 'admin.roles.index',
+                        'can'         => 'admin.roles.index',
+                        'icon'        => 'fas fa-fw fa-table',
+                    ],
+                ]
+            ],
+            [
+                'text'        => 'Documentacion',
+                'icon'        => 'cil-book',
+                'url'       => 'docs'
+            ],
         ];
 
         $this->validatePermission();
