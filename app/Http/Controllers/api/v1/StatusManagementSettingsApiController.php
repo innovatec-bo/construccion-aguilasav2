@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class StatusManagementSettingsApiController extends BaseApiController
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admin.status-management-settings.edit', ['only' => ['edit','update']]);
+    }
     /**
      * Display a listing of the resource.
      *
