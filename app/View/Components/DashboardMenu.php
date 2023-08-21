@@ -268,12 +268,12 @@ class DashboardMenu extends Component
             [
                 'text'        => 'Configuracion',
                 'icon'        => 'cil-settings',
-                'can'         => ['admin.roles.index', 'admin.roles.create'],
+                'can'         => ['admin.status-management-settings.edit'],
                 'submenu'     => [
                     [
                         'text'        => 'Administracion de estados',
-                        'route'       => 'admin.roles.index',
-                        'can'         => 'admin.roles.index',
+                        'route'       => 'admin.status-management-settings.edit',
+                        'can'         => 'admin.status-management-settings.edit',
                         'icon'        => 'fas fa-fw fa-table',
                     ],
                 ]

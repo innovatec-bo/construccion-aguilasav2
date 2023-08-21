@@ -73,6 +73,11 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
 
     //Contracts
     Route::resource('contratos','ContractController')->parameters(['contratos' => 'contract'])->names('contracts');
+
+    //Settings - Status management
+    // Route::resource('status-management-settings','StatusManagementSettingsController')->names('status-management-settings');
+    Route::get('status-management-settings/edit','StatusManagementSettingsController@edit')->name('status-management-settings.edit');
+    Route::post('status-management-settings/update','StatusManagementSettingsController@update')->name('status-management-settings.update');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');

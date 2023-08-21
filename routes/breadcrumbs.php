@@ -249,9 +249,15 @@ Breadcrumbs::for('admin.contracts.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.home.index');
     $trail->push('Contratos', route('admin.contracts.index'));
 });
-
+// Contract - edit
 Breadcrumbs::for('admin.contracts.edit', function (BreadcrumbTrail $trail, $contract) {
     $trail->parent('admin.home.index');
     $trail->push('Contratos', route('admin.contracts.index'));
     $trail->push('Editar contrato '.$contract->contract_number_con, route('admin.contracts.edit', $contract));
+});
+
+// Settings - Status management
+Breadcrumbs::for('admin.status-management-settings.edit', function (BreadcrumbTrail $trail) {
+    $trail->push('Inicio', route('admin.home.index'));
+    $trail->push('Editar configurar administracion de estados', route('admin.status-management-settings.edit'));
 });
