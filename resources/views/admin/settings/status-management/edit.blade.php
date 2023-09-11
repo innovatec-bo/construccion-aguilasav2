@@ -24,7 +24,7 @@
                         <label class="form-check-label" for="enable_manual_approvement_for_conciliations2">Desactivado</label>
                     </div>
                     <small class="form-text text-muted d-block">Esta opcion da control al encargado de almacen para definir que
-                        proyectos estan aptos para pasar de as built al siguiente estado</small>
+                        proyectos estan aptos para pasar de recepcion de conciliacion a envio de conciliacion.</small>
                 </div>
                 <div class="mb-3">
                     <label class="form-label d-block" for="exampleFormControlInput1">Denegar As Built si existen materiales pendientes de retiro en CRE</label>
