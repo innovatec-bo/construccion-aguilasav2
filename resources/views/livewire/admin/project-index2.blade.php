@@ -99,7 +99,9 @@
                                         {{$project->currentStatusLog->manual_entry_date_psl->format('d/m/Y')}}
                                         <p class="mb-0 text-info small">{{ $project->currentStatusLog->manual_entry_date_psl->diffForHumans() }}</p>
                                     </td>
-                                    <td>{{$project->system->name}}</td>
+                                    <td>
+                                        {{-- {{$project->system->name}} --}}
+                                    </td>
                                     <td>{{$project->points_pro}}p/{{$project->distance_pro}}Km</td>
                                     <td>
                                         @if ($project->creFiscal)
