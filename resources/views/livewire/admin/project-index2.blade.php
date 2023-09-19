@@ -131,6 +131,9 @@
                                                 @can('admin.projects.status-management')
                                                     <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href="{{route('admin.projects.status-management', $project->id_pro)}}">Administracion de estados</a></li>
                                                 @endcan
+                                                @if (!$project->project_has_returned_materials_to_cre && $project->status_pro == 34 && $enableManualApprovementForConciliations)
+                                                    <li><a wire:loading.class="disabled" class="dropdown-item" href="javascript:void(0)" wire:click="$emit('showModal','admin.conciliation-manual-approvement', {{$project->id_pro}})">Aprobar conciliaci&oacute;n</a></li>    
+                                                @endif
                                             </ul>
                                         </div>
                                     </td>

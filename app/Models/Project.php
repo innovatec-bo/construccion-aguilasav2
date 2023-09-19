@@ -22,7 +22,8 @@ class Project extends Model
     const UPDATED_AT = 'editedon_pro';
 
     protected $casts = [
-        'entry_date_pro' => 'datetime'
+        'entry_date_pro' => 'datetime',
+        'project_has_returned_materials_to_cre' => 'boolean'
     ];
 
     public function materialSummaries()

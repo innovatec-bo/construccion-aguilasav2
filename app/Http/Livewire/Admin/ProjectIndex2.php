@@ -7,6 +7,7 @@ use App\Models\ProjectStatus;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
+use App\Settings\StatusManagementSettings;
 use Illuminate\Database\Eloquent\Builder;
 
 class ProjectIndex2 extends Component
@@ -23,6 +24,7 @@ class ProjectIndex2 extends Component
     public $workAreaSelected;
     public $fiscalList;
     public $fiscalSelected;
+    public $enableManualApprovementForConciliations;
     protected $queryString = [
         'projectCode' => ['except' => '', 'as' => 'proyecto'],
         'statusSelected' => ['except' => '', 'as' => 'estado'],
@@ -30,8 +32,13 @@ class ProjectIndex2 extends Component
         'fiscalSelected' => ['except' => '', 'as' => 'fiscal']
     ];
 
+    protected $listeners = [
+        'refreshProjectIndex' => 'render'
+    ];
+
     public function mount()
     {
+        $this->enableManualApprovementForConciliations = app(StatusManagementSettings::class)->enable_manual_approvement_for_conciliations;
         $this->hiddenStatus = [
             'schedule',
             'approvement'
