@@ -401,7 +401,7 @@ class Project extends Model
                 case 'project_energized': 
                 case 'as_built':
                     $approved = $this->statusLog->where('status_id_psl',11)->first();
-                    if(is_null($approved->projectBudget))
+                    if(is_null($approved) || is_null($approved->projectBudget))
                     {
                         $budget = 0;
                     }
