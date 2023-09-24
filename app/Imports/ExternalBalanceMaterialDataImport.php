@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\ExternalBalanceMaterial;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
@@ -19,6 +20,7 @@ class ExternalBalanceMaterialDataImport implements ToModel, WithBatchInserts, Wi
     {
         // foreach ($rows as $row) 
         // {
+            
             if(strtolower($row[2]) == 'serebo')
             {
                 return new ExternalBalanceMaterial([
@@ -35,23 +37,12 @@ class ExternalBalanceMaterialDataImport implements ToModel, WithBatchInserts, Wi
                     'Reserva' => $row[10],
                     'Textocabdocumento' => $row[11],
                     'Referencia' => $row[12],
-                    'Fecontab' => $row[13],
-                    'Fechadoc' => $row[14],
-                    'Registrado' => $row[15],
+                    'Fecontab' => $row[13] !=''?Carbon::createFromFormat('d.m.Y', $row[13])->format('Y-m-d'):$row[13],
+                    'Fechadoc' => $row[14] !=''?Carbon::createFromFormat('d.m.Y', $row[14])->format('Y-m-d'):$row[14],
+                    'Registrado' => $row[15] !=''?Carbon::createFromFormat('d.m.Y', $row[15])->format('Y-m-d'):$row[15],
                     'EjMat' => $row[16],
                     'Cecoste' => $row[17],
                     'Grafo' => $row[18]
-                    // 'CMv' => '',
-                    // 'Docmat' => '',
-                    // 'Reserva' => '',
-                    // 'Textocabdocumento' => '',
-                    // 'Referencia' => '',
-                    // 'Fecontab' => '',
-                    // 'Fechadoc' => '',
-                    // 'Registrado' => '',
-                    // 'EjMat' => '',
-                    // 'Cecoste' => '',
-                    // 'Grafo' => ''
                 ]);
             }
         // }

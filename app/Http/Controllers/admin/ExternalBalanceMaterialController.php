@@ -53,8 +53,9 @@ class ExternalBalanceMaterialController extends Controller
         ini_set('memory_limit', '750M');
         
         $import = new ExternalBalanceMaterialImport();
-        $array = Excel::import($import, $request->file('file'));
-        
+        $import->onlySheets(1);
+        $data = Excel::import($import, $request->file('file'));
+        // ExternalBalanceMaterial::parseData($data[1]);
         // dd('toc toc',$array->total);
         // foreach ($array as $row) 
         // {
@@ -65,9 +66,8 @@ class ExternalBalanceMaterialController extends Controller
         // {
         //     dd('toc toc2',$key,$row);
         // }
-        
-        $response['var1'] = 'var 1';
-        $response['var2'] = 'var 2';
+        // dd($data[1][3]);
+        $response['var1'] = $data;
         // $response['data'] = $data;
         return response()->json(
             $response
