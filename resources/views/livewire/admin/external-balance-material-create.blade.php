@@ -62,8 +62,8 @@
             <div class="card-footer">
                 <div class="row row-cols-1 row-cols-md-5 text-center">
                     <div class="col mb-sm-2 mb-0">
-                        <div class="text-medium-emphasis">Proyectos</div>
-                        <div class="fw-semibold" id="total-projects"></div>
+                        <div class="text-medium-emphasis">Total registros</div>
+                        <div class="fw-semibold" id="total-records"></div>
                     </div>
                     <div class="col mb-sm-2 mb-0">
                         <div class="text-medium-emphasis">Registros 221</div>
@@ -74,13 +74,14 @@
                         <div class="fw-semibold" id="records-222"></div>
                     </div>
                     <div class="col mb-sm-2 mb-0">
+                        <div class="text-medium-emphasis">Proyectos</div>
+                        <div class="fw-semibold" id="total-projects"></div>
+                    </div>
+                    <div class="col mb-sm-2 mb-0">
                         <div class="text-medium-emphasis">Tipos de Materiales</div>
                         <div class="fw-semibold" id="total-materials"></div>
                     </div>
-                    <div class="col mb-sm-2 mb-0">
-                        <div class="text-medium-emphasis">Total registros</div>
-                        <div class="fw-semibold" id="total-records"></div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
