@@ -63,23 +63,23 @@
                 <div class="row row-cols-1 row-cols-md-5 text-center">
                     <div class="col mb-sm-2 mb-0">
                         <div class="text-medium-emphasis">Proyectos</div>
-                        <div class="fw-semibold">29.703 Users (40%)</div>
+                        <div class="fw-semibold" id="total-projects"></div>
                     </div>
                     <div class="col mb-sm-2 mb-0">
                         <div class="text-medium-emphasis">Registros 221</div>
-                        <div class="fw-semibold">24.093 Users (20%)</div>
+                        <div class="fw-semibold" id="records-221"></div>
                     </div>
                     <div class="col mb-sm-2 mb-0">
                         <div class="text-medium-emphasis">Registros 222</div>
-                        <div class="fw-semibold">78.706 Views (60%)</div>
+                        <div class="fw-semibold" id="records-222"></div>
                     </div>
                     <div class="col mb-sm-2 mb-0">
-                        <div class="text-medium-emphasis">Variedad de Materiales</div>
-                        <div class="fw-semibold">22.123 Users (80%)</div>
+                        <div class="text-medium-emphasis">Tipos de Materiales</div>
+                        <div class="fw-semibold" id="total-materials"></div>
                     </div>
                     <div class="col mb-sm-2 mb-0">
                         <div class="text-medium-emphasis">Total registros</div>
-                        <div class="fw-semibold">40.15%</div>
+                        <div class="fw-semibold" id="total-records"></div>
                     </div>
                 </div>
             </div>
@@ -126,19 +126,41 @@
                 //Disable the start button
                 $(file.previewElement).find('.start').addClass('d-none');
                 $(file.previewElement).find('[data-dz-remove]').addClass('disabled');
+                console.log('sending',file, xhr, formData);
             });
 
-            myDropzone.on("complete", function(file) {
+            myDropzone.on("processing", function(file,responseText) {
+                console.log('processing',file,responseText);
+                
+            });
+
+            myDropzone.on("complete", function(file,responseText) {
                 // Hookup the start button
-                // console.log(file);
+                console.log('complete',file,responseText);
                 myDropzone.removeFile(file);
                 // @this.refreshPost();
                 
             });
 
             myDropzone.on("success", function(file, responseText) {
-                var responseText = file.id // or however you would point to your assigned file ID here;
-                console.log(responseText); // console should show the ID you pointed to
+                // var responseText = file // or however you would point to your assigned file ID here;
+                console.log('success',file,responseText); // console should show the ID you pointed to
+                var totalRecords = responseText.totalRecords;
+                $("#total-records").text(totalRecords);
+
+                var totalProjects = responseText.totalProjects;
+                $("#total-projects").text(totalProjects);
+                
+                var total221 = responseText.records221And222[221];
+                var percentage221 = (total221 * 100) / totalRecords;
+                $("#records-221").text(total221+" ("+percentage221.toFixed(2)+"%)");
+                
+                var total222 = responseText.records221And222[222];
+                var percentage222 = (total222 * 100) / totalRecords;
+                $("#records-222").text(total222+" ("+percentage222.toFixed(2)+"%)");
+
+                var totalMaterials = responseText.totalMaterials;
+                $("#total-materials").text(totalMaterials);
                 // do stuff with file.id ...
             });
         });

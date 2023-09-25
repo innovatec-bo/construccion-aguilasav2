@@ -54,21 +54,27 @@ class ExternalBalanceMaterialController extends Controller
         
         $import = new ExternalBalanceMaterialImport();
         $import->onlySheets(1);
-        $data = Excel::import($import, $request->file('file'));
-        // ExternalBalanceMaterial::parseData($data[1]);
-        // dd('toc toc',$array->total);
-        // foreach ($array as $row) 
-        // {
-            
-        // }
-        // dd($import->data);
-        // foreach($data as $key => $row)
-        // {
-        //     dd('toc toc2',$key,$row);
-        // }
-        // dd($data[1][3]);
-        $response['var1'] = $data;
-        // $response['data'] = $data;
+        Excel::import($import, $request->file('file'));
+        
+        $data = ExternalBalanceMaterial::limit(8587)->get();
+        
+        $totalRecords = $data->count();
+
+        $totalProjects = $data->groupBy('Proyecto')->map(function ($project) {
+            return $project->count();
+        })->count();
+
+        $totalMaterials = $data->groupBy('Material')->map(function ($material) {
+            return $material->count();
+        })->count();
+
+        $records221And222 = $data->groupBy('CMv')->map(function ($project) {
+            return $project->count();
+        });
+        $response['totalMaterials'] = $totalMaterials;
+        $response['totalRecords'] = $totalRecords;
+        $response['totalProjects'] = $totalProjects;
+        $response['records221And222'] = $records221And222;
         return response()->json(
             $response
         );
