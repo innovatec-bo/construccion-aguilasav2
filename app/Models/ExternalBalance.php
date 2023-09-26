@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class ExternalBalance extends Model
 {
@@ -34,11 +35,13 @@ class ExternalBalance extends Model
     public static function saveData($data): int
     {
         $tensions = [];
+        $externalBalanceMaterials = [];
         $data = $data[1];
         $data = new Collection($data);
         $data->shift();
         foreach ($data as $key => $value) 
         {
+            //Looking for tensions
             $projectTension = explode('.',$value[0]);
             $projectTension = end($projectTension);
             if(!isset($tensions[$projectTension]))
@@ -72,7 +75,41 @@ class ExternalBalance extends Model
         ];
 
         $externalBalance = ExternalBalance::create($externalBalance);
-        $externalBalance->materials()->save($data);
+        $date = date('Y-m-d H:i:s');
+        foreach ($data as $value) 
+        {
+            //Preparing data to save in ExternalBalanceMaterial
+            $externalBalanceMaterials[] = [
+                'ElementoPEP' => $value[0],
+                'Proyecto' => $value[1],
+                'Contratista' => $value[2],
+                'Material' => $value[3],
+                'Texto_breve_de_material' => $value[4],
+                'Alm' => $value[5],
+                'Cantidad' => $value[6],
+                'Lote' => $value[7],
+                'CMv' => $value[8],
+                'Docmat' => $value[9],
+                'Reserva' => $value[10],
+                'Textocabdocumento' => $value[11],
+                'Referencia' => $value[12],
+                'Fecontab' => $value[13],
+                'Fechadoc' => $value[14],
+                'Registrado' => $value[15],
+                'EjMat' => $value[16],
+                'Cecoste' => $value[17],
+                'Grafo' => $value[18],
+                'external_balance_id' => $externalBalance->id,
+                'created_at' => $date,
+                'updated_at' => $date,
+                'created_by' => Auth::user()->id_usr
+            ];
+        }
+        foreach (array_chunk($externalBalanceMaterials,1000) as $chunk) 
+        {
+            ExternalBalanceMaterial::insert($chunk);
+        }
+        
         return $externalBalance->id;
     }
 }
