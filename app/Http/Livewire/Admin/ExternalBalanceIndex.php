@@ -12,7 +12,7 @@ class ExternalBalanceIndex extends Component
     
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $sort = 'id_mat';
+    public $sort = 'id';
     public $direction = 'desc';
     public $deleteId = '';
     protected $queryString = ['search' => ['except' => '']];

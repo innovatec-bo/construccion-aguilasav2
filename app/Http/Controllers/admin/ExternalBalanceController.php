@@ -46,24 +46,12 @@ class ExternalBalanceController extends Controller
         $import->onlySheets(1);
         $data = Excel::toArray($import, $request->file('file'));
         
-        $data = ExternalBalance::saveData($data);
+        $externalBalanceId = ExternalBalance::saveData($data);
         
-        
-
-        // $totalMaterials = $data->groupBy('Material')->map(function ($material) {
-        //     return $material->count();
-        // })->count();
-
-        // $records221And222 = $data->groupBy('CMv')->map(function ($project) {
-        //     return $project->count();
-        // });
-        // $response['totalMaterials'] = $totalMaterials;
-        // $response['totalRecords'] = $totalRecords;
-        // $response['totalProjects'] = $totalProjects;
-        // $response['records221And222'] = $records221And222;
-        // return response()->json(
-        //     $response
-        // );
+        $response['externalBalanceId'] = $externalBalanceId;
+        return response()->json(
+            $response
+        );
     }
 
     /**
