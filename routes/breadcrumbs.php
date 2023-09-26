@@ -267,3 +267,9 @@ Breadcrumbs::for('admin.external-balance.index', function (BreadcrumbTrail $trai
     $trail->parent('admin.home.index');
     $trail->push('Balance externo de materiales', route('admin.external-balance.index'));
 });
+
+// External balance - show
+Breadcrumbs::for('admin.external-balance.show', function (BreadcrumbTrail $trail, $externalBalance) {
+    $trail->parent('admin.home.index');
+    $trail->push('Balance externo de materiales', route('admin.external-balance.show', $externalBalance));
+});

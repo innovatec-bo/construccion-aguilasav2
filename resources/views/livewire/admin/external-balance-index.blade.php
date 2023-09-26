@@ -102,7 +102,7 @@
                                                 <x-coreui-icon svgClass="icon" icon="cil-options"/>
                                             </button>
                                             <ul class="dropdown-menu" style="">
-                                              <li><a class="dropdown-item" href="#">Ver</a></li>
+                                              <li><a class="dropdown-item" href="{{route('admin.external-balance.show', $externalBalance)}}">Ver</a></li>
                                               <li><a class="dropdown-item" href="#">Eliminar</a></li>
                                             </ul>
                                           </div>

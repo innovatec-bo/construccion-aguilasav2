@@ -62,7 +62,7 @@ class ExternalBalanceController extends Controller
      */
     public function show(ExternalBalance $externalBalance)
     {
-        //
+        return view('admin.external-balance.show', compact('externalBalance'));
     }
 
     /**
