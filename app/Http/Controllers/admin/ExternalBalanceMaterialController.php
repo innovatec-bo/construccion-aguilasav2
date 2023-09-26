@@ -49,35 +49,7 @@ class ExternalBalanceMaterialController extends Controller
      */
     public function store(Request $request)
     {
-        set_time_limit(300);
-        ini_set('memory_limit', '750M');
         
-        $import = new ExternalBalanceMaterialImport();
-        $import->onlySheets(1);
-        Excel::import($import, $request->file('file'));
-        
-        $data = ExternalBalanceMaterial::limit(8587)->get();
-        
-        $totalRecords = $data->count();
-
-        $totalProjects = $data->groupBy('Proyecto')->map(function ($project) {
-            return $project->count();
-        })->count();
-
-        $totalMaterials = $data->groupBy('Material')->map(function ($material) {
-            return $material->count();
-        })->count();
-
-        $records221And222 = $data->groupBy('CMv')->map(function ($project) {
-            return $project->count();
-        });
-        $response['totalMaterials'] = $totalMaterials;
-        $response['totalRecords'] = $totalRecords;
-        $response['totalProjects'] = $totalProjects;
-        $response['records221And222'] = $records221And222;
-        return response()->json(
-            $response
-        );
     }
 
     /**

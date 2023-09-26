@@ -137,8 +137,8 @@ class DashboardMenu extends Component
                     ],
                     [
                         'text'        => 'Balance externo de materiales',
-                        'route'       => 'admin.external-balance-material.index',
-                        'can'         => ['admin.external-balance-material.index'],
+                        'route'       => 'admin.external-balance.index',
+                        'can'         => ['admin.external-balance.index'],
                         'icon'        => 'fas fa-fw fa-table',
                     ],
                     

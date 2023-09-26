@@ -261,3 +261,9 @@ Breadcrumbs::for('admin.status-management-settings.edit', function (BreadcrumbTr
     $trail->push('Inicio', route('admin.home.index'));
     $trail->push('Editar configurar administracion de estados', route('admin.status-management-settings.edit'));
 });
+
+// External balance - index
+Breadcrumbs::for('admin.external-balance.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Balance externo de materiales', route('admin.external-balance.index'));
+});

@@ -8,19 +8,21 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 
-class ExternalBalanceMaterialDataImport implements ToModel, WithBatchInserts, WithChunkReading, WithCalculatedFormulas
+class ExternalBalanceMaterialDataImport implements ToCollection, WithBatchInserts, WithChunkReading, WithCalculatedFormulas
 {
     /**
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        // foreach ($rows as $row) 
-        // {
-            
+        //$rows->shift();//Removed first row
+        foreach ($rows as $key => $row) 
+        {
             if(strtolower($row[2]) == 'serebo')
             {
                 return new ExternalBalanceMaterial([
@@ -45,7 +47,7 @@ class ExternalBalanceMaterialDataImport implements ToModel, WithBatchInserts, Wi
                     'Grafo' => $row[18]
                 ]);
             }
-        // }
+        }
     }
 
     public function batchSize(): int

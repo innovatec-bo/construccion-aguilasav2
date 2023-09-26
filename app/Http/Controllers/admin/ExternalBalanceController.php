@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
+use App\Imports\ExternalBalanceMaterialImport;
 use App\Models\ExternalBalance;
+use App\Models\ExternalBalanceMaterial;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExternalBalanceController extends Controller
 {
@@ -14,7 +18,7 @@ class ExternalBalanceController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.external-balance.index');
     }
 
     /**
@@ -35,7 +39,31 @@ class ExternalBalanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        set_time_limit(300);
+        ini_set('memory_limit', '750M');
+        
+        $import = new ExternalBalanceMaterialImport();
+        $import->onlySheets(1);
+        $data = Excel::toArray($import, $request->file('file'));
+        
+        $data = ExternalBalance::saveData($data);
+        
+        
+
+        // $totalMaterials = $data->groupBy('Material')->map(function ($material) {
+        //     return $material->count();
+        // })->count();
+
+        // $records221And222 = $data->groupBy('CMv')->map(function ($project) {
+        //     return $project->count();
+        // });
+        // $response['totalMaterials'] = $totalMaterials;
+        // $response['totalRecords'] = $totalRecords;
+        // $response['totalProjects'] = $totalProjects;
+        // $response['records221And222'] = $records221And222;
+        // return response()->json(
+        //     $response
+        // );
     }
 
     /**

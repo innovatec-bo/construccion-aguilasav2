@@ -74,6 +74,9 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     //Contracts
     Route::resource('contratos','ContractController')->parameters(['contratos' => 'contract'])->names('contracts');
 
+    //External Balance
+    Route::resource('balance-externo','ExternalBalanceController')->parameters(['balance-externo' => 'external-balance'])->names('external-balance');
+
     //Settings - Status management
     // Route::resource('status-management-settings','StatusManagementSettingsController')->names('status-management-settings');
     Route::get('status-management-settings/edit','StatusManagementSettingsController@edit')->name('status-management-settings.edit');
