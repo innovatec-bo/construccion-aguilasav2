@@ -281,7 +281,7 @@ class DashboardMenu extends Component
             [
                 'text'        => 'Documentacion',
                 'icon'        => 'cil-book',
-                'url'       => 'docs'
+                'url'       => '/administracion/docs'
             ],
         ];
 
