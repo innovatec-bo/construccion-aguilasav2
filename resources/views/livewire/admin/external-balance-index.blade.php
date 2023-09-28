@@ -103,7 +103,7 @@
                                             </button>
                                             <ul class="dropdown-menu" style="">
                                               <li><a class="dropdown-item" href="{{route('admin.external-balance.show', $externalBalance)}}">Ver</a></li>
-                                              <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                              <li><a class="dropdown-item" href="javascript:void(0)" wire:click="$emit('showModal','confirm-delete-modal', {{$externalBalance->id}},'App\\Models\\ExternalBalance')">Eliminar</a></li>
                                             </ul>
                                           </div>
                                     </td>

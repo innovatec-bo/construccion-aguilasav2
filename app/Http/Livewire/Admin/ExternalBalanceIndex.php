@@ -16,6 +16,9 @@ class ExternalBalanceIndex extends Component
     public $direction = 'desc';
     public $deleteId = '';
     protected $queryString = ['search' => ['except' => '']];
+    protected $listeners = [
+        'render'
+    ];
 
     public function updatingSearch()
     {
