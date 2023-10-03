@@ -64,10 +64,10 @@
                     </table>
                 </div>
             </div>
-            <div class="card-footer clearfix">
-                {{ $incidents->links() }}
-            </div>
         </div>
+    </div>
+    <div class="col-md-12">
+        {{ $incidents->links() }}
     </div>
     <!-- /.col-->
 </div>
