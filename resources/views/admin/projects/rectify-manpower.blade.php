@@ -9,7 +9,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card card-primary">
+            <div class="card card-primary shadow-lg">
                 <div class="card-body">
                     {{-- <form method="post" action="">
                     @csrf
@@ -39,8 +39,8 @@
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form> --}}
-                    <p class="text-center">
-                        <a class="btn btn-primary fileinput-button" href="javascript:void(0);">Cargar Mano de obra</a>
+                    <p class="text-center mb-0">
+                        <a class="btn btn-primary fileinput-button" href="javascript:void(0);">Seleccionar Mano de obra</a>
                     </p>
                     {{-- <form id="form-previews" class="my-4" data-parsley-validate='' wire:ignore>
                     <div class="files" id="previews">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </form> --}}
-                    <form id="form-previews" class="my-4" data-parsley-validate=''>
+                    <form id="form-previews" class="" data-parsley-validate=''>
                         <div class="files" id="previews">
                             <div id="template" class="file-row pt-2 m-1 pb-2 d-none">
                                 <div class="row mb-3">
@@ -99,26 +99,28 @@
                                     <label class="col-sm-2 col-form-label" for="inputEmail3">Proyecto</label>
                                     <div class="col-sm-10">
                                         <input class="form-control" id="inputEmail3" type="email">
+                                        <div class="form-text">Solo proyectos que ya cuenten con una mano de obra</div>
                                     </div>
                                 </div>
                                 <fieldset class="row mb-3">
                                     <legend class="col-form-label col-sm-2 pt-0">Acci&oacute;n</legend>
                                     <div class="col-sm-10">
-                                        <div class="form-check">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" id="gridRadios1" type="radio"
                                                 name="gridRadios" value="option1" checked="">
-                                            <label class="form-check-label" for="gridRadios1">Actualizar precios, no borrar
-                                                nada.</label>
+                                            <label class="form-check-label" for="gridRadios1">Actualizar precios, no borrar nada.</label>
+                                                <div class="form-text">Esta acci&oacute;n actualiza los precios de las estructuras y los precios que fueron especificados por los fiscales en los registros de producci&oacute;n</div>
                                         </div>
                                         <div class="form-check disabled">
                                             <input class="form-check-input" id="gridRadios3" type="radio"
                                                 name="gridRadios" value="option3" disabled="">
-                                            <label class="form-check-label" for="gridRadios3">Eliminar mano de obra
-                                                existente y reemplazar con la que se esta cargando.</label>
+                                            <label class="form-check-label" for="gridRadios3">Eliminar mano de obra existente y reemplazar con la que se esta cargando.</label>
+                                            <div class="form-text">Esta acci&oacute;n borra la mano de obra existente y todos los registros de producci&oacute;n que tenga asociados. Use esta opci&oacute;n cuando la mano de obra existente sea la incorrecta</div>
                                         </div>
                                     </div>
                                 </fieldset>
-                                <button class="btn btn-primary" type="submit">Sign in</button>
+                                <button class="btn btn-primary start" type="submit">Rectificar</button>
+                                <button class="btn btn-secondary" type="button"  data-dz-remove>Cancelar</button>
                             </div>
                         </div>
                     </form>
@@ -173,6 +175,7 @@
                     myDropzone.enqueueFile(file);
                 };
                 $('.fileinput-button').addClass('d-none');
+                console.log('fileinput-button hidden');
             });
 
             myDropzone.on("error", function(file, message) {
@@ -199,7 +202,6 @@
                 // Hookup the start button
                 console.log('complete', file, responseText);
                 myDropzone.removeFile(file);
-
             });
 
             myDropzone.on("success", function(file, responseText) {
