@@ -96,9 +96,9 @@
                                     
                                 </div>
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="inputEmail3">Proyecto</label>
+                                    <label class="col-sm-2 col-form-label" for="project-code">Proyecto</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="inputEmail3" type="email">
+                                        <input class="form-control" id="project-code" type="text">
                                         <div class="form-text">Solo proyectos que ya cuenten con una mano de obra</div>
                                     </div>
                                 </div>
@@ -119,13 +119,13 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <button class="btn btn-primary start" type="submit">Rectificar</button>
+                                <button class="btn btn-primary start" type="button">Rectificar</button>
                                 <button class="btn btn-secondary" type="button"  data-dz-remove>Cancelar</button>
                             </div>
                         </div>
                     </form>
                     {!! Form::open([
-                        'route' => ['admin.external-balance.store'],
+                        'route' => ['admin.projects.update-manpower'],
                         'method' => 'post',
                         'class' => '',
                         'id' => 'my-dropzone',
@@ -188,6 +188,7 @@
 
             myDropzone.on("sending", function(file, xhr, formData) {
                 //Disable the start button
+                formData.append("project-code",$('#project-code').val());
                 $(file.previewElement).find('.start').addClass('d-none');
                 $(file.previewElement).find('[data-dz-remove]').addClass('d-none');
                 console.log('sending', file, xhr, formData);

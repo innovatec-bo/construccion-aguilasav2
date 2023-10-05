@@ -62,17 +62,24 @@
                         </thead>
                         <tbody>
                             @foreach ($workedUpStructures as $workedUpStructure)
-                                <tr>
+                                <tr data-id="{{$workedUpStructure->id_wus}}">
                                     {{-- <td>{{$workedUpStructure->id_wus}}</td> --}}
                                     <td class="stacked-info">
-                                        {{ $workedUpStructure->log->manual_entry_date_lal->format('d-m-Y H:i:s') }}
-                                        <p class="mb-0 text-info">{{ $workedUpStructure->log->manual_entry_date_lal->diffForHumans() }}</p>    
+                                        @if ($workedUpStructure->log)
+                                            {{ $workedUpStructure->log->manual_entry_date_lal->format('d-m-Y H:i:s') }}
+                                            <p class="mb-0 text-info">{{ $workedUpStructure->log->manual_entry_date_lal->diffForHumans() }}</p>        
+                                        @endif
+                                        
                                     </td>
                                     <td>
-                                        {{$workedUpStructure->log->detail_lal}}
+                                        @if ($workedUpStructure->log)
+                                            {{$workedUpStructure->log->detail_lal}}    
+                                        @endif
                                     </td>
                                     <td>
-                                        {{ $workedUpStructure->log->user->full_name }}
+                                        @if ($workedUpStructure->log)
+                                            {{ $workedUpStructure->log->user->full_name }}    
+                                        @endif
                                     </td>
                                     <td class="stacked-info">
                                         {{ $workedUpStructure->laborCost->laborDetail->project->code_pro }}

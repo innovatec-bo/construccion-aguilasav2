@@ -22,7 +22,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
 
     //Projects
     Route::get('proyectos/administracion-de-estados/{project}','ProjectController@statusManagement')->name('projects.status-management');
-    Route::post('proyectos/actualizar-mano-de-obra/{project}','ProjectController@updateManpower')->name('projects.update-manpower');
+    Route::post('proyectos/actualizar-mano-de-obra','ProjectController@updateManpower')->name('projects.update-manpower');
     Route::get('proyectos/rectificar-mano-de-obra','ProjectController@rectifyManpower')->name('projects.rectify-manpower');
     Route::resource('proyectos','ProjectController')->names('projects');
 

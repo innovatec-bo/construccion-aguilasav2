@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ManpowerImport;
+use App\Models\LaborDetail;
 use App\Models\NextStatus;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProjectController extends Controller
 {
@@ -99,9 +102,19 @@ class ProjectController extends Controller
         return view('admin.projects.rectify-manpower');   
     }
 
-    public function updateManpower(Request $request, Project $project)
+    public function updateManpower(Request $request)
     {
-        dd($project);
+        $project = Project::where('code_pro', $request->get('project-code'))->first();
+        $import = new ManpowerImport();
+        $data = Excel::toArray($import, $request->file('file'));
+        LaborDetail::updatePrices($project->id_pro, $data);
+        // $externalBalanceId = ExternalBalance::saveData($data);
+        
+        // $response['externalBalanceId'] = $externalBalanceId;
+        // return response()->json(
+        //     $response
+        // );
+        // dd($project);
     }
 
     public function statusManagement(Project $project)

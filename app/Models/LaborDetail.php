@@ -340,4 +340,11 @@ class LaborDetail extends Model
         }
         return $report;
     }
+
+    public static function updatePrices(int $projectId, array $data)
+    {
+        // LaborDetail::
+        // dd($data);
+    }
+
 }
