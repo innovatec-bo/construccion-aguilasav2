@@ -107,7 +107,7 @@ class ProjectController extends Controller
         $project = Project::where('code_pro', $request->get('project-code'))->first();
         $import = new ManpowerImport();
         $data = Excel::toArray($import, $request->file('file'));
-        LaborDetail::updatePrices($project->id_pro, $data);
+        LaborDetail::updatePrices($project, $data);
         // $externalBalanceId = ExternalBalance::saveData($data);
         
         // $response['externalBalanceId'] = $externalBalanceId;

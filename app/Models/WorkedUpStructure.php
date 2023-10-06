@@ -29,4 +29,9 @@ class WorkedUpStructure extends Model
     {
         return $this->belongsTo(LaborCostLog::class,'labor_cost_log_id_wus');
     }
+
+    public static function updatePrices(Project $project, array $data)
+    {
+        
+    }
 }

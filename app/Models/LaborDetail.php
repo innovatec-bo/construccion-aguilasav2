@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LaborDetail extends Model
 {
@@ -341,8 +342,36 @@ class LaborDetail extends Model
         return $report;
     }
 
-    public static function updatePrices(int $projectId, array $data)
+    public static function updatePrices(Project $project, array $data)
     {
+        $data = $data[0];
+        $data = array_slice($data, 4);
+        $laborDetailDesign = $project->laborDetailDesign->laborCosts;
+        $currentPrices = [];
+        foreach ($laborDetailDesign as $value) 
+        {
+            $currentPrices[$value->id_lac] = $value->toArray();
+            $currentPrices[$value->id_lac]['building_structure'] = $value->buildingStructure->structure_code_bus;
+        }
+
+        $newPrices = [];
+        foreach ($currentPrices as $key => $current) 
+        {
+            foreach ($data as $new) 
+            {
+                if (
+                    $current['activity_lac'] == $new[1] &&
+                    $current['building_structure'] == $new[2] &&
+                    $current['execution_lac'] == $new[3]
+                    ) 
+                {
+                    $newPrices[$key]['id_lac'] = $current['id_lac'];
+                    $newPrices[$key]['unit_price_lac'] = floatval($new[7]);
+                }
+            }
+        }
+        DB::table('bui_labor_cost')->upsert(array_values($newPrices), ['id_lac'], ['unit_price_lac']);
+        dd($currentPrices, $data, array_values($newPrices));
         // LaborDetail::
         // dd($data);
     }
