@@ -33,4 +33,9 @@ class LaborCost extends Model
     {
         return $this->hasMany(CustomStructureMaterial::class, 'labor_cost_id');
     }
+
+    public function workedUpstructures()
+    {
+        return $this->hasMany(WorkedUpStructure::class, 'labor_cost_id_wus');
+    }
 }

@@ -355,6 +355,7 @@ class LaborDetail extends Model
         }
 
         $newPrices = [];
+        $newPricesForWorkedUps = [];
         foreach ($currentPrices as $key => $current) 
         {
             foreach ($data as $new) 
@@ -365,13 +366,29 @@ class LaborDetail extends Model
                     $current['execution_lac'] == $new[3]
                     ) 
                 {
+                    //Labor costs
                     $newPrices[$key]['id_lac'] = $current['id_lac'];
                     $newPrices[$key]['unit_price_lac'] = floatval($new[7]);
+                    //Worked up
+                    $newPricesForWorkedUps[$key]['labor_cost_id_wus'] = $current['id_lac'];
+                    $newPricesForWorkedUps[$key]['price_wus'] = floatval($new[7]);
                 }
             }
         }
         DB::table('bui_labor_cost')->upsert(array_values($newPrices), ['id_lac'], ['unit_price_lac']);
+        $laborDetailDesign = $project->refresh()->laborDetailDesign->laborCosts;
+        foreach ($laborDetailDesign as $laborCost) 
+        {
+            foreach ($laborCost->workedUpstructures as $workedUp) 
+            {
+                $workedUp->price_wus = $laborCost->unit_price_lac;
+                $workedUp->save();
+            }
+        }
+        dd($laborDetailDesign);
+        // DB::table('bui_worked_up_structures')->upsert(array_values($newPricesForWorkedUps), ['labor_cost_id_wus'], ['price_wus']);
         dd($currentPrices, $data, array_values($newPrices));
+        // $laborDetailDesign = $project->laborDetailDesign->laborCosts
         // LaborDetail::
         // dd($data);
     }
