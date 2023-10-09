@@ -45,7 +45,7 @@ class ExternalBalanceController extends Controller
         $import = new ExternalBalanceMaterialImport();
         $import->onlySheets(1);
         $data = Excel::toArray($import, $request->file('file'));
-        
+        //Solo proyectos creados desde el 1ro de septiembre del 2021 en adelante
         $externalBalanceId = ExternalBalance::saveData($data);
         
         $response['externalBalanceId'] = $externalBalanceId;

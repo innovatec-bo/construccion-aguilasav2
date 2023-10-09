@@ -54,8 +54,8 @@
                 {
                     "closeButton" : true,
                     "progressBar" : true,
-                    "positionClass": "toast-top-full-width mt-5",
-                    "timeOut": "30000",
+                    "positionClass": "toast-top-right mt-1",
+                    "timeOut": "10000",
                     "allowHtml": true,
                     "preventDuplicates": true
                 }
