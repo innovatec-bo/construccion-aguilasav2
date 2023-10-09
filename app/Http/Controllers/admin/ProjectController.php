@@ -108,6 +108,8 @@ class ProjectController extends Controller
         $import = new ManpowerImport();
         $data = Excel::toArray($import, $request->file('file'));
         LaborDetail::updatePrices($project, $data);
+
+        return redirect()->route('admin.projects.rectify-manpower')->with('successMessage','La mano de obra ha sido rectificada');
         // $externalBalanceId = ExternalBalance::saveData($data);
         
         // $response['externalBalanceId'] = $externalBalanceId;

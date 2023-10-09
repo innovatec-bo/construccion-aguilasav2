@@ -385,9 +385,9 @@ class LaborDetail extends Model
                 $workedUp->save();
             }
         }
-        dd($laborDetailDesign);
+        // dd($laborDetailDesign);
         // DB::table('bui_worked_up_structures')->upsert(array_values($newPricesForWorkedUps), ['labor_cost_id_wus'], ['price_wus']);
-        dd($currentPrices, $data, array_values($newPrices));
+        // dd($currentPrices, $data, array_values($newPrices));
         // $laborDetailDesign = $project->laborDetailDesign->laborCosts
         // LaborDetail::
         // dd($data);

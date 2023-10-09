@@ -7,7 +7,7 @@ window.$ = window.jQuery = require('jquery');
 window.Swal = require('../../public/vendor/sweetalert2/sweetalert2.all.js');
 window.toastr = require('../../public/vendor/toastr/toastr.min.js');
 window.moment = require('moment');
-require('../../public/coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js');
+window.coreui = require('../../public/coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js');
 require('../../public/coreui/vendors/simplebar/js/simplebar.min.js');
 require('../../vendor/bastinald/laravel-livewire-modals/resources/js/modals');
 require('@selectize/selectize');

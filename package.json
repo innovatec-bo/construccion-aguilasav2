@@ -30,6 +30,7 @@
     "dependencies": {
         "@coreui/coreui": "^4.2.6",
         "@selectize/selectize": "^0.15.2",
+        "dropzone": "^6.0.0-beta.2",
         "jscharting": "^3.4.0",
         "moment": "^2.29.4",
         "popper": "^1.0.1",
