@@ -50,15 +50,15 @@
                 txt.innerHTML = html;
                 return txt.value;
             }
-            window.toastr.options =
-                {
-                    "closeButton" : true,
-                    "progressBar" : true,
-                    "positionClass": "toast-top-right mt-1",
-                    "timeOut": "10000",
-                    "allowHtml": true,
-                    "preventDuplicates": true
-                }
+            // window.toastr.options =
+            //     {
+            //         "closeButton" : true,
+            //         "progressBar" : true,
+            //         "positionClass": "toast-top-right mt-1",
+            //         "timeOut": "10000",
+            //         "allowHtml": true,
+            //         "preventDuplicates": true
+            //     }
             @if(session('successMessage'))
                 window.toastr.success("{{session('successMessage')}}");
             @endif

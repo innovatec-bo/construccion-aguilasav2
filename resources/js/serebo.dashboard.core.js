@@ -8,6 +8,6 @@ window.coreui = require('../../public/coreui/vendors/@coreui/coreui/js/coreui.bu
 require('../../public/coreui/vendors/simplebar/js/simplebar.min.js');
 require('../../vendor/bastinald/laravel-livewire-modals/resources/js/modals');
 require('@selectize/selectize');
-window.toastr = require('toastr');
+require('../../public/coreui/js/toasts.js');
 // require('../../public/js/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker');
 // require('../../public/js/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.es.min.js');
