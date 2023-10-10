@@ -8,6 +8,7 @@ use App\Models\LaborDetail;
 use App\Models\NextStatus;
 use App\Models\Project;
 use Illuminate\Http\Request;
+
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProjectController extends Controller
@@ -108,8 +109,9 @@ class ProjectController extends Controller
         $import = new ManpowerImport();
         $data = Excel::toArray($import, $request->file('file'));
         LaborDetail::updatePrices($project, $data);
-
-        return redirect()->route('admin.projects.rectify-manpower')->with('successMessage','La mano de obra ha sido rectificada');
+        session()->flash('successMessage','La mano de obra ha sido rectificada');
+        return redirect()->route('admin.projects.rectify-manpower');
+        
         // $externalBalanceId = ExternalBalance::saveData($data);
         
         // $response['externalBalanceId'] = $externalBalanceId;

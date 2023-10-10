@@ -9,6 +9,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-6">
+            <p>session: {{session('successMessage')}}</p>
             <div class="card card-primary shadow-lg">
                 <div class="card-body">
                     {{-- <form method="post" action="">
@@ -139,24 +140,7 @@
     </div>
     <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
 
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-          {{-- <svg class="docs-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <rect width="100%" height="100%" fill="#007aff"></rect>
-          </svg> --}}
-          <svg class="docs-placeholder-img rounded me-2" width="20" height="20">
-            <use xlink:href="http://serebo2.test/coreui/vendors/@coreui/icons/svg/free.svg#cil-info"></use>
-        </svg>
-          <strong class="me-auto">Bootstrap</strong>
-          <small>11 mins ago</small>
-          <button type="button" class="btn-close" data-coreui-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-          Hello, world! This is a toast message.
-        </div>
-      </div>
-    </div>
+    
 @stop
 
 @section('css')
@@ -168,16 +152,17 @@
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script>
         $(function() {
-            const toastTrigger = document.getElementById('liveToastBtn');
-            const toastLiveExample = document.getElementById('liveToast');
+            // const toastTrigger = document.getElementById('liveToastBtn');
+            // const toastLiveExample = document.getElementById('liveToast');
 
-            if (toastTrigger) 
-            {
-                const toastCoreUI = coreui.Toast.getOrCreateInstance(toastLiveExample);
-                toastTrigger.addEventListener('click', () => {
-                    toastCoreUI.show()
-                });
-            }
+            // if (toastTrigger) 
+            // {
+            //     const toastCoreUI = coreui.Toast.getOrCreateInstance(toastLiveExample);
+            //     toastCoreUI.show();
+            //     toastTrigger.addEventListener('click', () => {
+            //         toastCoreUI.show();
+            //     });
+            // }
             // upload documents
             var previewNode = document.querySelector("#template");
             previewNode.id = "";

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\admin;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
@@ -76,6 +77,7 @@ class UserEdit extends Component
         // $this->selectedRoles = array_values(array_filter($this->selectedRoles->toArray()));
         $this->user->update($data);
         $this->user->syncRoles($this->selectedRoles);
+        Session::flash('successMessage','Usuario actualizado exitosamente');
         return redirect()->route('admin.users.index');
     }
 }
