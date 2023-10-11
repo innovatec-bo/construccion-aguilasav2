@@ -9,7 +9,6 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <p>session: {{session('successMessage')}}</p>
             <div class="card card-primary shadow-lg">
                 <div class="card-body">
                     {{-- <form method="post" action="">
@@ -138,7 +137,7 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+    {{-- <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button> --}}
 
     
 @stop
