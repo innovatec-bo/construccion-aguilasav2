@@ -36,7 +36,6 @@ class ExternalBalance extends Model
     {
         $tensions = [];
         $externalBalanceMaterials = [];
-        $data = $data[1];
         $data = new Collection($data);
         $data->shift();
         foreach ($data as $key => $value) 
@@ -78,26 +77,42 @@ class ExternalBalance extends Model
         $date = date('Y-m-d H:i:s');
         foreach ($data as $value) 
         {
+            $elementoPEP = $value[0];
+            $proyecto = $value[1];
+            $material = $value[3];
+            $Alm = $value[5];
+            $cantidad = $value[6];
+            $lote = $value[7];
+            $CMv = $value[8];
+            $Docmat = $value[9];
+            $reserva = $value[10];
+            $Fecontab = $value[13];
+            $Fechadoc = $value[14];
+            $registrado = $value[15];
+            $EjMat = $value[16];
+            $Cecoste = $value[17];
             //Preparing data to save in ExternalBalanceMaterial
-            $externalBalanceMaterials[] = [
-                'ElementoPEP' => $value[0],
-                'Proyecto' => $value[1],
+            $keyList = [$elementoPEP, $proyecto, $material, $Alm, $cantidad, $lote, $CMv, $Docmat, $reserva, $Fecontab, $Fechadoc, $registrado, $EjMat, $Cecoste];
+            $key = implode('-',$keyList);
+            $externalBalanceMaterials[$key] = [
+                'ElementoPEP' => $elementoPEP,
+                'Proyecto' => $proyecto,
                 'Contratista' => $value[2],
-                'Material' => $value[3],
+                'Material' => $material,
                 'Texto_breve_de_material' => $value[4],
-                'Alm' => $value[5],
-                'Cantidad' => $value[6],
-                'Lote' => $value[7],
-                'CMv' => $value[8],
-                'Docmat' => $value[9],
-                'Reserva' => $value[10],
+                'Alm' => $Alm,
+                'Cantidad' => $cantidad,
+                'Lote' => $lote,
+                'CMv' => $CMv,
+                'Docmat' => $Docmat,
+                'Reserva' => $reserva,
                 'Textocabdocumento' => $value[11],
                 'Referencia' => $value[12],
-                'Fecontab' => $value[13],
-                'Fechadoc' => $value[14],
-                'Registrado' => $value[15],
-                'EjMat' => $value[16],
-                'Cecoste' => $value[17],
+                'Fecontab' => $Fecontab,
+                'Fechadoc' => $Fechadoc,
+                'Registrado' => $registrado,
+                'EjMat' => $EjMat,
+                'Cecoste' => $Cecoste,
                 'Grafo' => $value[18],
                 'external_balance_id' => $externalBalance->id,
                 'created_at' => $date,

@@ -12,8 +12,8 @@ class ExternalBalanceMaterialImport implements WithMultipleSheets
     public function conditionalSheets(): array
     {
         return [
-            0 => '',
-            1 => new ExternalBalanceMaterialDataImport(),
+            0 => new ExternalBalanceMaterialDataImport(),
+            1 => '',
         ];
     }
 }
