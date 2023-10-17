@@ -94,6 +94,7 @@ class ExternalBalance extends Model
             //Preparing data to save in ExternalBalanceMaterial
             $keyList = [$elementoPEP, $proyecto, $material, $Alm, $cantidad, $lote, $CMv, $Docmat, $reserva, $Fecontab, $Fechadoc, $registrado, $EjMat, $Cecoste];
             $key = implode('-',$keyList);
+
             $externalBalanceMaterials[$key] = [
                 'ElementoPEP' => $elementoPEP,
                 'Proyecto' => $proyecto,
@@ -120,6 +121,7 @@ class ExternalBalance extends Model
                 'created_by' => Auth::user()->id_usr
             ];
         }
+        // dd(count($externalBalanceMaterials));
         foreach (array_chunk($externalBalanceMaterials,1000) as $chunk) 
         {
             ExternalBalanceMaterial::insert($chunk);

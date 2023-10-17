@@ -27,7 +27,7 @@
                                                 aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td style="width: 1%;white-space: nowrap;">
                                         <a class="btn btn-sm text-white btn-danger" data-dz-remove
                                             href="javascript:void(0);">Cancelar</a>
                                         <a class="btn btn-sm btn-primary start" href="javascript:void(0)">Cargar</a>
@@ -49,7 +49,7 @@
         ]) !!}
         {!! Form::close() !!}
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12 mb-3">
         <div class="card shadow-lg">
             <div class="overlay d-none" wire:loading.class.remove="d-none"
                 wire:target="previousPage, nextPage, gotoPage, search">
