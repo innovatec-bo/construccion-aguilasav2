@@ -47,7 +47,9 @@ class LaborCostLogIndex extends Component
 
     public function render()
     {
-        $workedUpStructures = WorkedUpStructure::orderBy($this->sort, $this->direction)
+        $workedUpStructures = WorkedUpStructure::where('deleted_wus','!=',1)
+        ->whereNotNull('labor_cost_log_id_wus')
+        ->orderBy($this->sort, $this->direction)
         ->when($this->projectCode, function(Builder $query, $projectCode){
             $query->whereHas('laborCost', function(Builder $query){
                 $query->whereHas('laborDetail', function(Builder $query){
@@ -85,3 +87,22 @@ class LaborCostLogIndex extends Component
         return 0;
     }
 }
+/*
+    select
+        date_format(bui_labor_cost_log.manual_entry_date_lal,'%Y-%m-%d') 'Fecha',
+        bui_building_structures.structure_code_bus 'Estructura',
+        bui_worked_up_structures.worked_up_wus 'Cantidad Trabajada',
+        bui_worked_up_structures.price_wus 'Precio'
+        -- bui_worked_up_structures.*
+    from 
+        bui_labor_details 
+    LEFT join bui_labor_cost on bui_labor_cost.labor_detail_id_lac = bui_labor_details.id_lad
+    left join bui_worked_up_structures on bui_worked_up_structures.labor_cost_id_wus =  bui_labor_cost.id_lac
+    left join bui_building_structures on bui_building_structures.id_bus = bui_labor_cost.building_structure_id_lac
+    left join bui_labor_cost_log on bui_labor_cost_log.id_lal = bui_worked_up_structures.labor_cost_log_id_wus
+    where 
+    labor_cost_log_id_wus is not null
+    and deleted_wus != 1
+    and bui_labor_details.project_id_lad = 2911
+    order by manual_entry_date_lal desc;
+ */

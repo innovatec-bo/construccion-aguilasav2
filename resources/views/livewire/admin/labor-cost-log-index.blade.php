@@ -69,7 +69,6 @@
                                             {{ $workedUpStructure->log->manual_entry_date_lal->format('d-m-Y H:i:s') }}
                                             <p class="mb-0 text-info">{{ $workedUpStructure->log->manual_entry_date_lal->diffForHumans() }}</p>        
                                         @endif
-                                        
                                     </td>
                                     <td>
                                         @if ($workedUpStructure->log)
