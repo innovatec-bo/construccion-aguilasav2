@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('home/magic-login/{encrypted}',[HomeController::class,'magicLogin'])->name('home.magic-login');
@@ -82,8 +83,9 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::get('status-management-settings/edit','StatusManagementSettingsController@edit')->name('status-management-settings.edit');
     Route::post('status-management-settings/update','StatusManagementSettingsController@update')->name('status-management-settings.update');
 
-    Route::post('/print', function() { 
-        return view('print'); 
+    Route::post('/print', function(Request $request) { 
+        $body = $request->body;
+        return view('print', compact('body')); 
     })->name('print');
 });
 

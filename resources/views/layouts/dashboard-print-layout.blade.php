@@ -18,34 +18,19 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{asset('coreui/assets/favicon/ms-icon-144x144.png')}}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{{ mix('css/serebo.dashboard.css') }}">
-    @stack('css')
-    @yield('css')
-    @stack('styles')
-    @livewireStyles
+    <link rel="stylesheet" href="{{ mix('css/serebo.dashboard-print.css') }}">
 </head>
 <body>
     <!-- Menu -->
-    {{-- <x-dashboard-menu/> --}}
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
         <!-- Navbar -->
-        <x-dashboard-navbar/>
         <div class="body flex-grow-1 px-3">
             <div class="container-lg">
                 @yield('content')
             </div>
         </div>
-        <x-dashboard-footer/>
     </div>
     <!-- CoreUI and necessary plugins-->
-    <livewire:modals/>
-    @livewireScripts
-    <script src="{{ mix('js/serebo.dashboard.core.js') }}"></script>
-    <script src="{{ mix('js/serebo.dashboard.js') }}"></script>
-    <script></script>
-    <x-core-ui-toast/>
-    @stack('js')
-    @yield('js')
-    @stack('scripts')
+    <script src="{{ mix('js/serebo.dashboard-print.core.js') }}"></script>
 </body>
 </html>

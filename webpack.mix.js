@@ -14,10 +14,12 @@ const mix = require('laravel-mix');
 mix
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/serebo.dashboard.scss', 'public/css')
+    .sass('resources/sass/serebo.dashboard-print.scss', 'public/css')
     .sourceMaps();
 mix
     .js('resources/js/app.js', 'public/js')
     .js('resources/js/serebo.dashboard.core.js', 'public/js')
     .js('resources/js/serebo.dashboard.js', 'public/js')
+    .js('resources/js/serebo.dashboard-print.core.js', 'public/js')
     .sourceMaps();
 mix.version();
