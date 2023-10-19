@@ -1,19 +1,28 @@
-<div class="row justify-content-center">
-    <div class="col-md-12">
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+            <label>COD Proyecto</label>
+            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="search">
+            @error('projectCode')
+                <span class="text-danger small">{{$message}}</span>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-12 mt-3">
         <div class="card shadow-lg">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="">
                         <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.1500ms="search" placeholder="Buscar..">
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
+            </div> --}}
+            <div class="card-body p-0">
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive overflow-visible">
-                    <table class="table table-bordered table-hover table-striped table-sm">
+                    <table class="table table-bordered table-hover table-striped table-sm mb-0">
                         <thead>
                             <tr>
                                 <th style="width: 10px">ID</th>
@@ -81,14 +90,12 @@
                         </tbody>
                     </table>
                 </div>
-                
             </div>
-
-            <div class="card-footer clearfix">
-                <div class="table-responsive">
-                    {{ $projects->links() }}
-                </div>
-            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mt-3">
+        <div class="table-responsive">
+            {{ $projects->links() }}
         </div>
     </div>
 </div>
