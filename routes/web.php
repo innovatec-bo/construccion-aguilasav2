@@ -81,6 +81,10 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     // Route::resource('status-management-settings','StatusManagementSettingsController')->names('status-management-settings');
     Route::get('status-management-settings/edit','StatusManagementSettingsController@edit')->name('status-management-settings.edit');
     Route::post('status-management-settings/update','StatusManagementSettingsController@update')->name('status-management-settings.update');
+
+    Route::post('/print', function() { 
+        return view('print'); 
+    })->name('print');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');

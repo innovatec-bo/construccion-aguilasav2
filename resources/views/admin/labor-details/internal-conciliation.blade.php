@@ -26,6 +26,7 @@
                                 {{-- not ready yet export file class --}}
                                 {{-- <a href="{{route('admin.labor-details.export-internal-conciliation', $laborDetail->id_lad)}}" class="btn btn-primary btn-xs d-print-none"><i class="far fa-file-excel"></i> Exportar</a> --}}
                                 <a class="btn btn-info btn-xs d-print-none float-right ml-2" href="javascript:void(0)" onclick="window.print();"><i class="fa fa-print fa-fw"></i>Imprimir</a>
+                                <a class="btn btn-info btn-xs d-print-none float-right ml-2" href="javascript:void(0)" id="print"><i class="fa fa-print fa-fw"></i>Imprimir2</a>
                             @endcan
                         </div>
                     </div>
@@ -141,4 +142,31 @@
 
 @section('js')
     {{-- <script> console.log('Hi!'); </script> --}}
+    <script src="{{asset('js/jQuery.print/jQuery.print.js')}}"></script>
+    <script>
+        $('#print').on('click', function() {
+
+            let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');
+
+            $.ajaxSetup({
+            url: '{{route('admin.print')}}',
+            type: 'POST',
+            data: {
+                _token: CSRF_TOKEN,
+            },
+            beforeSend: function() {
+                console.log('printing ...');
+            },
+            complete: function() {
+                console.log('printed!');
+            }
+            });
+
+            $.ajax({
+                success: function(viewContent) {
+                    $.print(viewContent); // This is where the script calls the printer to print the viwe's content.
+                }
+            });
+        });
+    </script>
 @stop
