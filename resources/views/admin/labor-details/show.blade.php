@@ -2,39 +2,31 @@
 
 @section('title', 'Detalle de mano de obra: '.$laborDetail->project->code_pro)
 
-{{-- @section('content_header')
-    <div class="row">
-        <div class="col-sm-6">
-            <h1>Detalle de mano de obra en {!!$laborDetail->environment['label']!!}: {{$laborDetail->project->code_pro}}</h1>
-        </div>
-        <div class="col-sm-6">
-            {{ Breadcrumbs::render('admin.labor-details.show', $laborDetail) }}
-        </div>
-    </div>
-@stop --}}
 @section('breadcrumb')
     {{ Breadcrumbs::render('admin.labor-details.show', $laborDetail) }}
 @stop
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card shadow-lg">
+        <div class="col-md-12 mb-2 text-end">
+            <a class="btn btn-sm btn-primary d-print-none float-right mx-1" href="{{url()->previous()}}">Volver</a>
+            @can('admin.labor-details.export')
+                <div class="btn-group btn-group-sm" style="">
+                    <a href="{{route('admin.labor-details.export', $laborDetail->id_lad)}}" class="btn btn-primary d-print-none"><i class="far fa-file-excel"></i> Exportar</a>
+                    <a class="btn btn-info d-print-none float-right ml-2 text-white" href="javascript:void(0)" id="btn-print"><i class="fa fa-print fa-fw"></i>Imprimir</a>
+                </div>
+            @endcan
+        </div>
+        <div class="col-md-12 mb-3">
+            <div class="card shadow-lg" id="print-area">
                 <div class="card-header">
+                    <h3 class="text-center d-print-none">Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h3>
                     <h3 class="text-center d-none d-print-block">Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h3>
-                    <h4 class="text-center mb-4 d-none d-print-block">{!! ($laborDetail->environment['label']) !!}</h4>
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="">
-                            @can('admin.labor-details.export')
-                                <a href="{{route('admin.labor-details.export', $laborDetail->id_lad)}}" class="btn btn-primary btn-xs d-print-none"><i class="far fa-file-excel"></i> Exportar</a>
-                                <a class="btn btn-info btn-xs d-print-none float-right ml-2" href="javascript:void(0)" onclick="window.print();"><i class="fa fa-print fa-fw"></i>Imprimir</a>
-                            @endcan
-                        </div>
-                    </div>
+                    <h4 class="text-center mb-4 d-none d-print-block">{!! ucfirst($laborDetail->environment['label']) !!}</h4>
                 </div>
 
-                <div class="card-body">
-                    <table class="table table-bordered table-sm table-hover table-striped small">
+                <div class="card-body p-0">
+                    <table class="table table-bordered table-sm table-hover table-striped small mb-0">
                         <thead>
                             <tr>
                                 <th>Estructura</th>
@@ -43,7 +35,7 @@
                                 <th>Cantidad</th>
                                 <th>Precio<br>Unitario</th>
                                 <th>Es<br>adicional?</th>
-                                <th>Nro.<br>Materiales</th>
+                                <th>Cant.<br>Materiales</th>
                                 <th class="d-print-none">Personalizar<br>materiales</th>
                             </tr>
                         </thead>
@@ -77,11 +69,11 @@
                                     <td class="text-center">
                                         @switch($laborCost->is_additional_lac)
                                             @case(1)
-                                                <span class="badge badge-danger d-print-none">SI</span>
+                                                <span class="badge bg-danger d-print-none">SI</span>
                                                 <div class="d-none d-print-block">SI</div>
                                                 @break
                                             @case(0)
-                                                <span class="badge badge-info d-print-none">NO</span>
+                                                <span class="badge bg-info d-print-none">NO</span>
                                                 <div class="d-none d-print-block">NO</div>
                                                 @break
                                         @endswitch
@@ -110,6 +102,30 @@
 @stop
 
 @section('js')
-    @stack('scripts')
-    {{-- <script> console.log('Hi!'); </script> --}}
+    {{-- @stack('scripts') --}}
+    <script src="{{asset('js/jQuery.print/jQuery.print.js')}}"></script>
+    <script>
+        $('#btn-print').on('click', function() {
+            $.print($("#print-area").html());
+            // let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');
+            // let body = $("#print-area").html();
+            // $.ajax({
+            //     url: '{{route('admin.print')}}',
+            //     type: 'POST',
+            //     data: {
+            //         _token: CSRF_TOKEN,
+            //         body: body
+            //     },
+            //     beforeSend: function() {
+            //         console.log('printing ...');
+            //     },
+            //     complete: function() {
+            //         console.log('printed!');
+            //     },
+            //     success: function(viewContent) {
+            //         $.print(viewContent);
+            //     }
+            // });
+        });
+    </script>
 @stop

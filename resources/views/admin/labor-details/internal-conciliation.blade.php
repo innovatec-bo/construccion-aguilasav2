@@ -14,14 +14,16 @@
             </div>
         </div>
         <div class="col-md-12 mb-2 text-end">
-            <a class="btn btn-xs btn-primary d-print-none float-right mx-1" href="{{url()->previous()}}">Volver</a>
-                            @can('admin.labor-details.export-internal-conciliation')
-                                {{-- not ready yet export file class --}}
-                                {{-- <a href="{{route('admin.labor-details.export-internal-conciliation', $laborDetail->id_lad)}}" class="btn btn-primary btn-xs d-print-none"><i class="far fa-file-excel"></i> Exportar</a> --}}
-                                <a class="btn btn-info btn-xs d-print-none float-right ml-2 text-white" href="javascript:void(0)" id="btn-print"><i class="fa fa-print fa-fw"></i>Imprimir</a>
-                            @endcan
+            <a class="btn btn-sm btn-primary d-print-none float-right mx-1" href="{{url()->previous()}}">Volver</a>
+            @can('admin.labor-details.export-internal-conciliation')
+                <div class="btn-group btn-group-sm" style="">
+                    {{-- not ready yet export file class --}}
+                    {{-- <a href="{{route('admin.labor-details.export-internal-conciliation', $laborDetail->id_lad)}}" class="btn btn-primary d-print-none"><i class="far fa-file-excel"></i> Exportar</a> --}}
+                    <a class="btn btn-info d-print-none float-right ml-2  text-white" href="javascript:void(0)" id="btn-print"><i class="fa fa-print fa-fw"></i>Imprimir</a>
+                </div>
+            @endcan
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 mb-3">
             <div class="card shadow-lg" id="print-area">
                 <div class="card-header d-print-none">
                     <h4 class="card-title">
@@ -62,7 +64,7 @@
                         </div>
                     </div>
                     @if (count($materialsToBeReturned) > 0)
-                        <table class="table table-bordered table-sm table-hover table-striped">
+                        <table class="table table-bordered table-sm table-hover table-striped mb-0">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -77,7 +79,7 @@
                             <tbody>
                                 @foreach ($materialsToBeReturned as $key => $material)
                                     <tr>
-                                        <td>{{($key+1)}}</td>
+                                        <td class="text-center">{{($key+1)}}</td>
                                         <td>{{$material['code_mat']}}</td>
                                         <td>{{$material['description_mat']}}</td>
                                         <td class="text-end">                    
@@ -106,7 +108,7 @@
                                 
                                 @foreach ($returnedMaterials as $key => $material)
                                     <tr class="bg-success">
-                                        <td>{{($key+1)}}</td>
+                                        <td class="text-center">{{($key+1)}}</td>
                                         <td>{{$material['code_mat']}}</td>
                                         <td>{{$material['description_mat']}}</td>
                                         <td class="text-end">                    
