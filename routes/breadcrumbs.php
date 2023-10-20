@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\LaborCost;
+use App\Models\LaborDetail;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
@@ -14,13 +15,13 @@ Breadcrumbs::for('admin.home.index', function (BreadcrumbTrail $trail) {
 });
 
 // Labor Detail
-Breadcrumbs::for('admin.labor-details.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('admin.labor-details.index', function (BreadcrumbTrail $trail, $queryString) {
     $trail->parent('admin.home.index');
     $trail->push('Manos de obra', route('admin.labor-details.index'));
 });
 
 // Labor Detail - show
-Breadcrumbs::for('admin.labor-details.show', function (BreadcrumbTrail $trail, $laborDetail) {
+Breadcrumbs::for('admin.labor-details.show', function (BreadcrumbTrail $trail, LaborDetail $laborDetail) {
     $trail->parent('admin.labor-details.index');
     $trail->push('Detalle de Mano de obra '. $laborDetail->project->code_pro, route('admin.labor-details.index', $laborDetail));
 });
@@ -281,7 +282,9 @@ Breadcrumbs::for('admin.external-balance.show', function (BreadcrumbTrail $trail
 });
 
 // Labor cost - edit
-Breadcrumbs::for('admin.labor-cost.edit', function (BreadcrumbTrail $trail,LaborCost $laborCost) {
-    // $trail->push(,route('admin.labor-details.show', $laborCost->laborDetail));
+Breadcrumbs::for('admin.labor-cost.edit', function (BreadcrumbTrail $trail, LaborCost $laborCost) {
+    // $trail->parent('admin.labor-details.index', $laborCost->laborDetail);
+    $trail->parent('admin.labor-details.show', $laborCost->laborDetail);
+    // $trail->push('Detalle de Mano de obra '. $laborCost->laborDetail->project->code_pro, route('admin.labor-details.show', $laborCost->laborDetail));
     $trail->push('Editar estructura '.$laborCost->buildingStructure->structure_code_bus, route('admin.materials-summary.edit', $laborCost));
 });

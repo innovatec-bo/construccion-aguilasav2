@@ -3,7 +3,7 @@
 @section('title', 'Detalle de mano de obra: '.$laborDetail->project->code_pro)
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('admin.labor-details.show', $laborDetail) }}
+    {{ Breadcrumbs::render('admin.labor-details.show', $laborDetail, $previousQueryString) }}
 @stop
 
 @section('content')

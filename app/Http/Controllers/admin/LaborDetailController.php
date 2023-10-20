@@ -15,11 +15,17 @@ class LaborDetailController extends Controller
 {
     private $_internalConciliation;
     private $_previousRoute;
+    private $_previousQueryString;
     public function __construct()
     {
         $url = url()->previous();
         $this->_previousRoute = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
-
+        $parsedUrl = parse_url($url);
+        $this->_previousQueryString = $parsedUrl['query']??'';
+        // $parsedUrl['post']; // www.example.com
+        // $parsedUrl['path']; // /posts
+        // $parsedUrl['query']; // param=val&param2=val
+        // dd($parsedUrl);
     }
 
     /**
@@ -62,7 +68,9 @@ class LaborDetailController extends Controller
     public function show(LaborDetail $laborDetail)
     {
         $laborDetail->applyCustomMaterials();
-        return view('admin.labor-details.show', compact('laborDetail'));
+        $previousQueryString = $this->_previousQueryString;
+        // dd($this->_previousQueryString);
+        return view('admin.labor-details.show', compact('laborDetail','previousQueryString'));
     }
 
     /**
