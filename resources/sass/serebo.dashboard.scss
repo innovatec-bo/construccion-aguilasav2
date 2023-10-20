@@ -10,10 +10,6 @@
 // @import "/node_modules/toastr/build/toastr.css";
 // @import "/public/coreui/vendors/";
 
-@page {
-    size: letter;
-}
-
 @media print {
     * {
         background: transparent !important;
@@ -54,6 +50,9 @@
     thead {
         display: table-header-group;
     }
+    tbody{
+        font-size: 12px!important
+    }
 
     /* h5bp.com/t */
     tr,
@@ -67,6 +66,7 @@
 
     @page {
         margin: 0.5cm;
+        size: letter;
     }
 
     p,

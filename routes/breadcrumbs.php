@@ -2,6 +2,10 @@
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
+// Login
+Breadcrumbs::for('login', function ($trail) {
+    $trail->push('Login', route('login'));
+});
 // Home
 Breadcrumbs::for('admin.home.index', function (BreadcrumbTrail $trail) {
     $trail->push('Inicio', route('admin.home.index'));
