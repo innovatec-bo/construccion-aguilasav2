@@ -64,8 +64,8 @@
                                         @endswitch
                                     </td>
                                     <td>{{$laborCost->execution_lac}}</td>
-                                    <td class="text-end">{{$laborCost->quantity_lac}}</td>
-                                    <td class="text-end">{{$laborCost->unit_price_lac}}</td>
+                                    <td class="text-end">{{number_format($laborCost->quantity_lac,2,'.',',')}}</td>
+                                    <td class="text-end">{{number_format($laborCost->unit_price_lac,2,'.',',')}}</td>
                                     <td class="text-center">
                                         @switch($laborCost->is_additional_lac)
                                             @case(1)

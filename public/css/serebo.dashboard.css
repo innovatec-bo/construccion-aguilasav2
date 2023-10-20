@@ -14544,6 +14544,9 @@ img {
   @page {
     margin: 0.5cm;
     size: letter;
+    @bottom-left {
+      content: counter(page) " of " counter(pages);
+    }
   }
   p,
 h2,
