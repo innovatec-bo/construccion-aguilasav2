@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class LaborCostController extends Controller
 {
+    private $_previousRoute;
     public function __construct()
     {
         $this->middleware('permission:admin.labor-costs.edit', ['only' => ['edit','update']]);
+        $url = url()->previous();
+        $this->_previousRoute = app('router')->getRoutes($url)->match(app('request')->create($url))->getName();
     }
 
     /**
@@ -64,7 +67,8 @@ class LaborCostController extends Controller
     public function edit(LaborCost $laborCost)
     {
         $laborCost->laborDetail->applyCustomMaterials();
-        return view('admin.labor-costs.edit', compact('laborCost'));
+        $previousRoute = $this->_previousRoute;
+        return view('admin.labor-costs.edit', compact('laborCost','previousRoute'));
     }
 
     /**

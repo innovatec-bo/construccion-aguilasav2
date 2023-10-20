@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\LaborCost;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
@@ -276,4 +278,10 @@ Breadcrumbs::for('admin.external-balance.index', function (BreadcrumbTrail $trai
 Breadcrumbs::for('admin.external-balance.show', function (BreadcrumbTrail $trail, $externalBalance) {
     $trail->parent('admin.home.index');
     $trail->push('Balance externo de materiales', route('admin.external-balance.show', $externalBalance));
+});
+
+// Labor cost - edit
+Breadcrumbs::for('admin.labor-cost.edit', function (BreadcrumbTrail $trail,LaborCost $laborCost) {
+    // $trail->push(,route('admin.labor-details.show', $laborCost->laborDetail));
+    $trail->push('Editar estructura '.$laborCost->buildingStructure->structure_code_bus, route('admin.materials-summary.edit', $laborCost));
 });

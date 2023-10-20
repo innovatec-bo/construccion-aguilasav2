@@ -6,7 +6,7 @@
     {{ Breadcrumbs::render('admin.labor-details.internal-conciliation', $laborDetail, $previousRoute) }}
 @stop
 @section('content')
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" data-previous-route="{{$previousRoute}}">
         <div class="col-md-12">
             <div class="alert alert-info alert-dismissible d-print-none">
                 <h5><i class="icon fas fa-info"></i> Nota!</h5>
