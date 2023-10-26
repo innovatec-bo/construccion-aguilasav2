@@ -68,8 +68,7 @@ class LaborDetailController extends Controller
     public function show(LaborDetail $laborDetail)
     {
         $laborDetail->applyCustomMaterials();
-        $previousQueryString = $this->_previousQueryString;
-        // dd($this->_previousQueryString);
+        parse_str($this->_previousQueryString, $previousQueryString);
         return view('admin.labor-details.show', compact('laborDetail','previousQueryString'));
     }
 
