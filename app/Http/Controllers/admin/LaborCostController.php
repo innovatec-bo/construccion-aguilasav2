@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class LaborCostController extends Controller
 {
     private $_previousRoute;
+
     public function __construct()
     {
         $this->middleware('permission:admin.labor-costs.edit', ['only' => ['edit','update']]);

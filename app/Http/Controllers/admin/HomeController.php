@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Exports\LaborCostLogExport;
 use App\Http\Controllers\Controller;
 use App\Settings\StatusManagementSettings;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
@@ -16,5 +18,10 @@ class HomeController extends Controller
     public function dashboard()
     {
         return view('admin.home.dashboard');
+    }
+
+    public function testExport() 
+    {
+        return Excel::download(new LaborCostLogExport, 'test.xlsx');
     }
 }

@@ -38,4 +38,9 @@ class LaborCost extends Model
     {
         return $this->hasMany(WorkedUpStructure::class, 'labor_cost_id_wus');
     }
+
+    public function changeLog()
+    {
+        return $this->hasMany(LaborCostChangeLog::class, 'labor_cost_id');
+    }
 }

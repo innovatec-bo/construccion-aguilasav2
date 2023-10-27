@@ -8,6 +8,7 @@ Route::get('home/magic-login/{encrypted}',[HomeController::class,'magicLogin'])-
 
 Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'App\Http\Controllers\admin', 'middleware' => ['auth']], function () {
     //Home
+    Route::get('test-export','HomeController@testExport')->name('home.export');
     Route::get('inicio','HomeController@index')->name('home.index');
     Route::get('dashboard','HomeController@dashboard')->name('home.dashboard');
 
@@ -83,10 +84,12 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::get('status-management-settings/edit','StatusManagementSettingsController@edit')->name('status-management-settings.edit');
     Route::post('status-management-settings/update','StatusManagementSettingsController@update')->name('status-management-settings.update');
 
-    Route::post('/print', function(Request $request) { 
-        $body = $request->body;
-        return view('print', compact('body')); 
-    })->name('print');
+    
+
+    // Route::post('/print', function(Request $request) { 
+    //     $body = $request->body;
+    //     return view('print', compact('body')); 
+    // })->name('print');
 });
 
 Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Exports\LaborCostLogExport;
 use App\Http\Controllers\Controller;
 use App\Models\LaborCostChangeLog;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaborCostChangeLogApiController extends BaseApiController
 {
@@ -49,7 +51,7 @@ class LaborCostChangeLogApiController extends BaseApiController
      */
     public function show($id)
     {
-        //
+        return Excel::download(new LaborCostLogExport, 'test.xlsx');
     }
 
     /**
