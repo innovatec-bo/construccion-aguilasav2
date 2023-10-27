@@ -51,7 +51,21 @@ class LaborCostChangeLogApiController extends BaseApiController
      */
     public function show($id)
     {
-        return Excel::download(new LaborCostLogExport, 'test.xlsx');
+        // return Excel::download(new LaborCostLogExport, 'test.xlsx');
+        // return response()->json([
+        //     'response' => true,
+        //     'message' => 'ok',
+        //     'data' => ['file' => Excel::download( new LaborCostLogExport, 'export.xlsx')]
+        // ],200);
+        // return Excel::download( new LaborCostLogExport, 'export.csv', \Maatwebsite\Excel\Excel::CSV, [ 'Content-Type' => 'text/csv'] );
+        // return Excel::Xlsx(new LaborCostLogExport, 'Xlsx');
+        $file = Excel::raw(new LaborCostLogExport, 'Xlsx');
+        dd($file);
+        return response()->json([
+            'response' => true,
+            'message' => 'ok',
+            'data' => ['file' => $file]
+        ],200);
     }
 
     /**
