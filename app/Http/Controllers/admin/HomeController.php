@@ -22,7 +22,6 @@ class HomeController extends Controller
 
     public function testExport() 
     {
-        
         $contents = Excel::raw(new LaborCostLogExport, 'Xlsx');
         dd($contents);
     }

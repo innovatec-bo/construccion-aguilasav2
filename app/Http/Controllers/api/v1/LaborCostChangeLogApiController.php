@@ -59,12 +59,14 @@ class LaborCostChangeLogApiController extends BaseApiController
         // ],200);
         // return Excel::download( new LaborCostLogExport, 'export.csv', \Maatwebsite\Excel\Excel::CSV, [ 'Content-Type' => 'text/csv'] );
         // return Excel::Xlsx(new LaborCostLogExport, 'Xlsx');
-        $file = Excel::raw(new LaborCostLogExport, 'Xlsx');
-        dd($file);
+        // return response()->json(['dd']);
+        // $file = '';
+        // dd($file);
+        $contents = Excel::raw(new LaborCostLogExport, 'Xlsx');
         return response()->json([
             'response' => true,
             'message' => 'ok',
-            'data' => ['file' => $file]
+            'data' => ['file' => utf8_encode($contents)]
         ],200);
     }
 
