@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Exports\LaborCostLogExport;
 use App\Http\Controllers\Controller;
 use App\Models\LaborCostChangeLog;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -62,7 +63,8 @@ class LaborCostChangeLogApiController extends BaseApiController
         // return response()->json(['dd']);
         // $file = '';
         // dd($file);
-        $contents = Excel::raw(new LaborCostLogExport, 'Xlsx');
+        $project = Project::find($id);
+        $contents = Excel::raw(new LaborCostLogExport($project), 'Xlsx');
         return response()->json([
             'response' => true,
             'message' => 'ok',

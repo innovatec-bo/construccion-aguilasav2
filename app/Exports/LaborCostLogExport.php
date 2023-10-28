@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class LaborCostLogExport implements 
@@ -21,11 +22,12 @@ class LaborCostLogExport implements
     WithEvents
 {
     protected $_project;
-    protected $_laborCost;
+    protected $_laborCosts;
 
     public function __construct(Project $project)
     {
         $this->_project = $project;
+        $this->_laborCosts = $this->_project->laborDetailDesign->laborCosts;
     }
 
     /**
@@ -33,9 +35,8 @@ class LaborCostLogExport implements
     */
     public function collection()
     {
-        $this->_laborCost = $this->_project->laborDetailDesign->laborCosts;
-
-        return $this->_laborCost;
+        
+        return $this->_laborCosts;
     }
 
     public function map($row) : array
@@ -97,14 +98,14 @@ class LaborCostLogExport implements
 
     public function registerEvents(): array
     {
-        $payments = $this->_payments;
+        $laborCosts = $this->_laborCosts;
         return [
             // Array callable, refering to a static method.
-            AfterSheet::class => function(AfterSheet $event)use($payments){
+            AfterSheet::class => function(AfterSheet $event)use($laborCosts){
                 $event->sheet->getDelegate()->getRowDimension(1)->setRowHeight(35);
                 $event->sheet->getDelegate()->getRowDimension(2)->setRowHeight(30);
                 $event->sheet->mergeCells('A1:H1');
-                $event->sheet->getStyle('A1:H'.(count($payments) + 2))->applyFromArray([
+                $event->sheet->getStyle('A1:H'.(count($laborCosts) + 2))->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
