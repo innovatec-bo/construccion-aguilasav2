@@ -41,6 +41,12 @@ class LaborCostLogExport implements
 
     public function map($row) : array
     {
+        $logString = "";
+        foreach ($row->changeLog as $key => $log) 
+        {
+            $logString .= "(De ".$log->quantity_from." a ".$log->quantity_to." en fecha ".$log->created_at->format('d-m-Y H:i:s').")";
+        }
+        $logString .=" ";
         return [
             $row->buildingStructure->structure_code_bus,
             $row->buildingStructure->description_bus,
@@ -49,7 +55,7 @@ class LaborCostLogExport implements
             $row->quantity_lac,
             $row->unit_price_lac,
             $row->is_additional_lac == 1?'Si':'No',
-            ''
+            $logString
         ];
     }
 
