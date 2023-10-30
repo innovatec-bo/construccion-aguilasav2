@@ -75,8 +75,14 @@ class ExternalBalance extends Model
 
         $externalBalance = ExternalBalance::create($externalBalance);
         $date = date('Y-m-d H:i:s');
+        $projectArrayCodes = array_unique(array_column($data->toArray(),1));
+        $allowedProjects = Project::where('deleted_pro','!=', 1)->where('entry_date_pro',">=",'2021-09-01')->whereIn('code_pro',$projectArrayCodes)->pluck('code_pro')->toArray();
         foreach ($data as $value) 
         {
+            if(!in_array($value[1],$allowedProjects))
+            {
+                continue;
+            }
             $elementoPEP = $value[0];
             $proyecto = $value[1];
             $material = $value[3];
