@@ -146,7 +146,7 @@
             // let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');
             // let body = $("#print-area").html();
             // $.ajax({
-            //     url: '{{route('admin.print')}}',
+            //     url: '',
             //     type: 'POST',
             //     data: {
             //         _token: CSRF_TOKEN,

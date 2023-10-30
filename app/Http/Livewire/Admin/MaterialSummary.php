@@ -70,7 +70,12 @@ class MaterialSummary extends Component
 
     public function render()
     {
-        $materialSummaries = $this->_paginate();
+        $materialSummaries = [];
+        if($this->projectCode)
+        {
+            $materialSummaries = $this->_paginate();
+        }
+        
         $projectStatus = ProjectStatus::orderBy('order_pst')->get();
         return view('livewire.admin.material-summary', compact('materialSummaries', 'projectStatus'));
     }

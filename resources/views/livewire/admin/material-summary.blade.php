@@ -148,6 +148,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if (!$projectCode)
+                                <tr>
+                                    <td class="text-center py-3" colspan="7">Ingrese el c&oacute;digo de un proyecto</td>
+                                </tr>
+                            @endif
                             @foreach ($materialSummaries as $materialSummary)
                                 <tr>
                                     <td class="stacked-info text-end">
@@ -181,9 +186,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12 mt-4">
-        <div class="table-responsive">
-            {{ $materialSummaries->links() }}
+    @if ($materialSummaries)
+        <div class="col-md-12 mt-4">
+            <div class="table-responsive">
+                {{ $materialSummaries->links() }}
+            </div>
         </div>
-    </div>
+    @endif
 </div>
