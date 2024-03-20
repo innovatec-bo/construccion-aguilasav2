@@ -42,12 +42,13 @@ class ExternalBalanceController extends Controller
         set_time_limit(300);
         ini_set('memory_limit', '750M');
         
+        $manualEntryDate = $request->manual_entry_date;
         $sheet = 0;
         $import = new ExternalBalanceMaterialImport();
         $import->onlySheets($sheet);
         $data = Excel::toArray($import, $request->file('file'));
         //Solo proyectos creados desde el 1ro de septiembre del 2021 en adelante
-        $externalBalanceId = ExternalBalance::saveData($data[$sheet]);
+        $externalBalanceId = ExternalBalance::saveData($data[$sheet], $manualEntryDate);
         
         $response['externalBalanceId'] = $externalBalanceId;
         return response()->json(

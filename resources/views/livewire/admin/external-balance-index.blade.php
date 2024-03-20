@@ -27,6 +27,9 @@
                                                 aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </td>
+                                    <td style="width:200px">
+                                        <input type="text" class="form-control form-control-sm w-auto" name="manual_entry_date" id="manual_entry_date" placeholder="yyyy-mm-dd">
+                                    </td>
                                     <td style="width: 1%;white-space: nowrap;">
                                         <a class="btn btn-sm text-white btn-danger" data-dz-remove
                                             href="javascript:void(0);">Cancelar</a>
@@ -74,15 +77,14 @@
                                 <th class="text-center">Total<br>BT</th>
                                 <th class="text-center">Total<br>MT</th>
                                 <th class="text-center">Total<br>TR</th>
-                                <th class="text-center">Fecha de<br>registro</th>
+                                <th class="text-center">Fecha manual<br>de registro</th>
                                 <th class="text-center">
-                                    <x-coreui-icon svgClass="icon" icon="cil-options"/>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($externalBalances as $externalBalance)
-                                <tr>
+                                <tr class="align-middle">
                                     <td>{{ $externalBalance->id }}</td>
                                     <td class="text-center">{{ $externalBalance->total_records }}</td>
                                     <td class="text-center">{{ $externalBalance->total_records_221 }}</td>
@@ -93,8 +95,9 @@
                                     <td class="text-center">{{ $externalBalance->total_MT }}</td>
                                     <td class="text-center">{{ $externalBalance->total_TR }}</td>
                                     <td class="stacked-info text-center">
-                                        {{ $externalBalance->created_at->format('d-m-Y') }}<br>
-                                        <small class="text-muted">{{$externalBalance->created_at->diffForHumans()}}</small>
+                                        @if (isset($externalBalance->manual_entry_date))
+                                            {{ $externalBalance->manual_entry_date->format('d-m-Y') }}<br>
+                                        @endif
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group">
@@ -164,6 +167,9 @@
                     //Disable the start button
                     $(file.previewElement).find('.start').addClass('d-none');
                     $(file.previewElement).find('[data-dz-remove]').addClass('d-none');
+
+                    var manualEntryDate = file.previewElement.querySelector("#manual_entry_date").value;
+                    formData.append("manual_entry_date", manualEntryDate);
                     console.log('sending', file, xhr, formData);
                 });
 

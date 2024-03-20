@@ -16,6 +16,10 @@ class ExternalBalance extends Model
     use SoftDeletes;
     use Blameable;
     
+    protected $casts = [
+        'manual_entry_date' => 'date'
+    ];
+
     protected $fillable = [
         'total_records',
         'total_records_221',
@@ -24,7 +28,8 @@ class ExternalBalance extends Model
         'total_material_types',
         'total_BT',
         'total_MT',
-        'total_TR'
+        'total_TR',
+        'manual_entry_date'
     ];
 
     public function materials()
@@ -32,7 +37,7 @@ class ExternalBalance extends Model
         return $this->hasMany(ExternalBalanceMaterial::class, 'external_balance_id');
     }
 
-    public static function saveData($data): int
+    public static function saveData($data, $manualEntryDate): int
     {
         $tensions = [];
         $externalBalanceMaterials = [];
@@ -70,7 +75,8 @@ class ExternalBalance extends Model
             'total_material_types' => $totalMaterials,
             'total_BT' => $tensions['BT'],
             'total_MT' => $tensions['MT'],
-            'total_TR' => $tensions['TR']
+            'total_TR' => $tensions['TR'],
+            'manual_entry_date' => $manualEntryDate
         ];
 
         $externalBalance = ExternalBalance::create($externalBalance);
