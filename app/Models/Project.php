@@ -128,6 +128,7 @@ class Project extends Model
             tentative_total_budget_prb,
             reservation_number_prb,
             graph_number_prb,
+            trim_tree_prb,
 			design_reb,
 			building_reb,			
 			transportation_reb,
@@ -259,7 +260,8 @@ class Project extends Model
             invoice_number_pao,			
             log_detail_pos,
 			payment_order_id_pos,
-			status_id_pos
+			status_id_pos,
+            wfl_contracts.contract_number_con end_contract_number
 			
 		from 
 			wfl_payment_orders_status_log
@@ -276,9 +278,10 @@ class Project extends Model
 		) as filter on filter.entry_date = manual_entry_date_pos and filter.payment_order_id = payment_order_id_pos
 		LEFT JOIN wfl_payment_orders on id_pao = payment_order_id_pos		
         left join wfl_payment_orders_projects on order_id_pop = id_pao 
+        left join wfl_contracts on id_con = end_contract_id_pao
 		where 
 			deleted_pao != 1
-            and deleted_pop != 1		
+            and deleted_pop != 1
         ";
 		return $sql;
 	}

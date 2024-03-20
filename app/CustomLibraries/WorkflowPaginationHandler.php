@@ -49,7 +49,8 @@ class WorkflowPaginationHandler extends BasePaginationHandler
             budgetary_position_pro,
             entry_date_pro,
             folder_date_pro,
-            
+            minor_enlargement,
+			end_contract_pro,
 			CASE
                 WHEN system_pro = 1 then 'Sistema Santa Cruz'
                 WHEN system_pro = 2 then 'Sistema Velasco'
@@ -253,7 +254,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 		if(isset($filters["contract-id"]) && $filters["contract-id"] != "")
 		{
 			$contractId = $filters["contract-id"];
-			$sql .= " and id_con = ".$contractId." ";
+			$sql .= " and end_contract_pro = ".$contractId." ";
 		}
 		if(isset($filters["system"]) && $filters["system"] != "")
 		{
@@ -383,6 +384,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 			'drawing_date' => ['column' => 'drawing.entry_date drawing_date', 'dependencies' => ['drawing']],
 
 			'schedule_date' => ['column' => 'schedulee.entry_date schedule_date', 'dependencies' => ['schedulee']],
+			'trim_tree' => ['column' => 'schedulee.trim_tree_prb trim_tree', 'dependencies' => ['schedulee']],
             'schedule_design_budget' => ['column' => 'schedulee.design_prb schedule_design_budget', 'dependencies' => ['schedulee']],
 			'schedulee_tentative_total_budget' => ['column' => 'schedulee.tentative_total_budget_prb schedulee_tentative_total_budget', 'dependencies' => ['schedulee']],
 			'project_current_budget' => ['column' => "
@@ -390,7 +392,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 											WHEN keyword_pst in('project_has_been_created','drawing','stakes','digitization','returned') 
 												then initial_design_budget_pro + initial_building_budget_pro
 											WHEN keyword_pst in('schedule','ready_to_send','already_sent','rectify_design','rectify_illustration','rd_stakes','rd_digitization','rd_drawing','ri_digitization','ri_drawing') 
-												then if(schedulee.tentative_total_budget_prb is not null and schedulee.tentative_total_budget_prb > 0,schedulee.tentative_total_budget_prb,schedulee.design_prb)\n
+												then if(schedulee.tentative_total_budget_prb is not null && schedulee.tentative_total_budget_prb > 0,schedulee.tentative_total_budget_prb,schedulee.design_prb)\n
 											WHEN keyword_pst in('canceled') 
 												then canceled.design_prb \n
 											WHEN keyword_pst in('approved','assign_to','in_progress','paused','stopped','completed','project_energized','as_built') 
@@ -401,7 +403,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 			'project_current_design_budget' => ['column' => "CASE 
 													WHEN keyword_pst in('project_has_been_created','drawing','stakes','digitization','returned') 
 														then initial_design_budget_pro
-													WHEN keyword_pst in('schedule','ready_to_send','already_sent','rectify_design','rectify_illustration','rd_stakes','rd_digitization','rd_drawing','ri_digitization','ri_drawing','canceled') 
+													WHEN keyword_pst in('schedule','ready_to_send','already_sent','rectify_design','rectify_illustration','rd_stakes','rd_digitization','rd_drawing','ri_digitization','ri_drawing') 
 														then schedulee.design_prb
 													WHEN keyword_pst in('canceled') 
 														then canceled.design_prb \n
@@ -500,6 +502,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 
 			'payment_order_registered_date' => ['column' => 'payment_order_registered.entry_date payment_order_registered_date', 'dependencies' => ['payment_order_registered',]],
             'payment_order_registered_order_number' => ['column' => 'payment_order_registered.order_number_pao payment_order_registered_order_number', 'dependencies' => ['payment_order_registered']],
+			'payment_order_registered_contract_number' => ['column' => 'payment_order_registered.end_contract_number payment_order_registered_contract_number', 'dependencies' => ['payment_order_registered']],
             'payment_status' => ['column' => "if(payment_order_registered.order_number_pao != '','Pagado','Pendiente de pago') payment_status", 'dependencies' => ['payment_order_registered']],
             'payment_order_registered_invoice_number' => ['column' => "payment_order_registered.invoice_number_pao payment_order_registered_invoice_number", 'dependencies' => ['payment_order_registered']],
 
@@ -515,8 +518,11 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 			'cre_fiscal_pro' => ['column' => " concat(cre_fiscal.firstname_usr,' ', cre_fiscal.lastname_usr) cre_fiscal_pro", 'dependencies' => ['cre_fiscal']],
             'cre_fiscal_email' => ['column' => 'email_usr cre_fiscal_email', 'dependencies' => ['cre_fiscal']],
 
-			'id_con' => ['column' => 'id_con', 'dependencies' => ['wfl_contracts']],
-            'contract_number_con' => ['column' => 'contract_number_con', 'dependencies' => ['wfl_contracts']],
+			'initial_id_con' => ['column' => 'initial_contract.id_con initial_id_con', 'dependencies' => ['initial_contract']],
+            'initial_contract_number_con' => ['column' => 'initial_contract.contract_number_con initial_contract_number_con', 'dependencies' => ['initial_contract']],
+
+			'final_id_con' => ['column' => 'final_contract.id_con final_id_con', 'dependencies' => ['final_contract']],
+            'final_contract_number_con' => ['column' => 'final_contract.contract_number_con final_contract_number_con', 'dependencies' => ['final_contract']],
 
 			'static_days' => ['column' => " TIMESTAMPDIFF(DAY, status_log_manual_entry_date.manual_entry_date_psl, now()) static_days ", 'dependencies' => ['status_log_manual_entry_date']],
             'status_log_manual_entry_date' => ['column' => " status_log_manual_entry_date.manual_entry_date_psl status_log_manual_entry_date ", 'dependencies' => ['status_log_manual_entry_date']],
@@ -571,7 +577,8 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 			'payment_order_has_been_settled' => " LEFT JOIN (".Project::paymentOrderStatusDetailQuery(44).") payment_order_has_been_settled on payment_order_has_been_settled.project_id_pop = id_pro ",
 			'wfl_project_status' => " LEFT JOIN wfl_project_status on status_pro = id_pst ",
 			'cre_fiscal' => " left join sec_users cre_fiscal on id_usr = cre_fiscal_pro ",
-			'wfl_contracts' => " left join wfl_contracts on contract_id_pro = id_con ",
+			'initial_contract' => " left join wfl_contracts initial_contract on contract_id_pro = initial_contract.id_con ",
+			'final_contract' => " left join wfl_contracts final_contract on end_contract_pro = final_contract.id_con ",
 			'status_log_manual_entry_date' => " LEFT JOIN (
 													select * from (
 														select
@@ -669,7 +676,9 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 			'production' => " LEFT JOIN (
 								SELECT
 									project_id_lad,
-									sum(ROUND(worked_up_wus * price_wus,2)) total_bs
+									sum(ROUND(worked_up_wus * 
+									price_wus
+									,2)) total_bs
 								FROM
 									bui_worked_up_structures
 								LEFT JOIN bui_labor_cost on id_lac = labor_cost_id_wus
@@ -752,7 +761,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 			{
 				$dependencyList[$dependency] = $dependency;
 			}
-		}
+		}dd($this->_columnsAndDependencies);
 		// $columns = substr($columns,0,-1);
 		$dependencyList = array_values($dependencyList);
 		foreach($this->_queryDependencies as $key => $query)
@@ -826,6 +835,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 							$query = str_replace("{id-list-inc-t1}"," and t1.project_id_inc in (".$idListFilter.") ", $query);
 							$query = str_replace("{id-list-lad}"," and project_id_lad in (".$idListFilter.") ", $query);
 							$query = str_replace("{id-list-msu}"," and project_id_msu in (".$idListFilter.") ", $query);
+							$query = str_replace("{id-list-psl}"," and project_id_psl in (".$idListFilter.") ", $query);
 						}
 				}
 			}

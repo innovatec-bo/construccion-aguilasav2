@@ -4,6 +4,9 @@ namespace App\Http\Controllers\api\v1;
 
 use App\CustomLibraries\WorkflowPaginationHandler;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\WorkflowCollection;
+use App\Http\Resources\WorkflowResource;
+use App\Models\Workflow;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -15,7 +18,7 @@ class WorkflowApiController extends BaseApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index_(Request $request)
     {
         $perPage = 5;
         $page = $request->page;
@@ -51,6 +54,18 @@ class WorkflowApiController extends BaseApiController
         ],200);
     }
 
+    public function index(Request $request)
+    {
+        $perPage = 5;
+        if(isset($request->per_page) && $request->per_page <= 500)
+        {
+            $perPage = $request->per_page;
+        }
+        $workflow = Workflow::paginate($perPage);
+
+        return $this->sendResponse(new WorkflowCollection($workflow), '');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -59,7 +74,18 @@ class WorkflowApiController extends BaseApiController
      */
     public function store(Request $request)
     {
-        //
+        $perPage = count($request->projects);
+        $projectIds = implode(" ",$request->projects);
+        // $paginationHandler = new WorkflowPaginationHandler(10000, 0);
+        // $paginationHandler->setAdditionalParameters(['id-list' => $projectIds]);
+        // $data = $paginationHandler->getAll();
+
+        Workflow::updateAllData($projectIds);
+
+        return response()->json([
+            'response' => true,
+            'message' => '',
+        ],200);
     }
 
     /**
@@ -70,7 +96,11 @@ class WorkflowApiController extends BaseApiController
      */
     public function show($id)
     {
-        //
+        $workflow = Workflow::where('id_pro', $id)->first();
+        if (is_null($workflow)) {
+            return $this->sendError('No se encontro la informacion.');
+        }
+        return $this->sendResponse(new WorkflowResource($workflow), '');
     }
 
     /**
@@ -82,7 +112,7 @@ class WorkflowApiController extends BaseApiController
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
