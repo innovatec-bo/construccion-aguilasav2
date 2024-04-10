@@ -105,20 +105,22 @@ class ProjectController extends Controller
 
     public function updateManpower(Request $request)
     {
+        // echo "<pre>";var_dump($request->rectify_type);exit;
         $project = Project::where('code_pro', $request->get('project-code'))->first();
-        $import = new ManpowerImport();
-        $data = Excel::toArray($import, $request->file('file'));
-        LaborDetail::updatePrices($project, $data);
-        // session()->flash('successMessage','La mano de obra ha sido rectificada');
+        switch ($request->rectify_type) 
+        {
+            case 'partial':
+                $import = new ManpowerImport();
+                $data = Excel::toArray($import, $request->file('file'));
+                LaborDetail::updatePrices($project, $data);
+                break;
+            case 'total':
+                // $project->laborDetailDesign->delete();
+                // echo "<pre>";print_r($project);exit;
+                break;
+        }
+        
         return redirect()->route('admin.projects.rectify-manpower');
-        
-        // $externalBalanceId = ExternalBalance::saveData($data);
-        
-        // $response['externalBalanceId'] = $externalBalanceId;
-        // return response()->json(
-        //     $response
-        // );
-        // dd($project);
     }
 
     public function statusManagement(Project $project)

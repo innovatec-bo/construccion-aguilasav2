@@ -11,73 +11,9 @@
         <div class="col-md-6">
             <div class="card card-primary shadow-lg">
                 <div class="card-body">
-                    {{-- <form method="post" action="">
-                    @csrf
-                    @method('post')
-                    <div class="card-body">
-
-                        <div class="form-group mb-3">
-                            <label for="exampleInputFile">File input</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                </div>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">Upload</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">COD. proyecto</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                </form> --}}
                     <p class="text-center mb-0">
                         <a class="btn btn-primary fileinput-button" href="javascript:void(0);">Seleccionar Mano de obra</a>
                     </p>
-                    {{-- <form id="form-previews" class="my-4" data-parsley-validate='' wire:ignore>
-                    <div class="files" id="previews">
-                        <div id="template" class="file-row pt-2 m-1 pb-2 d-none">
-                            <!-- This is used as the file preview template -->
-                            <div class="table-responsive" style="background: #e8e8e8;">
-                                <table class="table border mb-0">
-                                    <tbody>
-                                        <tr class="align-middle">
-                                            <td>
-                                                <div data-dz-name></div>
-                                            </td>
-                                            <td>
-                                                <div class="clearfix">
-                                                    <div class="float-end">
-                                                        <small class="text-medium-emphasis" data-dz-size></small>
-                                                    </div>
-                                                </div>
-                                                <div class="progress progress-thin">
-                                                    <div class="progress-bar bg-success" data-dz-uploadprogress
-                                                        role="progressbar" style="width: 0%" aria-valuenow="0"
-                                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-sm text-white btn-danger" data-dz-remove
-                                                    href="javascript:void(0);">Cancelar</a>
-                                                <a class="btn btn-sm btn-primary start" href="javascript:void(0)">Cargar</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <p class="error text-danger fw-bold text-center" data-dz-errormessage></p>
-                        </div>
-                    </div>
-                </form> --}}
                     <form id="form-previews" class="" data-parsley-validate=''>
                         <div class="files" id="previews">
                             <div id="template" class="file-row pt-2 m-1 pb-2 d-none">
@@ -93,7 +29,6 @@
                                             <div class="progress-bar bg-success-gradient" data-dz-uploadprogress role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
-                                    
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="project-code">Proyecto</label>
@@ -106,15 +41,13 @@
                                     <legend class="col-form-label col-sm-2 pt-0">Acci&oacute;n</legend>
                                     <div class="col-sm-10">
                                         <div class="form-check mb-3">
-                                            <input class="form-check-input" id="gridRadios1" type="radio"
-                                                name="gridRadios" value="option1" checked="">
-                                            <label class="form-check-label" for="gridRadios1">Actualizar precios, no borrar nada.</label>
+                                            <input class="form-check-input" id="rectify-type-partial" type="radio" name="rectify-type" value="partial" checked="">
+                                            <label class="form-check-label" for="rectify-type-partial">Actualizar precios, no borrar nada.</label>
                                                 <div class="form-text">Esta acci&oacute;n actualiza los precios de las estructuras y los precios que fueron especificados por los fiscales en los registros de producci&oacute;n</div>
                                         </div>
-                                        <div class="form-check disabled">
-                                            <input class="form-check-input" id="gridRadios3" type="radio"
-                                                name="gridRadios" value="option3" disabled="">
-                                            <label class="form-check-label" for="gridRadios3">Eliminar mano de obra existente y reemplazar con la que se esta cargando.</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="rectify-type-total" type="radio" name="rectify-type" value="total">
+                                            <label class="form-check-label" for="rectify-type-total">Eliminar mano de obra existente y reemplazar con la que se esta cargando.</label>
                                             <div class="form-text">Esta acci&oacute;n borra la mano de obra existente y todos los registros de producci&oacute;n que tenga asociados. Use esta opci&oacute;n cuando la mano de obra existente sea la incorrecta</div>
                                         </div>
                                     </div>
@@ -137,9 +70,6 @@
             </div>
         </div>
     </div>
-    {{-- <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button> --}}
-
-    
 @stop
 
 @section('css')
@@ -205,6 +135,8 @@
                 formData.append("project-code",$('#project-code').val());
                 $(file.previewElement).find('.start').addClass('d-none');
                 $(file.previewElement).find('[data-dz-remove]').addClass('d-none');
+                var rectifyType = file.previewElement.querySelector("input[name=rectify-type]:checked").value;
+                formData.append("rectify_type", rectifyType);
                 console.log('sending', file, xhr, formData);
             });
 
@@ -220,7 +152,8 @@
             });
 
             myDropzone.on("success", function(file, responseText) {
-                window.location.reload();
+                // window.location.reload();
+
                 // console.log('success', file, responseText); // console should show the ID you pointed to
                 // var totalRecords = responseText.totalRecords;
                 // $("#total-records").text(totalRecords);

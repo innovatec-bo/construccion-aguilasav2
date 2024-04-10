@@ -393,4 +393,14 @@ class LaborDetail extends Model
         // dd($data);
     }
 
+    public function delete()
+    {
+        foreach ($this->laborCosts as $row) 
+        {
+            $row->delete();
+        }
+
+        $this->deleted_lad = 1;
+        parent::delete();
+    }
 }
