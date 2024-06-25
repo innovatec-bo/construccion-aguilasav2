@@ -309,7 +309,7 @@ class DashboardMenu extends Component
                         {
                             if (!$this->user->hasAnyPermission($subMenu['can'])) 
                             {
-                                unset($subMenu[$subKey]);
+                                unset($this->menu[$key]['submenu'][$subKey]);
                             }
                         }
                     }
