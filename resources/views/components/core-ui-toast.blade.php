@@ -3,7 +3,7 @@
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <svg class="docs-placeholder-img rounded me-2" width="20" height="20">
-                    <use xlink:href="http://serebo2.test/coreui/vendors/@coreui/icons/svg/free.svg#cil-info"></use>
+                    <use xlink:href="{{asset('coreui/vendors/@coreui/icons/svg/free.svg#')}}cil-info"></use>
                 </svg>
                 <strong class="me-auto">Success</strong>
                 <small>11 mins ago</small>
