@@ -38,7 +38,7 @@
         <x-dashboard-footer/>
     </div>
     <!-- CoreUI and necessary plugins-->
-    <livewire:modals/>
+    {{-- <livewire:modals/> --}}
     @livewireScripts
     <script src="{{ mix('js/serebo.dashboard.core.js') }}"></script>
     <script src="{{ mix('js/serebo.dashboard.js') }}"></script>

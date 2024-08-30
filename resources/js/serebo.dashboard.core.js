@@ -6,6 +6,6 @@ window.Swal = require('../../public/vendor/sweetalert2/sweetalert2.all.js');
 window.moment = require('moment');
 window.coreui = require('../../public/coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js');
 require('../../public/coreui/vendors/simplebar/js/simplebar.min.js');
-require('../../vendor/bastinald/laravel-livewire-modals/resources/js/modals');
+// require('../../vendor/bastinald/laravel-livewire-modals/resources/js/modals');
 require('@selectize/selectize');
 require('../../public/coreui/js/toasts.js');

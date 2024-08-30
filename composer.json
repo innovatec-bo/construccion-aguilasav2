@@ -5,8 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
-        "bastinald/laravel-livewire-modals": "^3.0",
+        "php": "^8.2",
         "binarytorch/larecipe": "^2.5",
         "binarytorch/larecipe-dark-theme": "^0.1.5",
         "bkwld/cloner": "^3.11",
@@ -17,7 +16,7 @@
         "imanghafoori/laravel-masterpass": "^2.0",
         "jeroennoten/laravel-adminlte": "^3.8",
         "laravel-appkit/blameable": "^1.0",
-        "laravel/framework": "^8.75",
+        "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.6",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
@@ -33,11 +32,11 @@
     },
     "require-dev": {
         "bennett-treptow/laravel-migration-generator": "^4.2",
-        "facade/ignition": "^2.5",
+        "spatie/laravel-ignition": "^1.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^5.10",
+        "nunomaduro/collision": "^6",
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {

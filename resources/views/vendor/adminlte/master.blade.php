@@ -189,7 +189,7 @@
             <livewire:scripts />
         @endif
     @endif
-    <livewire:modals/>    
+    {{-- <livewire:modals/>     --}}
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
