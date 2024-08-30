@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use AppKit\Blameable\Traits\Blameable;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +14,7 @@ class ExternalBalance extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use Blameable;
+    use BlameableTrait;
     
     protected $casts = [
         'manual_entry_date' => 'date'

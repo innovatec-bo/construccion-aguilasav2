@@ -11,7 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use AppKit\Blameable\Traits\Blameable;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 class User extends Authenticatable
 {
@@ -22,7 +22,7 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use HasRoles;
     use SoftDeletes;
-    use Blameable;
+    use BlameableTrait;
 
     protected $table = "sec_users";
     protected $primaryKey = "id_usr";

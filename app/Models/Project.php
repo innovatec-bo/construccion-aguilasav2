@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use AppKit\Blameable\Traits\Blameable;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +13,7 @@ class Project extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use Blameable;
+    use BlameableTrait;
     
     protected $table = "wfl_projects";
     protected $primaryKey = "id_pro";

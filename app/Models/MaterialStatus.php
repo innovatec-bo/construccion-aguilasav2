@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use AppKit\Blameable\Traits\Blameable;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +11,7 @@ class MaterialStatus extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use Blameable;
+    use BlameableTrait;
 
     protected $table = "mat_material_status";
     protected $primaryKey = "id_mst";

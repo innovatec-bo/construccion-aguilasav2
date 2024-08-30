@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use AppKit\Blameable\Traits\Blameable;
+use RichanFongdasen\EloquentBlameable\BlameableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +11,7 @@ class MaterialSummary extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use Blameable;
+    use BlameableTrait;
     use \Bkwld\Cloner\Cloneable;
 
     protected $table = "mat_materials_summary";
