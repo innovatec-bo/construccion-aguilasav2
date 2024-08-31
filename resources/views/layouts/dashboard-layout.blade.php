@@ -18,7 +18,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{asset('coreui/assets/favicon/ms-icon-144x144.png')}}">
     <meta name="theme-color" content="#ffffff">
-    @vite('resources/css/serebo.dashboard.css')
+    @vite('resources/sass/serebo.dashboard.scss')
     @stack('css')
     @yield('css')
     @stack('styles')
@@ -43,7 +43,7 @@
     @vite('resources/js/serebo.dashboard.core.js')
     @vite('resources/js/serebo.dashboard.js')
     <script></script>
-    <x-core-ui-toast/>
+    {{-- <x-core-ui-toast/> --}}
     @stack('js')
     @yield('js')
     @stack('scripts')
