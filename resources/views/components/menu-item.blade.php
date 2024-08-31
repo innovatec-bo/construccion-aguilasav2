@@ -1,42 +1,17 @@
-
-@if (isset($item['header']))
-    <li class="nav-title">{{$item['header']}}</li>
-@else
-    @if (isset($item['url']))
-        <li class="{{isset($item['submenu'])?'nav-group': 'nav-item' }}">
-            <a class="nav-link {{$isActive && !isset($item['submenu'])?'active':''}} {{isset($item['submenu'])?'nav-group-toggle': '' }}" href="{{isset($item['submenu'])?'#': $item['url'] }}">
-                <x-coreui-icon svgClass="nav-icon" icon="{{$item['icon']}}"/>
-                {{$item['text']}}
-            </a>
-            @if (isset($item['submenu']))
-                <ul class="nav-group-items">
-                    @foreach ($item['submenu'] as $subItem)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{$subItem['url']}}">
-                                <span class="nav-icon"></span> {{$subItem['text']}}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
-        </li>
-    @else
-        <li class="{{isset($item['submenu'])?'nav-group': 'nav-item' }}">
-            <a class="nav-link {{$isActive && !isset($item['submenu'])?'active':''}} {{isset($item['submenu'])?'nav-group-toggle': '' }}" href="{{isset($item['submenu'])?'#': route($item['route']) }}">
-                <x-coreui-icon svgClass="nav-icon" icon="{{$item['icon']}}"/>
-                {{$item['text']}}
-            </a>
-            @if (isset($item['submenu']))
-                <ul class="nav-group-items">
-                    @foreach ($item['submenu'] as $subItem)
-                        <li class="nav-item">
-                            <a class="nav-link {{request()->routeIs($subItem['route'])?'active':''}}" href="{{route($subItem['route'])}}">
-                                <span class="nav-icon"></span> {{$subItem['text']}}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
-        </li>        
-    @endif
-@endif
+<li class="menu-item {{$isActive?'active':''}} {{$isOpen?'open':''}}">
+    <a href="{{isset($item['submenu'])?'javascript:void(0);': route($item['route']) }}" class="menu-link {{isset($item['submenu'])?'menu-toggle':''}}">
+        <i class="menu-icon {{$item['icon']}}"></i>
+        <div>{{$item['text']}}</div>
+    </a>
+    @if (isset($item['submenu']))
+        <ul class="menu-sub">
+            @foreach ($item['submenu'] as $subItem)
+                <li class="menu-item {{request()->routeIs($subItem['route'])?'active':''}}">
+                    <a href="{{route($subItem['route'])}}" class="menu-link">
+                        <div>{{$subItem['text']}}</div>
+                    </a>
+                </li>    
+            @endforeach
+        </ul>
+    @endif    
+</li>

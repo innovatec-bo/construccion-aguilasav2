@@ -1,15 +1,26 @@
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
-@import '../../public/coreui/vendors/simplebar/css/simplebar.css';
-@import '../../public/coreui/css/vendors/simplebar.css';
-@import '../../public/coreui/css/style.css';
-@import url('https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css');
-@import "../../public/coreui/css/examples.css";
-@import "../../public/coreui/vendors/@coreui/chartjs/css/coreui-chartjs.css";
-// @import "../../public/js/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker.css";
-@import "/node_modules/@selectize/selectize/dist/css/selectize.bootstrap5.css";
-// @import "/node_modules/toastr/build/toastr.css";
-// @import "/public/coreui/vendors/";
-
+// <!-- Fonts -->
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+// <!-- Icons -->
+@import "/node_modules/fontawesome-free-6.2.1/css/all.min.css";
+@import "../../public/admin-theme/vendor/fonts/tabler-icons.css";
+// @import "/node_modules/flag-icons/css/flag-icons.min.css";
+@import "/node_modules/bootstrap-icons/font/bootstrap-icons.min.css";
+// <!-- Core CSS -->
+// @import "../../public/admin-theme/vendor/css/rtl/core.css";
+// @import "../../public/admin-theme/vendor/css/rtl/theme-default.css";
+@import "../../public/admin-theme/vendor/css/core-dark.css";
+@import "../../public/admin-theme/vendor/css/theme-default-dark.css";
+@import "../../public/admin-theme/css/demo.css";
+// <!-- Vendors CSS -->
+@import "../../public/admin-theme/vendor/libs/perfect-scrollbar/perfect-scrollbar.css";
+@import "../../public/admin-theme/vendor/libs/node-waves/node-waves.css";
+@import "../../public/admin-theme/vendor/libs/typeahead-js/typeahead.css";
+@import "../../public/admin-theme/vendor/libs/apex-charts/apex-charts.css";
+@import "../../public/admin-theme/vendor/libs/datatables-bs5/datatables.bootstrap5.css";
+@import "../../public/admin-theme/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css";
+@import "../../public/admin-theme/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css";
+@import "../../public/admin-theme/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css";
+@import "../../public/admin-theme/vendor/libs/spinkit/spinkit.css";
 @media print {
     * {
         background: transparent !important;

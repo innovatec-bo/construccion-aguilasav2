@@ -1,51 +1,85 @@
 <!DOCTYPE html>
-<!-- Breadcrumb-->
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <base href="./">
+<html
+  lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+  class="dark-style layout-navbar-fixed layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="{{asset('admin-theme')}}/"
+  data-template="vertical-menu-template-no-customizer"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="Seguimiento de proyectos electricos">
-    <meta name="author" content="Jair Cussy">
-    <meta name="keyword" content="serebo">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/png" sizes="128x128" href="{{ asset('favicon.ico') }}">
-    <link rel="manifest" href="{{asset('coreui/assets/favicon/manifest.json')}}">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{asset('coreui/assets/favicon/ms-icon-144x144.png')}}">
-    <meta name="theme-color" content="#ffffff">
-    @vite('resources/sass/serebo.dashboard.scss')
-    @stack('css')
-    @yield('css')
-    @stack('styles')
+    <meta name="description" content="" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{asset('admin-theme/img/favicon/favicon.ico')}}" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    @vite(['resources/sass/serebo.dashboard.scss'])
     @livewireStyles
-</head>
-<body>
-    <!-- Menu -->
-    <x-dashboard-menu/>
-    <div class="wrapper d-flex flex-column min-vh-100 bg-light">
-        <!-- Navbar -->
-        <x-dashboard-navbar/>
-        <div class="body flex-grow-1 px-3">
-            <div class="container-lg">
-                @yield('content')
+    <script src="{{asset('admin-theme/vendor/js/helpers.js')}}"></script>
+    <script src="{{asset('admin-theme/js/config.js')}}"></script>
+    <style>
+      .overlay {
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          border-radius: 0.25rem;
+          align-items: center;
+          background-color: rgb(37 41 60 / 74%);
+          /* display: flex; */
+          justify-content: center;
+          z-index: 50;
+      }
+    </style>
+    @yield('css')
+  </head>
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <x-dashboard-menu/>
+        <!-- / Menu -->
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <x-dashboard-navbar/>
+          <!-- / Navbar -->
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+              {{-- {{$slot}} --}}
+              @yield('content')
             </div>
+            <!-- / Content -->
+            <!-- Footer -->
+            <x-dashboard-footer/>
+            <!-- / Footer -->
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
         </div>
-        <x-dashboard-footer/>
+        <!-- / Layout page -->
+      </div>
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
     </div>
-    <!-- CoreUI and necessary plugins-->
-    {{-- <livewire:modals/> --}}
+    @vite(['resources/js/serebo.dashboard.core.js','resources/js/serebo.dashboard.js'])
     @livewireScripts
-    @vite('resources/js/serebo.dashboard.core.js')
-    @vite('resources/js/serebo.dashboard.js')
-    <script></script>
-    {{-- <x-core-ui-toast/> --}}
-    @stack('js')
-    @yield('js')
     @stack('scripts')
-</body>
+    @yield('js')
+  </body>
 </html>

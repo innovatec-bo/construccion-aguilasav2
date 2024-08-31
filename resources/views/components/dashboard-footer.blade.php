@@ -1,10 +1,13 @@
-<footer class="footer d-print-none">
-    <div>
-        {{env('APP_NAME')}}
-        ©
-        {{date('Y')}}
-    </div>
-    <div class="ms-auto">
-        Santa Cruz de la Sierra
+<footer class="content-footer footer bg-footer-theme">
+    <div class="container-xxl">
+        <div class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+            <div>
+                ©
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+                by <a href="#" target="_blank" class="fw-semibold">{{ENV('APP_NAME')}}</a>
+            </div>
+        </div>
     </div>
 </footer>

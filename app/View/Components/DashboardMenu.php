@@ -37,7 +37,7 @@ class DashboardMenu extends Component
             [
                 'text'        => 'Inicio',
                 'route'       => 'admin.home.index',
-                'icon'        => 'cil-home',
+                'icon'        => 'ti ti-smart-home',
             ],
             // [
             //     'text' => 'Dashboard',
@@ -46,243 +46,243 @@ class DashboardMenu extends Component
             // ],
             [
                 'text'        => 'Proyectos',
-                'icon'        => 'cil-folder',
+                'icon'        => 'ti ti-folder',
                 'can'         => ['admin.projects.index', 'admin.projects.create'],
                 'submenu'     => [
                     [
                         'text'        => 'Lista',
                         'route'       => 'admin.projects.index',
                         'can'         => ['admin.projects.index'],
-                        'icon'        => 'cil-speedometer',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Crear',
                         'route'       => 'admin.projects.create',
                         'can'         => ['admin.projects.create'],
-                        'icon'        => 'cil-speedometer',
+                        'icon'        => '',
                     ],
                 ]
             ],
             [
                 'text'        => 'Manos de obra',
-                'icon'        => 'cil-file',
+                'icon'        => 'ti ti-file',
                 'can'         => ['admin.labor-details.index','admin.projects.rectify-manpower'],
                 'submenu'     => [
                     [
                         'text'        => 'Lista',
                         'route'       => 'admin.labor-details.index',
                         'can'         => ['admin.labor-details.index'],
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Rectificar Mano de obra',
                         'route'       => 'admin.projects.rectify-manpower',
                         'can'         => ['admin.projects.rectify-manpower'],
-                        'icon'        => 'fas fa-fw fa-edit',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Registro de avance',
                         'route'       => 'admin.labor-cost-log.index',
                         // 'can'         => ['admin.labor-cost-log.index'],
-                        'icon'        => 'fas fa-fw fa-edit',
+                        'icon'        => '',
                     ],
                 ]
             ],
             [
                 'text'        => 'Almacen',
-                'icon'        => 'cil-house',
+                'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.materials-summary.index','admin.materials-summary.load-initial-list','admin.builder-debts-report.index','admin.materials.material-summary'],
                 'submenu'     => [
                     [
                         'text'        => 'Movimientos',
                         'route'       => 'admin.materials-summary.index',
                         'can'         => ['admin.materials-summary.index'],
-                        'icon'        => 'fas fa-fw fa-file-alt',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Movimientos agrupados',
                         'route'       => 'admin.materials-summary.grouped-movements',
                         // 'can'         => 'admin.materials-summary.index',
-                        'icon'        => 'fas fa-fw fa-file-alt',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Cargar lista inicial',
                         'route'       => 'admin.materials-summary.load-initial-list',
                         'can'         => ['admin.materials-summary.load-initial-list'],
-                        'icon'        => 'fas fa-fw fa-file-upload',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Constructores y deudas',
                         'route'       => 'admin.builder-debts-report.index',
                         'can'         => ['admin.builder-debts-report.index'],
-                        'icon'        => 'fas fa-fw fa-book-open',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Salidas observadas',
                         'route'       => 'admin.materials-summary.duplicate-outputs',
                         'can'         => ['admin.materials-summary.duplicate-outputs'],
-                        'icon'        => 'fas fa-fw fa-exclamation-triangle',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Resumen de materiales',
                         'route'       => 'admin.materials.material-summary',
                         'can'         => ['admin.materials.material-summary'],
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Depurar materiales',
                         'route'       => 'admin.materials.debug-pending-in-cre',
                         'can'         => ['admin.materials.debug-pending-in-cre'],
-                        'icon'        => 'fas fa-fw fa-bug',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Balance externo de materiales',
                         'route'       => 'admin.external-balance.index',
                         'can'         => ['admin.external-balance.index'],
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                     
                 ],  
             ],
             [
                 'text'        => 'Estructuras',
-                'icon'        => 'cil-layers',
+                'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.building-structures.index','admin.building-structures.upload-default-materials'],
                 'submenu'     => [
                     [
                         'text'        => 'Lista',
                         'route'       => 'admin.building-structures.index',
                         'can'         => 'admin.building-structures.index',
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Establecer materiales',
                         'route'       => 'admin.building-structures.upload-default-materials',
                         'can'         => 'admin.building-structures.upload-default-materials',
-                        'icon'        => 'fas fa-fw fa-cogs',
+                        'icon'        => '',
                     ]
                 ]
             ],
             [
                 'text'        => 'Materiales',
-                'icon'        => 'cil-puzzle',
+                'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.materials.index', 'admin.materials.create'],
                 'submenu'     => [
                     [
                         'text'        => 'Lista',
                         'route'       => 'admin.materials.index',
                         'can'         => 'admin.materials.index',
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Crear',
                         'route'       => 'admin.materials.create',
                         'can'         => 'admin.materials.create',
-                        'icon'        => 'fas fa-fw fa-plus',
+                        'icon'        => '',
                     ],
                 ]
             ],
             [
                 'text'        => 'Observaciones externas',
-                'icon'        => 'cil-notes',
+                'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.external-observations.index', 'admin.external-observations.create'],
                 'submenu'     => [
                     [
                         'text'        => 'Lista',
                         'route'       => 'admin.external-observations.index',
                         'can'         => 'admin.external-observations.index',
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Crear',
                         'route'       => 'admin.external-observations.create',
                         'can'         => 'admin.external-observations.create',
-                        'icon'        => 'fas fa-fw fa-plus',
+                        'icon'        => '',
                     ]
                 ]
             ],
             [
                 'text'        => 'Contratos',
-                'icon'        => 'cil-file',
+                'icon'        => 'ti ti-smart-home',
                 'route'       => 'admin.contracts.index',
                 'can'         => ['admin.contracts.index', 'admin.contracts.create'],
             ],
-            ['header' => 'SEGURIDAD', 'can' => ['admin.users.index', 'admin.users.create', 'admin.permissions.index', 'admin.permissions.create','admin.roles.index', 'admin.roles.create']],
+            // ['header' => 'SEGURIDAD', 'can' => ['admin.users.index', 'admin.users.create', 'admin.permissions.index', 'admin.permissions.create','admin.roles.index', 'admin.roles.create']],
             [
                 'text'        => 'Usuarios',
-                'icon'        => 'cil-group',
+                'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.users.index', 'admin.users.create'],
                 'submenu'     => [
                     [
                         'text'        => 'Lista',
                         'can'         => 'admin.users.index',
                         'route'       => 'admin.users.index',
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Crear',
                         'can'         => 'admin.users.create',
                         'route'       => 'admin.users.create',
-                        'icon'        => 'fas fa-fw fa-plus',
+                        'icon'        => '',
                     ]       
                 ]
             ],
             [
                 'text'        => 'Permisos',
-                'icon'        => 'cil-lock-locked',
+                'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.permissions.index', 'admin.permissions.create'],
                 'submenu'     => [
                     [
                         'text'        => 'Lista',
                         'route'       => 'admin.permissions.index',
                         'can'         => 'admin.permissions.index',
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Crear',
                         'route'       => 'admin.permissions.create',
                         'can'         => 'admin.permissions.create',
-                        'icon'        => 'fas fa-fw fa-plus',
+                        'icon'        => '',
                     ]       
                 ]
             ],
             [
                 'text'        => 'Roles',
-                'icon'        => 'cil-shield-alt',
+                'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.roles.index', 'admin.roles.create'],
                 'submenu'     => [
                     [
                         'text'        => 'Lista',
                         'route'       => 'admin.roles.index',
                         'can'         => 'admin.roles.index',
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                     [
                         'text'        => 'Crear',
                         'route'       => 'admin.roles.create',
                         'can'         => 'admin.roles.create',
-                        'icon'        => 'fas fa-fw fa-plus',
+                        'icon'        => '',
                     ]       
                 ]
             ],
             [
                 'text'        => 'Configuracion',
-                'icon'        => 'cil-settings',
+                'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.status-management-settings.edit'],
                 'submenu'     => [
                     [
                         'text'        => 'Administracion de estados',
                         'route'       => 'admin.status-management-settings.edit',
                         'can'         => 'admin.status-management-settings.edit',
-                        'icon'        => 'fas fa-fw fa-table',
+                        'icon'        => '',
                     ],
                 ]
             ],
-            [
-                'text'        => 'Documentacion',
-                'icon'        => 'cil-book',
-                'url'       => '/administracion/docs'
-            ],
+            // [
+            //     'text'        => 'Documentacion',
+            //     'icon'        => 'ti ti-smart-home',
+            //     'url'       => '/administracion/docs'
+            // ],
         ];
 
         $this->validatePermission();
