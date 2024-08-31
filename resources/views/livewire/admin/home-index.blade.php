@@ -7,7 +7,7 @@
                     <div class="sk-swing-dot"></div>
                 </div>
             </div>
-            <div class="card-header">{{$lastIncident->created_at->diffInDays(\Carbon\Carbon::now())}} dias sin incidentes</div>
+            <div class="card-header">{{round($lastIncident->created_at->diffInDays(),0)}} dias sin incidentes</div>
             <div class="card-body p-0">
                 <!-- /.row-->
                 <div class="table-responsive">

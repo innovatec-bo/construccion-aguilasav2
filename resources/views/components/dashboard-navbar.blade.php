@@ -420,7 +420,7 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">{{Auth::user()->name}}</span>
+                            <span class="fw-semibold d-block">{{Auth::user()->full_name}}</span>
                             <small class="text-muted">{{Auth::user()->email}}</small>
                           </div>
                         </div>
@@ -430,7 +430,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{{route('admin.users.show', Auth::user())}}">
+                      <a class="dropdown-item" href="{{route('admin.users.show', Auth::user()->id_usr)}}">
                         <i class="ti ti-user-check me-2 ti-sm"></i>
                         <span class="align-middle">Mi perfil</span>
                       </a>
