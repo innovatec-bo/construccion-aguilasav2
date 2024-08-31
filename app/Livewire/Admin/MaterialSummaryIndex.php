@@ -13,7 +13,6 @@ Class MaterialSummaryIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $idMSU;
     public $projectCode;
@@ -91,7 +90,7 @@ Class MaterialSummaryIndex extends Component
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
 
-        return view('class MaterialSummaryIndex', compact('materialSummaryList'));
+        return view('livewire.admin.material-summary-index', compact('materialSummaryList'));
     }
 
     public function fromChanged($date)

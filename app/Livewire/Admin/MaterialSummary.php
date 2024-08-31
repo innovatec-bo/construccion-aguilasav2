@@ -19,7 +19,6 @@ Class MaterialSummary extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search = "";
     public $sort = 'material_id';
     public $direction = 'desc';
@@ -77,7 +76,7 @@ Class MaterialSummary extends Component
         }
         
         $projectStatus = ProjectStatus::orderBy('order_pst')->get();
-        return view('class MaterialSummary', compact('materialSummaries', 'projectStatus'));
+        return view('livewire.admin.material-summary', compact('materialSummaries', 'projectStatus'));
     }
 
     public function _paginate($options = [])

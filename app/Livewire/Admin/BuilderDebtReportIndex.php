@@ -14,7 +14,6 @@ Class BuilderDebtReportIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id_pro';
     public $direction = 'asc';
@@ -72,7 +71,7 @@ Class BuilderDebtReportIndex extends Component
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
 
-        return view('class BuilderDebtReportIndex', compact('projects','builders','statusToVerify'));
+        return view('livewire.admin.builder-debt-report-index', compact('projects','builders','statusToVerify'));
     }
 
     public function order($sort)

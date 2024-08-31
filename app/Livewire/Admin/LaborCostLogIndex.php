@@ -13,7 +13,6 @@ use Livewire\WithPagination;
 class LaborCostLogIndex extends Component
 {
     use WithPagination;
-    protected $paginationTheme = 'bootstrap';
     public $projectCode;
     public $structureCode;
     public $from;

@@ -11,7 +11,6 @@ Class RoleIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id';
     public $direction = 'desc';
@@ -32,7 +31,7 @@ Class RoleIndex extends Component
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
         
-        return view('class RoleIndex', compact('roles'));
+        return view('livewire.admin.role-index', compact('roles'));
     }
 
     public function order($sort)

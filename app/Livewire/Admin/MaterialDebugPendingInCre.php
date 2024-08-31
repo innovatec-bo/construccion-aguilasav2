@@ -14,7 +14,6 @@ class MaterialDebugPendingInCre extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
     protected $listeners = ['refreshMaterialDebugPendingInCre' => 'render'];
     public $statusKeywords;
     public $statusToDebug;

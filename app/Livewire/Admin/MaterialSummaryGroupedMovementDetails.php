@@ -11,7 +11,6 @@ Class MaterialSummaryGroupedMovementDetails extends Component
 {
     use WithPagination;
     public $project;
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id_mat';
     public $direction = 'desc';
@@ -36,7 +35,7 @@ Class MaterialSummaryGroupedMovementDetails extends Component
             });
         })
         ->get();
-        return view('class MaterialSummaryGroupedMovementDetails', compact('materialSummaries'));
+        return view('livewire.admin.material-summary-grouped-movement-details', compact('materialSummaries'));
     }
 
     public function order($sort)

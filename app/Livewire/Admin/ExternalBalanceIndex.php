@@ -10,7 +10,6 @@ class ExternalBalanceIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id';
     public $direction = 'desc';

@@ -12,7 +12,6 @@ class ExternalBalanceShow extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id';
     public $direction = 'desc';

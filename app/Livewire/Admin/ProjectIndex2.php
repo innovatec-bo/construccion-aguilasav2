@@ -14,7 +14,6 @@ class ProjectIndex2 extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
     public $projectCode;
     public $sort = 'entry_date_pro';
     public $direction = 'desc';

@@ -10,7 +10,6 @@ Class PermissionIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'name';
     public $direction = 'desc';
@@ -32,7 +31,7 @@ Class PermissionIndex extends Component
         ->orderBy($this->sort, $this->direction)
         ->paginate(15);
 
-        return view('class PermissionIndex', compact('permissions'));
+        return view('livewire.admin.permission-index', compact('permissions'));
     }
 
     public function order($sort)

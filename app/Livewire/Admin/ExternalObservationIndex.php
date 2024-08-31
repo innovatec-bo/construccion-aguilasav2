@@ -11,7 +11,6 @@ Class ExternalObservationIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id_efo';
     public $direction = 'desc';
@@ -31,7 +30,7 @@ Class ExternalObservationIndex extends Component
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
 
-        return view('class ExternalObservationIndex', compact('externalObservations'));
+        return view('livewire.admin.external-observation-index', compact('externalObservations'));
     }
 
     public function order($sort)

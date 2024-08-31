@@ -12,7 +12,6 @@ Class BuildingStructureIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id_bus';
     public $direction = 'desc';
@@ -34,7 +33,7 @@ Class BuildingStructureIndex extends Component
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
 
-        return view('class BuildingStructureIndex', compact('buildingStructureList'));
+        return view('livewire.admin.building-structure-index', compact('buildingStructureList'));
     }
 
     public function order($sort)

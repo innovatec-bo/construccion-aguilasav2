@@ -12,7 +12,6 @@ Class UserIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id_usr';
     public $direction = 'desc';
@@ -37,7 +36,7 @@ Class UserIndex extends Component
         $this->usersToExport = $users->get();
         $users = $users->paginate(6);
 
-        return view('class UserIndex', compact('users'));
+        return view('livewire.admin.user-index', compact('users'));
     }
 
     public function order($sort)

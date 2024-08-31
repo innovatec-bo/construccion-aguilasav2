@@ -12,7 +12,6 @@ Class MaterialIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id_mat';
     public $direction = 'desc';
@@ -80,7 +79,7 @@ Class MaterialIndex extends Component
         {
             $materialQuantity[$value->material_id] = $value->stock;
         }
-        return view('class MaterialIndex', compact('materials','materialQuantity'));
+        return view('livewire.admin.material-index', compact('materials','materialQuantity'));
     }
 
     public function order($sort)

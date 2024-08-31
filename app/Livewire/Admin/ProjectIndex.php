@@ -16,7 +16,6 @@ Class ProjectIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search = "";
     public $sort = 'id_usr';
     public $direction = 'desc';
@@ -32,7 +31,7 @@ Class ProjectIndex extends Component
     public function render()
     {
         $projects = $this->_paginate();
-        return view('class ProjectIndex', compact('projects'));
+        return view('livewire.admin.project-index', compact('projects'));
     }
 
     public function _paginate($options = [])

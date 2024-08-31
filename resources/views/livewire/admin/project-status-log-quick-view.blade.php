@@ -83,7 +83,10 @@
                 @endphp
                 @foreach ($log->statusLogResponsible as $statusLogResponsible)
                     @php
+                    if ($statusLogResponsible->responsible) 
+                    {
                         $responsibles .= $statusLogResponsible->responsible->user->fullName . ', ';
+                    }
                     @endphp
                 @endforeach
                 <dl>

@@ -13,7 +13,6 @@ Class LaborDetailIndex extends Component
 {
     use WithPagination;
     
-    protected $paginationTheme = 'bootstrap';
     public $search;
     public $sort = 'id_pro';
     public $direction = 'desc';
@@ -38,7 +37,7 @@ Class LaborDetailIndex extends Component
         })
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
-        return view('class LaborDetailIndex', compact('projects'));
+        return view('livewire.admin.labor-detail-index', compact('projects'));
     }
 
     public function _render()

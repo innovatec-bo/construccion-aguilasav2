@@ -24,7 +24,7 @@ Class UserCreate extends Component
     }
     public function render()
     {
-        return view('class UserCreate');
+        return view('livewire.admin.user-create');
     }
 
     public function updated($propertyName)

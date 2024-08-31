@@ -12,7 +12,6 @@ class ContractIndex extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
     public $projectCode;
     public $sort = 'id_con';
     public $direction = 'desc';
