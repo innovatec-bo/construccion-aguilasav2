@@ -18,7 +18,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{asset('coreui/assets/favicon/ms-icon-144x144.png')}}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{{ mix('css/serebo.dashboard-print.css') }}">
+    @vite('resources/css/serebo.dashboard-print.css')
 </head>
 <body>
     <!-- Menu -->
@@ -31,6 +31,6 @@
         </div>
     </div>
     <!-- CoreUI and necessary plugins-->
-    <script src="{{ mix('js/serebo.dashboard-print.core.js') }}"></script>
+    @vite('resources/js/serebo.dashboard-print.core.js')
 </body>
 </html>
