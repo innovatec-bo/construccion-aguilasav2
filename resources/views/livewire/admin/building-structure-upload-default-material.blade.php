@@ -7,13 +7,13 @@
             <div class="card-header">
                 <h4 class="card-title">Debe cargar un archivo que contenga la asociacion de estructuras con sus respectivos materiales</h4>
             </div>
-            <form wire:submit.prevent="save()">
+            <form wire:submit="save()">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="materials">Estructuras y materiales</label>
                         <div class="input-group" wire:ignore>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="materials" name="materials" wire:model="file">
+                                <input type="file" class="custom-file-input" id="materials" name="materials" wire:model.live="file">
                                 <label class="custom-file-label" for="materials">Seleccione una lista de estructuras con sus respectivos materiales</label>
                             </div>
                         </div>

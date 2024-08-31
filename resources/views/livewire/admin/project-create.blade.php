@@ -4,7 +4,7 @@
             <div class="card-header">
                 Datos del proyecto
                 <div class="icheck-primary d-inline float-right">
-                    <input type="checkbox" id="showLabels" wire:model='showLabels'>
+                    <input type="checkbox" id="showLabels" wire:model.live='showLabels'>
                     <label for="showLabels">
                         Ver etiquetas
                     </label>
@@ -16,7 +16,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="designBudget">Dise&ntilde;o Bs.</label>
                             <input type="text" id="designBudget" class="form-control form-control-border @error('designBudget') is-invalid @enderror" placeholder="Dise&ntilde;o Bs."
-                                wire:model="designBudget">
+                                wire:model.live="designBudget">
                             @error('designBudget')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="buildingBudget">Construcci&oacute;n Bs.</label>
                             <input type="text" id="buildingBudget" class="form-control form-control-border @error('buildingBudget') is-invalid @enderror" placeholder="Construcci&oacute;n Bs."
-                                wire:model="buildingBudget">
+                                wire:model.live="buildingBudget">
                             @error('buildingBudget')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="code">C&oacute;digo</label>
                             <input type="text" class="form-control form-control-border @error('code')is-invalid @enderror" id="code" placeholder="C&oacute;digo"
-                                wire:model="code">
+                                wire:model.live="code">
                             @error('code')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -47,7 +47,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="workArea">Area de trabajo</label>
-                                <select class="form-control form-control-border @error('workArea')is-invalid @enderror" wire:model="workArea">
+                                <select class="form-control form-control-border @error('workArea')is-invalid @enderror" wire:model.live="workArea">
                                     <option value="">Area de trabajo</option>
                                     <option value="GIS">GIS</option>
                                     <option value="GIR">GIR</option>
@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="projectYear">A&ntilde;o del proyecto</label>
                             <input type="text" id="projectYear" class="form-control form-control-border @error('projectYear') is-invalid @enderror" placeholder="A&ntilde;o del proyecto"
-                                wire:model="projectYear">
+                                wire:model.live="projectYear">
                             @error('projectYear')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -71,7 +71,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label class='{{$showLabels?'':'d-none'}}' for="contractId">Contrato</label>
-                                <select class="form-control form-control-border @error('contractId')is-invalid @enderror" id="contractId" wire:model="contractId">
+                                <select class="form-control form-control-border @error('contractId')is-invalid @enderror" id="contractId" wire:model.live="contractId">
                                     <option value="">Contrato</option>
                                     @foreach ($contracts as $contract)
                                         <option value="{{$contract->id_con}}">{{$contract->contract_number_con}}</option>
@@ -88,7 +88,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="projectDetail">Detalle del proyecto</label>
-                            <textarea class="form-control form-control-border @error('projectDetail')is-invalid @enderror" id="projectDetail" wire:model="projectDetail" rows="2" placeholder="Detalle"></textarea>
+                            <textarea class="form-control form-control-border @error('projectDetail')is-invalid @enderror" id="projectDetail" wire:model.live="projectDetail" rows="2" placeholder="Detalle"></textarea>
                             @error('projectDetail')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -97,7 +97,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="projectAddress">Direcci&oacute;n</label>
-                            <textarea class="form-control form-control-border @error('projectAddress')is-invalid @enderror" id="projectAddress" wire:model="projectAddress" rows="2" placeholder="Direccion"></textarea>
+                            <textarea class="form-control form-control-border @error('projectAddress')is-invalid @enderror" id="projectAddress" wire:model.live="projectAddress" rows="2" placeholder="Direccion"></textarea>
                             @error('projectAddress')
                                 <span class='text-danger small'>{{$message}}</span>
                             @enderror
@@ -109,7 +109,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="entryDate">Fecha de Ingreso</label>
                             <input type="text" id="entryDate" class="form-control form-control-border @error('entryDate')is-invalid @enderror" placeholder="Fecha de Ingreso"
-                                wire:model="entryDate">
+                                wire:model.live="entryDate">
                             @error('entryDate')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -119,7 +119,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="folderDate">Fecha de folder</label>
                             <input type="text" id="folderDate" class="form-control form-control-border @error('folderDate') @enderror" placeholder="Fecha de folder"
-                                wire:model="folderDate">
+                                wire:model.live="folderDate">
                             @error('folderDate')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -129,7 +129,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label class='{{$showLabels?'':'d-none'}}' for="CREFiscal">Fiscal de CRE</label>
-                                <select class="form-control form-control-border @error('CREFiscal')is-invalid @enderror" wire:model='CREFiscal' id="CREFiscal">
+                                <select class="form-control form-control-border @error('CREFiscal')is-invalid @enderror" wire:model.live='CREFiscal' id="CREFiscal">
                                     <option value="">Fiscal de CRE</option>
                                     @foreach ($CREFiscals as $fiscal)
                                         <option value="{{$fiscal->id_usr}}">{{$fiscal->full_name}}</option>
@@ -147,7 +147,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label class='{{$showLabels?'':'d-none'}}' for="system">Sistema</label>
-                                <select class="form-control form-control-border @error('system')is-invalid @enderror" wire:model="system" id="system">
+                                <select class="form-control form-control-border @error('system')is-invalid @enderror" wire:model.live="system" id="system">
                                     <option value="">Sistema</option>
                                     @foreach ($systems as $key => $item)
                                         <option value="{{$key}}">{{$item}}</option>
@@ -163,7 +163,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label class='{{$showLabels?'':'d-none'}}' for="management">Administracion</label>
-                                <select class="form-control form-control-border @error('management')is-invalid @enderror" wire:model="management" id="management">
+                                <select class="form-control form-control-border @error('management')is-invalid @enderror" wire:model.live="management" id="management">
                                     <option value="">Administracion</option>
                                     @foreach ($managements as $key => $item)
                                         <option value="{{$key}}">{{$item}}</option>
@@ -179,7 +179,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label class='{{$showLabels?'':'d-none'}}' for="qualityLevel">Nivel de calidad</label>
-                                <select class="form-control form-control-border @error('qualityLevel')is-invalid @enderror" id="qualityLevel" wire:model="qualityLevel">
+                                <select class="form-control form-control-border @error('qualityLevel')is-invalid @enderror" id="qualityLevel" wire:model.live="qualityLevel">
                                     <option value="">Nivel de calidad</option>
                                     <option value="0">Ninguno</option>
                                     <option value="1">1</option>
@@ -198,7 +198,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="creDesignCompletionDate">Fin de dise&ntilde;o(CRE)</label>
                             <input type="text" id="creDesignCompletionDate" id="creDesignCompletionDate" class="form-control form-control-border @error('creDesignCompletionDate')is-invalid @enderror" placeholder="Fin de dise&ntilde;o(CRE)"
-                                wire:model="creDesignCompletionDate">
+                                wire:model.live="creDesignCompletionDate">
                             @error('creDesignCompletionDate')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -208,7 +208,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="creBuildingCompletionDate">Fin de construcci&oacute;n(CRE)</label>
                             <input type="text" id="creBuildingCompletionDate" id="creBuildingCompletionDate" class="form-control form-control-border @error('creBuildingCompletionDate')is-invalid @enderror" placeholder="Fin de construcci&oacute;n(CRE)"
-                                wire:model="creBuildingCompletionDate">
+                                wire:model.live="creBuildingCompletionDate">
                             @error('creBuildingCompletionDate')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -218,7 +218,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label class='{{$showLabels?'':'d-none'}}' for="projectBudgetaryPosition">Posicion presupuestaria</label>
-                                <select class="form-control form-control-border @error('projectBudgetaryPosition')is-invalid @enderror" id="projectBudgetaryPosition" wire:model="projectBudgetaryPosition">
+                                <select class="form-control form-control-border @error('projectBudgetaryPosition')is-invalid @enderror" id="projectBudgetaryPosition" wire:model.live="projectBudgetaryPosition">
                                     <option value="">Posicion presupuestaria</option>
                                     @for ($i = 1; $i <= 11; $i++)
                                         <option value="{{$i*10}}">{{$i*10}}</option>    
@@ -236,7 +236,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="points">Puntos</label>
                             <input type="text" id="points" class="form-control form-control-border @error('points')is-invalid @enderror" placeholder="Puntos"
-                                wire:model="points">
+                                wire:model.live="points">
                             @error('points')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror
@@ -246,7 +246,7 @@
                         <div class="form-group">
                             <label class='{{$showLabels?'':'d-none'}}' for="distance">Distancia KM</label>
                             <input type="text" id="distance" class="form-control form-control-border @error('distance')is-invalid @enderror" placeholder="Distancia"
-                                wire:model="distance">
+                                wire:model.live="distance">
                             @error('distance')
                                 <span class="text-danger small"> {{ $message }} </span>
                             @enderror

@@ -6,11 +6,11 @@
     </div>
     <div class="form-group col-2">
         <label for="projectCode" class="mb-0">Proyecto</label>
-        <input type="text" class="form-control" wire:model.debounce.1500ms="projectCode" id="projectCode" placeholder="Codigo proyecto">
+        <input type="text" class="form-control" wire:model.live.debounce.1500ms="projectCode" id="projectCode" placeholder="Codigo proyecto">
     </div>
     <div class="form-group col">
         <div class="d-grid gap-2 d-md-block">
-            <button type="button" class="btn btn-danger mt-4 ms-2" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar todos</button>
+            <button type="button" class="btn btn-danger mt-4 ms-2" wire:click="$dispatch('showModal', 'admin.material-debug-modal')">Depurar todos</button>
         </div>
     </div>
     <div class="col-md-12 mt-4">
@@ -55,8 +55,8 @@
                                          {{-- ({{$row['quantity_debug_pending_in_cre']}}) --}}
                                     </td>
                                     <td class="text-center">
-                                        {{-- <button type="button" class="btn btn-secondary" wire:click="$emit('showModal', 'admin.material-debug-modal')">Depurar todos</button> --}}
-                                        <button class="btn btn-sm btn-secondary" wire:click="$emit('showModal', 'admin.material-debug-single-project-modal', {{$row['project_id']}})" type="button">Depurar</button>
+                                        {{-- <button type="button" class="btn btn-secondary" wire:click="$dispatch('showModal', 'admin.material-debug-modal')">Depurar todos</button> --}}
+                                        <button class="btn btn-sm btn-secondary" wire:click="$dispatch('showModal', 'admin.material-debug-single-project-modal', {{$row['project_id']}})" type="button">Depurar</button>
                                     </td>
                                 </tr>
                             @endforeach

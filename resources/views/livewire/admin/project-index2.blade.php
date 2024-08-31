@@ -8,13 +8,13 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>COD Proyecto</label>
-            <input type="text" name="table_search" class="form-control form-control-sm" wire:model.debounce.1500ms="projectCode" placeholder="Buscar..">
+            <input type="text" name="table_search" class="form-control form-control-sm" wire:model.live.debounce.1500ms="projectCode" placeholder="Buscar..">
         </div>
     </div>
     <div class="col-md-2">
         <div class="form-group">
             <label>Area de trabajo</label>
-            <select class="form-control form-control-sm" wire:model="workAreaSelected">
+            <select class="form-control form-control-sm" wire:model.live="workAreaSelected">
                 <option value="">--Todos--</option>
                 <option value="gir">GIR</option>
                 <option value="gis">GIS</option>
@@ -24,7 +24,7 @@
     {{-- <div class="col-md-2">
         <div class="form-group">
             <label>Fiscal</label>
-            <select class="form-control" wire:model="fiscalSelected">
+            <select class="form-control" wire:model.live="fiscalSelected">
                 <option value="">--Todos--</option>
                 @foreach ($fiscalList as $user)
                     <option value="{{$user->id_usr}}">{{$user->fullName}}</option>
@@ -35,7 +35,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>Estado</label>
-            <select class="form-control form-control-sm" wire:model="statusSelected">
+            <select class="form-control form-control-sm" wire:model.live="statusSelected">
                 <option value="">--Todos--</option>
                 @foreach ($statusList as $status)
                     <option value="{{$status->id_pst}}">{{$status->status_name_pst}}</option>
@@ -132,7 +132,7 @@
                                                     <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href="{{route('admin.projects.status-management', $project->id_pro)}}">Administracion de estados</a></li>
                                                 @endcan
                                                 @if (Auth::user()->hasRole('Responsable de Almac') && !$project->project_has_returned_materials_to_cre && $project->status_pro == 34 && $enableManualApprovementForConciliations)
-                                                    <li><a wire:loading.class="disabled" class="dropdown-item" href="javascript:void(0)" wire:click="$emit('showModal','admin.conciliation-manual-approvement', {{$project->id_pro}})">Aprobar conciliaci&oacute;n</a></li>    
+                                                    <li><a wire:loading.class="disabled" class="dropdown-item" href="javascript:void(0)" wire:click="$dispatch('showModal','admin.conciliation-manual-approvement', {{$project->id_pro}})">Aprobar conciliaci&oacute;n</a></li>    
                                                 @endif
                                             </ul>
                                         </div>

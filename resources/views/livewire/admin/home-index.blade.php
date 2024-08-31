@@ -51,7 +51,7 @@
                                         <p class="mb-0">
                                             @if ($incident->created_at)
                                                 {{$incident->created_at->translatedFormat('l d F Y')}},
-                                                {{$incident->created_at->diffForHumans()}}
+                                                {{-- {{$incident->created_at->diffForHumans()}} --}}
                                             @else
                                                 {{$incident->createdon_inc->translatedFormat('l d F Y')}},
                                                 {{$incident->createdon_inc->diffForHumans()}}

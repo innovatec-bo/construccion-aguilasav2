@@ -8,14 +8,14 @@
             <form>
                 <div class="form-group">
                     <label for="number">N&uacute;mero</label>
-                    <input type="text" id="number" class="form-control" wire:model.lazy="number" placeholder="Numero de contrato">
+                    <input type="text" id="number" class="form-control" wire:model.blur="number" placeholder="Numero de contrato">
                     @error('number')
                         <span class="text-danger small"> {{$message}} </span>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="amount">Monto</label>
-                    <input type="text" id="amount" class="form-control" wire:model.lazy="amount" placeholder="Monto">
+                    <input type="text" id="amount" class="form-control" wire:model.blur="amount" placeholder="Monto">
                     @error('amount')
                         <span class="text-danger small"> {{$message}} </span>
                     @enderror
@@ -39,14 +39,14 @@
                 @enderror
                 <div class="form-group">
                     <label for="amount">UMBO</label>
-                    <input type="text" id="umbo" class="form-control" wire:model="umbo" placeholder="umbo">
+                    <input type="text" id="umbo" class="form-control" wire:model.live="umbo" placeholder="umbo">
                     @error('umbo')
                         <span class="text-danger small"> {{$message}} </span>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="amount">Activo<br><em class="text-muted">Si establece este contrato como activo, cualquier otro que haya estado activo, dejara de estarlo</em></label>
-                    <select class="form-select form-select-sm" wire:model="active">
+                    <select class="form-select form-select-sm" wire:model.live="active">
                         <option value="true">Si</option>
                         <option value="false">No</option>
                       </select>

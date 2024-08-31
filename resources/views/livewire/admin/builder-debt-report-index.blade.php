@@ -7,17 +7,17 @@
     <div class="col-md-2">
         <div class="form-group">
             {!! Form::label('builders', 'Constructor') !!}
-            {!! Form::select('builders', $builders, null, ['id' => 'builders', 'class' => 'form-control form-control-sm', 'required' => 'required', 'wire:model' => 'builderSelected']) !!}
+            {!! Form::select('builders', $builders, null, ['id' => 'builders', 'class' => 'form-control form-control-sm', 'required' => 'required', 'wire:model.live' => 'builderSelected']) !!}
         </div>
     </div>
     <div class="col-md-2">
         <div class="form-group">
             {!! Form::label('statusSelected', 'Estado del proyecto') !!}
-            {!! Form::select('statusSelected', $statusToVerify, null, ['id' => 'statusSelected', 'class' => 'form-control form-control-sm', 'wire:model' => 'statusSelected']) !!}
+            {!! Form::select('statusSelected', $statusToVerify, null, ['id' => 'statusSelected', 'class' => 'form-control form-control-sm', 'wire:model.live' => 'statusSelected']) !!}
         </div>
     </div>
     <div class="col-md-2">
-        <input class="form-control form-control-sm mt-4" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+        <input class="form-control form-control-sm mt-4" type="text" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
     </div>
     <div class="col-md-12 mt-4">
         <div class="card shadow-lg">

@@ -2,7 +2,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>COD Proyecto</label>
-            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="search">
+            <input type="text" class="form-control form-control-sm" wire:model.live.debounce.1500ms="search">
             @error('projectCode')
                 <span class="text-danger small">{{$message}}</span>
             @enderror
@@ -13,7 +13,7 @@
             {{-- <div class="card-header">
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="">
-                        <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                        <input type="text" name="table_search" class="form-control float-right" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
                     </div>
                 </div>
             </div> --}}

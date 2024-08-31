@@ -20,7 +20,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>ID de movimiento</label>
-            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="idMSU">
+            <input type="text" class="form-control form-control-sm" wire:model.live.debounce.1500ms="idMSU">
             @error('idMSU')
                 <span class="text-danger small">{{$message}}</span>
             @enderror
@@ -29,7 +29,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>COD Proyecto</label>
-            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="projectCode">
+            <input type="text" class="form-control form-control-sm" wire:model.live.debounce.1500ms="projectCode">
             @error('projectCode')
                 <span class="text-danger small">{{$message}}</span>
             @enderror
@@ -38,7 +38,7 @@
     <div class="col-md-3">
         <div class="form-group">
             <label>Tipo de movimiento</label>
-            <select class="form-control form-control-sm" wire:model="materialSummaryTypeSelected">
+            <select class="form-control form-control-sm" wire:model.live="materialSummaryTypeSelected">
                 <option value=""></option>
                 @foreach ($materialSummaryTypes as $materialSummaryType)
                     <option value="{{$materialSummaryType->id_mqt}}">{{$materialSummaryType->name_mqt}}</option>

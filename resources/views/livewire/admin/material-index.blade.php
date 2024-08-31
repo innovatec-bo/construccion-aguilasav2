@@ -7,7 +7,7 @@
                   </div>
             </div>
             <div class="card-header">
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                <input class="form-control form-control-sm" type="text" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">

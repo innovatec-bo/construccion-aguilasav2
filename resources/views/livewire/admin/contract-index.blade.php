@@ -9,7 +9,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label>&nbsp;</label>
-                <a href="javascript:void(0);" wire:click="$emit('showModal','admin.contract-create-modal')" class="btn btn-primary btn-sm form-control"
+                <a href="javascript:void(0);" wire:click="$dispatch('showModal','admin.contract-create-modal')" class="btn btn-primary btn-sm form-control"
                     type="button">Nuevo contrato</a>
             </div>
         </div>
@@ -49,7 +49,7 @@
                         </div>
                         @can('admin.contracts.edit')
                             <div class="card-footer px-3 py-2">
-                                <a class="btn-block text-medium-emphasis-inverse d-flex justify-content-between align-items-center" href="javascript:void(0);" wire:click="$emit('showModal','admin.contract-edit-modal', {{$contract}})">
+                                <a class="btn-block text-medium-emphasis-inverse d-flex justify-content-between align-items-center" href="javascript:void(0);" wire:click="$dispatch('showModal','admin.contract-edit-modal', {{$contract}})">
                                     <span class="small fw-semibold">Editar</span>
                                     <x-coreui-icon svgClass="icon" icon="cil-pencil"/>
                                 </a>

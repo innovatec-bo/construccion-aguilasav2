@@ -36,7 +36,7 @@
                         @error('responsibleList') <span class="text-danger small mt-0">{{ $message }}</span>@enderror 
                         <div class="col-12">
                             <label>Detalle</label>
-                            <textarea class="form-control" wire:model="detail" rows="2"></textarea>
+                            <textarea class="form-control" wire:model.live="detail" rows="2"></textarea>
                         </div>
                     @break
 

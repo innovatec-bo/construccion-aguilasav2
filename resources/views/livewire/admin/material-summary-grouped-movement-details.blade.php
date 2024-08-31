@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" name="table_search" class="form-control form-control-sm" wire:model.debounce.1500ms="search" placeholder="Buscar por codigo de material..">
+            <input type="text" name="table_search" class="form-control form-control-sm" wire:model.live.debounce.1500ms="search" placeholder="Buscar por codigo de material..">
         </div>
     </div>
     <div class="col-md-12 mt-4">

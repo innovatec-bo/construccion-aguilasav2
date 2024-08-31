@@ -8,14 +8,14 @@
             <form>
                 <div class="form-group">
                     <label for="number">N&uacute;mero</label>
-                    <input type="text" id="number" class="form-control" wire:model.lazy="number" placeholder="Numero de contrato">
+                    <input type="text" id="number" class="form-control" wire:model.blur="number" placeholder="Numero de contrato">
                     @error('number')
                         <span class="text-danger small"> {{$message}} </span>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="amount">Monto</label>
-                    <input type="text" id="amount" class="form-control" wire:model.lazy="amount" placeholder="Monto">
+                    <input type="text" id="amount" class="form-control" wire:model.blur="amount" placeholder="Monto">
                     @error('amount')
                         <span class="text-danger small"> {{$message}} </span>
                     @enderror
@@ -39,7 +39,7 @@
                 @enderror
                 <div class="form-group">
                     <label for="amount">UMBO</label>
-                    <input type="text" id="umbo" class="form-control" wire:model="umbo" placeholder="umbo">
+                    <input type="text" id="umbo" class="form-control" wire:model.live="umbo" placeholder="umbo">
                     @error('umbo')
                         <span class="text-danger small"> {{$message}} </span>
                     @enderror

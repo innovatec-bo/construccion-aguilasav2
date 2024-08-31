@@ -7,7 +7,7 @@
                 @endcan
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="">
-                        <input type="text" name="table_search" class="form-control float-right" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                        <input type="text" name="table_search" class="form-control float-right" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
                         {{-- @can('admin.projects.export')
                             <button class="btn btn-primary btn-xs" wire:click="export"><i class="far fa-file-excel"></i> Exportar</button>
                         @endcan --}}

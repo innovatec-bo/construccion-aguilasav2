@@ -16,7 +16,7 @@
                         </address>
                         <address class="mb-1">
                             <strong>Fecha</strong><br>
-                            <input class="form-control form-control-sm w-50" wire:model='manualEntryDate' type="text" placeholder="dd-mm-yyyy HH:MM:ss" autocapitalize='off' data-inputmask-alias="datetime" data-inputmask-inputformatt="dd-mm-yyyy HH:MM:ss" inputmode= "numeric">
+                            <input class="form-control form-control-sm w-50" wire:model.live='manualEntryDate' type="text" placeholder="dd-mm-yyyy HH:MM:ss" autocapitalize='off' data-inputmask-alias="datetime" data-inputmask-inputformatt="dd-mm-yyyy HH:MM:ss" inputmode= "numeric">
                             @error('manualEntryDate')
                                 <span class="text-info small"> {{$message}} </span>
                             @enderror
@@ -29,7 +29,7 @@
                             <strong>Tipo de resumen</strong><br>
                             {{$materialsSummary->summaryType->name_mqt}}
                             {{-- <div class="form-group">
-                                <select class="form-control form-control-sm" wire:model="materialsSummaryTypeId" disabled wire:change='responsiblesVisibility'>
+                                <select class="form-control form-control-sm" wire:model.live="materialsSummaryTypeId" disabled wire:change='responsiblesVisibility'>
                                     @foreach ($materialSummaryTypes as $item)
                                         <option value="{{$item->id_mqt}}">{{$item->name_mqt}}</option>
                                     @endforeach
@@ -41,7 +41,7 @@
                         @if ($materialsSummary->fiscal)
                             <address class="mb-1 {{$hideResponsibles}}">
                                 <strong>Fiscal</strong><br>
-                                <select class="form-control form-control-sm w-50" wire:model="fiscalId">
+                                <select class="form-control form-control-sm w-50" wire:model.live="fiscalId">
                                     <option value="">Seleccione un constructor</option>
                                     @foreach ($fiscals as $item)
                                         <option value="{{$item->id_usr}}">{{$item->full_name}}</option>
@@ -52,7 +52,7 @@
                         @if ($materialsSummary->builder)
                             <address class="mb-1 {{$hideResponsibles}}">
                                 <strong>Constructor</strong><br>
-                                <select class="form-control form-control-sm" wire:model="builderId">
+                                <select class="form-control form-control-sm" wire:model.live="builderId">
                                     <option value="">Seleccione un constructor</option>
                                     @foreach ($builders as $item)
                                         <option value="{{$item->id_usr}}">{{$item->full_name}}</option>
@@ -77,7 +77,7 @@
                                 <h4 class="card-title">Materiales</h4>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Buscar.." wire:model.debounce.1500ms='search'>
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Buscar.." wire:model.live.debounce.1500ms='search'>
                                         @if ($materials->hasPages())
                                             <ul class="pagination pagination-sm m-0 float-right">
                                                 @if ($materials->onFirstPage())
@@ -172,10 +172,10 @@
                                             @endif
                                         </td>
                                         <td class="text-end">
-                                            <input type="text" class="form-control form-control-sm text-end py-0 {{$errors->has('materialsToMove.'.$key.'.quantity_prm')?'is-invalid': ''}}" wire:model="materialsToMove.{{$key}}.quantity_prm" value="{{ $materialToMove['quantity_prm']??'0.00' }}">
+                                            <input type="text" class="form-control form-control-sm text-end py-0 {{$errors->has('materialsToMove.'.$key.'.quantity_prm')?'is-invalid': ''}}" wire:model.live="materialsToMove.{{$key}}.quantity_prm" value="{{ $materialToMove['quantity_prm']??'0.00' }}">
                                         </td>
                                         <td class="text-center">
-                                            <select class="" wire:model="materialsToMove.{{$key}}.status_id_prm">
+                                            <select class="" wire:model.live="materialsToMove.{{$key}}.status_id_prm">
                                                 <option value="1">NVO</option>
                                                 <option value="2">MEO</option>
                                                 <option value="3">RBO</option>

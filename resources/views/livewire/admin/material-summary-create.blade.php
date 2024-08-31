@@ -10,7 +10,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Tipo de movimiento</label>
-                    <select class="form-select" wire:model="movementTypeSelected">
+                    <select class="form-select" wire:model.live="movementTypeSelected">
                         @foreach ($movementTypes as $row)
                             <option value="{{$row->id_mqt}}">{{$row->name_mqt}}</option>
                         @endforeach
@@ -25,7 +25,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>ID de solicitud</label>
-                    <input type="text" class="form-control" wire:model="requestId">
+                    <input type="text" class="form-control" wire:model.live="requestId">
                     @error('requestId')
                         <span class="text-danger small"> {{ $message }} </span>
                     @enderror
@@ -36,7 +36,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Fiscal</label>
-                    <input type="text" class="form-control" wire:model="fiscal">
+                    <input type="text" class="form-control" wire:model.live="fiscal">
                     @error('fiscal')
                         <span class="text-danger small"> {{ $message }} </span>
                     @enderror
@@ -45,7 +45,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label>Constructor</label>
-                    <input type="text" class="form-control" wire:model="builder">
+                    <input type="text" class="form-control" wire:model.live="builder">
                     @error('builder')
                         <span class="text-danger small"> {{ $message }} </span>
                     @enderror
@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-2">
                 <label>Proyecto</label>
-                <input class="form-control" type="text" value="" wire:model="project">
+                <input class="form-control" type="text" value="" wire:model.live="project">
                 @error('project')
                     <span class="text-danger small"> {{ $message }} </span>
                 @enderror
@@ -73,7 +73,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="amount">Nro. de reserva</label>
-                    <select class="form-select" wire:model="reservationNumber">
+                    <select class="form-select" wire:model.live="reservationNumber">
                         <option value="a">45454</option>
                         <option value="b">45454232</option>
                     </select>

@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.2s="search" placeholder="Buscar..">
+                <input class="form-control form-control-sm" type="text" wire:model.live.debounce.2s="search" placeholder="Buscar..">
             </div>
 
             <div class="card-body">

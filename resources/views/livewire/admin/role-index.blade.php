@@ -25,7 +25,7 @@
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
                         <input type="text" name="table_search" class="form-control float-right"
-                            wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                            wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
                     </div>
                 </div>
             </div>

@@ -94,7 +94,7 @@
     @endif
 
     <!-- Token Value Modal -->
-    <x-jet-dialog-modal wire:model="displayingToken">
+    <x-jet-dialog-modal wire:model.live="displayingToken">
         <x-slot name="title">
             {{ __('API Token') }}
         </x-slot>
@@ -119,7 +119,7 @@
     </x-jet-dialog-modal>
 
     <!-- API Token Permissions Modal -->
-    <x-jet-dialog-modal wire:model="managingApiTokenPermissions">
+    <x-jet-dialog-modal wire:model.live="managingApiTokenPermissions">
         <x-slot name="title">
             {{ __('API Token Permissions') }}
         </x-slot>
@@ -147,7 +147,7 @@
     </x-jet-dialog-modal>
 
     <!-- Delete Token Confirmation Modal -->
-    <x-jet-confirmation-modal wire:model="confirmingApiTokenDeletion">
+    <x-jet-confirmation-modal wire:model.live="confirmingApiTokenDeletion">
         <x-slot name="title">
             {{ __('Delete API Token') }}
         </x-slot>

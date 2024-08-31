@@ -6,13 +6,13 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" name="table_search" class="form-control form-control-sm" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+            <input type="text" name="table_search" class="form-control form-control-sm" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
         </div>
     </div>
     <div class="col-md-12 mt-4">
         <div class="card shadow-lg">
             {{-- <div class="card-header">
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                <input class="form-control form-control-sm" type="text" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
             </div> --}}
             <div class="card-body p-0">
                 <div class="overlay dark d-none" wire:loading.class="d-flex" wire:target="previousPage, nextPage, gotoPage, search">

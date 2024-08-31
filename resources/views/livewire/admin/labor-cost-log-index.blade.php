@@ -7,7 +7,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>COD Proyecto</label>
-            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="projectCode">
+            <input type="text" class="form-control form-control-sm" wire:model.live.debounce.1500ms="projectCode">
             @error('projectCode')
                 <span class="text-danger small">{{$message}}</span>
             @enderror
@@ -16,7 +16,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>COD Estructura</label>
-            <input type="text" class="form-control form-control-sm" wire:model.debounce.1500ms="structureCode">
+            <input type="text" class="form-control form-control-sm" wire:model.live.debounce.1500ms="structureCode">
             @error('structureCode')
                 <span class="text-danger small">{{$message}}</span>
             @enderror

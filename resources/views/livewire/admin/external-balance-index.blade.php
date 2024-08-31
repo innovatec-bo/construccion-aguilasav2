@@ -61,7 +61,7 @@
                 </div>
             </div>
             {{-- <div class="card-header">
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Buscar..">
+                <input class="form-control form-control-sm" type="text" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
             </div> --}}
             <div class="card-body p-0">
                 <div class="table-responsive" style="overflow-x: visible">
@@ -106,7 +106,7 @@
                                             </button>
                                             <ul class="dropdown-menu" style="">
                                               <li><a class="dropdown-item" href="{{route('admin.external-balance.show', $externalBalance)}}">Ver</a></li>
-                                              <li><a class="dropdown-item" href="javascript:void(0)" wire:click="$emit('showModal','confirm-delete-modal', {{$externalBalance->id}},'App\\Models\\ExternalBalance')">Eliminar</a></li>
+                                              <li><a class="dropdown-item" href="javascript:void(0)" wire:click="$dispatch('showModal','confirm-delete-modal', {{$externalBalance->id}},'App\\Models\\ExternalBalance')">Eliminar</a></li>
                                             </ul>
                                           </div>
                                     </td>

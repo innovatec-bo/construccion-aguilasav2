@@ -5,7 +5,7 @@
                 <h3 class="card-title">Lista completa</h3>
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Buscar.." wire:model.debounce.1500ms='search'>
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Buscar.." wire:model.live.debounce.1500ms='search'>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                                 <td class="text-warning">{{ $custom['code_mat'] }}</td>
                                 <td>{{ $custom['description_mat'] }}</td>
                                 <td class="">
-                                    <input type="text" class="input-mask text-right" name="" value="{{$custom['quantity_csm']}}" wire:model="currentList.{{$custom['id_mat']}}.quantity_csm" id="" style="width: 80px">
+                                    <input type="text" class="input-mask text-right" name="" value="{{$custom['quantity_csm']}}" wire:model.live="currentList.{{$custom['id_mat']}}.quantity_csm" id="" style="width: 80px">
                                     {{ $custom['unit_of_measurement_mat'] }}
                                 </td>
                                 <td class="text-center">

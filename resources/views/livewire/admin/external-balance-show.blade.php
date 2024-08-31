@@ -7,7 +7,7 @@
     <div class="col-md-12 mb-3">
         <div class="row">
             <div class="col-md-3">
-                <input class="form-control form-control-sm" type="text" wire:model.debounce.1500ms="search" placeholder="Codigo de proyecto">
+                <input class="form-control form-control-sm" type="text" wire:model.live.debounce.1500ms="search" placeholder="Codigo de proyecto">
             </div>
         </div>
     </div>
