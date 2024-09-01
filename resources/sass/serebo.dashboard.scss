@@ -6,8 +6,6 @@
 // @import "/node_modules/flag-icons/css/flag-icons.min.css";
 @import "/node_modules/bootstrap-icons/font/bootstrap-icons.min.css";
 // <!-- Core CSS -->
-// @import "../../public/admin-theme/vendor/css/rtl/core.css";
-// @import "../../public/admin-theme/vendor/css/rtl/theme-default.css";
 @import "../../public/admin-theme/vendor/css/core-dark.css";
 @import "../../public/admin-theme/vendor/css/theme-default-dark.css";
 @import "../../public/admin-theme/css/demo.css";
@@ -21,6 +19,7 @@
 @import "../../public/admin-theme/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css";
 @import "../../public/admin-theme/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css";
 @import "../../public/admin-theme/vendor/libs/spinkit/spinkit.css";
+
 @media print {
     * {
         background: transparent !important;
@@ -51,7 +50,6 @@
         content: "";
     }
 
-    /* Don't show links for images, or javascript/internal links */
     pre,
     blockquote {
         border: 1px solid #999;
@@ -65,7 +63,6 @@
         font-size: 12px!important
     }
 
-    /* h5bp.com/t */
     tr,
     img {
         page-break-inside: avoid;
@@ -118,5 +115,5 @@
 
 .stacked-info {
     padding-top: 7px !important;
-    line-height: .94;
+    line-height: 1.2;
 }

@@ -14,7 +14,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>Area de trabajo</label>
-            <select class="form-control form-control-sm" wire:model.live="workAreaSelected">
+            <select class="form-select form-select-sm" wire:model.live="workAreaSelected">
                 <option value="">--Todos--</option>
                 <option value="gir">GIR</option>
                 <option value="gis">GIS</option>
@@ -35,7 +35,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label>Estado</label>
-            <select class="form-control form-control-sm" wire:model.live="statusSelected">
+            <select class="form-select form-select-sm" wire:model.live="statusSelected">
                 <option value="">--Todos--</option>
                 @foreach ($statusList as $status)
                     <option value="{{$status->id_pst}}">{{$status->status_name_pst}}</option>
@@ -118,23 +118,21 @@
                                             {{ $project->address_pro }} 
                                         </td>
                                     @endif
-                                    <td class="text-end">{{number_format($project->currentBudget, 2,'.',',')}}</td>
+                                    <td class="text-end fw-bold">{{number_format($project->currentBudget, 2,'.',',')}}</td>
                                     <td class="text-center">
                                         <div class="dropdown">
-                                            <a class="btn btn-transparent btn-sm" wire:loading.class="disabled" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
-                                                <x-coreui-icon svgClass="icon" icon="cil-options"/>
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false" wire:loading.class="disabled"><i class="ti ti-dots-vertical"></i></button>
+                                            <div class="dropdown-menu" style="">
                                                 @can('admin.projects.edit')
-                                                    <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href='{{ route('admin.projects.edit', $project) }}'">Editar</a></li>
+                                                    <a class="dropdown-item waves-effect" target="_blank" wire:loading.class="disabled" href='{{ route('admin.projects.edit', $project) }}'">Editar</a>
                                                 @endcan
                                                 @can('admin.projects.status-management')
-                                                    <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href="{{route('admin.projects.status-management', $project->id_pro)}}">Administracion de estados</a></li>
+                                                    <a class="dropdown-item waves-effect" wire:loading.class="disabled" target="_blank" href="{{route('admin.projects.status-management', $project->id_pro)}}">Administraci&oacute;n de estados</a>
                                                 @endcan
                                                 @if (Auth::user()->hasRole('Responsable de Almac') && !$project->project_has_returned_materials_to_cre && $project->status_pro == 34 && $enableManualApprovementForConciliations)
-                                                    <li><a wire:loading.class="disabled" class="dropdown-item" href="javascript:void(0)" wire:click="$dispatch('showModal','admin.conciliation-manual-approvement', {{$project->id_pro}})">Aprobar conciliaci&oacute;n</a></li>    
+                                                    <a class="dropdown-item waves-effect" wire:loading.class="disabled" href="javascript:void(0);"  wire:click="$dispatch('showModal','admin.conciliation-manual-approvement', {{$project->id_pro}})">Aprobar conciliaci&oacute;n</a>
                                                 @endif
-                                            </ul>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
