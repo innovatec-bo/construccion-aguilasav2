@@ -1,10 +1,20 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::get('login', function(){
+    return redirect("/");
+})->name('login');
+Route::post('authenticate',[LoginController::class,'authenticate'])->name('authenticate');
 Route::get('home/magic-login/{encrypted}',[HomeController::class,'magicLogin'])->name('home.magic-login');
+
+Route::group(['prefix' => '', 'as' => '', 'namespace' => 'App\Http\Controllers', 'middleware' => []], function () {
+    
+    Route::get('/','HomeController@index')->name('home.index');
+});
 
 Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'App\Http\Controllers\admin', 'middleware' => ['auth']], function () {
     //Home
@@ -92,9 +102,9 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     // })->name('print');
 });
 
-Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
+// Route::get('/', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
 
-Auth::routes(['register' => false]);
+// Auth::routes(['register' => false]);
 
 /*
  SELECT

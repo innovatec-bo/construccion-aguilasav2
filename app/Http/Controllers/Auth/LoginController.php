@@ -3,43 +3,58 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
+    /**
+     * Display a login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    // public function login()
+    // {
+        // return view('auth.login');
+    // }
 
     /**
-     * Where to redirect users after login.
+     * Authenticate the user.
      *
-     * @var string
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
+        if(Auth::attempt($credentials, $request->has('remember-me')))
+        {
+            $request->session()->regenerate();
+            return redirect()->route('admin.home.index')
+                ->withSuccess('Iniciaste sesion exitosamente!');
+        }
+
+        return back()->withErrors([
+            'email' => 'Tus credenciales parecen no estar registrados en el sistema.',
+        ])->onlyInput('email');
+    } 
+    
     /**
-     * Create a new controller instance.
+     * Log out the user from application.
      *
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    public function logout(Request $request)
     {
-        $this->middleware('guest')->except('logout');
-    }
-
-    public function username()
-    {
-        return 'email_usr';
-    }
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login')
+            ->withSuccess('Sesion finalzada exitosamente!');;
+    }    
 }
