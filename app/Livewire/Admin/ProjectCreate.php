@@ -42,11 +42,12 @@ class ProjectCreate extends Component
     $showLabels;
 
     protected $messages = [
+        'code.unique' => 'Este codigo ya se encuentra en uso.',
         'projectYear.digits' => ':attribute deben ser 4 digitos.',
-        'entryDate.date_format' => 'El formato debe ser dd-mm-yyyy',
-        'folderDate.date_format' => 'El formato debe ser dd-mm-yyyy',
-        'creDesignCompletionDate.date_format' => 'El formato debe ser dd-mm-yyyy',
-        'creBuildingCompletionDate.date_format' => 'El formato debe ser dd-mm-yyyy'
+        'entryDate.date_format' => 'El formato debe ser yyyy-mm-dd',
+        'folderDate.date_format' => 'El formato debe ser yyyy-mm-dd',
+        'creDesignCompletionDate.date_format' => 'El formato debe ser yyyy-mm-dd',
+        'creBuildingCompletionDate.date_format' => 'El formato debe ser yyyy-mm-dd'
     ];
 
     protected $validationAttributes = [
@@ -74,7 +75,7 @@ class ProjectCreate extends Component
     public function mount()
     {
         $this->contracts = Contract::all();
-        $this->CREFiscals = User::role('Fiscal de CRE')->get();
+        $this->CREFiscals = User::role('Fiscal de CRE')->orderBy('firstname_usr')->get();
         $this->systems = [
             1 => 'Sistema Santa Cruz',
             2 => 'Sistema Velasco',
@@ -112,14 +113,14 @@ class ProjectCreate extends Component
             'contractId' => ['required','exists:wfl_contracts,id_con'],
             'projectDetail' => ['required','string','max:100'],
             'projectAddress' => ['required','string','max:100'],
-            'entryDate' => ['required','date_format:d-m-Y'],
-            'folderDate' => ['required','date_format:d-m-Y'],
+            'entryDate' => ['required','date_format:Y-m-d'],
+            'folderDate' => ['required','date_format:Y-m-d'],
             'CREFiscal' => ['required','exists:sec_users,id_usr'],
             'system' => ['required'],
             'management' => ['required'],
             'qualityLevel' => ['required', 'between:0,3'],
-            'creDesignCompletionDate' => ['required','date_format:d-m-Y'],
-            'creBuildingCompletionDate' => ['required','date_format:d-m-Y'],
+            'creDesignCompletionDate' => ['required','date_format:Y-m-d'],
+            'creBuildingCompletionDate' => ['required','date_format:Y-m-d'],
             'projectBudgetaryPosition' => ['required','in:10,20,30,40,50,60,70,80,90,100,110'],
             'points' => ['required','numeric'],
             'distance' => ['required','numeric'],
