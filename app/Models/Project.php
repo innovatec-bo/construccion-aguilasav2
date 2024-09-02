@@ -21,6 +21,33 @@ class Project extends Model
     const CREATED_AT = 'createdon_pro';
     const UPDATED_AT = 'editedon_pro';
 
+    protected $fillable = [
+        'initial_design_budget_pro',
+        'initial_building_budget_pro',
+        'code_pro',
+        'work_area_pro',
+        'project_year_pro',
+        'contract_id_pro',
+        'end_contract_pro',
+        'detail_pro',
+        'address_pro',
+        'entry_date_pro',
+        'folder_date_pro',
+        'cre_fiscal_pro',
+        'system_pro',
+        'management_by_pro',
+        'quality_level_pro',
+        'cre_design_completion_date_pro',
+        'cre_building_completion_date_pro',
+        'budgetary_position_pro',
+        'points_pro',
+        'distance_pro',
+        'minor_enlargement',
+        'status_pro',
+        'latitude_pro',
+        'longitude_pro'
+    ];
+
     protected $casts = [
         'entry_date_pro' => 'datetime',
         'project_has_returned_materials_to_cre' => 'boolean'

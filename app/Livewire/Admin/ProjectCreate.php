@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Contract;
+use App\Models\Project;
 use App\Models\User;
 use Livewire\Component;
 
@@ -31,8 +32,8 @@ class ProjectCreate extends Component
     $points,
     $distance,
     $latitude,
-    $longitude
-    ;
+    $longitude,
+    $minorEnlargement;
 
     public 
     $contracts,
@@ -95,6 +96,7 @@ class ProjectCreate extends Component
             7 => 'Sistema Valles'
         ];
         $this->showLabels = false;
+        $this->minorEnlargement = "AM";
     }
 
     public function render()
@@ -137,5 +139,33 @@ class ProjectCreate extends Component
     public function save()
     {
         $this->validate();
+        $statusHasBeenCreated = 46;
+        $data = [
+            'initial_design_budget_pro' => $this->designBudget,
+            'initial_building_budget_pro' => $this->buildingBudget,
+            'code_pro' => $this->code,
+            'work_area_pro' => $this->workArea,
+            'project_year_pro' => $this->projectYear,
+            'contract_id_pro' => $this->contractId,
+            'end_contract_pro' => $this->contractId,
+            'detail_pro' => $this->projectDetail,
+            'address_pro' => $this->projectAddress,
+            'entry_date_pro' => $this->entryDate,
+            'folder_date_pro' => $this->folderDate,
+            'cre_fiscal_pro' => $this->CREFiscal,
+            'system_pro' => $this->system,
+            'management_by_pro' => $this->management,
+            'quality_level_pro' => $this->qualityLevel,
+            'cre_design_completion_date_pro' => $this->creDesignCompletionDate,
+            'cre_building_completion_date_pro' => $this->creBuildingCompletionDate,
+            'budgetary_position_pro' => $this->projectBudgetaryPosition,
+            'points_pro' => $this->points,
+            'distance_pro' => $this->distance,
+            'minor_enlargement' => $this->minorEnlargement,
+            'status_pro' => $statusHasBeenCreated
+        ];
+
+        $project = new Project($data);
+        dd($project);
     }
 }

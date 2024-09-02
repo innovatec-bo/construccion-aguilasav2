@@ -242,6 +242,19 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <label class="form-check-label">Ampliaci&oacute;n menor {{$minorEnlargement}}</label>
+                        <div class="col mt-2">
+                            <div class="form-check form-check-inline">
+                                <input name="minorEnlargement" class="form-check-input" type="radio" value="AM" id="minorEnlargement-yes" wire:model.live="minorEnlargement">
+                                <label class="form-check-label" for="minorEnlargement-yes">Si</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input name="minorEnlargement" class="form-check-input" type="radio" value="" id="minorEnlargement-no" wire:model.live="minorEnlargement">
+                                <label class="form-check-label" for="minorEnlargement-no">No</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
