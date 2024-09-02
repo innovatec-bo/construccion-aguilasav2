@@ -165,7 +165,7 @@ class ProjectCreate extends Component
             'status_pro' => $statusHasBeenCreated
         ];
 
-        $project = new Project($data);
-        dd($project);
+        Project::create($data);
+        return redirect()->route('admin.projects.index');
     }
 }

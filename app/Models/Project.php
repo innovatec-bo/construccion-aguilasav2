@@ -488,4 +488,42 @@ class Project extends Model
     {
         return $this->hasOne(PaymentOrderProject::class, 'project_id_pop');
     }
+
+    /**
+	 * Save the points to log.
+	 * @param $points
+	 * @param $metersDistance
+	 * @param $statusId
+	 * @param $statusDetail
+	 * @param $manualEntryDate
+	 * @param array $responsibleList
+	 * @param array $fileIds
+	 */
+	public function savePoints($points, $metersDistance, $statusId, $statusDetail, $manualEntryDate, $responsibleList = array(), $fileIds = array()) : void
+    {
+        //Lets create a new log
+        $projectStatusLogData = [
+            'project_id_psl' => $this->id_pro, 
+            'status_id_psl' => $statusId,
+            'log_detail_psl' => $statusDetail,
+            'manual_entry_date_psl' => $manualEntryDate
+        ];
+
+        $projectStatus = ProjectStatusLog::create($projectStatusLogData);
+
+        //Create the record about the points and distance and associate it to project status log
+        $projectPointsData = [
+            '' => $projectStatus->getId(),
+            '' => $points,
+            '' => $metersDistance
+        ];
+        // $projectPoints =  new Model_project_points();
+        // $projectPoints->save();
+
+        //Each statusLog needs to have a o more responsible by log
+        Model_status_log_responsible::addResponsible($projectStatus->getId(), $responsibleList);
+
+        //If there is file ids added to status log, then let's save these        
+        Model_project_status_file::addFiles($projectStatus->getId(), $fileIds, $this->_id, $statusId);
+    }
 }

@@ -28,7 +28,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="designBudget">Dise&ntilde;o Bs.</label>
-                            <input type="text" class="form-control" id="designBudget" wire:model.live="designBudget">
+                            <input type="number" class="form-control" id="designBudget" wire:model.live="designBudget">
                             @error('designBudget')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -37,7 +37,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="buildingBudget">Construcci&oacute;n Bs.</label>
-                            <input type="text" id="buildingBudget" class="form-control" wire:model.live="buildingBudget">
+                            <input type="number" id="buildingBudget" class="form-control" wire:model.live="buildingBudget">
                             @error('buildingBudget')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -227,7 +227,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="points">Puntos</label>
-                            <input type="text" class="form-control" id="points" wire:model.live="points">
+                            <input type="number" class="form-control" id="points" wire:model.live="points">
                             @error('points')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -236,7 +236,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="distance">Distancia</label>
-                            <input type="text" class="form-control" id="distance" wire:model.live="distance">
+                            <input type="number" class="form-control" id="distance" wire:model.live="distance">
                             @error('distance')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror

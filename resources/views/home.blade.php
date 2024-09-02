@@ -65,7 +65,7 @@
                         <!-- Logo -->
                         <div class="app-brand justify-content-center mb-4 mt-2">
                             <a href="index.html" class="app-brand-link gap-0">
-                                <span class="app-brand-logo demo">
+                                <span class="app-brand-logo me-2">
                                     <img src="{{asset('admin-theme/img/favicon/favicon.ico')}}" alt="" width="35" srcset="">
                                 </span>
                                 <span class="text-body fw-bold ms-0 fs-4">{{env('APP_NAME')}}</span>
