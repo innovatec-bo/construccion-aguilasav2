@@ -1,8 +1,9 @@
-import _ from 'lodash';
-window._ = _;
-import 'bootstrap';
-import Popper from '../../public/vendor/popper/popper';
+// import _ from 'lodash';
+// window._ = _;
+window.Helpers.initCustomOptionCheck(); 
+import jQuery from 'jquery';
+window.jQuery = window.$ = jQuery;
+import * as Popper from '@popperjs/core';
 window.Popper = Popper;
-window.$ = window.jQuery = require('jquery');
-import coreui from '../../public/coreui/vendors/@coreui/coreui/js/coreui.bundle.min.js';
-window.coreui = coreui;
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;

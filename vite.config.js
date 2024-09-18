@@ -6,9 +6,11 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/sass/app.scss',
-                'resources/sass/serebo.dashboard-print.scss',
-                'resources/sass/serebo.dashboard.scss',
                 'resources/js/app.js',
+
+                'resources/sass/serebo.dashboard.scss',
+                'resources/sass/serebo.dashboard-print.scss',
+                
                 'resources/js/serebo.dashboard-print.core.js',
                 'resources/js/serebo.dashboard.core.js',
                 'resources/js/serebo.dashboard.js',
