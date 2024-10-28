@@ -68,7 +68,7 @@
         </div>
     </div>
     <div class="col-md-12">
-        {{ $incidents->links() }}
+        {{ $incidents->links(data: ['scrollTo' => false]) }}
     </div>
     <!-- /.col-->
 </div>

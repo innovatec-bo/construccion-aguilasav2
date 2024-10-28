@@ -103,116 +103,141 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-9">
-            <div class="card mb-4 shadow">
-                {{-- <div class="card-header">Descripci&oacute;n general</div> --}}
+            <div class="card mb-4">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-4">
-                          <div class="border-start border-start-4 border-start-info px-3 mb-0 fw-semibold"><small class="text-medium-emphasis text-truncate">Proyecto</small>
-                            <div class="fs-5 fw-semibold">{{$project->code_pro}}</div>
-                          </div>
+                  <div class="row gy-3">
+                    <div class="col-md-4 col-6">
+                      <div class="d-flex align-items-center">
+                        <div class="badge rounded bg-label-info me-4 p-2">
+                            <i class="ti ti-folder ti-lg"></i></div>
+                        <div class="card-info">
+                          <h5 class="mb-0">{{$project->code_pro}}</h5>
+                          <small>Proyecto</small>
                         </div>
-                        <!-- /.col-->
-                        <div class="col-4">
-                          <div class="border-start border-start-4 border-start-danger px-3 mb-0">
-                            <small class="text-medium-emphasis text-truncate fw-semibold">Producci&oacute;n (No incluye dise&ntilde;o)</small>
-                            <div class="fs-5 fw-semibold">{{number_format($project->productionAmount,2,'.',',')}}</div>
-                          </div>
-                        </div><div class="col-4">
-                          <div class="border-start border-start-4 border-start-danger px-3 mb-0 fw-semibold"><small class="text-medium-emphasis text-truncate">Estado</small>
-                            <div class="fs-5 fw-semibold">{{$project->status->status_name_pst}}</div>
-                          </div>
-                        </div>
-                        <!-- /.col-->
                       </div>
-                </div>
-            </div>
-            <div class="row justify-content-around mb-4">
-                <div class="col-sm-6 col-md-4">
-                    <div class="card shadow mb-3">
-                        <div class="card-body">
-                            <div class="text-medium-emphasis text-end mb-4">
-                                <svg class="icon icon-xxl">
-                                    <x-coreui-icon svgClass="nav-icon" icon="cil-dollar" />
-                                </svg>
-                            </div>
-                            <div class="fs-4 fw-semibold">{{number_format($project->currentBudget,2,'.',',')}}</div>
-                            <small class="text-medium-emphasis text-uppercase fw-semibold">Importe</small>
+                    </div>
+                    <div class="col-md-4 col-6">
+                      <div class="d-flex align-items-center">
+                        <div class="badge rounded bg-label-danger me-4 p-2">
+                            <i class="ti ti-trending-up ti-lg"></i>
                         </div>
-        
+                        <div class="card-info">
+                          <h5 class="mb-0">{{number_format($project->productionAmount,2,'.',',')}}</h5>
+                          <small>Producci&oacute;n (No incluye dise&ntilde;o)</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-6">
+                      <div class="d-flex align-items-center">
+                        <div class="badge rounded bg-label-success me-4 p-2">
+                            <i class="ti ti-activity ti-lg"></i>
+                        </div>
+                        <div class="card-info">
+                          <h5 class="mb-0">{{$project->status->status_name_pst}}</h5>
+                          <small>Estado</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="row justify-content-around mb-4 row-gap-4">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card card-border-shadow-primary h-100">
+                        <div class="card-body">
+                          <div class="d-flex align-items-center mb-2">
+                            <div class="avatar me-4">
+                                <span class="avatar-initial rounded bg-label-primary">
+                                    <i class="ti ti-currency-dollar ti-28px"></i>
+                                </span>
+                            </div>
+                            <h4 class="mb-0">{{number_format($project->currentBudget,2,'.',',')}}</h4>
+                          </div>
+                          <p class="mb-1">Importe</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
-                    <div class="card shadow mb-3">
+                    <div class="card card-border-shadow-primary h-100">
                         <div class="card-body">
-                            <div class="text-medium-emphasis text-end mb-4">
-                                <svg class="icon icon-xxl">
-                                    <x-coreui-icon svgClass="nav-icon" icon="cil-cog" />
-                                </svg>
+                          <div class="d-flex align-items-center mb-2">
+                            <div class="avatar me-4">
+                                <span class="avatar-initial rounded bg-label-primary">
+                                    <i class="ti ti-settings ti-28px"></i>
+                                </span>
                             </div>
-                            <div class="fs-4 fw-semibold">{{$project->system->name}}</div><small
-                                class="text-medium-emphasis text-uppercase fw-semibold">Sistema</small>
+                            <h4 class="mb-0">{{$project->system->name}}</h4>
+                          </div>
+                          <p class="mb-1">Sistema</p>
                         </div>
                     </div>
                 </div>
                 <!-- /.col-->
                 <div class="col-sm-6 col-md-4">
-                    <div class="card shadow mb-3">
+                    <div class="card card-border-shadow-primary h-100">
                         <div class="card-body">
-                            <div class="text-medium-emphasis text-end mb-4">
-                                <svg class="icon icon-xxl">
-                                    <x-coreui-icon svgClass="nav-icon" icon="cil-calendar" />
-                                </svg>
+                          <div class="d-flex align-items-center mb-2">
+                            <div class="avatar me-4">
+                                <span class="avatar-initial rounded bg-label-primary">
+                                    <i class="ti ti-calendar ti-28px"></i>
+                                </span>
                             </div>
-                            <div class="fs-6 fw-semibold">
+                            <h6 class="mb-0">
                                 @if ($project->entry_date_pro)
                                     {{$project->entry_date_pro->translatedFormat('D d M Y')}},
                                     {{$project->entry_date_pro->diffForHumans()}}
-                                @endif
-                            </div><small
-                                class="text-medium-emphasis text-uppercase fw-semibold">Ingreso</small>
+                                @endif    
+                            </h6>
+                          </div>
+                          <p class="mb-1">Ingreso</p>
                         </div>
                     </div>
                 </div>
                 <!-- /.col-->
                 <div class="col-sm-6 col-md-4">
-                    <div class="card shadow mb-3">
+                    <div class="card card-border-shadow-primary h-100">
                         <div class="card-body">
-                            <div class="text-medium-emphasis text-end mb-4">
-                                <svg class="icon icon-xxl">
-                                    <x-coreui-icon svgClass="nav-icon" icon="cil-user" />
-                                </svg>
+                          <div class="d-flex align-items-center mb-2">
+                            <div class="avatar me-4">
+                                <span class="avatar-initial rounded bg-label-primary">
+                                    <i class="ti ti-user ti-28px"></i>
+                                </span>
                             </div>
-                            <div class="fs-4 fw-semibold">{{$project->creFiscal->fullName}}</div><small
-                                class="text-medium-emphasis text-uppercase fw-semibold">Fiscal</small>
+                            <h6 class="mb-0">{{$project->creFiscal->fullName}}</h6>
+                          </div>
+                          <p class="mb-1">Fiscal</p>
                         </div>
                     </div>
                 </div>
                 <!-- /.col-->
                 <div class="col-sm-6 col-md-4">
-                    <div class="card shadow mb-3">
+                    <div class="card card-border-shadow-primary h-100">
                         <div class="card-body">
-                            <div class="text-medium-emphasis text-end mb-4">
-                                <svg class="icon icon-xxl">
-                                    <x-coreui-icon svgClass="nav-icon" icon="cil-location-pin" />
-                                </svg>
+                          <div class="d-flex align-items-center mb-2">
+                            <div class="avatar me-4">
+                                <span class="avatar-initial rounded bg-label-primary">
+                                    <i class="ti ti-map-pin ti-28px"></i>
+                                </span>
                             </div>
-                            <div class="fs-5 fw-semibold">{{$project->address_pro}}</div><small
-                                class="text-medium-emphasis text-uppercase fw-semibold">Direcci&oacute;n</small>
+                            <h6 class="mb-0">{{$project->address_pro}}</h6>
+                          </div>
+                          <p class="mb-1">Direcci&oacute;n</p>
                         </div>
                     </div>
                 </div>
                 <!-- /.col-->
                 <div class="col-sm-6 col-md-4">
-                    <div class="card shadow mb-3">
+                    <div class="card card-border-shadow-primary h-100">
                         <div class="card-body">
-                            <div class="text-medium-emphasis text-end mb-4">
-                                <svg class="icon icon-xxl">
-                                    <x-coreui-icon svgClass="nav-icon" icon="cil-text-shapes" />
-                                </svg>
+                          <div class="d-flex align-items-center mb-2">
+                            <div class="avatar me-4">
+                                <span class="avatar-initial rounded bg-label-primary">
+                                    <i class="ti ti-shape ti-28px"></i>
+                                </span>
                             </div>
-                            <div class="fs-4 fw-semibold">{{$project->points_pro}}p/{{$project->distance_pro}}Km</div>
-                            <small class="text-medium-emphasis text-uppercase fw-semibold">Area</small>
+                            <h4 class="mb-0">{{$project->points_pro}}p/{{$project->distance_pro}}Km</h4>
+                          </div>
+                          <p class="mb-1">Area</p>
                         </div>
                     </div>
                 </div>
@@ -220,6 +245,88 @@
             </div>
         </div>
         <div class="col-md-3">
+            {{-- <div class="card h-100">
+                <div class="card-header d-flex justify-content-between">
+                  <h5 class="card-title m-0 me-2 pt-1 mb-2 d-flex align-items-center"><i class="ti ti-list-details me-3"></i> Actividad</h5>
+                </div>
+                <div class="card-body pb-xxl-0">
+                  <ul class="timeline mb-0">
+                    <li class="timeline-item timeline-item-transparent">
+                      <span class="timeline-point timeline-point-primary"></span>
+                      <div class="timeline-event">
+                        <div class="timeline-header mb-3">
+                          <h6 class="mb-0">12 Invoices have been paid</h6>
+                          <small class="text-muted">12 min ago</small>
+                        </div>
+                        <p class="mb-2">
+                          Invoices have been paid to the company
+                        </p>
+                        <div class="d-flex align-items-center mb-1">
+                          <div class="badge bg-lighter rounded-3">
+                            <img src="../../assets//img/icons/misc/pdf.png" alt="img" width="15" class="me-2">
+                            <span class="h6 mb-0 text-body">invoices.pdf</span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="timeline-item timeline-item-transparent">
+                      <span class="timeline-point timeline-point-success"></span>
+                      <div class="timeline-event">
+                        <div class="timeline-header mb-3">
+                          <h6 class="mb-0">Client Meeting</h6>
+                          <small class="text-muted">45 min ago</small>
+                        </div>
+                        <p class="mb-2">
+                          Project meeting with john @10:15am
+                        </p>
+                        <div class="d-flex justify-content-between flex-wrap gap-2">
+                          <div class="d-flex flex-wrap align-items-center">
+                            <div class="avatar avatar-sm me-2">
+                              <img src="../../assets/img/avatars/1.png" alt="Avatar" class="rounded-circle">
+                            </div>
+                            <div>
+                              <p class="mb-0 small fw-medium">Lester McCarthy (Client)</p>
+                              <small>CEO of Pixinvent</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="timeline-item timeline-item-transparent">
+                      <span class="timeline-point timeline-point-info"></span>
+                      <div class="timeline-event">
+                        <div class="timeline-header mb-3">
+                          <h6 class="mb-0">Create a new project for client</h6>
+                          <small class="text-muted">2 Day Ago</small>
+                        </div>
+                        <p class="mb-2">
+                          6 team members in a project
+                        </p>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap p-0">
+                            <div class="d-flex flex-wrap align-items-center">
+                              <ul class="list-unstyled users-list d-flex align-items-center avatar-group m-0 me-2">
+                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar pull-up" aria-label="Vinnie Mostowy" data-bs-original-title="Vinnie Mostowy">
+                                  <img class="rounded-circle" src="../../assets/img/avatars/5.png" alt="Avatar">
+                                </li>
+                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar pull-up" aria-label="Allen Rieske" data-bs-original-title="Allen Rieske">
+                                  <img class="rounded-circle" src="../../assets/img/avatars/12.png" alt="Avatar">
+                                </li>
+                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar pull-up" aria-label="Julee Rossignol" data-bs-original-title="Julee Rossignol">
+                                  <img class="rounded-circle" src="../../assets/img/avatars/6.png" alt="Avatar">
+                                </li>
+                                <li class="avatar">
+                                  <span class="avatar-initial rounded-circle pull-up text-heading" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="3 more">+3</span>
+                                </li>
+                              </ul>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div> --}}
             @livewire('admin.project-status-log-quick-view', ['project' => $project])
         </div>
     </div>

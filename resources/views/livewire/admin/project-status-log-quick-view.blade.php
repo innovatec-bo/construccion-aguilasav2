@@ -1,4 +1,37 @@
-<div class="position-relative">
+<div class="card h-100">
+    <div class="card-header d-flex justify-content-between">
+      <h5 class="card-title m-0 me-2 pt-1 mb-2 d-flex align-items-center"><i class="ti ti-list-details me-3"></i> Actividad</h5>
+    </div>
+    <div class="card-body pb-xxl-0 ps-0 pe-2 small">
+      <ul class="timeline mb-0">
+        @foreach ($logs as $log)
+        <li class="timeline-item timeline-item-transparent">
+          <span class="timeline-point timeline-point-primary"></span>
+          <div class="timeline-event">
+            <div class="timeline-header mb-3">
+              <h6 class="mb-0 small">
+                @if ($log->status)
+                    {{ $log->status->status_name_pst }}
+                @endif
+              </h6>
+              <small class="text-muted">12 min ago</small>
+            </div>
+            <p class="mb-2">
+              Invoices have been paid to the company
+            </p>
+            <div class="d-flex align-items-center mb-1">
+              <div class="badge bg-lighter rounded-3">
+                <img src="../../assets//img/icons/misc/pdf.png" alt="img" width="15" class="me-2">
+                <span class="h6 mb-0 text-body">invoices.pdf</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        @endforeach
+      </ul>
+    </div>
+  </div>
+{{-- <div class="position-relative">
     <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="loadLogs">
         <div class="spinner-grow" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -60,17 +93,7 @@
                         {{ $log->status->status_name_pst }}
                     @endif
                 </h2>
-                {{-- <div class="dropdown d-inline-flex float-end">
-                    <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <x-coreui-icon svgClass="icon" icon="cil-options" />
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end" style="">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Editar fecha</a>
-                        <a class="dropdown-item" href="#">Eliminar estado</a>
-                    </div>
-                </div> --}}
+                
                 <span class="small text-gray d-block">
                     <i class="fa fa-clock-o mr-1"></i>
                     @if ($log->manual_entry_date_psl)
@@ -147,4 +170,4 @@
             </button>
         </div>
     @endif
-</div>
+</div> --}}

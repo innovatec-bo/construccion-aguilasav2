@@ -149,7 +149,7 @@
     </div>
     <div class="col-md-12 mt-4">
         <div class="table-responsive">
-            {{ $projects->links() }}
+            {{ $projects->links(data: ['scrollTo' => false]) }}
         </div>
     </div>
 </div>
