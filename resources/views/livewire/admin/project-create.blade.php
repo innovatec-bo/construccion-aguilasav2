@@ -19,7 +19,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="code">C&oacute;digo</label>
-                            <input type="text" class="form-control" id="code" wire:model.live="code">
+                            <input type="text" class="form-control form-control-sm" id="code" wire:model.live="code">
                             @error('code')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -28,7 +28,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="designBudget">Dise&ntilde;o Bs.</label>
-                            <input type="number" class="form-control" id="designBudget" wire:model.live="designBudget">
+                            <input type="number" class="form-control form-control-sm" id="designBudget" wire:model.live="designBudget">
                             @error('designBudget')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -37,7 +37,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="buildingBudget">Construcci&oacute;n Bs.</label>
-                            <input type="number" id="buildingBudget" class="form-control" wire:model.live="buildingBudget">
+                            <input type="number" id="buildingBudget" class="form-control form-control-sm" wire:model.live="buildingBudget">
                             @error('buildingBudget')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -48,7 +48,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="workArea">Area de trabajo</label>
-                            <select class="form-select" id="workArea" wire:model.live="workArea">
+                            <select class="form-select form-select-sm" id="workArea" wire:model.live="workArea">
                                 <option selected=""></option>
                                 <option value="GIS">GIS</option>
                                 <option value="GIR">GIR</option>
@@ -61,7 +61,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="projectYear">A&ntilde;o del proyecto</label>
-                            <input type="text" class="form-control" id="projectYear" wire:model.live="projectYear">
+                            <input type="text" class="form-control form-control-sm" id="projectYear" wire:model.live="projectYear">
                             @error('projectYear')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -70,7 +70,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="contractId">Contrato</label>
-                            <select class="form-select" id="contractId" wire:model.live="contractId">
+                            <select class="form-select form-select-sm" id="contractId" wire:model.live="contractId">
                                 <option selected=""></option>
                                 @foreach ($contracts as $contract)
                                     <option value="{{$contract->id_con}}">{{$contract->contract_number_con}}</option>
@@ -86,7 +86,7 @@
                     <div class="col-md-6">
                         <div class="mb-6">
                             <label class="form-label" for="projectDetail">Detalle</label>
-                            <textarea id="projectDetail" wire:model.live="projectDetail" class="form-control"></textarea>
+                            <textarea id="projectDetail" wire:model.live="projectDetail" class="form-control form-control-sm"></textarea>
                             @error('projectDetail')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -95,7 +95,7 @@
                     <div class="col-md-6">
                         <div class="mb-6">
                             <label class="form-label" for="projectAddress">Direcci&oacute;n</label>
-                            <textarea id="projectAddress" class="form-control"  wire:model.live="projectAddress"></textarea>
+                            <textarea id="projectAddress" class="form-control form-control-sm"  wire:model.live="projectAddress"></textarea>
                             @error('projectAddress')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -106,7 +106,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="entryDate">Fecha de ingreso(yyyy-mm-dd)</label>
-                            <input type="text" class="form-control" id="entryDate" wire:model.live="entryDate">
+                            <input type="text" class="form-control form-control-sm" id="entryDate" wire:model.live="entryDate">
                             @error('entryDate')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -115,7 +115,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="folderDate">Fecha de folder(yyyy-mm-dd)</label>
-                            <input type="text" class="form-control" id="folderDate" wire:model.live="folderDate">
+                            <input type="text" class="form-control form-control-sm" id="folderDate" wire:model.live="folderDate">
                             @error('folderDate')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -124,7 +124,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="CREFiscal">Fiscal de CRE</label>
-                            <select class="form-select" id="CREFiscal" wire:model.live="CREFiscal">
+                            <select class="form-select form-select-sm" id="CREFiscal" wire:model.live="CREFiscal">
                                 <option selected=""></option>
                                 @foreach ($CREFiscals as $CREFiscal)
                                     <option value="{{$CREFiscal->id_usr}}">{{$CREFiscal->full_name}}</option>
@@ -140,7 +140,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="system">Sistema</label>
-                            <select class="form-select" id="system" wire:model.live="system">
+                            <select class="form-select form-select-sm" id="system" wire:model.live="system">
                                 <option selected=""></option>
                                 @foreach ($systems as $key => $name)
                                     <option value="{{$key}}">{{$name}}</option>
@@ -154,7 +154,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="management">Administraci&oacute;n</label>
-                            <select class="form-select" id="management" wire:model.live="management">
+                            <select class="form-select form-select-sm" id="management" wire:model.live="management">
                                 <option selected=""></option>
                                 @foreach ($managements as $key => $name)
                                     <option value="{{$key}}">{{$name}}</option>
@@ -168,7 +168,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="qualityLevel">Nivel de calidad</label>
-                            <select class="form-select" id="qualityLevel" wire:model.live="qualityLevel">
+                            <select class="form-select form-select-sm" id="qualityLevel" wire:model.live="qualityLevel">
                                 <option selected="" value=""></option>
                                 <option value="0">Ninguno</option>
                                 <option value="1">1</option>
@@ -185,7 +185,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="creDesignCompletionDate">Fin de dise&ntilde;o(CRE)</label>
-                            <input type="text" class="form-control" id="creDesignCompletionDate" wire:model.live="creDesignCompletionDate">
+                            <input type="text" class="form-control form-control-sm" id="creDesignCompletionDate" wire:model.live="creDesignCompletionDate">
                             @error('creDesignCompletionDate')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -194,7 +194,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="creBuildingCompletionDate">Fin de construcci&oacute;n(CRE)</label>
-                            <input type="text" class="form-control" id="creBuildingCompletionDate" wire:model.live="creBuildingCompletionDate">
+                            <input type="text" class="form-control form-control-sm" id="creBuildingCompletionDate" wire:model.live="creBuildingCompletionDate">
                             @error('creBuildingCompletionDate')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -203,7 +203,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="projectBudgetaryPosition">Posici&oacute;n presupuestaria</label>
-                            <select class="form-select" id="projectBudgetaryPosition" wire:model.live="projectBudgetaryPosition">
+                            <select class="form-select form-select-sm" id="projectBudgetaryPosition" wire:model.live="projectBudgetaryPosition">
                                 <option selected="" value=""></option>
                                 <option value="10">10</option>
                                 <option value="20">20</option>
@@ -227,7 +227,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="points">Puntos</label>
-                            <input type="number" class="form-control" id="points" wire:model.live="points">
+                            <input type="number" class="form-control form-control-sm" id="points" wire:model.live="points">
                             @error('points')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror
@@ -236,7 +236,7 @@
                     <div class="col-md-4">
                         <div class="mb-6">
                             <label class="form-label" for="distance">Distancia</label>
-                            <input type="number" class="form-control" id="distance" wire:model.live="distance">
+                            <input type="number" class="form-control form-control-sm" id="distance" wire:model.live="distance">
                             @error('distance')
                                 <small class="text-danger">{{ $message }} </small>
                             @enderror

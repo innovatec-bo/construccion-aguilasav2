@@ -5,31 +5,84 @@
     <div class="card-body pb-xxl-0 ps-0 pe-2 small">
       <ul class="timeline mb-0">
         @foreach ($logs as $log)
-        <li class="timeline-item timeline-item-transparent">
+        <li class="timeline-item timeline-item-transparent ps-4">
           <span class="timeline-point timeline-point-primary"></span>
           <div class="timeline-event">
             <div class="timeline-header mb-3">
-              <h6 class="mb-0 small">
+              <h6 class="mb-0 small fw-bold">
                 @if ($log->status)
                     {{ $log->status->status_name_pst }}
                 @endif
               </h6>
-              <small class="text-muted">12 min ago</small>
+              <small class="text-muted">{{ $log->manual_entry_date_psl->diffForHumans() }}</small>
             </div>
-            <p class="mb-2">
-              Invoices have been paid to the company
+            <p class="my-50 fw-semibold text-decoration-underline">Responsable:</p>
+            <p class="text-body mb-2">
+                @php
+                    $responsibles = '';
+                @endphp
+                @foreach ($log->statusLogResponsible as $statusLogResponsible)
+                    @php
+                    if ($statusLogResponsible->responsible) 
+                    {
+                        $responsibles .= $statusLogResponsible->responsible->user->fullName . ', ';
+                    }
+                    @endphp
+                @endforeach
+                {{ substr($responsibles, 0, -2) }}
             </p>
-            <div class="d-flex align-items-center mb-1">
-              <div class="badge bg-lighter rounded-3">
-                <img src="../../assets//img/icons/misc/pdf.png" alt="img" width="15" class="me-2">
-                <span class="h6 mb-0 text-body">invoices.pdf</span>
-              </div>
+            @if (($log->status->keyword_pst == 'approved' || $log->status->keyword_pst == 'drawing') && $log->projectBudget)
+                    <div class="d-flex justify-content-between border-bottom">
+                        <span class="fw-semibold">Total</span>
+                        @php
+                            $total = $log->projectBudget->design_prb + $log->projectBudget->building_prb + $log->projectBudget->transportation_prb + $log->projectBudget->live_line_prb + $log->projectBudget->right_of_way_prb;
+                        @endphp
+                        <span class="">{{ number_format($total, 2, '.', ',') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom">
+                        <span class="fw-semibold">Dise&ntilde;o</span>
+                        <span class="">{{ number_format($log->projectBudget->design_prb, 2, '.', ',') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom">
+                        <span class="fw-semibold">Construcci&oacute;n</span>
+                        <span class="">{{ number_format($log->projectBudget->building_prb, 2, '.', ',') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom">
+                        <span class="fw-semibold">Transporte</span>
+                        <span
+                            class="">{{ number_format($log->projectBudget->transportation_prb, 2, '.', ',') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom">
+                        <span class="fw-semibold">Linea viva</span>
+                        <span
+                            class="">{{ number_format($log->projectBudget->live_line_prb, 2, '.', ',') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom">
+                        <span class="fw-semibold">Derecho de via</span>
+                        <span
+                            class="">{{ number_format($log->projectBudget->right_of_way_prb, 2, '.', ',') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom">
+                        <span class="fw-semibold">Nro. Grafo</span>
+                        <span class="">{{ $log->projectBudget->graph_number_prb }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom">
+                        <span class="fw-semibold">Nro. Reserva</span>
+                        <span class="">{{ $log->projectBudget->reservation_number_prb }}</span>
+                    </div>
+                @endif
             </div>
-          </div>
         </li>
         @endforeach
       </ul>
     </div>
+    @if ($hasMorePages)
+        <div class="card-footer">
+            <button class="btn btn-primary btn-sm w-100" wire:click="loadLogs">
+                Cargar m&aacute;s
+            </button>
+        </div>
+    @endif
   </div>
 {{-- <div class="position-relative">
     <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="loadLogs">
