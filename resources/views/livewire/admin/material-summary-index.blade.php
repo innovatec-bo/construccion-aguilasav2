@@ -4,19 +4,17 @@
             <span class="visually-hidden">Loading...</span>
           </div>
     </div>
-    <div class="col-md-12 mb-2">
-        <div class="row">
-            @can('admin.contracts.create')
-            <div class="col-md-2 d-block">
-                <div class="form-group">
-                    <label>&nbsp;</label>
-                    <a href="{{route('admin.materials-summary.create')}}" class="btn btn-primary form-control"
-                        type="button">Registrar movimiento</a>
-                </div>
-            </div>
-        @endcan        
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
+        <div class="d-flex flex-column justify-content-center">
+            <h4 class="mb-1">Movimiento de materiales</h4>
         </div>
+        @can('admin.contracts.create')
+            <div class="d-flex align-content-center flex-wrap gap-4">
+                <a href="{{route('admin.materials-summary.create')}}" class="btn btn-primary waves-effect waves-light">Registrar movimiento</a>
+            </div>
+        @endcan
     </div>
+    
     <div class="col-md-2">
         <div class="form-group">
             <label>ID de movimiento</label>
@@ -38,7 +36,7 @@
     <div class="col-md-3">
         <div class="form-group">
             <label>Tipo de movimiento</label>
-            <select class="form-control form-control-sm" wire:model.live="materialSummaryTypeSelected">
+            <select class="form-select form-select-sm" wire:model.live="materialSummaryTypeSelected">
                 <option value=""></option>
                 @foreach ($materialSummaryTypes as $materialSummaryType)
                     <option value="{{$materialSummaryType->id_mqt}}">{{$materialSummaryType->name_mqt}}</option>
@@ -65,7 +63,7 @@
         <div class="card shadow-lg">
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-sm table-hover table-striped mb-0">
+                    <table class="table table-bordered table-sm table-hover table-striped mb-0 small">
                         <thead>
                             <tr>
                                 <th style="width: 10px">ID</th>
@@ -75,7 +73,7 @@
                                 <th>Proyecto</th>
                                 <th>Tipo de movimiento</th>
                                 <th>Items</th>
-                                <th style="width: 130px">Opciones</th>
+                                <th style=""><i class="ti ti-dots-vertical"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,24 +106,25 @@
                                         {{$materialSummary->projectMaterials->count()}}
                                     </td>
                                     <td class="text-center">
-                                        
-                                        
                                         <div class="dropdown">
-                                            
-                                            <a class="btn btn-transparent btn-sm" wire:loading.class="disabled" id="dropdownMenuLink" href="#" role="button" data-coreui-toggle="dropdown" aria-expanded="false">
-                                                <x-coreui-icon svgClass="icon" icon="cil-options"/>
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="">
-                                                <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href='{{ route('admin.materials-summary.show', $materialSummary) }}'">Ver</a></li>
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti ti-dots-vertical"></i></button>
+                                            <div class="dropdown-menu" style="">
+                                                <a class="dropdown-item waves-effect" wire:loading.class="disabled" target="_blank" href="{{route('admin.materials-summary.show', $materialSummary)}}">
+                                                    <i class="ti ti-eye me-1"></i> Ver
+                                                </a>
                                                 @can('admin.materials-summary.edit')
                                                     @if (in_array($materialSummary->summaryType->keyword_mqt, ['materials_picked_up_from_cre','materials_delivered_to_builder','materials_delivered_to_builder_loan','builder_returns_materials']))
-                                                        <li><a wire:loading.class="disabled" class="dropdown-item" target="_blank" href="{{ route('admin.materials-summary.edit', $materialSummary) }}">Editar</a></li>
+                                                        <a class="dropdown-item waves-effect" wire:loading.class="disabled" target="_blank" href="{{route('admin.materials-summary.edit', $materialSummary)}}">
+                                                            <i class="ti ti-edit me-1"></i> Editar
+                                                        </a>
                                                     @endif
                                                 @endcan
                                                 @if (Auth::user()->email == 'jair@twiiti.com')
-                                                    <li><a href="javascript:void(0)" wire:loading.class="disabled" class="dropdown-item lv-confirm-action" data-record="{{$materialSummary}}">Eliminar</a></li>
+                                                    <a class="dropdown-item waves-effect" wire:loading.class="disabled" href="javascript:void(0);" lv-confirm-action data-record="{{$materialSummary}}">
+                                                        <i class="ti ti-trash me-1"></i> Eliminar
+                                                    </a>
                                                 @endif
-                                            </ul>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -138,7 +137,7 @@
     </div>
     <div class="col-md-12 mt-4">
         <div class="table-responsive">
-            {{ $materialSummaryList->links() }}
+            {{ $materialSummaryList->links(data: ['scrollTo' => false]) }}
         </div>
     </div>
 </div>

@@ -118,31 +118,31 @@
         {{ $workedUpStructures->links() }}
     </div>
 </div>
-@push('scripts')
-    <script>
-        $(function() {
-            $('.input-group.date').datepicker({
-                language: "es",
-                format: 'dd-mm-yyyy',
-                autoclose: true,
-                clearBtn: true,
-            });
-            $('.input-group.date').on('changeDate', function(e) {
-                let date = null;
-                if (e.date !== undefined) 
-                {
-                    date = moment(e.date).format('DD-MM-YYYY');
-                }
-                if ($(this).hasClass('from')) 
-                {
-                    @this.from = date;
-                } 
-                else 
-                {
-                    @this.to = date;
-                }
-                @this.triggerLoading();
-            });
+@script
+<script type="module">
+    $(function() {
+        $('.input-group.date').datepicker({
+            language: "es",
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            clearBtn: true,
         });
-    </script>
-@endpush
+        $('.input-group.date').on('changeDate', function(e) {
+            let date = null;
+            if (e.date !== undefined) 
+            {
+                date = moment(e.date).format('DD-MM-YYYY');
+            }
+            if ($(this).hasClass('from')) 
+            {
+                @this.from = date;
+            } 
+            else 
+            {
+                @this.to = date;
+            }
+            @this.triggerLoading();
+        });
+    });
+</script>
+@endscript

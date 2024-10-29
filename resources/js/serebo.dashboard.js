@@ -6,4 +6,5 @@ import "../../public/admin-theme/vendor/libs/typeahead-js/typeahead.js";
 import "../../public/admin-theme/vendor/js/menu.js";
 import "../../public/admin-theme/vendor/libs/bs-stepper/bs-stepper.js";
 import "../../public/admin-theme/js/main.js";
-
+import moment from "moment";
+window.moment = moment;

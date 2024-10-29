@@ -2,13 +2,13 @@
 
 @section('title', 'Rectificar mano de obra')
 
-@section('breadcrumb')
+{{-- @section('breadcrumb')
     {{ Breadcrumbs::render('admin.projects.rectify-manpower') }}
-@stop
+@stop --}}
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="card card-primary shadow-lg">
                 <div class="card-body">
                     <p class="text-center mb-0">
@@ -57,14 +57,18 @@
                             </div>
                         </div>
                     </form>
-                    {!! Form::open([
+                    {{-- {!! Form::open([
                         'route' => ['admin.projects.update-manpower'],
                         'method' => 'post',
                         'class' => '',
                         'id' => 'my-dropzone',
                         'enctype' => 'multipart/form-data',
                     ]) !!}
-                    {!! Form::close() !!}
+                    {!! Form::close() !!} --}}
+                    <form action="{{ route('admin.projects.update-manpower') }}" method="POST" id="my-dropzone" enctype="multipart/form-data">
+                        @csrf
+                        <!-- Aquí puedes agregar los campos del formulario -->
+                    </form>
                 </div>
 
             </div>
@@ -78,8 +82,8 @@
 
 @section('js')
 
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-    <script>
+    <script type="module" src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script type="module">
         $(function() {
             // const toastTrigger = document.getElementById('liveToastBtn');
             // const toastLiveExample = document.getElementById('liveToast');
