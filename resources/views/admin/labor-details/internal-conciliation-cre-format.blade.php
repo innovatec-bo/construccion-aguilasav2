@@ -113,9 +113,8 @@
 @stop
 
 @section('js')
-    {{-- <script> console.log('Hi!'); </script> --}}
-    <script src="{{asset('js/jQuery.print/jQuery.print.js')}}"></script>
-    <script>
+    <script type="module" src="{{asset('js/jQuery.print/jQuery.print.js')}}"></script>
+    <script type="module">
         $('#btn-print').on('click', function() {
             $.print($("#print-area").html());
             // let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');

@@ -8,21 +8,27 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-12 mb-2 text-end">
-            <a class="btn btn-sm btn-primary d-print-none float-right mx-1" href="{{url()->previous()}}">Volver</a>
-            @can('admin.labor-details.export')
-                <div class="btn-group btn-group-sm" style="">
-                    <a href="{{route('admin.labor-details.export', $laborDetail->id_lad)}}" class="btn btn-primary d-print-none"><i class="far fa-file-excel"></i> Exportar</a>
-                    <a class="btn btn-info d-print-none float-right ml-2 text-white" href="javascript:void(0)" id="btn-print"><i class="fa fa-print fa-fw"></i>Imprimir</a>
+        <div class="col-md-12">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4 d-print-none">
+                <div class="d-flex flex-column justify-content-center">
+                    <div class="mb-1">
+                        <span class="h5">Detalle de mano de obra: {{$laborDetail->project->code_pro}}</span>
+                    </div>
                 </div>
-            @endcan
+                <div class="d-flex align-content-center flex-wrap gap-2">
+                    <a href="{{url()->previous()}}" class="btn btn-sm btn-label-info delete-order waves-effect">Volver</a>
+                    @can('admin.labor-details.export')
+                        <a href="{{route('admin.labor-details.export', $laborDetail->id_lad)}}" class="btn btn-sm btn-label-primary delete-order waves-effect">Exportar</a>
+                        <a href="javascript:void(0)" id="btn-print" class="btn btn-sm btn-label-secondary delete-order waves-effect">Imprimir</a>
+                    @endcan
+                </div>
+              </div>
         </div>
         <div class="col-md-12 mb-3">
             <div class="card shadow-lg" id="print-area">
-                <div class="card-header">
-                    <h3 class="text-center d-print-none">Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h3>
-                    <h3 class="text-center d-none d-print-block">Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h3>
-                    <h4 class="text-center mb-4 d-none d-print-block">{!! ucfirst($laborDetail->environment['label']) !!}</h4>
+                <div class="card-header d-none d-print-block">
+                    <h3 class="text-center">Detalle de mano de obra: {{$laborDetail->project->code_pro}}</h3>
+                    <h4 class="text-center mb-4">{!! ucfirst($laborDetail->environment['label']) !!}</h4>
                 </div>
 
                 <div class="card-body p-0">
@@ -45,7 +51,6 @@
                                     <td>
                                         <span class="text-info">{{$laborCost->buildingStructure->structure_code_bus}}</span>
                                         {{$laborCost->buildingStructure->description_bus}}
-                                        
                                     </td>
                                     <td>
                                         @switch($laborCost->activity_lac)
@@ -83,7 +88,8 @@
                                     </td>
                                     <td class="text-center d-print-none">
                                         @can('admin.labor-costs.edit')
-                                            <a href="{{route('admin.labor-costs.edit', $laborCost)}}" class="btn btn-sm btn-primary py-0" target="_blank"><i class="fas fa-fw fa-pen"></i></a>    
+                                            <a href="{{route('admin.labor-costs.edit', $laborCost)}}" class="btn btn-icon btn-text-secondary waves-effect waves-light rounded-pill"><i class="ti ti-edit ti-md"></i></a>
+                                            {{-- <a href="{{route('admin.labor-costs.edit', $laborCost)}}" class="btn btn-sm btn-primary py-0" target="_blank"><i class="fas fa-fw fa-pen"></i></a>     --}}
                                         @endcan
                                     </td>
                                 </tr>    
@@ -97,14 +103,9 @@
     </div>
 @stop
 
-@section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-@stop
-
 @section('js')
-    {{-- @stack('scripts') --}}
-    <script src="{{asset('js/jQuery.print/jQuery.print.js')}}"></script>
-    <script>
+    <script type="module" src="{{asset('js/jQuery.print/jQuery.print.js')}}" defer></script>
+    <script type="module">
         $('#btn-print').on('click', function() {
             $.print($("#print-area").html());
             // let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');

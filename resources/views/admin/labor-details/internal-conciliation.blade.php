@@ -2,9 +2,9 @@
 
 @section('title', 'Conciliacion interna')
 
-@section('breadcrumb')
-    {{ Breadcrumbs::render('admin.labor-details.internal-conciliation', $laborDetail, $previousRoute) }}
-@stop
+{{-- @section('breadcrumb') --}}
+    {{-- {{ Breadcrumbs::render('admin.labor-details.internal-conciliation', $laborDetail, $previousRoute) }} --}}
+{{-- @stop --}}
 @section('content')
     <div class="row justify-content-center" data-previous-route="{{$previousRoute}}">
         <div class="col-md-12">
@@ -139,8 +139,8 @@
 @stop
 
 @section('js')
-    <script src="{{asset('js/jQuery.print/jQuery.print.js')}}"></script>
-    <script>
+    <script type="module" src="{{asset('js/jQuery.print/jQuery.print.js')}}"></script>
+    <script type="module">
         $('#btn-print').on('click', function() {
             $.print($("#print-area").html());
             // let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');

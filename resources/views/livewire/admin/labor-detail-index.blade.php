@@ -1,4 +1,13 @@
 <div class="row">
+    <div class="col-md-12">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
+            <div class="d-flex flex-column justify-content-center">
+                <div class="mb-1">
+                    <span class="h5">Manos de obra </span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-md-2">
         <div class="form-group">
             <label>COD Proyecto</label>
@@ -22,7 +31,7 @@
                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                 </div>
                 <div class="table-responsive overflow-visible">
-                    <table class="table table-bordered table-hover table-striped table-sm mb-0">
+                    <table class="table table-bordered table-hover table-striped table-sm mb-0 small">
                         <thead>
                             <tr>
                                 <th style="width: 10px">ID</th>
@@ -95,7 +104,7 @@
     </div>
     <div class="col-md-12 mt-3">
         <div class="table-responsive">
-            {{ $projects->links() }}
+            {{ $projects->links(data: ['scrollTo' => false]) }}
         </div>
     </div>
 </div>

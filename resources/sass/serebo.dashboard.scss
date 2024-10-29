@@ -62,7 +62,10 @@
     tbody{
         font-size: 12px!important
     }
-
+    td,
+    th{
+        padding: 7px!important;
+    }
     tr,
     img {
         page-break-inside: avoid;

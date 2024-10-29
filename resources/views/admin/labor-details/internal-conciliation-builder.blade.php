@@ -2,9 +2,9 @@
 
 @section('title', 'Conciliacion internal(Vista de constructor): '.$laborDetail->project->code_pro)
 
-@section('breadcrumb')
+{{-- @section('breadcrumb')
     {{ Breadcrumbs::render('admin.labor-details.internal-conciliation-builder', $laborDetail, $previousRoute) }}
-@stop
+@stop --}}
 
 @section('content')
     <div class="row justify-content-center">
@@ -122,8 +122,8 @@
 @stop
 
 @section('js')
-<script src="{{asset('js/jQuery.print/jQuery.print.js')}}"></script>
-<script>
+<script type="module" src="{{asset('js/jQuery.print/jQuery.print.js')}}"></script>
+<script type="module">
     $('#btn-print').on('click', function() {
         $.print($("#print-area").html());
         // let CSRF_TOKEN = $('meta[name="csrf-token"').attr('content');
