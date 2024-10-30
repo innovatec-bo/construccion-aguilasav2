@@ -4,7 +4,24 @@
             <span class="visually-hidden">Loading...</span>
           </div>
     </div>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
+
+        <div class="d-flex flex-column justify-content-center">
+          <h4 class="mb-1">Proyectos</h4>
+          <p class="mb-0">Listado de todos los proyectos del sistema</p>
+        </div>
+        <div class="d-flex align-content-center flex-wrap gap-4">
+            <div class="d-flex gap-4">
+                <button class="btn btn-sm btn-primary waves-effect" 
+                wire:click="$dispatch('showModal', {data: {'alias' : 'admin.incident-create','size':'modal-sm','params' :{} }})"
+                >Registrar incidencia</button>
+                @can('admin.projects.create')
+                    <a href="{{route('admin.projects.create')}}" class="btn btn-sm btn-primary waves-effect">Nuevo proyecto</a>    
+                @endcan
+            </div>
+        </div>
     
+      </div>
     <div class="col-md-2">
         <div class="form-group">
             <label>COD Proyecto</label>
@@ -43,30 +60,8 @@
             </select>    
         </div>
     </div>
-    @can('admin.projects.create')
-        <div class="col-md-2">
-            <div class="form-group">
-                <label>&nbsp;</label>
-                <a href="{{route('admin.projects.create')}}" class="btn btn-primary btn-sm form-control" type="button">Nuevo proyecto</a>
-            </div>
-        </div>
-    @endcan
     <div class="col-md-12 mt-4">
         <div class="card shadow-lg">
-            <div class="card-header d-none">
-                @can('admin.projects.create')
-                    <a href="{{route('admin.projects.create')}}" class="btn btn-xs btn-primary">Nuevo</a>    
-                @endcan
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="">
-                        
-                        @can('admin.users.export')
-                            <button class="btn btn-primary btn-xs" wire:click="export"><i class="far fa-file-excel"></i> Exportar</button>
-                        @endcan
-                        
-                    </div>
-                </div>
-            </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover table-sm small mb-0">

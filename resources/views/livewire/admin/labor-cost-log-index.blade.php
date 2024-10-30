@@ -27,7 +27,7 @@
         <div class="input-group input-group-sm date mb-3 from">
             <input class="form-control" type="text" value="{{$from}}" placeholder="dd-mm-yyyy">
             <span class="input-group-text input-group-append" role="button" id="basic-addon2"><i class="fa fa-calendar"></i></span>
-            </div>
+        </div>
     </div>
     <div class="col-md-2">
         <label>Hasta</label>

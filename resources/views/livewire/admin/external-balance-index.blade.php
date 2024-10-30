@@ -8,7 +8,7 @@
             <div class="files" id="previews">
                 <div id="template" class="file-row pt-2 m-1 pb-2 d-none">
                     <!-- This is used as the file preview template -->
-                    <div class="table-responsive" style="background: #e8e8e8;">
+                    <div class="table-responsive">
                         <table class="table border mb-0">
                             <tbody>
                                 <tr class="align-middle">
@@ -43,14 +43,6 @@
                 </div>
             </div>
         </form>
-        {{-- {!! Form::open([
-            'route' => ['admin.external-balance.store'],
-            'method' => 'post',
-            'class' => '',
-            'id' => 'my-dropzone',
-            'enctype' => 'multipart/form-data',
-        ]) !!}
-        {!! Form::close() !!} --}}
         <form action="{{ route('admin.external-balance.store') }}" method="post" class="" id="my-dropzone" enctype="multipart/form-data">
             @csrf
         </form>
@@ -67,7 +59,7 @@
                 <input class="form-control form-control-sm" type="text" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
             </div> --}}
             <div class="card-body p-0">
-                <div class="table-responsive" style="overflow-x: visible">
+                <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover table-sm small m-0">
                         <thead>
                             <tr>
@@ -117,15 +109,6 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="btn-group d-none">
-                                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-coreui-toggle="dropdown" aria-expanded="false">
-                                                <x-coreui-icon svgClass="icon" icon="cil-options"/>
-                                            </button>
-                                            <ul class="dropdown-menu" style="">
-                                              <li><a class="dropdown-item" href="{{route('admin.external-balance.show', $externalBalance)}}">Ver</a></li>
-                                              <li><a class="dropdown-item" href="javascript:void(0)" wire:click="$dispatch('showModal','confirm-delete-modal', {{$externalBalance->id}},'App\\Models\\ExternalBalance')">Eliminar</a></li>
-                                            </ul>
-                                          </div>
                                     </td>
                                 </tr>
                             @endforeach

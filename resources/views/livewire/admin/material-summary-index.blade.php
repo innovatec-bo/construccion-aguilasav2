@@ -14,7 +14,7 @@
             </div>
         @endcan
     </div>
-    
+
     <div class="col-md-2">
         <div class="form-group">
             <label>ID de movimiento</label>
