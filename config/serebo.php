@@ -52,5 +52,17 @@ return [
             "project_return_materials",
             "stopped",
         ],
+    ],
+    'incident_types' => [
+        1 => "Permisos",
+        2 => "Fiscales",
+        3 => "Vecinos",
+        4 => "Linea viva",
+        5 => "Mecanico",
+        6 => "Materiales incompletos",
+        7 => "Climatológico",
+        8 => "Otros",
+        10 => "CRE",
+        9 => "Ninguno",
     ]
 ];
