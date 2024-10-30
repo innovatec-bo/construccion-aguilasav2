@@ -17,8 +17,22 @@ class Incident extends Model
     protected $primaryKey = "id_inc";
     protected $casts = [
         'manual_entry_date_inc' => 'datetime',
+        'paused_inc' => 'boolean',
         'created_at' => 'datetime',
         'createdon_inc' => 'datetime'
+    ];
+
+    protected $fillable = [
+        'project_id_inc',
+        'status_id_inc',
+        'percentage_inc',
+        'detail_inc',
+        'manual_entry_date_inc',
+        'paused_inc',
+        'stopped_inc',
+        'incident_type_inc',
+        'need_to_be_solved_inc',
+        'solved_by_inc'
     ];
 
     const CREATED_AT = 'createdon_inc';

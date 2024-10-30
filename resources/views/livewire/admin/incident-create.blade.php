@@ -7,8 +7,8 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-12 mb-4">
-                    <label class="form-label" for="projectList">Proyecto(s)</label>
-                    <textarea id="projectList" wire:model.live="projectList" class="form-control form-control-sm" placeholder="proyecto1,proyecto2,proyecto3"></textarea>
+                    <label class="form-label" for="projectCodes">Proyecto(s)</label>
+                    <textarea id="projectCodes" wire:model.live="projectCodes" class="form-control form-control-sm" placeholder="proyecto1,proyecto2,proyecto3"></textarea>
                     <div class="form-text">Especifique aqu&iacute; el proyecto o los proyectos a los que se aplicar&aacute; esta incidencia.</div>
                 </div>
                 <div class="col-12 mb-4">
