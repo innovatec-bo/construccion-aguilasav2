@@ -2,9 +2,9 @@
 
 @section('title', 'Movimientos agrupados por proyectos')
 
-@section('breadcrumb')
+{{-- @section('breadcrumb')
     {{ Breadcrumbs::render('admin.materials-summary.grouped-movements') }}
-@stop
+@stop --}}
 
 @section('content')
     @livewire('admin.material-summary-grouped-movements')

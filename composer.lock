@@ -4,8 +4,68 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f7857ba11a65cc5ee8bdf9b512ceb13",
+    "content-hash": "6091e7b52e7ed5122f720a7b46a57a04",
     "packages": [
+        {
+            "name": "aliqasemzadeh/livewire-bootstrap-modal",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aliqasemzadeh/livewire-bootstrap-modal.git",
+                "reference": "67511771d1caaf9ca96c3d45ffc356cd052eadbe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aliqasemzadeh/livewire-bootstrap-modal/zipball/67511771d1caaf9ca96c3d45ffc356cd052eadbe",
+                "reference": "67511771d1caaf9ca96c3d45ffc356cd052eadbe",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.0|^9.0|^10.0|^11.0",
+                "livewire/livewire": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AliQasemzadeh\\LaravelLivewireModals\\Providers\\LaravelLivewireModalsProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AliQasemzadeh\\LaravelLivewireModals\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Dion",
+                    "email": "bastinald@icloud.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Ali Qasemzadeh",
+                    "email": "aliqasemzadeh7@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Lungdsuo Mozhui",
+                    "email": "mozhui.lungdsuo@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Dynamic Laravel Livewire 3 Bootstrap modals.",
+            "homepage": "https://github.com/aliqasemzadeh/livewire-bootstrap-modal",
+            "support": {
+                "issues": "https://github.com/aliqasemzadeh/livewire-bootstrap-modal/issues",
+                "source": "https://github.com/aliqasemzadeh/livewire-bootstrap-modal/tree/v2.2.0"
+            },
+            "time": "2024-03-15T07:35:37+00:00"
+        },
         {
             "name": "almasaeed2010/adminlte",
             "version": "v3.2.0",

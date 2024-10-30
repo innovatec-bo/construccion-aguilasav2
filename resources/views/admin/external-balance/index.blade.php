@@ -2,9 +2,9 @@
 
 @section('title', 'Balance externo de materiales')
 
-@section('breadcrumb')
+{{-- @section('breadcrumb')
     {{ Breadcrumbs::render('admin.external-balance.index') }}
-@stop
+@stop --}}
 
 @section('content')
     @livewire('admin.external-balance-index')
@@ -16,6 +16,6 @@
 @stop
 
 @section('js')
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script type="module" src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     {{-- <script> console.log('Hi!'); </script> --}}
 @stop

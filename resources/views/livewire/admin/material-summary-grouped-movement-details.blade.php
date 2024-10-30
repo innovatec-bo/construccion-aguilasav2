@@ -4,6 +4,11 @@
             <span class="visually-hidden">Loading...</span>
           </div>
     </div>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
+        <div class="d-flex flex-column justify-content-center">
+            <h4 class="mb-1">Movimiento de materiales del proyecto: {{$project->code_pro}}</h4>
+        </div>
+    </div>
     <div class="col-md-2">
         <div class="form-group">
             <input type="text" name="table_search" class="form-control form-control-sm" wire:model.live.debounce.1500ms="search" placeholder="Buscar por codigo de material..">

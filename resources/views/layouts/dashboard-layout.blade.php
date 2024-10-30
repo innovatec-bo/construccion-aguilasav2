@@ -78,6 +78,7 @@
       <div class="drag-target"></div>
     </div>
     @vite(['resources/js/serebo.dashboard.core.js','resources/js/serebo.dashboard.js'])
+    <livewire:modals/>
     @livewireScripts
     @stack('scripts')
     @yield('js')

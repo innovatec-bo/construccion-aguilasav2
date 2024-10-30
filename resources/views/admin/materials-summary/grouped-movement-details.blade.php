@@ -2,9 +2,9 @@
 
 @section('title', 'Movimientos del proyecto '.$project->code_pro)
 
-@section('breadcrumb')
+{{-- @section('breadcrumb')
     {{ Breadcrumbs::render('admin.materials-summary.grouped-movement-details', $project) }}
-@stop
+@stop --}}
 
 @section('content')
     @livewire('admin.material-summary-grouped-movement-details', ['project' => $project])

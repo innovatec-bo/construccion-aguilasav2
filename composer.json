@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "aliqasemzadeh/livewire-bootstrap-modal": "^2.2",
         "binarytorch/larecipe": "^2.5",
         "binarytorch/larecipe-dark-theme": "^0.1.5",
         "bkwld/cloner": "^3.11",

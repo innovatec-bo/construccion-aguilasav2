@@ -43,14 +43,17 @@
                 </div>
             </div>
         </form>
-        {!! Form::open([
+        {{-- {!! Form::open([
             'route' => ['admin.external-balance.store'],
             'method' => 'post',
             'class' => '',
             'id' => 'my-dropzone',
             'enctype' => 'multipart/form-data',
         ]) !!}
-        {!! Form::close() !!}
+        {!! Form::close() !!} --}}
+        <form action="{{ route('admin.external-balance.store') }}" method="post" class="" id="my-dropzone" enctype="multipart/form-data">
+            @csrf
+        </form>
     </div>
     <div class="col-md-12 mb-3">
         <div class="card shadow-lg">
@@ -100,7 +103,21 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <div class="btn-group">
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item waves-effect" href="{{route('admin.external-balance.show', $externalBalance)}}">
+                                                    <i class="ti ti-eye me-1"></i> Ver
+                                                </a>
+                                                  <a class="dropdown-item waves-effect" href="javascript:void(0);" 
+                                                  {{-- wire:click="$dispatch('showModal','confirm-delete-modal', {{$externalBalance->id}},'App\\Models\\ExternalBalance')" --}}
+                                                  wire:click="$dispatch('showModal', {data: {'alias' : 'confirm-delete-modal','size':'modal-sm','params' :{objectToDelete:{{ $externalBalance->id }}, model:'App\\Models\\ExternalBalance' }}})"
+                                                  >
+                                                    <i class="ti ti-trash me-1"></i> Eliminar
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="btn-group d-none">
                                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-coreui-toggle="dropdown" aria-expanded="false">
                                                 <x-coreui-icon svgClass="icon" icon="cil-options"/>
                                             </button>
@@ -123,90 +140,90 @@
             {{ $externalBalances->links() }}
         </div>
     </div>
-    @push('scripts')
-        <script>
-            $(function() {
-                // upload documents
-                var previewNode = document.querySelector("#template");
-                previewNode.id = "";
-                var previewTemplate = previewNode.parentNode.innerHTML;
-                previewNode.parentNode.removeChild(previewNode);
-                var buttonId;
+@script
+<script>
+    $(function() {
+        // upload documents
+        var previewNode = document.querySelector("#template");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
+        var buttonId;
 
-                var myDropzone = new Dropzone(document.querySelector(
-                "#my-dropzone"), { // Make the whole body a dropzone
-                    parallelUploads: 1,
-                    uploadMultiple: false,
-                    acceptedFiles: ".xls,.xlsx,.csv",
-                    maxFilesize: 8,
-                    previewTemplate: previewTemplate,
-                    autoQueue: false, // Make sure the files aren't queued until manually added
-                    previewsContainer: "#previews", // Define the container to display the previews
-                    clickable: ".fileinput-button", // Define the element that should be used as click trigger to select files.
-                    dictFileTooBig: 'Archivo demasiado grande. Maximo permitido 8MB',
-                });
+        var myDropzone = new Dropzone(document.querySelector(
+        "#my-dropzone"), { // Make the whole body a dropzone
+            parallelUploads: 1,
+            uploadMultiple: false,
+            acceptedFiles: ".xls,.xlsx,.csv",
+            maxFilesize: 8,
+            previewTemplate: previewTemplate,
+            autoQueue: false, // Make sure the files aren't queued until manually added
+            previewsContainer: "#previews", // Define the container to display the previews
+            clickable: ".fileinput-button", // Define the element that should be used as click trigger to select files.
+            dictFileTooBig: 'Archivo demasiado grande. Maximo permitido 8MB',
+        });
 
-                myDropzone.on("addedfile", function(file) {
-                    // Hookup the start button
-                    $(file.previewElement).removeClass('d-none');
-                    file.previewElement.querySelector(".start").onclick = function() {
-                        myDropzone.enqueueFile(file);
-                    };
-                    $('.fileinput-button').addClass('d-none');
-                });
+        myDropzone.on("addedfile", function(file) {
+            // Hookup the start button
+            $(file.previewElement).removeClass('d-none');
+            file.previewElement.querySelector(".start").onclick = function() {
+                myDropzone.enqueueFile(file);
+            };
+            $('.fileinput-button').addClass('d-none');
+        });
 
-                myDropzone.on("error", function(file, message) {
-                    $(file.previewElement).find('.start').addClass('disabled');
-                });
+        myDropzone.on("error", function(file, message) {
+            $(file.previewElement).find('.start').addClass('disabled');
+        });
 
-                myDropzone.on('removedfile', function(file) {
-                    $('.fileinput-button').removeClass('d-none');
-                });
+        myDropzone.on('removedfile', function(file) {
+            $('.fileinput-button').removeClass('d-none');
+        });
 
-                myDropzone.on("sending", function(file, xhr, formData) {
-                    //Disable the start button
-                    $(file.previewElement).find('.start').addClass('d-none');
-                    $(file.previewElement).find('[data-dz-remove]').addClass('d-none');
+        myDropzone.on("sending", function(file, xhr, formData) {
+            //Disable the start button
+            $(file.previewElement).find('.start').addClass('d-none');
+            $(file.previewElement).find('[data-dz-remove]').addClass('d-none');
 
-                    var manualEntryDate = file.previewElement.querySelector("#manual_entry_date").value;
-                    formData.append("manual_entry_date", manualEntryDate);
-                    console.log('sending', file, xhr, formData);
-                });
+            var manualEntryDate = file.previewElement.querySelector("#manual_entry_date").value;
+            formData.append("manual_entry_date", manualEntryDate);
+            console.log('sending', file, xhr, formData);
+        });
 
-                myDropzone.on("processing", function(file, responseText) {
-                    console.log('processing', file, responseText);
+        myDropzone.on("processing", function(file, responseText) {
+            console.log('processing', file, responseText);
 
-                });
+        });
 
-                myDropzone.on("complete", function(file, responseText) {
-                    // Hookup the start button
-                    console.log('complete', file, responseText);
-                    myDropzone.removeFile(file);
-                    // @this.refreshPost();
+        myDropzone.on("complete", function(file, responseText) {
+            // Hookup the start button
+            console.log('complete', file, responseText);
+            myDropzone.removeFile(file);
+            // @this.refreshPost();
 
-                });
+        });
 
-                myDropzone.on("success", function(file, responseText) {
-                    window.location.reload();
-                    // console.log('success', file, responseText); // console should show the ID you pointed to
-                    // var totalRecords = responseText.totalRecords;
-                    // $("#total-records").text(totalRecords);
+        myDropzone.on("success", function(file, responseText) {
+            window.location.reload();
+            // console.log('success', file, responseText); // console should show the ID you pointed to
+            // var totalRecords = responseText.totalRecords;
+            // $("#total-records").text(totalRecords);
 
-                    // var totalProjects = responseText.totalProjects;
-                    // $("#total-projects").text(totalProjects);
+            // var totalProjects = responseText.totalProjects;
+            // $("#total-projects").text(totalProjects);
 
-                    // var total221 = responseText.records221And222[221];
-                    // var percentage221 = (total221 * 100) / totalRecords;
-                    // $("#records-221").text(total221 + " (" + percentage221.toFixed(2) + "%)");
+            // var total221 = responseText.records221And222[221];
+            // var percentage221 = (total221 * 100) / totalRecords;
+            // $("#records-221").text(total221 + " (" + percentage221.toFixed(2) + "%)");
 
-                    // var total222 = responseText.records221And222[222];
-                    // var percentage222 = (total222 * 100) / totalRecords;
-                    // $("#records-222").text(total222 + " (" + percentage222.toFixed(2) + "%)");
+            // var total222 = responseText.records221And222[222];
+            // var percentage222 = (total222 * 100) / totalRecords;
+            // $("#records-222").text(total222 + " (" + percentage222.toFixed(2) + "%)");
 
-                    // var totalMaterials = responseText.totalMaterials;
-                    // $("#total-materials").text(totalMaterials);
-                });
-            });
-        </script>
-    @endpush
+            // var totalMaterials = responseText.totalMaterials;
+            // $("#total-materials").text(totalMaterials);
+        });
+    });
+</script>
+@endscript
 </div>

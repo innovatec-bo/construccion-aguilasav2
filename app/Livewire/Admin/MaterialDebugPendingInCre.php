@@ -19,6 +19,7 @@ class MaterialDebugPendingInCre extends Component
     public $statusToDebug;
     public $toDebug;
     public $projectCode;
+    public $page;
     
     public function mount()
     {

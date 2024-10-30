@@ -90,7 +90,7 @@ class DashboardMenu extends Component
             ],
             [
                 'text'        => 'Almacen',
-                'icon'        => 'ti ti-smart-home',
+                'icon'        => 'ti ti-building-warehouse',
                 'can'         => ['admin.materials-summary.index','admin.materials-summary.load-initial-list','admin.builder-debts-report.index','admin.materials.material-summary'],
                 'submenu'     => [
                     [
@@ -117,12 +117,12 @@ class DashboardMenu extends Component
                         'can'         => ['admin.builder-debts-report.index'],
                         'icon'        => '',
                     ],
-                    [
-                        'text'        => 'Salidas observadas',
-                        'route'       => 'admin.materials-summary.duplicate-outputs',
-                        'can'         => ['admin.materials-summary.duplicate-outputs'],
-                        'icon'        => '',
-                    ],
+                    // [
+                    //     'text'        => 'Salidas observadas',
+                    //     'route'       => 'admin.materials-summary.duplicate-outputs',
+                    //     'can'         => ['admin.materials-summary.duplicate-outputs'],
+                    //     'icon'        => '',
+                    // ],
                     [
                         'text'        => 'Resumen de materiales',
                         'route'       => 'admin.materials.material-summary',

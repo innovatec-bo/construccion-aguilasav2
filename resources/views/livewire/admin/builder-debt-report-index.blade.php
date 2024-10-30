@@ -6,18 +6,27 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            {!! Form::label('builders', 'Constructor') !!}
-            {!! Form::select('builders', $builders, null, ['id' => 'builders', 'class' => 'form-control form-control-sm', 'required' => 'required', 'wire:model.live' => 'builderSelected']) !!}
+            <label for="builders" class="form-label">Constructor</label>
+            <select id="builders" name="builders" class="form-select form-select-sm" required wire:model.live="builderSelected">
+                @foreach ($builders as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            {!! Form::label('statusSelected', 'Estado del proyecto') !!}
-            {!! Form::select('statusSelected', $statusToVerify, null, ['id' => 'statusSelected', 'class' => 'form-control form-control-sm', 'wire:model.live' => 'statusSelected']) !!}
+            <label for="statusSelected" class="form-label">Estado del proyecto</label>
+            <select id="statusSelected" name="statusSelected" class="form-select form-select-sm" wire:model.live="statusSelected">
+                @foreach ($statusToVerify as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
     <div class="col-md-2">
-        <input class="form-control form-control-sm mt-4" type="text" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
+        <label class="form-label">&nbsp;</label>
+        <input class="form-control form-control-sm" type="text" wire:model.live.debounce.1500ms="search" placeholder="Buscar..">
     </div>
     <div class="col-md-12 mt-4">
         <div class="card shadow-lg">

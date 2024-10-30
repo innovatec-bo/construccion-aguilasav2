@@ -37,6 +37,7 @@ Class MaterialSummary extends Component
     public $projectCode;
     public $projectStatusId;
     public $materialCode;
+    public $page;
 
     public function updatingSearch()
     {
