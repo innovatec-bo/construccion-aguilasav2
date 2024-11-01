@@ -328,6 +328,28 @@ class Project extends Model
         return $this->belongsTo(User::class, 'cre_fiscal_pro');
     }
 
+    public function getProductionPercentageAttribute()
+    {
+        $statusKeyword = $this->status->keyword_pst;
+
+        if(in_array($statusKeyword,['project_has_been_created','drawing','stakes','digitization','returned','schedule','ready_to_send','already_sent','rectify_design','rectify_illustration','rd_stakes','rd_digitization','rd_drawing','ri_digitization','ri_drawing','canceled']))
+        {
+            $totalProductionWithDesign = 0;
+        }
+        elseif(in_array($statusKeyword,['approved','assign_to','in_progress','paused','stopped','completed','project_energized','as_built']))
+        {
+            $totalProductionWithDesign = (($this->currentDesignBudget + $this->productionAmount) * 100) / $this->currentBudget;
+        }
+        elseif(in_array($statusKeyword,['conciliation_reception','conciliation_shipment','cre_return_order','project_return_materials','project_real_budget_confirmation']))
+        {
+            // (((IFNULL(production.total_bs,0) + if(payment_order_registered.order_number_pao != '',payment_order_registered.design_budget_pop, conciliation_reception.design_reb) ) * 100)/ if(payment_order_registered.order_number_pao != '',payment_order_registered.total_real_budget, conciliation_reception.total_real_budget))
+            $totalProductionWithDesign = 0;
+        }
+
+        
+        return  round($totalProductionWithDesign,2);   
+    }
+
     public function getProductionAmountAttribute()
     {
         $sql = '
@@ -469,6 +491,92 @@ class Project extends Model
                         }
                         
 
+                    }
+                break;
+            default:
+                $budget = 0;
+                break;
+        }
+        return $budget;
+    }
+
+    public function getCurrentDesignBudgetAttribute()
+    {
+        $budget = 0;
+        switch ($this->status->keyword_pst) 
+        {
+            case 'project_has_been_created':
+            case 'drawing':
+            case 'stakes':
+            case 'digitization':
+            case 'returned':
+                $budget = $this->initial_design_budget_pro;
+                break;
+            case 'schedule':
+            case 'ready_to_send':
+            case 'already_sent':
+            case 'rectify_design':
+            case 'rectify_illustration':
+            case 'rd_stakes':
+            case 'rd_digitization':
+            case 'rd_drawing':
+            case 'ri_digitization':
+            case 'ri_drawing':
+                $schedule = $this->statusLog->where('status_id_psl',6)->first();
+                if(is_null($schedule->projectBudget))
+                {
+                    $budget = 0;
+                }
+                else
+                {
+                    $budget = !is_null($schedule->projectBudget->tentative_total_budget_prb) && $schedule->projectBudget->tentative_total_budget_prb > 0?$schedule->projectBudget->tentative_total_budget_prb:$schedule->projectBudget->design_prb;
+                }
+                break;
+            case 'canceled':
+                $canceled = $this->statusLog->where('status_id_psl',12)->first();
+                if(is_null($canceled->projectBudget))
+                {
+                    $budget = 0;
+                }
+                else
+                {
+                    $budget = $canceled->projectBudget->design_prb;
+                }
+                break;
+                case 'approved': 
+                case 'assign_to': 
+                case 'in_progress': 
+                case 'paused': 
+                case 'stopped': 
+                case 'completed': 
+                case 'project_energized': 
+                case 'as_built':
+                    $approved = $this->statusLog->where('status_id_psl',11)->first();
+                    if(is_null($approved) || is_null($approved->projectBudget))
+                    {
+                        $budget = 0;
+                    }
+                    else
+                    {
+                        $budget = $approved->projectBudget->design_prb;
+                    }
+                break;
+                case 'conciliation_reception': 
+                case 'conciliation_shipment': 
+                case 'cre_return_order': 
+                case 'project_return_materials':
+                case 'project_real_budget_confirmation':
+                    if($this->paymentOrderProject)
+                    {
+                        $budget = $this->paymentOrderProject->design_budget_pop + $this->paymentOrderProject->total_real_budget;
+                    }
+                    else
+                    {
+                        $conciliationReception = $this->statusLog->where('status_id_psl', 34)->first();
+                        if ($conciliationReception->projectRealBudget) 
+                        {
+                            $budget = $conciliationReception->projectRealBudget->design_reb;
+                        }
                     }
                 break;
             default:

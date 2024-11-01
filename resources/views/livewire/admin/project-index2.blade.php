@@ -75,7 +75,7 @@
                                 <th>Fiscal<br>de CRE</th>
                                 <th>Direcci&oacute;n</th>
                                 <th>Importe</th>
-                                <th class="text-center">Opciones</th>
+                                <th class="text-center"><i class="ti ti-dots-vertical"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,7 +83,7 @@
                                 <tr>
                                     <td class="stacked-info">
                                         {{ $project->code_pro }}
-                                        <p class="mb-0 text-info small">{{ $project->status->status_name_pst }}</p>
+                                        <p class="mb-0 text-info small">{{ $project->status->status_name_pst }}</p>    
                                     </td>
                                     <td class="stacked-info">
                                         {{ $project->entry_date_pro->format('d/m/Y') }}
@@ -94,7 +94,7 @@
                                         <p class="mb-0 text-info small">{{ $project->currentStatusLog->manual_entry_date_psl->diffForHumans() }}</p>
                                     </td>
                                     <td>
-                                        {{-- {{$project->system->name}} --}}
+                                        {{$project->system->name}}
                                     </td>
                                     <td>{{$project->points_pro}}p/{{$project->distance_pro}}Km</td>
                                     <td>
@@ -112,7 +112,7 @@
                                             {{ $project->address_pro }} 
                                         </td>
                                     @endif
-                                    <td class="text-end fw-bold">{{number_format($project->currentBudget, 2,'.',',')}}</td>
+                                    <td class="text-end fw-bold">{{number_format($project->currentBudget, 2,'.',',')}}/{{$project->productionPercentage}}</td>
                                     <td class="text-center">
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false" wire:loading.class="disabled"><i class="ti ti-dots-vertical"></i></button>
