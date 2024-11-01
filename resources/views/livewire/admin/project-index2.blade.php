@@ -81,39 +81,39 @@
                         <tbody>
                             @foreach ($projects as $project)
                                 <tr>
-                                    <td class="stacked-info">
+                                    <td class="stacked-info px-2">
                                         {{ $project->code_pro }}
                                         <p class="mb-0 text-info small">{{ $project->status->status_name_pst }}</p>    
                                     </td>
-                                    <td class="stacked-info">
+                                    <td class="stacked-info px-2">
                                         {{ $project->entry_date_pro->format('d/m/Y') }}
                                         <p class="mb-0 text-info small">{{ $project->entry_date_pro->diffForHumans() }}</p>
                                     </td>
-                                    <td class="stacked-info">
+                                    <td class="stacked-info px-2">
                                         {{$project->currentStatusLog->manual_entry_date_psl->format('d/m/Y')}}
                                         <p class="mb-0 text-info small">{{ $project->currentStatusLog->manual_entry_date_psl->diffForHumans() }}</p>
                                     </td>
-                                    <td>
+                                    <td class="px-2">
                                         {{$project->system->name}}
                                     </td>
-                                    <td>{{$project->points_pro}}p/{{$project->distance_pro}}Km</td>
-                                    <td>
+                                    <td class="px-2">{{$project->points_pro}}p/{{$project->distance_pro}}Km</td>
+                                    <td class="px-2">
                                         @if ($project->creFiscal)
                                             {{$project->creFiscal->fullName}}    
                                         @endif
                                     </td>
                                     @if ($project->latitude_pro != '')
-                                        <td class="stacked-info"> 
+                                        <td class="stacked-info px-2"> 
                                             {{ $project->address_pro }} 
                                             <a class="small d-block" target="_blank" href="https://www.google.com/maps/search/?q={{$project->latitude_pro}},{{$project->longitude_pro}}" class="d-block">Ver en google maps</a>
                                         </td>
                                     @else
-                                        <td> 
+                                        <td class="px-2"> 
                                             {{ $project->address_pro }} 
                                         </td>
                                     @endif
-                                    <td class="text-end fw-bold">{{number_format($project->currentBudget, 2,'.',',')}}/{{$project->productionPercentage}}</td>
-                                    <td class="text-center">
+                                    <td class="text-end fw-bold px-2">{{number_format($project->currentBudget, 2,'.',',')}}/{{$project->productionPercentage}}</td>
+                                    <td class="text-center px-2">
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false" wire:loading.class="disabled"><i class="ti ti-dots-vertical"></i></button>
                                             <div class="dropdown-menu" style="">
