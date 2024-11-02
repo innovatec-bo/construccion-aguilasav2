@@ -533,7 +533,6 @@ class Project extends Model
     public function getProductionPercentageAttribute()
     {
         $statusKeyword = $this->status->keyword_pst;
-
         if(in_array($statusKeyword,['project_has_been_created','drawing','stakes','digitization','returned','schedule','ready_to_send','already_sent','rectify_design','rectify_illustration','rd_stakes','rd_digitization','rd_drawing','ri_digitization','ri_drawing','canceled']))
         {
             $totalProductionWithDesign = 0;
@@ -547,8 +546,8 @@ class Project extends Model
             $paymentOrderRegistered = $this->paymentOrderStatusDetail(42);
             $conciliationReception = $this->statusDetail(34);
 
-            $design = $conciliationReception['design_reb'];
-            $totalRealBudget = $conciliationReception['total_real_budget'];
+            $design = $conciliationReception['design_reb']??0;
+            $totalRealBudget = $conciliationReception['total_real_budget']??0;
             if(isset($paymentOrderRegistered['order_number_pao']) && $paymentOrderRegistered['order_number_pao'] != '')
             {
                 $design = $paymentOrderRegistered['design_budget_pop'];
@@ -556,15 +555,11 @@ class Project extends Model
             }
 
             $totalProductionWithDesign = (($this->productionAmount + $design) * 100) / $totalRealBudget;
-            /*
-            (((
-                IFNULL(production.total_bs,0) + if(payment_order_registered.order_number_pao != '', payment_order_registered.design_budget_pop, conciliation_reception.design_reb) ) * 100)
-                / if(payment_order_registered.order_number_pao != '',payment_order_registered.total_real_budget, conciliation_reception.total_real_budget))
-            */
-            // if
-            // $totalProductionWithDesign = 0;
         }
-
+        if(!isset($totalProductionWithDesign))
+        {
+            dd($this);
+        }
         
         return  round($totalProductionWithDesign,2);   
     }

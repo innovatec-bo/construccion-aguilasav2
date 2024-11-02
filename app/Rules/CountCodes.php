@@ -36,19 +36,17 @@ class CountCodes implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        // Regex para capturar códigos en el formato ra.XX.YYYY
-        $pattern = '/^[a-zA-Z]{2}\.\d{2}\.\d{4}$/';
+        $pattern = '/\b[a-zA-Z]{2}\.\d{2}\.\d{4}\b(?=(,|$))/';
 
         // Buscar todos los códigos que coincidan con el patrón
         preg_match_all($pattern, $value, $matches);
 
         // Contar los códigos encontrados
         $this->count = count($matches[0]);
-
         // Verificar si la cantidad de códigos supera el límite
         if ($this->count > $this->maxCount) 
         {
-            $fail("El campo {$attribute} no puede contener más de {$this->maxCount} códigos. Se encontraron {$this->count} códigos.");
+            $fail("El campo proyecto(s) no puede contener más de {$this->maxCount} códigos. Se identificaron {$this->count} códigos.");
         }
     }
 

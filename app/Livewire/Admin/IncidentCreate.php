@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Incident;
 use App\Models\Project;
+use App\Rules\CountCodes;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -12,15 +13,15 @@ use Livewire\Attributes\Validate;
 
 class IncidentCreate extends Component
 {
-    #[Validate(['required','string','max:1700'], as: 'proyecto(s)')]
+    #[Validate(as: 'proyecto(s)')]
     public $projectCodes;
     public $projectCodesArray;
     public $projectList;
-    #[Validate(['required','date_format:d-m-Y'], as: 'fecha de la incidencia')]
+    #[Validate(as: 'fecha de la incidencia')]
     public $incidentDate;
-    #[Validate(['required','numeric'], as: 'tipo de incidente')]
+    #[Validate(as: 'tipo de incidente')]
     public $incidentType;
-    #[Validate(['required','string'], as: 'detalle')]
+    #[Validate(as: 'detalle')]
     public $incidentDetail;
     public $formHidden;
     public $showProjectsNotFound;
@@ -42,10 +43,10 @@ class IncidentCreate extends Component
     public function rules()
     {
         return [
-            'projectCodes' => ['required'],
-            'incidentDate' => ['required'],
-            'incidentType' => ['required'],
-            'incidentDetail' => ['required']
+            'projectCodes' => ['required','string',new CountCodes(150)],
+            'incidentDate' => ['required','date_format:d-m-Y'],
+            'incidentType' => ['required','numeric'],
+            'incidentDetail' => ['required','string']
         ];
     }
 
