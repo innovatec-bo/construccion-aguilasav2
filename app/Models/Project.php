@@ -544,9 +544,25 @@ class Project extends Model
         }
         elseif(in_array($statusKeyword,['conciliation_reception','conciliation_shipment','cre_return_order','project_return_materials','project_real_budget_confirmation']))
         {
-            // (((IFNULL(production.total_bs,0) + if(payment_order_registered.order_number_pao != '',payment_order_registered.design_budget_pop, conciliation_reception.design_reb) ) * 100)/ if(payment_order_registered.order_number_pao != '',payment_order_registered.total_real_budget, conciliation_reception.total_real_budget))
+            $paymentOrderRegistered = $this->paymentOrderStatusDetail(42);
+            $conciliationReception = $this->statusDetail(34);
+
+            $design = $conciliationReception['design_reb'];
+            $totalRealBudget = $conciliationReception['total_real_budget'];
+            if(isset($paymentOrderRegistered['order_number_pao']) && $paymentOrderRegistered['order_number_pao'] != '')
+            {
+                $design = $paymentOrderRegistered['design_budget_pop'];
+                $totalRealBudget = $paymentOrderRegistered['total_real_budget'];
+            }
+
+            $totalProductionWithDesign = (($this->productionAmount + $design) * 100) / $totalRealBudget;
+            /*
+            (((
+                IFNULL(production.total_bs,0) + if(payment_order_registered.order_number_pao != '', payment_order_registered.design_budget_pop, conciliation_reception.design_reb) ) * 100)
+                / if(payment_order_registered.order_number_pao != '',payment_order_registered.total_real_budget, conciliation_reception.total_real_budget))
+            */
             // if
-            $totalProductionWithDesign = 0;
+            // $totalProductionWithDesign = 0;
         }
 
         
