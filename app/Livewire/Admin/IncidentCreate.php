@@ -12,7 +12,7 @@ use Livewire\Attributes\Validate;
 
 class IncidentCreate extends Component
 {
-    #[Validate(['required','string'], as: 'proyecto(s)')]
+    #[Validate(['required','string','max:1700'], as: 'proyecto(s)')]
     public $projectCodes;
     public $projectCodesArray;
     public $projectList;
