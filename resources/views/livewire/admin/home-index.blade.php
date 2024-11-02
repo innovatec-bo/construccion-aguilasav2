@@ -70,30 +70,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!--/ On route vehicles Table -->
     <div class="col-md-12">
         <div class="card mb-4 position-relative shadow-lg">
@@ -107,7 +83,7 @@
             <div class="card-body p-0">
                 <!-- /.row-->
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover border mb-0 small">
+                    <table class="table table-striped table-hover border mb-0 small table-sm">
                         <thead class="table-light fw-semibold">
                             <tr class="align-middle">
                                 <th>Proyecto</th>
@@ -122,35 +98,35 @@
                         <tbody>
                             @foreach ($incidents as $incident)
                                 <tr class="align-middle">
-                                    <td>
+                                    <td class="px-2">
                                         {{ $incident->project->code_pro }}
                                     </td>
-                                    <td class="text-start">
-                                        {{ $incident->detail_inc }}
+                                    <td class="text-start px-2">
+                                        {{ ucfirst(strtolower($incident->detail_inc)) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center px-2">
                                         {{ $incident->status->status_name_pst }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center px-2">
                                         {{ $incident->project->status->status_name_pst }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center px-2">
                                         @if ($incident->incident_type_inc)
                                             {{ $incidentTypes[$incident->incident_type_inc] }}
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="px-2">
                                         @if ($incident->author)
                                             {{ $incident->author->fullName }}
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="px-2">
                                         <p class="mb-0">
                                             @if ($incident->created_at)
-                                                {{ $incident->created_at->translatedFormat('l d F Y') }},
+                                                {{ $incident->created_at->format('Y') == date('Y')? ucwords($incident->created_at->translatedFormat('l d F')): ucwords($incident->created_at->translatedFormat('l d F Y')) }},
                                                 {{ $incident->created_at->diffForHumans() }}
                                             @else
-                                                {{ $incident->createdon_inc->translatedFormat('l d F Y') }},
+                                                {{ $incident->createdon_inc->format('Y') == date('Y')? ucwords($incident->createdon_inc->translatedFormat('l d F Y')) : ucwords($incident->createdon_inc->translatedFormat('l d F Y')) }},
                                                 {{ $incident->createdon_inc->diffForHumans() }}
                                             @endif
                                         </p>
