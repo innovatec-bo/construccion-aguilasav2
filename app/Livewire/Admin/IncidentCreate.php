@@ -2,18 +2,25 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Incident;
 use App\Models\Project;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Validate;
 
 class IncidentCreate extends Component
 {
+    #[Validate(['required','string'], as: 'proyecto(s)')]
     public $projectCodes;
     public $projectCodesArray;
     public $projectList;
+    #[Validate(['required','date_format:d-m-Y'], as: 'fecha de la incidencia')]
     public $incidentDate;
+    #[Validate(['required','numeric'], as: 'tipo de incidente')]
     public $incidentType;
+    #[Validate(['required','string'], as: 'detalle')]
     public $incidentDetail;
     public $formHidden;
     public $showProjectsNotFound;
@@ -46,8 +53,9 @@ class IncidentCreate extends Component
     {
         $this->validate();
         $this->prepareProjectList();
+        $userId = Auth::user()->id_usr;
+        $date = date('Y-m-d H:i:s');
         $incidentsToSave = [];
-        $aux = $this->projectCodesArray;
         foreach ($this->projectList as $project) 
         {
             $incidentsToSave[] = [
@@ -60,7 +68,11 @@ class IncidentCreate extends Component
                 'stopped_inc' => 0,
                 'incident_type_inc' => $this->incidentType,
                 'need_to_be_solved_inc' => 0,
-                'solved_by_inc' => null
+                'solved_by_inc' => null,
+                'created_by' => $userId,
+                'created_at' => $date,
+                'createdby_inc' => $userId,
+                'createdon_inc' => $date
             ];
             $posInCodesArray = array_search(strtolower($project->code_pro), array_map('strtolower',$this->projectCodesArray));
             
@@ -70,15 +82,15 @@ class IncidentCreate extends Component
             }
         }
         
+        if(count($incidentsToSave) > 0)
+        {
+            Incident::insert($incidentsToSave);
+        }
+
         $this->formHidden = TRUE;
         if (count($this->projectCodesArray) > 0 && count($this->projectList) > 0)
         {
             $this->showProjectsNotFound = TRUE;
-        }
-
-        if(count($incidentsToSave) > 0)
-        {
-            dd($incidentsToSave);
         }
     }
 

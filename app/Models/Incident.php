@@ -32,7 +32,11 @@ class Incident extends Model
         'stopped_inc',
         'incident_type_inc',
         'need_to_be_solved_inc',
-        'solved_by_inc'
+        'solved_by_inc',
+        'created_by',
+        'created_at',
+        'createdby_inc',
+        'createdon_inc'
     ];
 
     const CREATED_AT = 'createdon_inc';

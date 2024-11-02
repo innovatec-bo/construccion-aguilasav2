@@ -46,15 +46,21 @@
                         <label class="form-label" for="projectCodes">Proyecto(s)</label>
                         <textarea id="projectCodes" wire:model.live="projectCodes" class="form-control form-control-sm" placeholder="proyecto1,proyecto2,proyecto3"></textarea>
                         <div class="form-text">Especifique aqu&iacute; el proyecto o los proyectos a los que se aplicar&aacute; esta incidencia.</div>
+                        @error('projectCodes')
+                            <small class="text-danger">{{ $message }} </small>
+                        @enderror
                     </div>
-                    <div class="col-12 mb-4" wire:ignore>
+                    <div class="col-12 mb-4">
                         <label class="form-label" for="incidentDate">Fecha de la incidencia</label>
-                        <div class="input-group input-group-sm date">
+                        <div class="input-group input-group-sm date" wire:ignore>
                             <input class="form-control" id="incidentDate" readonly type="text" value="{{$incidentDate}}" placeholder="dd-mm-yyyy">
                             <span class="input-group-text input-group-append" role="button">
                                 <i class="ti ti-calendar"></i>
                             </span>
                         </div>
+                        @error('incidentDate')
+                            <small class="text-danger">{{ $message }} </small>
+                        @enderror
                     </div>
                     <div class="col-12 mb-4">
                         <label for="incidentType" class="form-label">Tipo de incidente</label>
@@ -64,10 +70,16 @@
                                 <option value="{{$key}}">{{$name}}</option>
                             @endforeach
                         </select>
+                        @error('incidentType')
+                            <small class="text-danger">{{ $message }} </small>
+                        @enderror
                     </div>
                     <div class="col-12">
                         <label class="form-label" for="incidentDetail">Detalle</label>
                         <textarea id="incidentDetail" wire:model.live="incidentDetail" class="form-control form-control-sm" placeholder="Escriba aqui el detalle de la incidencia"></textarea>
+                        @error('incidentDetail')
+                            <small class="text-danger">{{ $message }} </small>
+                        @enderror
                     </div>
                 </div>
             @endif
