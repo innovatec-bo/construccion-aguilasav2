@@ -112,7 +112,7 @@
                                             {{ $project->address_pro }} 
                                         </td>
                                     @endif
-                                    <td class="text-end fw-bold px-2">{{number_format($project->currentBudget, 2,'.',',')}}/{{$project->productionPercentage}}</td>
+                                    <td class="text-end fw-bold px-2">{{number_format($project->currentBudget, 2,'.',',')}}</td>
                                     <td class="text-center px-2">
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false" wire:loading.class="disabled"><i class="ti ti-dots-vertical"></i></button>
