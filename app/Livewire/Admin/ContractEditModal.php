@@ -4,18 +4,24 @@ namespace App\Livewire\Admin;
 
 use App\Models\Contract;
 use Carbon\Carbon;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class ContractEditModal extends Component
 {
     public $contract;
+    #[Validate(as: 'número')]
     public $number;
+    #[Validate(as: 'monto')]
     public $amount;
+    #[Validate(as: 'desde')]
     public $from;
+    #[Validate(as: 'hasta')]
     public $to;
+    #[Validate(as: 'umbo')]
     public $umbo;
     public $active;
-    public $listeners = ['fromChanged','toChanged'];
 
     public function mount(Contract $contract)
     {
@@ -66,13 +72,8 @@ class ContractEditModal extends Component
         $this->dispatch('reloadContractIndex');
     }
 
-    public function fromChanged($date)
+    public function triggerLoading()
     {
-        $this->from = $date;
-    }
-
-    public function toChanged($date)
-    {
-        $this->to = $date;
+        return 0;
     }
 }

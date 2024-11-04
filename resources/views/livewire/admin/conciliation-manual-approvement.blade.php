@@ -1,10 +1,10 @@
-<div class="modal-dialog position-relative">
-    <div class="overlay d-none" wire:loading.class="d-flex" wire:target="save">
-        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
-            <span class="visually-hidden">Loading...</span>
+<div>
+    <div class="modal-content position-relative">
+        <div class="overlay d-none" wire:loading.class="d-flex" wire:target="save">
+            <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
-    </div>
-    <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Aprobacion manual de conciliaci&oacute;n</h5>
         </div>
