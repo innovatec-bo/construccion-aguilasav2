@@ -556,10 +556,6 @@ class Project extends Model
 
             $totalProductionWithDesign = (($this->productionAmount + $design) * 100) / $totalRealBudget;
         }
-        if(!isset($totalProductionWithDesign))
-        {
-            dd($this);
-        }
         
         return  round($totalProductionWithDesign,2);   
     }

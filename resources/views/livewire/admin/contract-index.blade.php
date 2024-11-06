@@ -5,18 +5,25 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    @can('admin.contracts.create')
-        <div class="col-md-2">
-            <div class="form-group">
-                <label>&nbsp;</label>
-                <a href="javascript:void(0);" wire:click="$dispatch('showModal','admin.contract-create-modal')"
-                    class="btn btn-primary btn-sm form-control" type="button">Nuevo contrato</a>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
+
+        <div class="d-flex flex-column justify-content-center">
+          <h4 class="mb-1">Contratos</h4>
+          <p class="mb-0">Listado de todos los contratos del sistema</p>
+        </div>
+        <div class="d-flex align-content-center flex-wrap gap-4">
+            <div class="d-flex gap-4">
+                @can('admin.contracts.create')
+                    <a href="javascript:void(0);" 
+                    wire:click="$dispatch('showModal', {data: {'alias' : 'admin.contract-create-modal','size':'modal-sm','params' :{}}})"
+                    class="btn btn-sm btn-primary waves-effect">Nuevo contrato</a>    
+                @endcan
             </div>
         </div>
-    @endcan
+    
+    </div>
     <div class="col-md-12 mt-4">
-        <div class="row">
-
+        <div class="row row-gap-3">
             @foreach ($contracts as $contract)
                 <div class="col-sm-6 col-lg-3">
                     <div class="card h-100">
@@ -25,7 +32,7 @@
                                 <p class="mb-0 text-body">Monto del contrato</p>
                                 <p class="card-text fw-medium text-success">{{ $contract->active ? 'Activo' : '' }}</p>
                             </div>
-                            <h4 class="card-title mb-1">Bs. {{ number_format($contract->amount_con, 2, '.', ',') }}</h4>
+                            <h5 class="card-title mb-1">Bs. {{ number_format($contract->amount_con, 2, '.', ',') }}</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -42,34 +49,6 @@
                                 Desde el {{$contract->start_date_con->translatedFormat('l d F Y')}} hasta el
                                         {{$contract->expiration_date_con->translatedFormat('l d F Y')}}
                             </p>
-                            <div class="d-flex align-items-center mt-6">
-                                <div class="progress w-100" style="height: 10px;">
-                                    <div class="progress-bar bg-info" style="width: 70%" role="progressbar"
-                                        aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%"
-                                        aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="card text-white {{ $contract->active ? 'bg-primary' : 'bg-info' }} shadow-lg">
-                        <div class="card-body">
-                            <div class="fs-4 fw-semibold">Bs.
-                                {{ number_format($contract->amount_con, 2, '.', ',') }}</div>
-                            <div>
-                                <strong>Nro.</strong> {{ $contract->contract_number_con }}<br>
-                                <strong>UMBO: </strong>{{ $contract->umbo }}
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <div class="float-end ms-1 stacked-info">
-                                    <small class="">
-                                        Desde el {{ $contract->start_date_con->translatedFormat('l d F Y') }} hasta el
-                                        {{ $contract->expiration_date_con->translatedFormat('l d F Y') }}
-                                    </small>
-                                </div>
-                            </div>
                             @php
                                 $start = $contract->start_date_con->timestamp;
                                 $end = $contract->expiration_date_con->timestamp;
@@ -78,21 +57,20 @@
                                 $progress = $current / $timespan;
                                 $remaining = (1 - $progress) * 100;
                             @endphp
-                            <div class="progress progress-white progress-thin my-2">
-                                <div class="progress-bar" role="progressbar" style="width: {{ 100 - $remaining }}%"
-                                    aria-valuenow="{{ 100 - $remaining }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="d-flex align-items-center mt-6 mb-3">
+                                <div class="progress w-100" style="height: 10px;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{ 100 - $remaining }}%" aria-valuenow="{{ 100 - $remaining }}" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
                             </div>
+                            @can('admin.contracts.edit')
+                                <button type="button" class="btn btn-sm btn-primary w-100 waves-effect waves-light"
+                                wire:click="$dispatch('showModal', {data: {'alias' : 'admin.contract-edit-modal','size':'modal-sm','params' :{'contract':{{$contract->id_con}} }}})"
+                                >
+                                    Editar
+                                </button>
+                            @endcan
                         </div>
-                        @can('admin.contracts.edit')
-                            <div class="card-footer px-3 py-2">
-                                <a class="btn-block text-medium-emphasis-inverse d-flex justify-content-between align-items-center"
-                                    href="javascript:void(0);"
-                                    wire:click="$dispatch('showModal','admin.contract-edit-modal', {{ $contract }})">
-                                    <span class="small fw-semibold">Editar</span>
-                                    <x-coreui-icon svgClass="icon" icon="cil-pencil" />
-                                </a>
-                            </div>
-                        @endcan
                     </div>
                 </div>
             @endforeach

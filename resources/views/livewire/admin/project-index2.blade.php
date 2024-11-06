@@ -21,7 +21,7 @@
             </div>
         </div>
     
-      </div>
+    </div>
     <div class="col-md-2">
         <div class="form-group">
             <label>COD Proyecto</label>
@@ -114,6 +114,7 @@
                                     @endif
                                     <td class="text-end fw-bold px-2">{{number_format($project->currentBudget, 2,'.',',')}}</td>
                                     <td class="text-center px-2">
+                                        {{-- @dump(Auth::user()->hasRole('Responsable de Almac')) --}}
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false" wire:loading.class="disabled"><i class="ti ti-dots-vertical"></i></button>
                                             <div class="dropdown-menu" style="">
@@ -123,8 +124,10 @@
                                                 @can('admin.projects.status-management')
                                                     <a class="dropdown-item waves-effect" wire:loading.class="disabled" target="_blank" href="{{route('admin.projects.status-management', $project->id_pro)}}">Administraci&oacute;n de estados</a>
                                                 @endcan
-                                                @if (Auth::user()->hasRole('Responsable de Almac') && !$project->project_has_returned_materials_to_cre && $project->status_pro == 34 && $enableManualApprovementForConciliations)
-                                                    <a class="dropdown-item waves-effect" wire:loading.class="disabled" href="javascript:void(0);"  wire:click="$dispatch('showModal','admin.conciliation-manual-approvement', {{$project->id_pro}})">Aprobar conciliaci&oacute;n</a>
+                                                @if (!$project->project_has_returned_materials_to_cre && $project->status_pro == 34 && $enableManualApprovementForConciliations)
+                                                    <a class="dropdown-item waves-effect" wire:loading.class="disabled" href="javascript:void(0);" 
+                                                    wire:click="$dispatch('showModal', {data: {'alias' : 'admin.conciliation-manual-approvement','size':'modal-sm','params' :{project:{{ $project->id_pro }} }}})"
+                                                    >Aprobar conciliaci&oacute;n</a>
                                                 @endif
                                             </div>
                                         </div>

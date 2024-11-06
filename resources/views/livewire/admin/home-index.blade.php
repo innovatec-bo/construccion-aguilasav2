@@ -1,6 +1,5 @@
 <div class="row g-6">
-    <!-- Card Border Shadow -->
-    <div class="col-lg-3 col-sm-6">
+    {{-- <div class="col-lg-3 col-sm-6">
         <div class="card card-border-shadow-primary h-100">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-2">
@@ -69,8 +68,8 @@
                 </p>
             </div>
         </div>
-    </div>
-    <!--/ On route vehicles Table -->
+    </div> --}}
+    
     <div class="col-md-12">
         <div class="card mb-4 position-relative shadow-lg">
             <div class="overlay" wire:loading.flex wire:target="previousPage, nextPage, gotoPage, search, roleId">

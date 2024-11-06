@@ -4,6 +4,12 @@
             <span class="visually-hidden">Cargando...</span>
           </div>
     </div>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
+        <div class="d-flex flex-column justify-content-center">
+          <h4 class="mb-1">Registros de avance</h4>
+          <p class="mb-0">Listado de todos los registros de avance de los fiscales</p>
+        </div>
+    </div>
     <div class="col-md-2">
         <div class="form-group">
             <label>COD Proyecto</label>
@@ -36,18 +42,12 @@
             <span class="input-group-text input-group-append" role="button" id="basic-addon2"><i class="fa fa-calendar"></i></span>
         </div>
     </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            <label>&nbsp;</label>
-            <button class="btn btn-primary btn-sm form-control" type="button">Decargar</button>
-        </div>
-    </div>
     <div class="col-md-12">
         <div class="card shadow-lg">
             <div class="card-body p-0">
                 
                 <div class="table-responsive">
-                    <table class="table table-bordered table-sm table-hover table-striped mb-0">
+                    <table class="table table-bordered table-sm table-hover table-striped mb-0 small">
                         <thead>
                             <tr>
                                 {{-- <th>ID</th> --}}
@@ -64,37 +64,37 @@
                             @foreach ($workedUpStructures as $workedUpStructure)
                                 <tr data-id="{{$workedUpStructure->id_wus}}">
                                     {{-- <td>{{$workedUpStructure->id_wus}}</td> --}}
-                                    <td class="stacked-info">
+                                    <td class="stacked-info px-2">
                                         @if ($workedUpStructure->log)
                                             {{ $workedUpStructure->log->manual_entry_date_lal->format('d-m-Y H:i:s') }}
                                             <p class="mb-0 text-info">{{ $workedUpStructure->log->manual_entry_date_lal->diffForHumans() }}</p>        
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="px-2">
                                         @if ($workedUpStructure->log)
                                             {{$workedUpStructure->log->detail_lal}}    
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="px-2">
                                         @if ($workedUpStructure->log)
                                             {{ $workedUpStructure->log->user->full_name }}    
                                         @endif
                                     </td>
-                                    <td class="stacked-info">
+                                    <td class="stacked-info px-2">
                                         {{ $workedUpStructure->laborCost->laborDetail->project->code_pro }}
                                         <p class="mb-0 text-info small">{{ $workedUpStructure->laborCost->laborDetail->project->status->status_name_pst }}</p>
                                     </td>
                                     @if ($workedUpStructure->laborCost->laborDetail->project->latitude_pro != '')
-                                        <td class="stacked-info"> 
+                                        <td class="stacked-info px-2"> 
                                             {{ $workedUpStructure->laborCost->laborDetail->project->address_pro }} 
                                             <a class="small d-block" target="_blank" href="https://www.google.com/maps/search/?q={{$workedUpStructure->laborCost->laborDetail->project->latitude_pro}},{{$workedUpStructure->laborCost->laborDetail->project->longitude_pro}}" class="d-block">Ver en google maps</a>
                                         </td>
                                     @else
-                                        <td> 
+                                        <td class="px-2">  
                                             {{ $workedUpStructure->laborCost->laborDetail->project->address_pro }} 
                                         </td>
                                     @endif
-                                    <td class="stacked-info">
+                                    <td class="stacked-info px-2">
                                         {{$workedUpStructure->laborCost->buildingStructure->structure_code_bus}}<br>
                                         <p class="small my-0">
                                             {{$workedUpStructure->laborCost->activity_lac}} - 
@@ -103,7 +103,7 @@
                                             {{number_format($workedUpStructure->worked_up_wus, 2,'.',',')}} {{$workedUpStructure->laborCost->buildingStructure->unit_of_measurement_bus}}
                                         </p>
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end px-2">
                                         {{number_format($workedUpStructure->laborCost->laborDetail->project->currentBudget,2,'.',',')}}
                                     </td>
                                 </tr>    
@@ -115,7 +115,7 @@
         </div>
     </div>
     <div class="col-md-12 mt-4">
-        {{ $workedUpStructures->links() }}
+        {{ $workedUpStructures->links(data: ['scrollTo' => false]) }}
     </div>
 </div>
 @script
