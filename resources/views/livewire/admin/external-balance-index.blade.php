@@ -102,7 +102,6 @@
                                                     <i class="ti ti-eye me-1"></i> Ver
                                                 </a>
                                                   <a class="dropdown-item waves-effect" href="javascript:void(0);" 
-                                                  {{-- wire:click="$dispatch('showModal','confirm-delete-modal', {{$externalBalance->id}},'App\\Models\\ExternalBalance')" --}}
                                                   wire:click="$dispatch('showModal', {data: {'alias' : 'confirm-delete-modal','size':'modal-sm','params' :{objectToDelete:{{ $externalBalance->id }}, model:'App\\Models\\ExternalBalance' }}})"
                                                   >
                                                     <i class="ti ti-trash me-1"></i> Eliminar

@@ -1,5 +1,5 @@
 <div class="row position-relative">
-    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="delete, previousPage, nextPage, gotoPage, idMSU, projectCode, materialSummaryTypeSelected, from, to">
+    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, idMSU, projectCode, materialSummaryTypeSelected, from, to, triggerLoading">
         <div class="spinner-grow" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
@@ -120,7 +120,10 @@
                                                     @endif
                                                 @endcan
                                                 @if (Auth::user()->email == 'jair@twiiti.com')
-                                                    <a class="dropdown-item waves-effect" wire:loading.class="disabled" href="javascript:void(0);" lv-confirm-action data-record="{{$materialSummary}}">
+                                                    <a class="dropdown-item waves-effect" 
+                                                    wire:loading.class="disabled" href="javascript:void(0);" lv-confirm-action data-record="{{$materialSummary}}"
+                                                    wire:click="$dispatch('showModal', {data: {'alias' : 'confirm-delete-modal','size':'modal-sm','params' :{objectToDelete:{{ $materialSummary->id_msu }}, model:'App\\Models\\MaterialSummary' }}})"
+                                                    >
                                                         <i class="ti ti-trash me-1"></i> Eliminar
                                                     </a>
                                                 @endif
@@ -141,9 +144,8 @@
         </div>
     </div>
 </div>
-@push('scripts')
+@script
     <script>
-        $(function() {
             $(document).on('click', '.lv-confirm-action', function() {
                 var record = $(this).data('record');
                 var question = $(this).data('confirm-question');
@@ -164,15 +166,14 @@
                 }
                 if ($(this).hasClass('from')) 
                 {
-                    Livewire.emit('fromChanged', date); 
-                    console.log(date);  
+                    @this.from = date;
                 } 
                 else 
                 {
-                    Livewire.emit('toChanged', date);
+                    @this.to = date;
                 }
+                @this.triggerLoading();
             });
-        });
 
         function confirmSubmit(question, recordId) {
             Swal.fire({
@@ -190,4 +191,4 @@
 
         
     </script>
-@endpush
+@endscript

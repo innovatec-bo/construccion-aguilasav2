@@ -16,7 +16,7 @@ class ExternalBalanceIndex extends Component
     public $deleteId = '';
     protected $queryString = ['search' => ['except' => '']];
     protected $listeners = [
-        'render'
+        'object-deleted' => 'render'
     ];
 
     public function updatingSearch()

@@ -63,4 +63,9 @@ class MaterialSummary extends Model
         $this->deleted_msu = 1;
         parent::delete();
     }
+
+    public function deleteConfirmMessage() : string
+    {
+        return "Esta acci&oacute;n eliminar&aacute; moviento con c&oacute;digo ".$this->id_msu;
+    }
 }

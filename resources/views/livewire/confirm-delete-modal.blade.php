@@ -5,6 +5,11 @@
         </div>
         <div class="modal-body">
             <h5 class="modal-title">Eliminar?</h5>
+            @if ($confirmMessage != "")
+                <p>
+                    {!!$confirmMessage!!}
+                </p>
+            @endif
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Cancelar</button>

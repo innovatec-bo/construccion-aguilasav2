@@ -30,10 +30,11 @@ Class MaterialSummaryIndex extends Component
         'from' => ['except' => '', 'as' => 'desde'],
         'to' => ['except' => '', 'as' => 'hasta']
     ];
+
     protected $listeners = [
-        'fromChanged' => 'fromChanged',
-        'toChanged' => 'toChanged'
+        'object-deleted' => 'render'
     ];
+
     protected $messages = [
         'from.date_format' => 'Formato incorrecto.',
         'to.date_format' => 'Formato incorrecto.',
@@ -47,7 +48,6 @@ Class MaterialSummaryIndex extends Component
     public function updating($attribute)
     {
         $toValidate = ['idMSU','projectCode','materialSummaryTypeSelected','from', 'to'];
-        // dd(array_search($attribute, $toValidate) !== FALSE);
         if (array_search($attribute, $toValidate) !== FALSE) 
         {
             $this->resetPage();
@@ -93,14 +93,9 @@ Class MaterialSummaryIndex extends Component
         return view('livewire.admin.material-summary-index', compact('materialSummaryList'));
     }
 
-    public function fromChanged($date)
+    public function triggerLoading()
     {
-        $this->from = $date;
-    }
-
-    public function toChanged($date)
-    {
-        $this->to = $date;
+        return 0;
     }
 
     public function order($sort)
@@ -122,12 +117,5 @@ Class MaterialSummaryIndex extends Component
             $this->sort = $sort;
             $this->direction = 'asc';
         }   
-    }
-
-    public function delete(MaterialSummary $materialSummary)
-    {
-        $materialSummary->delete();
-        $this->dispatch('alert',['successMessage', 'Movimiento eliminado exitosamente.']);
-        return back();
     }
 }
