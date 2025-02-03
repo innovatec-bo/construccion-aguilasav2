@@ -26,7 +26,7 @@ class ProjectStatusIndex extends Component
     {
         $projectStatus = ProjectStatus::when($this->search, function(Builder $query, $search){
         
-            $query->where('firstname_usr','like','%'.$this->search.'%');
+            $query->where('status_name_pst','like','%'.$this->search.'%');
         })
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
