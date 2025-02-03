@@ -266,6 +266,25 @@ class DashboardMenu extends Component
                 ]
             ],
             [
+                'text'        => 'Estados de proyecto',
+                'icon'        => 'ti ti-smart-home',
+                'can'         => ['admin.project-status.index', 'admin.project-status.create'],
+                'submenu'     => [
+                    [
+                        'text'        => 'Lista',
+                        'route'       => 'admin.project-status.index',
+                        'can'         => 'admin.project-status.index',
+                        'icon'        => '',
+                    ],
+                    [
+                        'text'        => 'Crear',
+                        'route'       => 'admin.project-status.create',
+                        'can'         => 'admin.project-status.create',
+                        'icon'        => '',
+                    ]
+                ]
+            ],
+            [
                 'text'        => 'Configuracion',
                 'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.status-management-settings.edit'],

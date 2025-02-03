@@ -15,7 +15,9 @@ class StatusResponsible extends Model
     
     protected $table = "wfl_status_responsibles";
     protected $primaryKey = "id_sre";
-
+    protected $casts = [
+        'active_sre' => 'boolean'
+    ];
     const CREATED_AT = 'createdon_sre';
     const UPDATED_AT = 'editedon_sre';
 
