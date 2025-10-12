@@ -28,7 +28,7 @@ Class BuildingStructureIndex extends Component
         $buildingStructureList = BuildingStructure::where(function(Builder $query){
             if(isset($this->search) && $this->search != "")
                 $query->where('description_bus','like','%'.$this->search.'%')
-                ->orWhere('structure_code_bus',$this->search);
+                ->orWhere('structure_code_bus','like','%'.$this->search.'%');
         })
         ->orderBy($this->sort, $this->direction)
         ->paginate(6);
