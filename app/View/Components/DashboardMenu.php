@@ -145,6 +145,12 @@ class DashboardMenu extends Component
                 ],  
             ],
             [
+                'text'        => 'Poda',
+                'icon'        => 'ti ti-scissors',
+                'route'       => 'admin.tree-prunings.index',
+                'can'         => ['admin.tree-prunings.index', 'admin.tree-prunings.create'],
+            ],
+            [
                 'text'        => 'Estructuras',
                 'icon'        => 'ti ti-smart-home',
                 'can'         => ['admin.building-structures.index','admin.building-structures.upload-default-materials'],

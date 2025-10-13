@@ -86,6 +86,9 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     //Contracts
     Route::resource('contratos','ContractController')->parameters(['contratos' => 'contract'])->names('contracts');
 
+    //Pruning
+    Route::resource('podas','TreePruningController')->parameters(['podas' => 'tree_pruning'])->names('tree-prunings');
+
     //External Balance
     Route::resource('balance-externo','ExternalBalanceController')->parameters(['balance-externo' => 'external-balance'])->names('external-balance');
 
