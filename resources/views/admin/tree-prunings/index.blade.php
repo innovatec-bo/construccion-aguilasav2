@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-layout')
 
-@section('title', 'Poda de arboles')
+@section('title', 'Proyectos con cronograma de poda')
 
 @section('breadcrumb')
     {{ Breadcrumbs::render('admin.tree-prunings.index') }}
