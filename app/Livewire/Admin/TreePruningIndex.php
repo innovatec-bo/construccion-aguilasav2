@@ -12,7 +12,6 @@ class TreePruningIndex extends Component
 
     public $search = '';
     public $projectCode = '';
-    public $listeners = ['tree-pruning-created' => 'render'];
 
     public function updatingSearch()
     {

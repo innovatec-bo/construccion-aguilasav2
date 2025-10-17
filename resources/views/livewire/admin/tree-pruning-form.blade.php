@@ -51,6 +51,7 @@
           <table class="table table-bordered table-sm table-hover table-striped mb-0 small">
             <thead>
               <tr class="text-center">
+                <th class="px-2">Nro<br>&Aacute;rbol</th>
                 <th class="px-2">Fecha</th>
                 <th class="px-2">Especie</th>
                 <th class="px-2">UTM<br>XCOORD</th>
@@ -69,6 +70,7 @@
             <tbody>
                 @foreach ($projectBudget->treePruning as $treePruning)
                 <tr>
+                    <td class="px-2 text-center">{{$treePruning->tree_number}}</td>
                     <td class="px-2 text-center">{{$treePruning->pruned_at->format('d-m-Y')}}</td>
                     <td class="px-2">{{$treePruning->specy->name}}</td>
                     <td class="px-2 text-center">{{round($treePruning->utm_x,2)}}</td>
