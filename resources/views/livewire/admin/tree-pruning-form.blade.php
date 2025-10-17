@@ -1,4 +1,10 @@
-<div class="row invoice-preview justify-content-center row-gap-4">
+<div class="row invoice-preview justify-content-center row-gap-4 position-relative">
+    <div class="overlay" wire:loading.flex wire:target="refreshComponent,showModal">
+        <div class="sk-swing sk-primary">
+            <div class="sk-swing-dot"></div>
+            <div class="sk-swing-dot"></div>
+        </div>
+    </div>
     <!-- Invoice -->
     <div class="col-12 mb-md-0 mb-6">
         <div class="card invoice-preview-card p-sm-12 p-6">
@@ -102,7 +108,7 @@
                                 @endcan
                                 @if (Auth::user()->email == 'jair@twiiti.com')
                                     <a class="dropdown-item waves-effect" 
-                                    wire:loading.class="disabled" href="javascript:void(0);" lv-confirm-action data-record="{{$treePruning}}"
+                                    wire:loading.class="disabled" href="javascript:void(0);"
                                     wire:click="$dispatch('showModal', {data: {'alias' : 'confirm-delete-modal','size':'modal-sm','params' :{objectToDelete:{{ $treePruning->id }}, model:'App\\Models\\TreePruning' }}})"
                                     >
                                         <i class="ti ti-trash me-1"></i> Eliminar
@@ -119,25 +125,3 @@
     </div>
     <!-- /Invoice -->
   </div>
-  @script
-  <script>
-    $(document).on('click', '.lv-confirm-action', function() {
-        var record = $(this).data('record');
-        var question = $(this).data('confirm-question');
-        confirmSubmit(question, record);
-    });
-    function confirmSubmit(question, recordId) {
-            Swal.fire({
-                title: "Eliminar registro?",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Si!",
-                cancelButtonText: "No"
-            }).then(function(result) {
-                if (result.value === true) {
-                    @this.delete(recordId);
-                }
-            });
-        }
-  </script>
-  @endscript

@@ -10,7 +10,6 @@ class TreePruningForm extends Component
 {
     public $projectBudget;
     public $project;
-    public $listeners = ['tree-pruning-created' => 'render'];
 
     public function mount(ProjectBudget $projectBudget)
     {
@@ -18,10 +17,9 @@ class TreePruningForm extends Component
         $this->project = $this->projectBudget->project;
     }
 
-    #[On('tree-pruning-created')]
+    #[On(['tree-pruning-created','object-deleted'])]
     public function refreshComponent()
     {
-        // Si solo quieres recargar los datos:
         $this->projectBudget->refresh();
         $this->project = $this->projectBudget->project;
     }
