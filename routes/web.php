@@ -87,6 +87,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::resource('contratos','ContractController')->parameters(['contratos' => 'contract'])->names('contracts');
 
     //Pruning
+    Route::get('podas/formulario/{project_budget}','TreePruningController@form')->name('tree-prunings.form');
     Route::resource('podas','TreePruningController')->parameters(['podas' => 'tree_pruning'])->names('tree-prunings');
 
     //External Balance

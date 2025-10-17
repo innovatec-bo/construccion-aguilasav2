@@ -7,5 +7,5 @@
 @stop
 
 @section('content')
-    {{-- @livewire('admin.contract-index') --}}
+    @livewire('admin.tree-pruning-index')
 @stop

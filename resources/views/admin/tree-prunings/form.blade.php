@@ -1,13 +1,13 @@
 @extends('layouts.dashboard-layout')
 
-@section('title', 'Nuevo Proyecto')
+@section('title', 'Registro de podas')
 
 @section('content_header')
-    <h1>Nuevo Proyecto</h1>
+    <h1>Registro de podas</h1>
 @stop
 
 @section('content')
-    @livewire('admin.project-create')
+    @livewire('admin.tree-pruning-form', ['projectBudget' => $projectBudget])
 @stop
 
 @section('css')

@@ -290,3 +290,9 @@ Breadcrumbs::for('admin.labor-cost.edit', function (BreadcrumbTrail $trail, Labo
     $trail->push('Detalle de Mano de obra '. $laborCost->laborDetail->project->code_pro, route('admin.labor-details.show', $laborCost->laborDetail));
     $trail->push('Editar estructura '.$laborCost->buildingStructure->structure_code_bus, route('admin.materials-summary.edit', $laborCost));
 });
+
+// Tree pruning
+Breadcrumbs::for('admin.tree-prunings.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.home.index');
+    $trail->push('Podas', route('admin.tree-prunings.index'));
+});

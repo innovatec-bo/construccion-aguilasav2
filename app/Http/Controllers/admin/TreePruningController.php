@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
+use App\Models\ProjectBudget;
 use App\Models\TreePruning;
 use Illuminate\Http\Request;
 
@@ -25,12 +27,17 @@ class TreePruningController extends Controller
         return view('admin.tree-prunings.index');
     }
 
+    public function form(ProjectBudget $projectBudget)
+    {
+        return view('admin.tree-prunings.form', compact('projectBudget'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Project $project)
     {
-        //
+
     }
 
     /**
@@ -44,7 +51,7 @@ class TreePruningController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(TreePruning $treePruning)
+    public function show(Project $project)
     {
         //
     }
