@@ -148,7 +148,7 @@ class TreePruningCreate extends Component
         try {
             $manager = new ImageManager(new GdDriver());
             $contents = file_get_contents($url);
-            if ($contents === false) throw new \Exception("Can't read $url registering ecommerce ".$model->ecommerce_name);
+            if ($contents === false) throw new \Exception("Can't read $url registering treePruning ".$model->id);
 
             $image = $manager->read($contents);
             $image->scale(720, 720);
@@ -160,7 +160,7 @@ class TreePruningCreate extends Component
                 ->usingFileName($filenamePrefix . '_' . $time . '.jpg')
                 ->toMediaCollection($collection);
         } catch (\Throwable $e) {
-            Log::error("Error processing file for $collection to tree_pruning ".$model->ecommerce_name, [
+            Log::error("Error processing file for $collection to tree_pruning ".$model->id, [
                 'error' => $e->getMessage(),
                 'tree_pruning_id' => $model->id,
                 'url' => $url
