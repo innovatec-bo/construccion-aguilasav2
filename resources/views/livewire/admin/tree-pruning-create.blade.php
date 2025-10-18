@@ -94,7 +94,12 @@
                         <div class="col-6">
                             <div class="form-group mb-3">
                                 <label class="form-label" for="quality">Calidad</label>
-                                <input type="text" id="quality" class="form-control form-control-sm" wire:model.live="quality">
+                                <select class="form-select form-select-sm" name="" id="quality" wire:model.live="quality">
+                                    <option value="">---</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
                                 @error('quality')
                                     <span class="text-danger small"> {{$message}} </span>
                                 @enderror
