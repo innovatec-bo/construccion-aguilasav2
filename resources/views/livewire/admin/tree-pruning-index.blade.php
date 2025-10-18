@@ -58,9 +58,11 @@
                                             @dump($budget)
                                         @endif
                                     </td>
-                                    <td>
-                                        @if (!$budget->treePruning)
-                                            Sin registros
+                                    <td class="text-center">
+                                        @if ($budget->treePruning->count() == 0)
+                                            <span class="text-danger fw-bold">Sin registros</span>
+                                        @elseif ($budget->treePruning->count() > 0)
+                                            {{$budget->treePruning->count()}}
                                         @endif
                                     </td>
                                     <td>
