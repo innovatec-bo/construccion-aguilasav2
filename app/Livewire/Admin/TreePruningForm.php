@@ -17,7 +17,7 @@ class TreePruningForm extends Component
         $this->project = $this->projectBudget->project;
     }
 
-    #[On(['tree-pruning-created','object-deleted'])]
+    #[On(['tree-pruning-created','tree-pruning-edited','object-deleted'])]
     public function refreshComponent()
     {
         $this->projectBudget->refresh();
@@ -27,5 +27,15 @@ class TreePruningForm extends Component
     public function render()
     {
         return view('livewire.admin.tree-pruning-form');
+    }
+
+    public function openFormToCreateTreePruning($projectBudget)
+    {
+        $this->dispatch('showModal',data: ['alias' => 'admin.tree-pruning-create','params' => ['projectBudget' => $projectBudget] ]);
+    }
+
+    public function openFormToEditTreePruning($treePruning)
+    {
+        $this->dispatch('showModal',data: ['alias' => 'admin.tree-pruning-edit','params' => ['treePruning' => $treePruning] ]);
     }
 }

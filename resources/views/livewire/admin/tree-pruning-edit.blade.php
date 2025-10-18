@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="modal-header">
-        <h5 class="modal-title">Registrar poda</h5>
+        <h5 class="modal-title">Editar poda</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
@@ -94,7 +94,12 @@
                         <div class="col-6">
                             <div class="form-group mb-3">
                                 <label class="form-label" for="quality">Calidad</label>
-                                <input type="text" id="quality" class="form-control form-control-sm" wire:model.live="quality">
+                                <select class="form-select form-select-sm" name="" id="quality" wire:model.live="quality">
+                                    <option value="">---</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
                                 @error('quality')
                                     <span class="text-danger small"> {{$message}} </span>
                                 @enderror
@@ -126,7 +131,7 @@
                             <div class="form-group mb-3">
                                 <label class="form-label">Fecha de poda</label>
                                 <div class="input-group date prunedAt">
-                                    <input class="form-control form-control-sm" type="text" value="" placeholder="dd/mm/yyyy">
+                                    <input class="form-control form-control-sm" type="text" value="{{$prunedAt}}" placeholder="dd/mm/yyyy">
                                     <span class="input-group-text input-group-append" id="basic-addon2"><i class="fa fa-calendar"></i></span>
                                 </div>
                                 @error('prunedAt')
@@ -143,6 +148,7 @@
                                 @enderror
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="col-md-5">

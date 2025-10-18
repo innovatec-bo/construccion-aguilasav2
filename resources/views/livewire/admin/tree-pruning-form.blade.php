@@ -1,5 +1,5 @@
 <div class="row invoice-preview justify-content-center row-gap-4 position-relative">
-    <div class="overlay" wire:loading.flex wire:target="refreshComponent,showModal">
+    <div class="overlay" wire:loading.flex wire:target="refreshComponent,openFormToCreateTreePruning,openFormToEditTreePruning">
         <div class="sk-swing sk-primary">
             <div class="sk-swing-dot"></div>
             <div class="sk-swing-dot"></div>
@@ -40,7 +40,8 @@
                         <button 
                             class="btn btn-primary" 
                             type="button"
-                            wire:click="$dispatch('showModal', {data: {'alias' : 'admin.tree-pruning-create','params' :{'projectBudget':{{$projectBudget}} }}})"
+                            wire:click="openFormToCreateTreePruning({{$projectBudget}})"
+                            {{-- wire:click="$dispatch('showModal', {data: {'alias' : 'admin.tree-pruning-create','params' :{'projectBudget':{{$projectBudget}} }}})" --}}
                             >
                             <span>
                                 <i class="ti ti-plus me-md-1"></i>
@@ -101,19 +102,15 @@
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti ti-dots-vertical"></i></button>
                             <div class="dropdown-menu" style="">
-                                @can('admin.tree-prunings.edit')
-                                    <a class="dropdown-item waves-effect" wire:loading.class="disabled" target="_blank" href="{{route('admin.tree-prunings.edit', $treePruning)}}">
-                                        <i class="ti ti-edit me-1"></i> Editar
-                                    </a>
-                                @endcan
-                                @if (Auth::user()->email == 'jair@twiiti.com')
-                                    <a class="dropdown-item waves-effect" 
+                                <a class="dropdown-item waves-effect" wire:loading.class="disabled" wire:click="openFormToEditTreePruning({{$treePruning}})" href="javascript:void(0);">
+                                    <i class="ti ti-edit me-1"></i> Editar
+                                </a>
+                                <a class="dropdown-item waves-effect" 
                                     wire:loading.class="disabled" href="javascript:void(0);"
                                     wire:click="$dispatch('showModal', {data: {'alias' : 'confirm-delete-modal','size':'modal-sm','params' :{objectToDelete:{{ $treePruning->id }}, model:'App\\Models\\TreePruning' }}})"
                                     >
-                                        <i class="ti ti-trash me-1"></i> Eliminar
-                                    </a>
-                                @endif
+                                    <i class="ti ti-trash me-1"></i> Eliminar
+                                </a>
                             </div>
                         </div>
                     </td>

@@ -13,11 +13,11 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Illuminate\Support\Facades\Log;
 
-class TreePruningCreate extends Component
+class TreePruningEdit extends Component
 {
     use WithFileUploads;
 
-    public $projectBudget;
+    public $treePruning;
     #[Validate(as: 'nro de arbol')]
     public $treeNumber;
     public $species;
@@ -51,16 +51,30 @@ class TreePruningCreate extends Component
     
     public $treeSpeciesList;
 
-    public function mount(ProjectBudget $projectBudget)
+    public function mount(TreePruning $treePruning)
     {
         $this->treeSpeciesList = TreeSpecies::all();
-        $this->species = 1;//Desconocida
-        $this->projectBudget = $projectBudget;
+        $this->treePruning = $treePruning;
+        $this->treeNumber = $this->treePruning->tree_number;
+        $this->species = $this->treePruning->species_id;
+        $this->utmX = $this->treePruning->utm_x;
+        $this->utmY = $this->treePruning->utm_y;
+        $this->neighborhood = $this->treePruning->neighborhood;
+        $this->neighborhoodUnit = $this->treePruning->neighborhood_unit;
+        $this->block = $this->treePruning->block;
+        $this->district = $this->treePruning->district;
+        $this->quality = $this->treePruning->quality;
+        $this->pruningType = $this->treePruning->pruning_type;
+        $this->hasAgreement = +$this->treePruning->has_agreement;
+        $this->notes = $this->treePruning->notes;
+        $this->prunedAt = $this->treePruning->pruned_at->format('d/m/Y');
+        $this->temporaryBeforeUrl = $this->treePruning->getFirstMediaUrl('before','md');
+        $this->temporaryAfterUrl = $this->treePruning->getFirstMediaUrl('after','md');
     }
 
     public function render()
     {
-        return view('livewire.admin.tree-pruning-create');
+        return view('livewire.admin.tree-pruning-edit');
     }
 
     public function rules()
@@ -74,7 +88,7 @@ class TreePruningCreate extends Component
             'neighborhoodUnit' => ['required', 'string', 'max:255'],
             'block'        => ['required', 'string', 'max:100'],
             'district'     => ['required', 'string', 'max:255'],
-            'quality'      => ['required', 'string', 'max:20'],
+            'quality'      => ['required'],
             'pruningType'  => ['required', 'string', 'max:50'],
             'hasAgreement' => ['required', 'boolean'],
             'prunedAt'     => ['required', 'date_format:d/m/Y'],
@@ -88,36 +102,33 @@ class TreePruningCreate extends Component
         $this->validate();
 
         $prunedAt = Carbon::createFromFormat('d/m/Y', $this->prunedAt)->format('Y-m-d');
-        $data = [
-            'budget_id' => $this->projectBudget->id_prb,
-            'tree_number' => $this->treeNumber,
-            'species_id' => $this->species,
-            'utm_x' => $this->utmX,
-            'utm_y' => $this->utmY,
-            'neighborhood' => $this->neighborhood,
-            'neighborhood_unit' => $this->neighborhoodUnit,
-            'block' => $this->block,
-            'district' => $this->district,
-            'quality' => $this->quality,
-            'pruning_type' => $this->pruningType,
-            'has_agreement' => $this->hasAgreement,
-            'notes' => $this->notes,
-            'pruned_at' => $prunedAt,
-        ];
-
-        $treePruning = TreePruning::create($data);
+        
+        $this->treePruning->tree_number = $this->treeNumber;
+        $this->treePruning->species_id = $this->species;
+        $this->treePruning->utm_x = $this->utmX;
+        $this->treePruning->utm_y = $this->utmY;
+        $this->treePruning->neighborhood = $this->neighborhood;
+        $this->treePruning->neighborhood_unit = $this->neighborhoodUnit;
+        $this->treePruning->block = $this->block;
+        $this->treePruning->district = $this->district;
+        $this->treePruning->quality = $this->quality;
+        $this->treePruning->pruning_type = $this->pruningType;
+        $this->treePruning->has_agreement = $this->hasAgreement;
+        $this->treePruning->notes = $this->notes;
+        $this->treePruning->pruned_at = $prunedAt;
+        $this->treePruning->save();
 
         if ($this->before) 
         {
-            $this->_addImageToMediaCollection($treePruning, $this->temporaryBeforeUrl, 'tree_pruning_before', 'before');
+            $this->_addImageToMediaCollection($this->treePruning, $this->temporaryBeforeUrl, 'tree_pruning_before', 'before');
         }
 
         if ($this->after) 
         {
-            $this->_addImageToMediaCollection($treePruning, $this->temporaryAfterUrl, 'tree_pruning_after', 'after');
+            $this->_addImageToMediaCollection($this->treePruning, $this->temporaryAfterUrl, 'tree_pruning_after', 'after');
         }
         $this->dispatch('hideModal');
-        $this->dispatch('tree-pruning-created');
+        $this->dispatch('tree-pruning-edited');
     }
 
     public function updatedBefore()
