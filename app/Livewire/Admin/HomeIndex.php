@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Incident;
+use App\Models\ProjectBudget;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -45,34 +46,28 @@ Class HomeIndex extends Component
         //detail_inc not in('Construccion completada','En construccion','','En Contruccion')
         $incidents = Incident::whereNotIn('detail_inc',['Construccion completada','En construccion','','En Contruccion'])
         ->orderBy($this->sort, $this->direction)
-        ->paginate(6);
+        ->paginate(6, pageName: 'incident-page');
         if (!$this->lastIncident) 
         {
             $this->lastIncident = $incidents[0];
         }
         
-        return view('livewire.admin.home-index', compact('incidents'));
+        $budgets = ProjectBudget::query()
+            ->where('trim_tree_prb', 1)
+            ->whereHas('projectStatusLog')
+            ->with(['project', 'treePruning'])
+            // ->when($this->projectCode, function ($query) {
+            //     $query->whereHas('project', function ($q) {
+            //         $q->where('code_pro', 'like', '%' . $this->projectCode . '%');
+            //     });
+            // })
+            ->orderByDesc('id_prb')
+            ->paginate(10, pageName: 'budget-page');
+        return view('livewire.admin.home-index', compact('incidents', 'budgets'));
     }
 
-    public function order($sort)
+    public function paginationView()
     {
-        if ($this->sort == $sort) 
-        {
-            if ($this->direction == 'desc') 
-            {
-                $this->direction = 'asc';
-            } 
-            else 
-            {
-                $this->direction = 'desc';
-            }
-            
-        } 
-        else 
-        {
-            $this->sort = $sort;
-            $this->direction = 'asc';
-        }   
-        
+        return 'livewire.custom-paginations-links';
     }
 }
