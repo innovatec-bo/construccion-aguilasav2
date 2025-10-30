@@ -16,6 +16,7 @@ class TreePruningController extends Controller
         $this->middleware('permission:admin.tree-prunings.create', ['only' => ['create', 'store']]);
         $this->middleware('permission:admin.tree-prunings.edit', ['only' => ['edit','update']]);
         $this->middleware('permission:admin.tree-prunings.show', ['only' => ['show']]); 
+        $this->middleware('permission:admin.tree-prunings.form', ['only' => ['form']]); 
         $this->middleware('permission:admin.tree-prunings.delete', ['only' => ['destroy']]);
     }
 
