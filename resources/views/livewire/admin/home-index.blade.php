@@ -30,7 +30,7 @@
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
                                 <h6 class="mb-0">{{ $budget->project->code_pro }}</h6>
-                                <small class="text-body d-block">{{$budget->project->statusDetail(2)['responsible']}}</small>
+                                <small class="text-body d-block">{{!isset($budget->project->statusDetail(2)['responsible'])?'':$budget->project->statusDetail(2)['responsible']}}</small>
                                 </div>
                                 <div class="user-progress d-flex align-items-center gap-1">
                                     {{-- <p class="mb-0">$999.29</p> --}}

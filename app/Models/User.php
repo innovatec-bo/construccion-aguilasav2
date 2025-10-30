@@ -12,8 +12,11 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens;
     use HasFactory;
@@ -23,6 +26,7 @@ class User extends Authenticatable
     use HasRoles;
     use SoftDeletes;
     use BlameableTrait;
+    use InteractsWithMedia;
 
     protected $table = "sec_users";
     protected $primaryKey = "id_usr";
@@ -97,5 +101,27 @@ class User extends Authenticatable
     public function getAuthPassword()
     {
         return $this->password_usr;
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('default')
+            ->useFallbackUrl(asset('/admin-theme/img/avatars/default-avatar.jpg'))
+            ->useFallbackPath(public_path('/admin-theme/img/avatars/default-avatar.jpg'))
+            ->singleFile();
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('md')
+              ->width(480)
+              ->height(360)
+              ->sharpen(10)->nonQueued();
+
+        $this->addMediaConversion('sm')
+              ->width(240)
+              ->height(180)
+              ->sharpen(10)->nonQueued();
     }
 }
