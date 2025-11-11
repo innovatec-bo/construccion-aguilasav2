@@ -4,11 +4,11 @@ namespace App\Enums;
 
 enum PruningType: string
 {
-    case FORMATION_OR_DIRECTED = 'formation';
+    case FORMATION_OR_DIRECTED = 'formation_or_directed';
     case ORNAMENTAL = 'ornamental';
     case THINNING = 'thinning';
     case FLOWERING = 'flowering';
-    case REGENERATION_OR_RIGOROUS = 'regeneration';
+    case REGENERATION_OR_RIGOROUS = 'regeneration_or_rigurous';
     case BALANCED = 'balanced';
     case SANITARY = 'sanitary';
     case EMERGENCY = 'emergency';
