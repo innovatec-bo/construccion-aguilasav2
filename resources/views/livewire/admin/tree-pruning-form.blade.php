@@ -87,7 +87,7 @@
                     <td class="px-2">{{$treePruning->block}}</td>
                     <td class="px-2">{{$treePruning->district}}</td>
                     <td class="px-2 text-center">{{$treePruning->quality}}</td>
-                    <td class="px-2 text-center">{{$treePruning->pruning_type}}</td>
+                    <td class="px-2 text-center">{{$treePruning->pruning_type->label()}}</td>
                     <td class="px-2">
                         <div class="avatar avatar rounded-2 bg-label-secondary mx-auto">
                             <img src="{{$treePruning->getFirstMediaUrl('before','sm')}}"class="rounded-2">

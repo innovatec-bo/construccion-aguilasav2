@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PruningType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -37,6 +38,7 @@ class TreePruning extends Model implements HasMedia
     protected $casts = [
         'has_agreement' => 'boolean',
         'pruned_at' => 'date',
+        'pruning_type' => PruningType::class,
     ];
 
     public function budget()

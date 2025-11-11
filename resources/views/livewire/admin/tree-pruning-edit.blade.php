@@ -24,18 +24,18 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group mb-3">
-                                <label class="form-label" for="species">Especie</label>
-                                {{-- <input type="text" id="species" class="form-control form-control-sm" wire:model.live="species"> --}}
-                                <select name="species" id="species" class="form-select form-select-sm" wire:model.live="species">
+                            <div class="form-group mb-3" wire:ignore>
+                                <label class="form-label" for="speciesId">Especie</label>
+                                <select name="speciesId" id="speciesId" class="form-select form-select-sm select2">
+                                    <option value=""></option>
                                     @foreach ($treeSpeciesList->sortBy('name') as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
                                 </select>
-                                @error('species')
-                                    <span class="text-danger small"> {{$message}} </span>
-                                @enderror
                             </div>
+                            @error('speciesId')
+                                <span class="text-danger small"> {{$message}} </span>
+                            @enderror
                         </div>
                         <div class="col-6">
                             <div class="form-group mb-3">
@@ -108,7 +108,12 @@
                         <div class="col-6">
                             <div class="form-group mb-3">
                                 <label class="form-label" for="pruningType">Tipo de poda</label>
-                                <input type="text" id="pruningType" class="form-control form-control-sm" wire:model.live="pruningType">
+                                <select class="form-select form-select-sm" name="" id="pruningType" wire:model.live="pruningType">
+                                    <option value="">---</option>
+                                    @foreach ($pruningTypeList as $key => $item)
+                                        <option value="{{$key}}">{{$item}}</option>
+                                    @endforeach
+                                </select>
                                 @error('pruningType')
                                     <span class="text-danger small"> {{$message}} </span>
                                 @enderror
@@ -208,30 +213,59 @@
     </div>
 </div>
 @assets
-    <link rel="stylesheet" href="{{asset('js/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker3.css')}}">
-    <script src="{{asset('js/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.es.min.js')}}" defer></script>
-    <script src="{{asset('js/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.js')}}" defer></script>
+<script src="{{asset('admin-theme/vendor/libs/select2/select2.js')}}" defer></script>
+<script src="{{asset('js/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.js')}}" defer></script>
+<script src="{{asset('js/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.es.min.js')}}" defer></script>
+<link rel="stylesheet" type="text/css" href="{{asset('admin-theme/vendor/libs/select2/select2.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('js/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker3.css')}}">
 @endassets
 @script
     <script>
-        $('.input-group.date').datepicker({
-            language: "es",
-            format: 'dd/mm/yyyy',
-            autoclose: true,
-            container: ".modal-body"
-        });
+        $(() =>{
+            $('.input-group.date').datepicker({
+                language: "es",
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+                container: ".modal-body"
+            });
 
-        $('.input-group.date').on('changeDate', function(e) {
-            let date = null;
-            if (e.date !== undefined) 
+            $('.input-group.date').on('changeDate', function(e) {
+                let date = null;
+                if (e.date !== undefined) 
+                {
+                    date = moment(e.date).format('DD/MM/YYYY');
+                }
+                if ($(this).hasClass('prunedAt')) 
+                {
+                    @this.prunedAt = date;
+                    @this.triggerLoading();
+                }
+            });
+
+            $('#speciesId').select2({
+                placeholder:'',
+                dropdownParent: $('div.modal-body'),
+                tags:true,
+                templateResult: formatState
+            })
+            .on('select2:select', function(e){
+                var val = $('#speciesId').select2("val");
+                @this.speciesId = val;
+            });
+            var speciesIdPreselected = jQuery.parseJSON('{!!$speciesIdPreselected!!}');
+            $('#speciesId').append(new Option(speciesIdPreselected.name, speciesIdPreselected.id, true, true)).trigger('select2:select');        
+
+            function formatState (state) 
             {
-                date = moment(e.date).format('DD/MM/YYYY');
-            }
-            if ($(this).hasClass('prunedAt')) 
-            {
-                @this.prunedAt = date;
-                @this.triggerLoading();
-            } 
+                if ($.isNumeric(state.id)) 
+                {
+                    return state.text;
+                }
+                var $state = $(
+                    '<span class="text-warning fw-bold">' + state.text + '*</span>'
+                );
+                return $state;
+            };
         });
     </script>
 @endscript

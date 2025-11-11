@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\ProjectBudget;
+use App\Enums\PruningType;
 use App\Models\TreePruning;
 use App\Models\TreeSpecies;
 use Carbon\Carbon;
@@ -20,7 +20,8 @@ class TreePruningEdit extends Component
     public $treePruning;
     #[Validate(as: 'nro de arbol')]
     public $treeNumber;
-    public $species;
+    public $speciesId;
+    public $speciesIdPreselected;
     #[Validate(as: 'Coordinate UTM X')]
     public $utmX;
     #[Validate(as: 'Coordinate UTM Y')]
@@ -37,6 +38,7 @@ class TreePruningEdit extends Component
     public $quality;
     #[Validate(as: 'tipo de poda')]
     public $pruningType;
+    public $pruningTypeList;
     #[Validate(as: 'con convenio')]
     public $hasAgreement;
     public $notes;
@@ -56,7 +58,8 @@ class TreePruningEdit extends Component
         $this->treeSpeciesList = TreeSpecies::all();
         $this->treePruning = $treePruning;
         $this->treeNumber = $this->treePruning->tree_number;
-        $this->species = $this->treePruning->species_id;
+        $this->speciesId = $this->treePruning->species_id;
+        $this->speciesIdPreselected = json_encode(['id' => $this->treePruning->specy->id, 'name' => $this->treePruning->specy->name]);
         $this->utmX = $this->treePruning->utm_x;
         $this->utmY = $this->treePruning->utm_y;
         $this->neighborhood = $this->treePruning->neighborhood;
@@ -65,6 +68,16 @@ class TreePruningEdit extends Component
         $this->district = $this->treePruning->district;
         $this->quality = $this->treePruning->quality;
         $this->pruningType = $this->treePruning->pruning_type;
+        $this->pruningTypeList = [
+            PruningType::FORMATION_OR_DIRECTED->value => PruningType::FORMATION_OR_DIRECTED->label(),
+            PruningType::ORNAMENTAL->value => PruningType::ORNAMENTAL->label(),
+            PruningType::THINNING->value => PruningType::THINNING->label(),
+            PruningType::FLOWERING->value => PruningType::FLOWERING->label(),
+            PruningType::REGENERATION_OR_RIGOROUS->value => PruningType::REGENERATION_OR_RIGOROUS->label(),
+            PruningType::BALANCED->value => PruningType::BALANCED->label(),
+            PruningType::SANITARY->value => PruningType::SANITARY->label(),
+            PruningType::EMERGENCY->value => PruningType::EMERGENCY->label()
+        ];
         $this->hasAgreement = +$this->treePruning->has_agreement;
         $this->notes = $this->treePruning->notes;
         $this->prunedAt = $this->treePruning->pruned_at->format('d/m/Y');
@@ -81,7 +94,7 @@ class TreePruningEdit extends Component
     {
         return [
             'treeNumber'   => ['required', 'integer', 'min:1'],
-            'species'      => ['required', 'exists:tree_species,id'],
+            // 'species'      => ['required', 'exists:tree_species,id'],
             'utmX'         => ['required', 'numeric'],
             'utmY'         => ['required', 'numeric'],
             'neighborhood' => ['required', 'string', 'max:255'],
@@ -89,7 +102,7 @@ class TreePruningEdit extends Component
             'block'        => ['required', 'string', 'max:100'],
             'district'     => ['required', 'string', 'max:255'],
             'quality'      => ['required'],
-            'pruningType'  => ['required', 'string', 'max:50'],
+            'pruningType'  => ['required'],
             'hasAgreement' => ['required', 'boolean'],
             'prunedAt'     => ['required', 'date_format:d/m/Y'],
             'before'       => ['nullable', 'image', 'max:5120', 'mimes:jpg,jpeg,png,webp'],
@@ -102,9 +115,14 @@ class TreePruningEdit extends Component
         $this->validate();
 
         $prunedAt = Carbon::createFromFormat('d/m/Y', $this->prunedAt)->format('Y-m-d');
-        
+        if (!is_numeric($this->speciesId)) 
+        {
+            $species = TreeSpecies::create(['name' => $this->speciesId]);
+            $this->speciesId = $species->id;
+        }
+
         $this->treePruning->tree_number = $this->treeNumber;
-        $this->treePruning->species_id = $this->species;
+        $this->treePruning->species_id = $this->speciesId;
         $this->treePruning->utm_x = $this->utmX;
         $this->treePruning->utm_y = $this->utmY;
         $this->treePruning->neighborhood = $this->neighborhood;

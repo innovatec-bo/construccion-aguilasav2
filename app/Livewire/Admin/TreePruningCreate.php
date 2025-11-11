@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Enums\PruningType;
 use App\Models\ProjectBudget;
 use App\Models\TreePruning;
 use App\Models\TreeSpecies;
@@ -20,7 +21,7 @@ class TreePruningCreate extends Component
     public $projectBudget;
     #[Validate(as: 'nro de arbol')]
     public $treeNumber;
-    public $species;
+    public $speciesId;
     #[Validate(as: 'Coordinate UTM X')]
     public $utmX;
     #[Validate(as: 'Coordinate UTM Y')]
@@ -37,6 +38,7 @@ class TreePruningCreate extends Component
     public $quality;
     #[Validate(as: 'tipo de poda')]
     public $pruningType;
+    public $pruningTypeList;
     #[Validate(as: 'con convenio')]
     public $hasAgreement;
     public $notes;
@@ -54,8 +56,17 @@ class TreePruningCreate extends Component
     public function mount(ProjectBudget $projectBudget)
     {
         $this->treeSpeciesList = TreeSpecies::all();
-        $this->species = 1;//Desconocida
         $this->projectBudget = $projectBudget;
+        $this->pruningTypeList = [
+            PruningType::FORMATION_OR_DIRECTED->value => PruningType::FORMATION_OR_DIRECTED->label(),
+            PruningType::ORNAMENTAL->value => PruningType::ORNAMENTAL->label(),
+            PruningType::THINNING->value => PruningType::THINNING->label(),
+            PruningType::FLOWERING->value => PruningType::FLOWERING->label(),
+            PruningType::REGENERATION_OR_RIGOROUS->value => PruningType::REGENERATION_OR_RIGOROUS->label(),
+            PruningType::BALANCED->value => PruningType::BALANCED->label(),
+            PruningType::SANITARY->value => PruningType::SANITARY->label(),
+            PruningType::EMERGENCY->value => PruningType::EMERGENCY->label()
+        ];
     }
 
     public function render()
@@ -67,7 +78,7 @@ class TreePruningCreate extends Component
     {
         return [
             'treeNumber'   => ['required', 'integer', 'min:1'],
-            'species'      => ['required', 'exists:tree_species,id'],
+            // 'speciesId'      => ['required', 'exists:tree_species,id'],
             'utmX'         => ['required', 'numeric'],
             'utmY'         => ['required', 'numeric'],
             'neighborhood' => ['required', 'string', 'max:255'],
@@ -75,7 +86,7 @@ class TreePruningCreate extends Component
             'block'        => ['required', 'string', 'max:100'],
             'district'     => ['required', 'string', 'max:255'],
             'quality'      => ['required', 'string', 'max:20'],
-            'pruningType'  => ['required', 'string', 'max:50'],
+            'pruningType'  => ['required'],
             'hasAgreement' => ['required', 'boolean'],
             'prunedAt'     => ['required', 'date_format:d/m/Y'],
             'before'       => ['nullable', 'image', 'max:5120', 'mimes:jpg,jpeg,png,webp'],
@@ -88,10 +99,15 @@ class TreePruningCreate extends Component
         $this->validate();
 
         $prunedAt = Carbon::createFromFormat('d/m/Y', $this->prunedAt)->format('Y-m-d');
+        if (!is_numeric($this->speciesId)) 
+        {
+            $species = TreeSpecies::create(['name' => $this->speciesId]);
+            $this->speciesId = $species->id;
+        }
         $data = [
             'budget_id' => $this->projectBudget->id_prb,
             'tree_number' => $this->treeNumber,
-            'species_id' => $this->species,
+            'species_id' => $this->speciesId,
             'utm_x' => $this->utmX,
             'utm_y' => $this->utmY,
             'neighborhood' => $this->neighborhood,
