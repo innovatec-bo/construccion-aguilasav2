@@ -108,7 +108,7 @@ class LaborDetail extends Model
                     $saveAsCustom = array_map(function ($data) use ($object) {
                         $timestamp = $object->freshTimestampString();
                         $data['created_at'] = $timestamp;
-                        $data['created_by'] = Auth::user()->id_usr;
+                        $data['created_by'] = Auth::user()?Auth::user()->id_usr:null;
                         return $data;
                     }, $saveAsCustom);
             if(count($saveAsCustom) > 0)
