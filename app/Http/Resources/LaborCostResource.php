@@ -17,7 +17,7 @@ class LaborCostResource extends JsonResource
             'quantity_lac' => $this->quantity_lac,
             'unit_price_lac' => $this->unit_price_lac,
             'is_additional_lac' => $this->is_additional_lac,
-            'custom_structure_materials' => collect(new CustomStructureMaterialCollection($this->customStructureMaterials)),
+            'default_materials' => collect(new CustomStructureMaterialCollection($this->customStructureMaterials)),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
