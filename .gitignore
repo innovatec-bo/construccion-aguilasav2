@@ -16,3 +16,5 @@ yarn-error.log
 /.vscode
 .htaccess
 .well-known/
+.user.ini
+php.ini
