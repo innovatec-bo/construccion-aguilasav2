@@ -145,8 +145,14 @@ class DashboardMenu extends Component
                 ],  
             ],
             [
+                'text'        => 'Poda',
+                'icon'        => 'ti ti-scissors',
+                'route'       => 'admin.tree-prunings.index',
+                'can'         => ['admin.tree-prunings.index', 'admin.tree-prunings.create'],
+            ],
+            [
                 'text'        => 'Estructuras',
-                'icon'        => 'ti ti-smart-home',
+                'icon'        => 'ti ti-box',
                 'can'         => ['admin.building-structures.index','admin.building-structures.upload-default-materials'],
                 'submenu'     => [
                     [
@@ -165,7 +171,7 @@ class DashboardMenu extends Component
             ],
             [
                 'text'        => 'Materiales',
-                'icon'        => 'ti ti-smart-home',
+                'icon'        => 'ti ti-shape',
                 'can'         => ['admin.materials.index', 'admin.materials.create'],
                 'submenu'     => [
                     [
@@ -184,7 +190,7 @@ class DashboardMenu extends Component
             ],
             [
                 'text'        => 'Observaciones externas',
-                'icon'        => 'ti ti-smart-home',
+                'icon'        => 'ti ti-eye',
                 'can'         => ['admin.external-observations.index', 'admin.external-observations.create'],
                 'submenu'     => [
                     [
@@ -203,14 +209,14 @@ class DashboardMenu extends Component
             ],
             [
                 'text'        => 'Contratos',
-                'icon'        => 'ti ti-smart-home',
+                'icon'        => 'ti ti-file',
                 'route'       => 'admin.contracts.index',
                 'can'         => ['admin.contracts.index', 'admin.contracts.create'],
             ],
             // ['header' => 'SEGURIDAD', 'can' => ['admin.users.index', 'admin.users.create', 'admin.permissions.index', 'admin.permissions.create','admin.roles.index', 'admin.roles.create']],
             [
                 'text'        => 'Usuarios',
-                'icon'        => 'ti ti-smart-home',
+                'icon'        => 'ti ti-users',
                 'can'         => ['admin.users.index', 'admin.users.create'],
                 'submenu'     => [
                     [
@@ -229,7 +235,7 @@ class DashboardMenu extends Component
             ],
             [
                 'text'        => 'Permisos',
-                'icon'        => 'ti ti-smart-home',
+                'icon'        => 'ti ti-list-check',
                 'can'         => ['admin.permissions.index', 'admin.permissions.create'],
                 'submenu'     => [
                     [
@@ -248,7 +254,7 @@ class DashboardMenu extends Component
             ],
             [
                 'text'        => 'Roles',
-                'icon'        => 'ti ti-smart-home',
+                'icon'        => 'ti ti-user-check',
                 'can'         => ['admin.roles.index', 'admin.roles.create'],
                 'submenu'     => [
                     [
@@ -266,8 +272,27 @@ class DashboardMenu extends Component
                 ]
             ],
             [
+                'text'        => 'Estados de proyecto',
+                'icon'        => 'ti ti-hierarchy-2',
+                'can'         => ['admin.project-status.index', 'admin.project-status.create'],
+                'submenu'     => [
+                    [
+                        'text'        => 'Lista',
+                        'route'       => 'admin.project-status.index',
+                        'can'         => 'admin.project-status.index',
+                        'icon'        => '',
+                    ],
+                    [
+                        'text'        => 'Crear',
+                        'route'       => 'admin.project-status.create',
+                        'can'         => 'admin.project-status.create',
+                        'icon'        => '',
+                    ]
+                ]
+            ],
+            [
                 'text'        => 'Configuracion',
-                'icon'        => 'ti ti-smart-home',
+                'icon'        => 'ti ti-settings',
                 'can'         => ['admin.status-management-settings.edit'],
                 'submenu'     => [
                     [

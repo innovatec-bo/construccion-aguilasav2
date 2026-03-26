@@ -86,6 +86,10 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     //Contracts
     Route::resource('contratos','ContractController')->parameters(['contratos' => 'contract'])->names('contracts');
 
+    //Pruning
+    Route::get('podas/formulario/{project_budget}','TreePruningController@form')->name('tree-prunings.form');
+    Route::resource('podas','TreePruningController')->parameters(['podas' => 'tree_pruning'])->names('tree-prunings');
+
     //External Balance
     Route::resource('balance-externo','ExternalBalanceController')->parameters(['balance-externo' => 'external-balance'])->names('external-balance');
 
@@ -94,6 +98,8 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::get('status-management-settings/edit','StatusManagementSettingsController@edit')->name('status-management-settings.edit');
     Route::post('status-management-settings/update','StatusManagementSettingsController@update')->name('status-management-settings.update');
 
+    //Project Status
+    Route::resource('project-status', 'ProjectStatusController')->names('project-status');
     
 
     // Route::post('/print', function(Request $request) { 

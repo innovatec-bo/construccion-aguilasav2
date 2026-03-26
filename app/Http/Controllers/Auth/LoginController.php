@@ -34,7 +34,8 @@ class LoginController extends Controller
         if(Auth::attempt($credentials, $request->has('remember-me')))
         {
             $request->session()->regenerate();
-            return redirect()->route('admin.home.index')
+            return redirect()
+                ->intended(route('admin.home.index'))
                 ->withSuccess('Iniciaste sesion exitosamente!');
         }
 

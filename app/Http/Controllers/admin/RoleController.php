@@ -119,7 +119,7 @@ class RoleController extends Controller
         ]);
         $role->name = $request->name;
         $role->save();
-
+        $request->permissions_checked = $request->permissions_checked??[];
         $permissions = Permission::whereIn('id', $request->permissions_checked)->get();
         $role->syncPermissions($permissions);
 

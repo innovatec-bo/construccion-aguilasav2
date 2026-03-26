@@ -20,11 +20,12 @@ Class UserEdit extends Component
         $roles,
         $selectedRoles = [];
 
-    public function mount()
+    public function mount(User $user)
     {
-        $this->firstName = $this->user->first_name;
-        $this->lastName = $this->user->last_name;
-        $this->email = $this->user->email;
+        $this->user = $user;
+        $this->firstName = $this->user->firstname_usr;
+        $this->lastName = $this->user->lastname_usr;
+        $this->email = $this->user->email_usr;
         $currentRoles = $this->user->getRoleNames();
         $this->selectedRoles = Role::whereIn('name',$currentRoles->toArray())->pluck('id')->toArray();
         $this->roles = Role::all();

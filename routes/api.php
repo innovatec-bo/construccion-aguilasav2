@@ -23,4 +23,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'App\Http\Control
     Route::apiResource('workflows', 'WorkflowApiController')->names('workflows');
     Route::apiResource('status-management-settings', 'StatusManagementSettingsApiController')->names('status-management-settings');
     Route::apiResource('labor-cost-change-log', 'LaborCostChangeLogApiController')->names('labor-cost-change-log');
+    Route::apiResource('labor-costs', 'LaborCostApiController')->names('labor-costs');
+    Route::apiResource('building-structures', 'BuildingStructureApiController')->names('building-structures');
 });

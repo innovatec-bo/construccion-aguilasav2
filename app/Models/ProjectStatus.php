@@ -18,4 +18,9 @@ class ProjectStatus extends Model
 
     const CREATED_AT = 'createdon_pst';
     const UPDATED_AT = 'editedon_pst';
+
+    public function responsibles()
+    {
+        return $this->belongsToMany(User::class, 'wfl_status_responsibles', 'status_id_sre', 'user_id_sre')->withPivot('active_sre','id_sre');
+    }
 }

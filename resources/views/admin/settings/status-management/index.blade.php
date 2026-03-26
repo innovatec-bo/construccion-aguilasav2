@@ -18,8 +18,7 @@
                     <label class="form-check-label" for="inlineRadio1">Activado</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" id="inlineRadio2" type="radio" name="inlineRadioOptions1" checked
-                        value="option2">
+                    <input class="form-check-input" id="inlineRadio2" type="radio" name="inlineRadioOptions1" checked value="option2">
                     <label class="form-check-label" for="inlineRadio2">Desactivado</label>
                 </div>
                 <small class="form-text text-muted d-block">Esta opcion da control al encargado de almacen para definir que

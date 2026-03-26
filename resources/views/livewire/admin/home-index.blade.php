@@ -1,76 +1,62 @@
 <div class="row g-6">
-    {{-- <div class="col-lg-3 col-sm-6">
-        <div class="card card-border-shadow-primary h-100">
-            <div class="card-body">
-                <div class="d-flex align-items-center mb-2">
-                    <div class="avatar me-4">
-                        <span class="avatar-initial rounded bg-label-primary"><i class="ti ti-truck ti-28px"></i></span>
-                    </div>
-                    <h4 class="mb-0">42</h4>
+    <div class="col-md-6 col-xxl-4 mb-6">
+        <div class="card h-100 position-relative">
+            <div class="overlay" wire:loading.flex wire:target="previousPage, nextPage, gotoPage, search,searchSubscriber">
+                <div class="sk-swing sk-primary">
+                    <div class="sk-swing-dot"></div>
+                    <div class="sk-swing-dot"></div>
                 </div>
-                <p class="mb-1">On route vehicles</p>
-                <p class="mb-0">
-                    <span class="text-heading fw-medium me-2">+18.2%</span>
-                    <small class="text-muted">than last week</small>
-                </p>
+            </div>
+            <div class="card-header d-flex justify-content-between">
+            <div class="card-title m-0 me-2">
+                <h5 class="mb-1">Con cronograma de poda</h5>
+                <a href="{{route('admin.tree-prunings.index')}}">Ver detalles...</a>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-text-secondary btn-icon rounded-pill text-body-secondary border-0 me-n1 waves-effect" type="button" id="popularProduct" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="icon-base ti tabler-dots-vertical icon-22px text-body-secondary"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="popularProduct">
+                <a class="dropdown-item waves-effect" href="javascript:void(0);">Last 28 Days</a>
+                <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Month</a>
+                <a class="dropdown-item waves-effect" href="javascript:void(0);">Last Year</a>
+                </div>
+            </div>
+            </div>
+            <div class="card-body">
+                <ul class="p-0 m-0">
+                    @foreach ($budgets as $budget)
+                        <li class="d-flex mb-3">
+                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                <div class="me-2">
+                                <h6 class="mb-0">{{ $budget->project->code_pro }}</h6>
+                                <small class="text-body d-block">{{!isset($budget->project->statusDetail(2)['responsible'])?'':$budget->project->statusDetail(2)['responsible']}}</small>
+                                </div>
+                                <div class="user-progress d-flex align-items-center gap-1">
+                                    {{-- <p class="mb-0">$999.29</p> --}}
+                                    @if ($budget->treePruning->count() == 0)
+                                        <p class="text-danger mb-0">Sin registros</p>
+                                    @elseif ($budget->treePruning->count() == 1)
+                                        {{$budget->treePruning->count()}} registro
+                                    @elseif ($budget->treePruning->count() > 1)
+                                        {{$budget->treePruning->count()}} registros
+                                    @endif
+                                </div>
+                            </div>    
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="card-footer py-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ $budgets->links(data: ['scrollTo' => false]) }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-sm-6">
-        <div class="card card-border-shadow-warning h-100">
-            <div class="card-body">
-                <div class="d-flex align-items-center mb-2">
-                    <div class="avatar me-4">
-                        <span class="avatar-initial rounded bg-label-warning"><i
-                                class="ti ti-alert-triangle ti-28px"></i></span>
-                    </div>
-                    <h4 class="mb-0">8</h4>
-                </div>
-                <p class="mb-1">Vehicles with errors</p>
-                <p class="mb-0">
-                    <span class="text-heading fw-medium me-2">-8.7%</span>
-                    <small class="text-muted">than last week</small>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-sm-6">
-        <div class="card card-border-shadow-danger h-100">
-            <div class="card-body">
-                <div class="d-flex align-items-center mb-2">
-                    <div class="avatar me-4">
-                        <span class="avatar-initial rounded bg-label-danger"><i
-                                class="ti ti-git-fork ti-28px"></i></span>
-                    </div>
-                    <h4 class="mb-0">27</h4>
-                </div>
-                <p class="mb-1">Deviated from route</p>
-                <p class="mb-0">
-                    <span class="text-heading fw-medium me-2">+4.3%</span>
-                    <small class="text-muted">than last week</small>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-sm-6">
-        <div class="card card-border-shadow-info h-100">
-            <div class="card-body">
-                <div class="d-flex align-items-center mb-2">
-                    <div class="avatar me-4">
-                        <span class="avatar-initial rounded bg-label-info"><i class="ti ti-clock ti-28px"></i></span>
-                    </div>
-                    <h4 class="mb-0">13</h4>
-                </div>
-                <p class="mb-1">Late vehicles</p>
-                <p class="mb-0">
-                    <span class="text-heading fw-medium me-2">-2.5%</span>
-                    <small class="text-muted">than last week</small>
-                </p>
-            </div>
-        </div>
-    </div> --}}
-    
-    <div class="col-md-12">
+    <div class="col-md-8">
         <div class="card mb-4 position-relative shadow-lg">
             <div class="overlay" wire:loading.flex wire:target="previousPage, nextPage, gotoPage, search, roleId">
                 <div class="sk-swing sk-primary">
@@ -136,10 +122,14 @@
                     </table>
                 </div>
             </div>
+            <div class="card-footer py-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ $incidents->links(data: ['scrollTo' => false]) }}
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-12">
-        {{ $incidents->links(data: ['scrollTo' => false]) }}
     </div>
     <!-- /.col-->
 </div>
