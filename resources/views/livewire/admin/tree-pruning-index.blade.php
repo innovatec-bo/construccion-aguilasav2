@@ -41,21 +41,21 @@
                                         @if ($budget->project)
                                             {{ $budget->project->code_pro }}
                                         @else
-                                            @dump($budget)
+                                            No identificado
                                         @endif
                                     </td>
                                     <td>
                                         @if ($budget->project)
                                             {{ $budget->project->status->status_name_pst }}
                                         @else
-                                            @dump($budget)
+                                            No identificado
                                         @endif
                                     </td>
                                     <td>
                                         @if ($budget->project)
                                             {{$budget->project->statusDetail(2)['responsible']}}
                                         @else
-                                            @dump($budget)
+                                            No identificado
                                         @endif
                                     </td>
                                     <td class="text-center">
