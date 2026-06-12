@@ -125,6 +125,7 @@ class ProjectController extends Controller
 
     public function statusManagement(Project $project)
     {
+        // dd($project->statusLogResponsibles);
         $nextStatusList = NextStatus::where('parent_status_id', $project->status_pro)->get();
         return view('admin.projects.status-management', compact('project', 'nextStatusList'));
     }

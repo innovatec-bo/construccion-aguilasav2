@@ -83,7 +83,7 @@ class Project extends Model
                 // });
             // });
         // })
-        ->where('status_id_psl',29)
+        ->whereIn('status_id_psl',[21,29])//29 = construccion, 21 asignacion
         ->limit(2)
         ->orderBy('manual_entry_date_psl','desc');
     }
@@ -125,7 +125,7 @@ class Project extends Model
 	 * @param bool $showFirstDetail
 	 * @return string
 	 */
-    public static function statusDetailQuery($statusId, bool $showFirstDetail = FALSE) : string
+    public static function statusDetailQuery(int $statusId, bool $showFirstDetail = FALSE) : string
     {
         $entryCriteria = 'MAX';
         if($showFirstDetail)
@@ -271,7 +271,7 @@ class Project extends Model
 	 * @param bool $showFirstDetail
 	 * @return string
 	 */
-    public function statusDetail($statusId, bool $showFirstDetail = FALSE) : array
+    public function statusDetail(int $statusId, bool $showFirstDetail = FALSE) : array
     {
         $entryCriteria = 'MAX';
         if($showFirstDetail)
@@ -592,7 +592,7 @@ class Project extends Model
         $this->addStatusToLog();
     }
 
-    public function addStatusToLog($statusId, $detail = "", $manualEntryDate = "", $responsibleList = array(), $fileIds = array()) : void
+    public function addStatusToLog(int $statusId, $detail = "", $manualEntryDate = "", $responsibleList = array(), $fileIds = array()) : void
     {
         //Lets create a new log
         // $projectStatus = new Model_project_status_log($this->_id, $statusId, $detail, $manualEntryDate);
