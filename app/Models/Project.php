@@ -269,9 +269,8 @@ class Project extends Model
     /**
 	 * @param $statusId
 	 * @param bool $showFirstDetail
-	 * @return string
 	 */
-    public function statusDetail(int $statusId, bool $showFirstDetail = FALSE) : array
+    public function statusDetail(int $statusId, bool $showFirstDetail = FALSE)
     {
         $entryCriteria = 'MAX';
         if($showFirstDetail)
@@ -421,9 +420,8 @@ class Project extends Model
     /**
      * Query complement
 	 * @param $statusId
-	 * @return string
 	 */
-	public static function paymentOrderStatusDetailQuery($statusId) : string
+	public static function paymentOrderStatusDetailQuery(int $statusId)
 	{
 		$sql = "
 		select 
