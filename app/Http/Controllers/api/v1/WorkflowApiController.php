@@ -30,8 +30,11 @@ class WorkflowApiController extends BaseApiController
      */
     public function index(Request $request)
     {
+        // \Log::info('Tiempo desde LARAVEL_START hasta index(): ' . round((microtime(true) - LARAVEL_START), 3) . 's');
+        // $t0 = microtime(true);
+        // \DB::enableQueryLog();
         $perPage = 15;
-        if ($request->filled('per_page') && (int)$request->per_page <= 500)
+        if ($request->filled('per_page'))
         {
             $perPage = (int)$request->per_page;
         }
@@ -51,6 +54,27 @@ class WorkflowApiController extends BaseApiController
         }
 
         // ── Filtros ───────────────────────────────────────────────────────
+        if ($request->filled('id_list'))
+        {
+            // Comma or whitespace/newline separated list of id_pro values.
+            $ids = self::_parseList($request->id_list);
+            $ids = array_map('intval', $ids);
+            if (!empty($ids))
+            {
+                $query->whereIn('id_pro', $ids);
+            }
+        }
+ 
+        if ($request->filled('code_list'))
+        {
+            // Comma or whitespace/newline separated list of code_pro values.
+            $codes = self::_parseList($request->code_list);
+            if (!empty($codes))
+            {
+                $query->whereIn('code_pro', $codes);
+            }
+        }
+        
         if ($request->filled('keyword'))
         {
             $keywords = array_map('trim', explode(',', $request->keyword));
@@ -139,8 +163,17 @@ class WorkflowApiController extends BaseApiController
         $query->orderBy($orderBy, $orderType === 'asc' ? 'asc' : 'desc');
         // return $query->dumpRawSql();
         $workflows = $query->paginate($perPage);
+        // $t1 = microtime(true);
+        // \Log::info('Query + paginate: ' . round($t1 - $t0, 3) . 's');
 
-        return $this->sendResponse(new WorkflowCollection($workflows), '');
+        $resource = new WorkflowCollection($workflows);
+        // $t2 = microtime(true);
+        // \Log::info('WorkflowCollection construido: ' . round($t2 - $t1, 3) . 's');
+
+        $response = $this->sendResponse($resource, '');
+        // $t3 = microtime(true);
+        // \Log::info('sendResponse (serialización completa): ' . round($t3 - $t2, 3) . 's');
+        return $response;
     }
 
     /**
@@ -229,5 +262,20 @@ class WorkflowApiController extends BaseApiController
                 500
             );
         }
+    }
+
+    /**
+     * Convierte un string de lista (separado por comas, espacios o saltos
+     * de línea) en un array limpio de valores. Replica el comportamiento
+     * que tenía el WorkflowPaginationHandler original en Serebo.
+     *
+     * @param string $value
+     * @return array
+     */
+    private static function _parseList(string $value) : array
+    {
+        $value = str_replace(["\r\n", ","], " ", $value);
+        $parts = preg_split('/\s+/', trim($value));
+        return array_values(array_filter($parts, fn($v) => $v !== ''));
     }
 }
