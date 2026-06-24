@@ -153,6 +153,26 @@ class WorkflowApiController extends BaseApiController
             }
         }
 
+        if ($request->filled('has_location'))
+        {
+            if ($request->has_location == 1)
+            {
+                $query->where(function ($q) {
+                    $q->whereNotNull('project_latitude')
+                    ->where('project_latitude', '!=', '')
+                    ->where('project_latitude', '!=', 0);
+                });
+            }
+            elseif ($request->trim_tree == 0)
+            {
+                $query->where(function ($q) {
+                    $q->whereNull('project_latitude')
+                    ->orWhere('project_latitude', '=', '')
+                    ->orWhere('project_latitude', '=', 0);
+                });
+            }
+        }
+
         $orderBy   = $request->input('order_by', 'entry_date_pro');
         $orderType = $request->input('order_type', 'desc');
         $allowedOrderBy = ['entry_date_pro', 'code_pro', 'status_log_manual_entry_date', 'static_days', 'project_current_budget'];
