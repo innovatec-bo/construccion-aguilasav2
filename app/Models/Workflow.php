@@ -385,4 +385,15 @@ class Workflow extends Model
             self::upsert($upsertData, ['id_pro']);
         }
     }
+
+    protected function serializeDate(\DateTimeInterface $date): string
+    {
+        // Si el objeto Carbon no tiene horas, minutos ni segundos, asumimos que es un cast 'date'
+        if ($date->hour === 0 && $date->minute === 0 && $date->second === 0) {
+            return $date->format('Y-m-d');
+        }
+
+        // Para todo lo demás (datetime), le ponemos el formato completo
+        return $date->format('Y-m-d H:i:s');
+    }
 }
