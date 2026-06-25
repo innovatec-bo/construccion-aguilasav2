@@ -25,6 +25,7 @@
         "mavinoo/laravel-batch": "^2.3",
         "phpoffice/phpspreadsheet": "^1.22",
         "richan-fongdasen/eloquent-blameable": "^1.10",
+        "spatie/laravel-activitylog": "^4.12",
         "spatie/laravel-medialibrary": "^11.15",
         "spatie/laravel-permission": "^6",
         "spatie/laravel-settings": "^3.2"
