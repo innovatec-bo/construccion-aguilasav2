@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
-class ProjectApiController extends Controller
+class ProjectApiController extends BaseApiController
 {
     public function index(Request $request)
     {
@@ -107,6 +107,134 @@ class ProjectApiController extends Controller
             'recordsTotal'    => $recordsTotal,
             'recordsFiltered' => $recordsFiltered,
             'data'            => $data
+        ]);
+    }
+
+    public function export(string $code)
+    {
+        // 1. Cabecera del proyecto
+        $project = DB::table('wfl_projects')->where('code_pro', $code)->where('deleted_at', null)->where('deleted_pro','!=',1)->first();
+
+        if (!$project) {
+            return response()->json(['message' => "Proyecto {$code} no encontrado."], 404);
+        }
+
+        $idPro = $project->id_pro;
+
+        // 2. Registro desnormalizado en workflows
+        $workflow = DB::table('workflows')->where('id_pro', $idPro)->first();
+
+        // 3. Status Logs (clave para presupuestos, puntos de proyecto y asignaciones)
+        $statusLogs = DB::table('wfl_project_status_log')
+            ->where('project_id_psl', $idPro)
+            ->get();
+        $statusLogIds = $statusLogs->pluck('id_psl')->toArray();
+
+        $projectPoints = [];
+        $projectBudgets = [];
+        $projectRealBudgets = [];
+        $constructionAssignments = [];
+        $statusLogResponsibles = [];
+
+        if (!empty($statusLogIds)) {
+            $projectPoints = DB::table('wfl_project_points')
+                ->whereIn('status_log_id_prp', $statusLogIds)
+                ->get();
+
+            $projectBudgets = DB::table('wfl_project_budgets')
+                ->whereIn('status_log_id_prb', $statusLogIds)
+                ->get();
+
+            $projectRealBudgets = DB::table('wfl_project_real_budgets')
+                ->whereIn('status_log_id_reb', $statusLogIds)
+                ->get();
+
+            $constructionAssignments = DB::table('wfl_construction_assignments')
+                ->whereIn('status_log_id_cas', $statusLogIds)
+                ->get();
+
+            $statusLogResponsibles = DB::table('wfl_status_log_responsibles')
+                ->whereIn('status_log_id_slr', $statusLogIds)
+                ->get();
+        }
+
+        // 4. Operaciones directas de proyecto
+        $projectStakes    = DB::table('wfl_project_stakes')->where('project_id_prs', $idPro)->get();
+        $productionLimits = DB::table('wfl_production_limits')->where('project_id_prl', $idPro)->get();
+        $incidents        = DB::table('wfl_incidents')->where('project_id_inc', $idPro)->get();
+        $datesToWork      = DB::table('wfl_dates_to_work')->where('project_id_wpl', $idPro)->get();
+        $workPlanDates    = DB::table('wfl_work_plan_dates')->where('project_id_wpd', $idPro)->get();
+
+        // 5. Mano de Obra (bui_)
+        $laborDetails = DB::table('bui_labor_details')->where('project_id_lad', $idPro)->get();
+        $ladIds       = $laborDetails->pluck('id_lad')->toArray();
+
+        $laborCosts = !empty($ladIds)
+            ? DB::table('bui_labor_cost')->whereIn('labor_detail_id_lac', $ladIds)->get()
+            : collect([]);
+        $lacIds = $laborCosts->pluck('id_lac')->toArray();
+
+        $buildingPoints    = DB::table('bui_building_points')->where('project_id_bpo', $idPro)->get();
+        $structureByPoints = DB::table('bui_structure_by_points')->where('project_id_sbp', $idPro)->get();
+
+        $customStructureMaterials = !empty($lacIds)
+            ? DB::table('bui_custom_structure_materials')->whereIn('labor_cost_id', $lacIds)->get()
+            : collect([]);
+
+        $workedUpStructures = !empty($lacIds)
+            ? DB::table('bui_worked_up_structures')->whereIn('labor_cost_id_wus', $lacIds)->get()
+            : collect([]);
+
+        $lalIds = $workedUpStructures->pluck('labor_cost_log_id_wus')->filter()->unique()->toArray();
+        $laborCostLogs = !empty($lalIds)
+            ? DB::table('bui_labor_cost_log')->whereIn('id_lal', $lalIds)->get()
+            : collect([]);
+
+        $buildersInManpower = !empty($lalIds)
+            ? DB::table('bui_builders_in_manpower')->whereIn('labor_cost_log_id_bim', $lalIds)->get()
+            : collect([]);
+
+        // 6. Materiales (mat_)
+        $materialsSummary = DB::table('mat_materials_summary')->where('project_id_msu', $idPro)->get();
+        $msuIds           = $materialsSummary->pluck('id_msu')->toArray();
+
+        $projectsMaterials = !empty($msuIds)
+            ? DB::table('mat_projects_materials')->whereIn('materials_summary_id_prm', $msuIds)->get()
+            : collect([]);
+
+        $warehouseOps = DB::table('mat_internal_warehouse_operations')->where('project_id_iwo', $idPro)->get();
+        $iwoIds       = $warehouseOps->pluck('id_iwo')->toArray();
+
+        $matInternals = !empty($iwoIds)
+            ? DB::table('mat_internals')->whereIn('operation_id_int', $iwoIds)->get()
+            : collect([]);
+
+        return response()->json([
+            'wfl_projects'                      => $project,
+            'workflows'                         => $workflow,
+            'wfl_project_status_log'            => $statusLogs,
+            'wfl_project_points'                => $projectPoints,
+            'wfl_project_budgets'               => $projectBudgets,
+            'wfl_project_real_budgets'          => $projectRealBudgets,
+            'wfl_construction_assignments'      => $constructionAssignments,
+            'wfl_status_log_responsibles'       => $statusLogResponsibles,
+            'wfl_project_stakes'                => $projectStakes,
+            'wfl_production_limits'             => $productionLimits,
+            'wfl_incidents'                     => $incidents,
+            'wfl_dates_to_work'                 => $datesToWork,
+            'wfl_work_plan_dates'               => $workPlanDates,
+            'bui_labor_details'                 => $laborDetails,
+            'bui_labor_cost'                    => $laborCosts,
+            'bui_building_points'               => $buildingPoints,
+            'bui_structure_by_points'           => $structureByPoints,
+            'bui_custom_structure_materials'    => $customStructureMaterials,
+            'bui_labor_cost_log'                => $laborCostLogs,
+            'bui_worked_up_structures'          => $workedUpStructures,
+            'bui_builders_in_manpower'          => $buildersInManpower,
+            'mat_materials_summary'             => $materialsSummary,
+            'mat_projects_materials'            => $projectsMaterials,
+            'mat_internal_warehouse_operations' => $warehouseOps,
+            'mat_internals'                     => $matInternals,
         ]);
     }
 }

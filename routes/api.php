@@ -31,6 +31,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'App\Http\Control
     Route::apiResource('labor-cost-change-log', 'LaborCostChangeLogApiController')->names('labor-cost-change-log');
     Route::apiResource('labor-costs', 'LaborCostApiController')->names('labor-costs');
     Route::apiResource('building-structures', 'BuildingStructureApiController')->names('building-structures');
+    
+    Route::get('projects/{code}/export', 'ProjectApiController@export')->name('projects.export');
     Route::apiResource('projects', 'ProjectApiController')->names('projects');
+    
     Route::post('users/sync-roles', 'RoleSyncApiController@syncUserRoles')->name('users.sync-roles');
+
+    
 });
