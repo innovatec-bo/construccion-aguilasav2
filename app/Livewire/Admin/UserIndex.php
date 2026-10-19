@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Permission\Models\Role;
 
 Class UserIndex extends Component
 {
@@ -18,6 +19,13 @@ Class UserIndex extends Component
     public $deleteId = '';
     protected $queryString = ['search' => ['except' => '']];
     public $usersToExport;
+    public $roleList;
+    public $roleSelected;
+
+    public function mount()
+    {
+        $this->roleList = Role::all();
+    }
 
     public function updatingSearch()
     {
@@ -26,11 +34,13 @@ Class UserIndex extends Component
 
     public function render()
     {
-
         $users = User::Where(function($query){
             $query->where('firstname_usr','like','%'.$this->search.'%')
             ->orWhere('lastname_usr','like','%'.$this->search.'%')
             ->orWhere('email_usr','like','%'.$this->search.'%');
+        })
+        ->when($this->roleSelected, function ($query) {
+            $query->role($this->roleSelected);
         });
         $users = $users->orderBy($this->sort, $this->direction);
         $this->usersToExport = $users->get();

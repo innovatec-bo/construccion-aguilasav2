@@ -11,8 +11,14 @@
                         @can('admin.users.export')
                             <button class="btn btn-primary btn-xs" wire:click="export"><i class="far fa-file-excel"></i> Exportar</button>
                         @endcan
-                        
+                        <select wire:model.live="roleSelected" class="select-control select-control-sm">
+                            <option value="">Todos los roles</option>
+                            @foreach($roleList as $role)
+                                <option value="{{ $role->name }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
                 </div>
             </div>
             <div class="card-body p-0">
