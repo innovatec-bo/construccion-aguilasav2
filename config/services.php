@@ -29,5 +29,9 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'serebo2' => [
+        'url'   => env('SEREBO2_API_URL'),
+        'token' => env('SEREBO2_API_TOKEN'),
+    ],
 
 ];

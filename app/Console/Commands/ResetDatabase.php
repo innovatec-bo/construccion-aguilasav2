@@ -37,7 +37,7 @@ class ResetDatabase extends Command
         'wfl_project_status_files', 'wfl_project_status_log', 'wfl_stakes_team_leader',
         'wfl_status_log_responsibles', 'wfl_status_responsibles', 'wfl_tracking_list',
         'wfl_user_ubmos', 'wfl_work_plan_dates', 'wfl_work_plans',
-        'project_management', 'project_systems', 'sec_user_supervisor_by_period',
+        'project_management', 'sec_user_supervisor_by_period',
         'wfl_projects','workflows','wfl_workflow_column_groups','wfl_process_line','wfl_production_limits'
     ];
 
