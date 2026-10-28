@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Settings\StatusManagementSettings;
+use App\Settings\SystemSettings;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -13,10 +14,10 @@ class SettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function system()
+    public function system(SystemSettings $statusManagementSettings)
     {
         // dd($statusManagementSettings->enable_manual_approvement_for_conciliations);
-        
+        return view('admin.settings.system-settings');
     }
 
     /**

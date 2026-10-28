@@ -5,7 +5,7 @@
             <h5 class="mb-4">Configuraci&oacute;n</h5>
             <ul class="nav nav-align-left nav-pills flex-column">
                 <li class="nav-item mb-1">
-                    <a class="nav-link waves-effect waves-light" href="javascript:void(0);">
+                    <a class="nav-link waves-effect waves-light" href="{{route('admin.settings.system')}}">
                         <i class="icon-base ti tabler-shopping-cart icon-sm me-1_5"></i>
                         <span class="align-middle">Sistema</span>
                     </a>

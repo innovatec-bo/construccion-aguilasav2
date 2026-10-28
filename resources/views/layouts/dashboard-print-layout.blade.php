@@ -13,7 +13,7 @@
     <meta name="author" content="Jair Cussy">
     <meta name="keyword" content="serebo">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/png" sizes="128x128" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="128x128" href="{{ $systemSettings->getFaviconUrl() }}">
     <link rel="manifest" href="{{asset('coreui/assets/favicon/manifest.json')}}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{asset('coreui/assets/favicon/ms-icon-144x144.png')}}">

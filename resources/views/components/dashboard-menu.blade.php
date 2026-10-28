@@ -2,7 +2,7 @@
     <div class="app-brand demo">
         <a href="{{route('admin.home.index')}}" class="app-brand-link">
             <span class="app-brand-logo demo">
-                <img src="{{asset('admin-theme/img/favicon/favicon.ico')}}" height="32" alt="">
+                <img src="{{ $systemSettings->getFaviconUrl() }}" height="32" alt="">
             </span>
             <span class="app-brand-text demo menu-text fw-bold">{{ENV('APP_NAME')}}</span>
         </a>

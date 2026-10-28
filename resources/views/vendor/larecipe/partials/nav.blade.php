@@ -5,7 +5,7 @@
         <div class="flex items-center flex-no-shrink">
             <a href="{{ url('/') }}" class="flex items-center flex-no-shrink text-black mx-4">
                 {{-- @include("larecipe::partials.logo") --}}
-                <img src="{{asset('favicon.ico')}}" alt="" style="height: 50px; width:auto">
+                <img src="{{ $systemSettings->getFaviconUrl() }}" alt="" style="height: 50px; width:auto">
                 <p class="inline-block font-semibold mx-1 text-grey-dark">
                     {{ config('app.name') }}
                 </p>

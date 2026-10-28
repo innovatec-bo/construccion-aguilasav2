@@ -1,6 +1,7 @@
 <?php
 
 use App\Settings\StatusManagementSettings;
+use App\Settings\SystemSettings;
 
 return [
 
@@ -9,6 +10,7 @@ return [
      * put them (manually) here.
      */
     'settings' => [
+        SystemSettings::class,
         StatusManagementSettings::class
     ],
 

@@ -72,9 +72,9 @@
     
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
-        <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ $systemSettings->getFaviconUrl() }}" />
     @elseif(config('adminlte.use_full_favicon'))
-        <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ $systemSettings->getFaviconUrl() }}" />
         <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('favicons/apple-icon-57x57.png') }}">
         <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('favicons/apple-icon-60x60.png') }}">
         <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicons/apple-icon-72x72.png') }}">

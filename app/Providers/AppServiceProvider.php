@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\CustomLibraries\Collection;
+use App\Settings\SystemSettings;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,6 +54,11 @@ class AppServiceProvider extends ServiceProvider
                     'pageName' => $pageName,
                 ]
             );
+        });
+
+        //Share $systemSettings with all blade views
+        View::composer('*', function ($view) {
+            $view->with('systemSettings', app(SystemSettings::class));
         });
     }
 }
