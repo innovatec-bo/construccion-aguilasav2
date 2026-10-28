@@ -296,9 +296,15 @@ class DashboardMenu extends Component
                 'can'         => ['admin.status-management-settings.edit'],
                 'submenu'     => [
                     [
+                        'text'        => 'Sistema',
+                        'route'       => 'admin.settings.system',
+                        'can'         => 'admin.settings.system',
+                        'icon'        => '',
+                    ],
+                    [
                         'text'        => 'Administracion de estados',
-                        'route'       => 'admin.status-management-settings.edit',
-                        'can'         => 'admin.status-management-settings.edit',
+                        'route'       => 'admin.settings.status-management',
+                        'can'         => 'admin.settings.status-management',
                         'icon'        => '',
                     ],
                 ]

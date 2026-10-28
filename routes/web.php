@@ -98,9 +98,6 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::get('settings/system','SettingsController@system')->name('settings.system');
     Route::get('settings/status-management','SettingsController@statusManagement')->name('settings.status-management');
 
-    Route::get('status-management-settings/edit','StatusManagementSettingsController@edit')->name('status-management-settings.edit');
-    Route::post('status-management-settings/update','StatusManagementSettingsController@update')->name('status-management-settings.update');
-
     //Project Status
     Route::resource('project-status', 'ProjectStatusController')->names('project-status');
     
