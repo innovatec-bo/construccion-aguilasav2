@@ -18,6 +18,7 @@ class SystemSettings extends Component
     public ?string $documentLogo = null;
     public ?string $pinMarker = null;
     public ?string $favicon = null;
+    public ?string $emailFooterText = null;
 
     // Subidas temporales
     public $newAppLogo;
@@ -33,6 +34,7 @@ class SystemSettings extends Component
         $this->documentLogo = $this->settings->document_logo;
         $this->pinMarker = $this->settings->pin_marker;
         $this->favicon = $this->settings->favicon;
+        $this->emailFooterText = $this->settings->email_footer_text;
     }
 
     public function rules(): array
@@ -42,6 +44,7 @@ class SystemSettings extends Component
             'newDocumentLogo' => ['nullable', 'image', 'max:3072'],
             'newPinMarker'    => ['nullable', 'image', 'max:1024'],
             'newFavicon'      => ['nullable', 'mimes:ico,png,jpg,svg', 'max:512'],
+            'emailFooterText'  => ['nullable', 'string', 'max:150'],
         ];
     }
 
@@ -88,6 +91,9 @@ class SystemSettings extends Component
             $this->favicon = $this->settings->favicon;
             $this->newFavicon = null;
         }
+
+        // 5. Email footer text
+        $this->settings->email_footer_text = $this->emailFooterText;
 
         $this->settings->save();
 

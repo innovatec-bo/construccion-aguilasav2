@@ -112,6 +112,20 @@
                         <input type="file" wire:model="newFavicon" class="form-control" accept="image/*,.ico">
                         @error('newFavicon') <span class="text-danger small">{{ $message }}</span> @enderror
                     </div>
+
+                    <!-- Texto al pie de correos / Firma -->
+                    <div class="col-12">
+                        <label class="form-label text-heading fw-semibold" for="emailFooterText">Texto al pie de correos / Remitente</label>
+                        <span class="text-muted d-block small mb-2">Texto que se mostrará como firma o pie de página en los correos y notificaciones enviadas.</span>
+                        <input type="text" 
+                            id="emailFooterText" 
+                            wire:model="emailFooterText" 
+                            class="form-control" 
+                            placeholder="Ej: Serebo.Admin">
+                        @error('emailFooterText') 
+                            <span class="text-danger small">{{ $message }}</span> 
+                        @enderror
+                    </div>
                 </div>
             </div>
         </div>

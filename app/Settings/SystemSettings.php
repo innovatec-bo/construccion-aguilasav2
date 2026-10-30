@@ -11,6 +11,7 @@ class SystemSettings extends Settings
     public ?string $document_logo;
     public ?string $pin_marker;
     public ?string $favicon;
+    public ?string $email_footer_text;
 
     public static function group(): string
     {
@@ -46,5 +47,10 @@ class SystemSettings extends Settings
         return $this->document_logo && Storage::disk('public')->exists($this->document_logo)
             ? Storage::disk('public')->path($this->document_logo)
             : null;
+    }
+
+    public function getEmailFooterText(): string
+    {
+        return $this->email_footer_text ?: 'System.Admin';
     }
 }
