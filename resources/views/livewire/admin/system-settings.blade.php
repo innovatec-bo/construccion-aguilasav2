@@ -126,6 +126,20 @@
                             <span class="text-danger small">{{ $message }}</span> 
                         @enderror
                     </div>
+                    <div class="col-12">
+                        <label class="form-label text-heading fw-semibold" for="enableDetailedTreeTrimming">Activar recorte detallado del árbol</label>
+                        <span class="text-muted d-block small mb-2">Habilita el recorte detallado del árbol en la interfaz de usuario, esto permite especificar el tipo de corte</span>
+                        <div class="form-check form-switch">
+                            <input type="checkbox" 
+                                id="enableDetailedTreeTrimming" 
+                                wire:model="enableDetailedTreeTrimming" 
+                                class="form-check-input">
+                            <label class="form-check-label" for="enableDetailedTreeTrimming">Activar recorte detallado del árbol</label>
+                        </div>
+                        @error('enableDetailedTreeTrimming') 
+                            <span class="text-danger small">{{ $message }}</span> 
+                        @enderror
+                    </div>
                 </div>
             </div>
         </div>

@@ -61,7 +61,8 @@ class SettingsApiController extends Controller
             'document_logo_real_path' => $settings->getDocumentLogoRealPath(),
             'pin_marker_url'          => $settings->getPinMarkerUrl(),
             'favicon_url'             => $settings->getFaviconUrl(),
-            'email_footer_text'       => $settings->getEmailFooterText()
+            'email_footer_text'       => $settings->getEmailFooterText(),
+            'enable_detailed_tree_trimming'=> (bool) $settings->enable_detailed_tree_trimming,
         ];
     }
 

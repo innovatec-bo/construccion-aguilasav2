@@ -19,6 +19,7 @@ class SystemSettings extends Component
     public ?string $pinMarker = null;
     public ?string $favicon = null;
     public ?string $emailFooterText = null;
+    public bool $enableDetailedTreeTrimming = false;
 
     // Subidas temporales
     public $newAppLogo;
@@ -35,6 +36,7 @@ class SystemSettings extends Component
         $this->pinMarker = $this->settings->pin_marker;
         $this->favicon = $this->settings->favicon;
         $this->emailFooterText = $this->settings->email_footer_text;
+        $this->enableDetailedTreeTrimming = $this->settings->enable_detailed_tree_trimming;
     }
 
     public function rules(): array
@@ -45,6 +47,7 @@ class SystemSettings extends Component
             'newPinMarker'    => ['nullable', 'image', 'max:1024'],
             'newFavicon'      => ['nullable', 'mimes:ico,png,jpg,svg', 'max:512'],
             'emailFooterText'  => ['nullable', 'string', 'max:150'],
+            'enableDetailedTreeTrimming' => ['boolean'],
         ];
     }
 
@@ -94,6 +97,9 @@ class SystemSettings extends Component
 
         // 5. Email footer text
         $this->settings->email_footer_text = $this->emailFooterText;
+
+        // 6. Enable detailed tree trimming
+        $this->settings->enable_detailed_tree_trimming = $this->enableDetailedTreeTrimming;
 
         $this->settings->save();
 

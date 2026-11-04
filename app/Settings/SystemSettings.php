@@ -12,6 +12,7 @@ class SystemSettings extends Settings
     public ?string $pin_marker;
     public ?string $favicon;
     public ?string $email_footer_text;
+    public bool $enable_detailed_tree_trimming;
 
     public static function group(): string
     {
@@ -52,5 +53,10 @@ class SystemSettings extends Settings
     public function getEmailFooterText(): string
     {
         return $this->email_footer_text ?: 'System.Admin';
+    }
+
+    public function isDetailedTreeTrimmingEnabled(): bool
+    {
+        return (bool) ($this->enable_detailed_tree_trimming ?? false);
     }
 }
