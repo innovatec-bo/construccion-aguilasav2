@@ -161,6 +161,7 @@ class Workflow extends Model
         // Schedule
         'schedule_date',
         'trim_tree',
+        'trim_tree_type',
         'schedule_design_budget',
         'schedulee_tentative_total_budget',
 
@@ -324,7 +325,7 @@ class Workflow extends Model
     {
         $handler = new WorkflowPaginationHandler(1, 0);
         $handler->setAdditionalParameters(['id-list' => (string)$projectId]);
-        $projects = $handler->getAll();
+        $projects = $handler->getAll();//echo"<pre>";var_dump($projects);exit;
 
         if (empty($projects))
         {

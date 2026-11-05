@@ -156,6 +156,7 @@ class Project extends Model
             reservation_number_prb,
             graph_number_prb,
             trim_tree_prb,
+            trim_tree_type,
 			design_reb,
 			building_reb,			
 			transportation_reb,
