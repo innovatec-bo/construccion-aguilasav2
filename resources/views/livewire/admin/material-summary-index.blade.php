@@ -119,7 +119,7 @@
                                                         </a>
                                                     @endif
                                                 @endcan
-                                                @if (Auth::user()->email == 'jair@twiiti.com')
+                                                @if (Auth::user()->email == 'jair@twiiti.com' || Auth::user()->email == 'javier.jair.cussy.saucedo@gmail.com')
                                                     <a class="dropdown-item waves-effect" 
                                                     wire:loading.class="disabled" href="javascript:void(0);" lv-confirm-action data-record="{{$materialSummary}}"
                                                     wire:click="$dispatch('showModal', {data: {'alias' : 'confirm-delete-modal','size':'modal-sm','params' :{objectToDelete:{{ $materialSummary->id_msu }}, model:'App\\Models\\MaterialSummary' }}})"
