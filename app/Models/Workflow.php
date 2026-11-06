@@ -98,6 +98,9 @@ class Workflow extends Model
         'static_days'            => 'integer',
         'estimated_time_assigned'=> 'integer',
         'order_pst'              => 'integer',
+
+        //Boolean
+        'has_live_line'          => 'boolean',
     ];
 
     protected $fillable = [
@@ -183,6 +186,7 @@ class Workflow extends Model
         'building_budget',
         'transportation_budget',
         'live_line_budget',
+        'has_live_line',
         'right_of_way_budget',
         'total_approved',
         'manpower_file_id',

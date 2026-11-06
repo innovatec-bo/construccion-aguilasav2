@@ -149,6 +149,7 @@ class Project extends Model
 			building_prb,			
 			transportation_prb,
 			live_line_prb,
+            if(live_line_prb> 0, 'Si', 'No') as has_live_line,
 			right_of_way_prb,
             manpower_file_id_prb manpower_file_id,
 			(IFNULL(design_prb,0) + IFNULL(building_prb,0) + IFNULL(transportation_prb,0) + IFNULL(live_line_prb,0) + IFNULL(right_of_way_prb,0)) as total_budget,

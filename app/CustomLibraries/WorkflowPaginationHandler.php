@@ -422,6 +422,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 			'building_budget'              => ['column' => 'approved.building_prb building_budget',                       'dependencies' => ['approved']],
 			'transportation_budget'        => ['column' => 'approved.transportation_prb transportation_budget',           'dependencies' => ['approved']],
 			'live_line_budget'             => ['column' => 'approved.live_line_prb live_line_budget',                     'dependencies' => ['approved']],
+			'has_live_line'            	   => ['column' => 'approved.has_live_line',                     				   'dependencies' => ['approved']],
 			'right_of_way_budget'          => ['column' => 'approved.right_of_way_prb right_of_way_budget',               'dependencies' => ['approved']],
 			'total_approved'               => ['column' => 'approved.total_budget total_approved',                        'dependencies' => ['approved']],
 			'manpower_file_id'             => ['column' => 'approved.manpower_file_id',                                   'dependencies' => ['approved']],
