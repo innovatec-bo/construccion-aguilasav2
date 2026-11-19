@@ -132,7 +132,6 @@ Class MaterialSummaryIndex extends Component
     {
         ini_set('memory_limit', '1024M');
         set_time_limit(300);
-        dd((new MaterialMovementTrackingExport)->collection()->count());
         $fileName = 'Planilla_De_Seguimiento_De_materiales_' . now()->format('Y.m.d H.i.s') . '.xlsx';
         return Excel::download(new MaterialMovementTrackingExport, $fileName);
     }
