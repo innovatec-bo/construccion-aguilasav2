@@ -145,6 +145,7 @@ class Workflow extends Model
         'stake_date',
         'stake_responsible_user_id',
         'stake_responsible',
+        'default_staker',
 
         // RD Digitization
         'rd_digitization_points_quantity',

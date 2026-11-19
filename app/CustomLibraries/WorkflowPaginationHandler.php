@@ -44,6 +44,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 				project_percentage_pro,
 				code_pro,
 				secondary_code_pro,
+				wfl_projects.default_staker,
 				detail_pro,
 				budgetary_position_pro,
 				entry_date_pro,
@@ -352,7 +353,7 @@ class WorkflowPaginationHandler extends BasePaginationHandler
 			// Stakes (status 2)
 			'stake_date'                 => ['column' => 'stakes.entry_date stake_date',                        'dependencies' => ['stakes']],
 			'stake_responsible_user_id'  => ['column' => 'stakes.responsible_user_id stake_responsible_user_id','dependencies' => ['stakes']],
-			'stake_responsible'          => ['column' => 'stakes.responsible stake_responsible',                 'dependencies' => ['stakes']],
+			'stake_responsible'          => ['column' => 'ifnull(stakes.responsible, wfl_projects.default_staker) stake_responsible',                 'dependencies' => ['stakes', 'wfl_projects']],
 
 			// RD Digitization (status 16)
 			'rd_digitization_points_quantity' => ['column' => 'rd_digitization.points_quantity_prp rd_digitization_points_quantity', 'dependencies' => ['rd_digitization']],

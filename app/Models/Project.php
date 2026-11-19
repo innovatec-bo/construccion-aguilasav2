@@ -25,6 +25,7 @@ class Project extends Model
         'initial_design_budget_pro',
         'initial_building_budget_pro',
         'code_pro',
+        'default_staker',
         'work_area_pro',
         'project_year_pro',
         'contract_id_pro',
