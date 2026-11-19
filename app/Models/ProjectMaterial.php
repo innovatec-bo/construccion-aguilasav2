@@ -19,7 +19,11 @@ class ProjectMaterial extends Model
         'material_id_prm',
         'quantity_prm',
         'status_id_prm',
-        'tension_id_prm'
+        'tension_id_prm',
+        'materials_summary_id_prm',
+        'request_cre_pto_prm',
+        'request_cre_detail_prm',
+        'delivered_to_builder_detail_prm'
     ];
 
     const CREATED_AT = 'createdon_prm';

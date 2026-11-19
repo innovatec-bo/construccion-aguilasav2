@@ -145,6 +145,18 @@ class DashboardMenu extends Component
                 ],  
             ],
             [
+                'text'        => 'Almacen interno',
+                'icon'        => 'ti ti-building-warehouse',
+                'can'         => ['admin.internal-warehouses.index'],
+                'submenu'     => [
+                    [
+                        'text'        => 'Movimientos',
+                        'route'       => 'admin.internal-warehouses.index',
+                        'can'         => ['admin.internal-warehouses.index'],
+                    ],
+                ]
+            ],
+            [
                 'text'        => 'Poda',
                 'icon'        => 'ti ti-scissors',
                 'route'       => 'admin.tree-prunings.index',
@@ -317,6 +329,7 @@ class DashboardMenu extends Component
         ];
 
         $this->validatePermission();
+        $this->validateFeatures();
     }
 
     public function validatePermission()
@@ -345,6 +358,17 @@ class DashboardMenu extends Component
                         }
                     }
                 }
+            }
+        }
+    }
+
+    public function validateFeatures()
+    {
+        foreach ($this->menu as $key => $value) 
+        {
+            if ($value['text'] == 'Almacen interno' && !env('USE_INTERNAL_WAREHOUSES', false)) 
+            {
+                unset($this->menu[$key]);
             }
         }
     }

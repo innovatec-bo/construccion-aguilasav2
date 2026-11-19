@@ -154,6 +154,7 @@
                                 </tr>
                             @endif
                             @foreach ($materialSummaries as $materialSummary)
+                            {{-- @dump($materialSummary) --}}
                                 <tr>
                                     <td class="stacked-info text-end">
                                         {{ $materialSummary->material_code }}

@@ -39,11 +39,14 @@ Route::group(['prefix' => 'administracion', 'as' => 'admin.', 'namespace' => 'Ap
     Route::resource('proyectos','ProjectController')->names('projects');
 
     //Materials Summary
-    Route::get('movimientos/movimientos-duplicados', 'MaterialSummaryController@duplicateOutputs')->name('materials-summary.duplicate-outputs');
-    Route::get('movimientos/movimientos-agrupados/{project}','MaterialSummaryController@groupedMovementDetails')->name('materials-summary.grouped-movement-details');
-    Route::get('movimientos/movimientos-agrupados','MaterialSummaryController@groupedMovements')->name('materials-summary.grouped-movements');
-    Route::get('movimientos/cargar-lista-inicial','MaterialSummaryController@loadInitialList')->name('materials-summary.load-initial-list');
-    Route::resource('movimientos','MaterialSummaryController')->parameters(['movimientos' => 'materials_summary'])->names('materials-summary');
+    Route::get('materials-summary/movimientos-duplicados', 'MaterialSummaryController@duplicateOutputs')->name('materials-summary.duplicate-outputs');
+    Route::get('materials-summary/movimientos-agrupados/{project}','MaterialSummaryController@groupedMovementDetails')->name('materials-summary.grouped-movement-details');
+    Route::get('materials-summary/movimientos-agrupados','MaterialSummaryController@groupedMovements')->name('materials-summary.grouped-movements');
+    Route::get('materials-summary/cargar-lista-inicial','MaterialSummaryController@loadInitialList')->name('materials-summary.load-initial-list');
+    Route::resource('materials-summary','MaterialSummaryController')->only(['index', 'create', 'show', 'edit'])->names('materials-summary');
+
+    //Internal Warehouses
+    Route::resource('internal-warehouses','InternalWarehouseController')->only(['index'])->names('internal-warehouses');
 
     //Building Structures
     Route::get('estructuras-de-construccion/upload-default-materials','BuildingStructureController@uploadDefaultMaterials')->name('building-structures.upload-default-materials');

@@ -1,5 +1,5 @@
 <div class="row position-relative">
-    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, idMSU, projectCode, materialSummaryTypeSelected, from, to, triggerLoading,downloadMaterialPhysicalInventory">
+    <div class="overlay d-none" wire:loading.class.remove="d-none" wire:target="previousPage, nextPage, gotoPage, idMSU, projectCode, materialSummaryTypeSelected, from, to, triggerLoading,downloadMaterialPhysicalInventory,downloadMaterialMovementTrackingExport">
         <div class="spinner-grow" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
@@ -23,6 +23,12 @@
                     <span>
                         <i class="icon-base ti ti-download me-0 me-sm-1 icon-16px"></i>
                         <span class="d-none d-sm-inline-block">Inventario general</span>
+                    </span>
+                </a>
+                <a class="btn btn-label-secondary" href="javascript:void(0);" wire:click="downloadMaterialMovementTrackingExport">
+                    <span>
+                        <i class="icon-base ti ti-download me-0 me-sm-1 icon-16px"></i>
+                        <span class="d-none d-sm-inline-block">Seguimiento de materiales</span>
                     </span>
                 </a>
             </div>

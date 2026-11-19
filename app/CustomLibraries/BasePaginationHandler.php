@@ -74,12 +74,12 @@ class BasePaginationHandler
 	 */
 	public function countAll() : int
 	{
+		// count(distinct) para que coincida con el "group by TABLE_ID" de getAll/search
 		$sql = '
-                select count(' . static::TABLE_ID. ') as total
-                from ' . $this->_coreQuery() .' where 1=1 '.$this->_additionalParameters();
+                select count(distinct ' . static::TABLE_ID . ') as total
+                from ' . $this->_coreQuery() . ' where 1=1 ' . $this->_additionalParameters();
 
-		$result = DB::select($sql)[0];
-        return $result->total;
+		return (int)DB::select($sql)[0]->total;
 	}
 
 	/**
@@ -87,29 +87,14 @@ class BasePaginationHandler
 	 */
 	public function getAll() : array
 	{
-		if ($this->_orderBy === "")
-		{
-			$this->_orderBy = static::TABLE_ID;
-		}
-
-		$sql = 'select '.$this->_dataTableColumns().' from ' . $this->_coreQuery() . ' 
+		$sql = 'select ' . $this->_dataTableColumns() . ' from ' . $this->_coreQuery() . '
 				where
 				1 = 1
-				'.$this->_additionalParameters().'                    
-                group by '.static::TABLE_ID.' order by ' . $this->_orderBy . ' ' . $this->_orderType . ' limit ' . $this->_limit . ' offset ' . $this->_offset;
-		$results = DB::select($sql);
-		if($this->_returnAsObjectCollection)
-		{
-			return $results;
-		}
-		else
-		{
-			foreach ($results as $key => $value) 
-			{
-				$results[$key] = (array)$value;
-			}
-			return $results;
-		}
+				' . $this->_additionalParameters() . '
+                group by ' . static::TABLE_ID . ' order by ' . $this->_orderClause()
+				. ' limit ' . (int)$this->_limit . ' offset ' . (int)$this->_offset;
+
+		return $this->_fetch($sql);
 	}
 
 	/**
@@ -117,40 +102,13 @@ class BasePaginationHandler
 	 */
 	public function search() : array
 	{
-		if ($this->_orderBy === "")
-		{
-			$this->_orderBy = static::TABLE_ID;
-		}
+		$sql = 'select ' . $this->_dataTableColumns() . ' from ' . $this->_coreQuery() . '
+			 where 1=1 ' . $this->_searchCondition() . $this->_additionalParameters()
+			. ' group by ' . static::TABLE_ID
+			. ' order by ' . $this->_orderClause()
+			. ' limit ' . (int)$this->_limit . ' offset ' . (int)$this->_offset;
 
-		$sql = 'select '.$this->_dataTableColumns().' from ' . $this->_coreQuery().'
-		 where 1=1 ';
-		if (count($this->_colsArray) > 0) 
-		{
-			$sql .= ' and ( ';
-			foreach ($this->_colsArray as $var)
-			{
-				$sql .= ' ' . $var . ' like \'%' . $this->_textToSearch . '%\' ESCAPE \'!\' or ';
-			}
-			$sql = substr($sql, 0, -3);
-			$sql .= ' ) ';
-		}
-
-		
-		$sql .= ' '.$this->_additionalParameters().' group by '.static::TABLE_ID.' order by ' . $this->_orderBy . ' ' . $this->_orderType . ' limit ' . $this->_limit . ' offset ' . $this->_offset;
-		
-		$results = DB::select($sql);
-		if($this->_returnAsObjectCollection)
-		{
-			return $results;
-		}
-		else
-		{
-			foreach ($results as $key => $value) 
-			{
-				$results[$key] = (array)$value;
-			}
-			return $results;
-		}
+		return $this->_fetch($sql);
 	}
 
 	/**
@@ -158,25 +116,81 @@ class BasePaginationHandler
 	 */
 	public function searchTotalCount() : int
 	{
-		$sql = 'select count('.static::TABLE_ID.') as total from ' . $this->_coreQuery().'
-		 where 1=1 ';
+		$sql = 'select count(distinct ' . static::TABLE_ID . ') as total from ' . $this->_coreQuery() . '
+			 where 1=1 ' . $this->_searchCondition() . $this->_additionalParameters();
 
-		 if (count($this->_colsArray) > 0) 
-		 {
-			 $sql .= ' and ( ';
-			 foreach ($this->_colsArray as $var)
-			 {
-				 $sql .= ' ' . $var . ' like \'%' . $this->_textToSearch . '%\' ESCAPE \'!\' or ';
-			 }
-			 $sql = substr($sql, 0, -3);
-			 $sql .= ' ) ';
-		 }
+		return (int)DB::select($sql)[0]->total;
+	}
 
-		
-		$sql .= ' '.$this->_additionalParameters();
+	/**
+	 * Ejecuta el SQL y devuelve objetos o arreglos segun _returnAsObjectCollection.
+	 * @param string $sql
+	 * @return array
+	 */
+	protected function _fetch(string $sql) : array
+	{
+		$results = DB::select($sql);
+		if ($this->_returnAsObjectCollection)
+		{
+			return $results;
+		}
 
-		$result = DB::select($sql)[0];
-        return $result->total;
+		foreach ($results as $key => $value)
+		{
+			$results[$key] = (array)$value;
+		}
+		return $results;
+	}
+
+	/**
+	 * Literal SQL escapado.
+	 * @param mixed $value
+	 * @return string
+	 */
+	protected function _quoteValue($value) : string
+	{
+		return (string)DB::getPdo()->quote((string)$value);
+	}
+
+	/**
+	 * Condicion de busqueda de texto sobre _colsArray. Vacia si no hay texto ni columnas.
+	 * Compartida por search() y searchTotalCount() para que los conteos coincidan.
+	 * El texto se escapa y los comodines LIKE (% _) del usuario se toman como texto literal.
+	 * @return string
+	 */
+	protected function _searchCondition() : string
+	{
+		if ($this->_textToSearch === "")
+			return "";
+
+		// solo columnas/alias simples
+		$cols = array_filter($this->_colsArray, function ($col) {
+			return is_string($col) && preg_match('/^[A-Za-z_][A-Za-z0-9_.]*$/', $col);
+		});
+		if (count($cols) === 0)
+			return "";
+
+		$like = str_replace(array('!', '%', '_'), array('!!', '!%', '!_'), $this->_textToSearch);
+		$quoted = $this->_quoteValue('%' . $like . '%');
+
+		$conditions = array();
+		foreach ($cols as $col)
+		{
+			$conditions[] = $col . " like " . $quoted . " ESCAPE '!'";
+		}
+		return ' and (' . implode(' or ', $conditions) . ') ';
+	}
+
+	/**
+	 * ORDER BY validado (columna/alias simple + asc|desc). Cae en TABLE_ID si no es valido.
+	 * _orderBy puede venir de una propiedad publica de Livewire (manipulable desde el navegador).
+	 * @return string
+	 */
+	protected function _orderClause() : string
+	{
+		$orderBy = preg_match('/^[A-Za-z_][A-Za-z0-9_.]*$/', $this->_orderBy) ? $this->_orderBy : static::TABLE_ID;
+		$orderType = strtolower($this->_orderType) === 'desc' ? 'desc' : 'asc';
+		return $orderBy . ' ' . $orderType;
 	}
 
 	/**
@@ -188,11 +202,11 @@ class BasePaginationHandler
 		return "
 			(
 				SELECT
-					".static::TABLE_NAME.".*
+					" . static::TABLE_NAME . ".*
 				FROM
-					".static::TABLE_NAME."
-				GROUP BY ".static::TABLE_ID."	 
-			) ".static::TABLE_NAME."_master_detail
+					" . static::TABLE_NAME . "
+				GROUP BY " . static::TABLE_ID . "
+			) " . static::TABLE_NAME . "_master_detail
 		";
 	}
 
@@ -202,7 +216,7 @@ class BasePaginationHandler
 	 */
 	protected function _dataTableColumns() : string
 	{
-		return static::TABLE_NAME.".*";
+		return static::TABLE_NAME . ".*";
 	}
 
 	/**
@@ -262,8 +276,9 @@ class BasePaginationHandler
 		$resultArray['pagination'] = array("more" => $moreResults);
 		return $resultArray;
 	}
+
 	protected static function notDeleted()
 	{
-		return " deleted".static::ATTRIB_SUFIX." != 1 ";
+		return " deleted" . static::ATTRIB_SUFIX . " != 1 ";
 	}
 }
