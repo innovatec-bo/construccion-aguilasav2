@@ -124,7 +124,7 @@ Class MaterialSummaryIndex extends Component
 
     public function downloadMaterialPhysicalInventory()
     {
-        $fileName = 'Planilla_Conteo_Fisico_Materiales_' . now()->format('Y.m.d H.i.s') . '.xlsx';
+        $fileName = now()->format('Y-m-d H.i.s') . ' - Toma De Inventario.xlsx';
         return Excel::download(new MaterialPhysicalInventoryExport, $fileName);
     }
 

@@ -73,6 +73,8 @@ class MaterialPhysicalInventoryExport implements FromCollection, WithHeadings, W
     public function headings(): array
     {
         return [
+            ['TOMA DE INVENTARIO - REALIZADO EL '.strtoupper(now()->translatedFormat('d \d\e F \d\e Y')).' A LAS '.strtoupper(now()->translatedFormat('H:i')).' HRS'],
+            [
             'Código',
             'Nombre del Material',
             'U.M.',
@@ -83,7 +85,7 @@ class MaterialPhysicalInventoryExport implements FromCollection, WithHeadings, W
             'Saldo RBE',
             'Conteo RBE',
             'Observaciones / Descripción física en sitio'
-        ];
+        ]];
     }
 
     public function map($row): array
@@ -105,9 +107,21 @@ class MaterialPhysicalInventoryExport implements FromCollection, WithHeadings, W
     public function styles(Worksheet $sheet)
     {
         $lastRow = $sheet->getHighestRow();
-
-        // Estilos para encabezados
+        // Estilo para la primera fila (título)
         $sheet->getStyle('A1:J1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 14,
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+        $sheet->mergeCells('A1:J1');
+        $sheet->getRowDimension(1)->setRowHeight(40);
+        // Estilos para encabezados
+        $sheet->getStyle('A2:J2')->applyFromArray([
             'font' => [
                 'bold' => true,
                 'color' => ['rgb' => 'FFFFFF'],
@@ -124,10 +138,10 @@ class MaterialPhysicalInventoryExport implements FromCollection, WithHeadings, W
             ],
         ]);
 
-        $sheet->getRowDimension(1)->setRowHeight(28);
+        $sheet->getRowDimension(2)->setRowHeight(28);
 
         // Bordes completos para facilitar la lectura y el marcado a mano
-        $sheet->getStyle("A1:J{$lastRow}")->applyFromArray([
+        $sheet->getStyle("A2:J{$lastRow}")->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => Border::BORDER_THIN,
