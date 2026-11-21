@@ -4,6 +4,7 @@ namespace App\Exports;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -20,8 +21,10 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
  * - El saldo se calcula sobre TODO el historial; los filtros (proyecto, fechas) solo recortan las filas que se muestran,
  *   asi el saldo de cada fila sigue siendo el real del almacen en ese momento.
  * Mismo formato que MaterialPhysicalInventoryExport.
+ *
+ * WithStrictNullComparison: sin esto, Laravel Excel trata el 0 como "vacio" (0 == null) y deja la celda en blanco.
  */
-class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
+class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize, WithStyles, WithStrictNullComparison
 {
 	/** Tipos que suman al almacen: 3 CRE, 9 conciliacion 221, 18 devolucion del constructor, 19 depuracion pendiente en CRE */
 	const IN_TYPES = [3, 9, 18, 19];
