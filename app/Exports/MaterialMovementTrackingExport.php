@@ -13,8 +13,13 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 /**
- * Seguimiento (tracking) de movimientos de material: una fila por material en cada documento de entrada o salida de almacen.
- * Mismo formato que MaterialPhysicalInventoryExport. Usa los mismos tipos de movimiento que el calculo de stock.
+ * Kardex de materiales: cada movimiento de entrada o salida de almacen con el saldo acumulado.
+ *
+ * - El saldo es el stock del almacen (todos los proyectos juntos) por material y estado; la tension no se toma en cuenta.
+ * - Orden: codigo de material (numerico), estado, fecha, entradas antes que salidas el mismo dia, ID del movimiento.
+ * - El saldo se calcula sobre TODO el historial; los filtros (proyecto, fechas) solo recortan las filas que se muestran,
+ *   asi el saldo de cada fila sigue siendo el real del almacen en ese momento.
+ * Mismo formato que MaterialPhysicalInventoryExport.
  */
 class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
 {
@@ -39,58 +44,88 @@ class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMap
 		$this->dateTo = $dateTo;
 	}
 
+	/**
+	 * SQL completo y sus parametros (se puede ejecutar en phpMyAdmin cambiando los ? por los valores). Requiere MariaDB 10.2+ (funciones de ventana).
+	 * @return array{0:string,1:array}
+	 */
+	public function sql(): array
+	{
+		$in = implode(',', array_map('intval', self::IN_TYPES));
+		$all = implode(',', array_map('intval', array_merge(self::IN_TYPES, self::OUT_TYPES)));
+
+		$innerBindings = [];
+		$innerWhere = '';
+		if ($this->materialId !== null)
+		{
+			// el material se puede filtrar adentro: el saldo se calcula por material, no se altera
+			$innerWhere = ' AND prm.material_id_prm = ?';
+			$innerBindings[] = $this->materialId;
+		}
+
+		// Proyecto, tipo, estado y tension salen de subconsultas de una sola fila: si una tabla maestra tuviera ids repetidos
+		// no se multiplican las lineas. Estado nulo equivale a Indefinido (4).
+		// Serebo no borra en cascada las lineas de un documento borrado: el filtro de msu es imprescindible.
+		$inner = "
+			SELECT
+				mat.code_mat, mat.description_mat, mat.unit_of_measurement_mat,
+				(SELECT mst.code_mst FROM mat_material_status mst WHERE mst.id_mst = COALESCE(prm.status_id_prm, 4) LIMIT 1) AS code_mst,
+				DATE(msu.entry_date_msu) AS entry_day,
+				msu.project_id_msu AS project_id,
+				(SELECT pro.code_pro FROM wfl_projects pro WHERE pro.id_pro = msu.project_id_msu LIMIT 1) AS code_pro,
+				msu.id_msu, prm.id_prm,
+				(SELECT mqt.name_mqt FROM mat_materials_summary_types mqt WHERE mqt.id_mqt = msu.summary_type_id_msu LIMIT 1) AS name_mqt,
+				CASE WHEN msu.summary_type_id_msu IN ($in) THEN 1 ELSE 0 END AS is_in,
+				CASE WHEN msu.summary_type_id_msu IN ($in) THEN prm.quantity_prm ELSE -prm.quantity_prm END AS signed_qty,
+				SUM(CASE WHEN msu.summary_type_id_msu IN ($in) THEN prm.quantity_prm ELSE -prm.quantity_prm END) OVER (
+					PARTITION BY prm.material_id_prm, COALESCE(prm.status_id_prm, 4)
+					ORDER BY DATE(msu.entry_date_msu), CASE WHEN msu.summary_type_id_msu IN ($in) THEN 0 ELSE 1 END, msu.id_msu, prm.id_prm
+					ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+				) AS saldo
+			FROM mat_materials_summary msu
+			JOIN mat_projects_materials prm
+				ON prm.materials_summary_id_prm = msu.id_msu
+				AND prm.deleted_prm != 1 AND prm.deleted_at IS NULL
+			LEFT JOIN mat_materials mat ON mat.id_mat = prm.material_id_prm
+			WHERE msu.deleted_msu != 1 AND msu.deleted_at IS NULL
+				AND msu.summary_type_id_msu IN ($all)
+				$innerWhere";
+
+		// Los filtros de proyecto y fechas van AFUERA del calculo del saldo
+		$outerBindings = [];
+		$outerWhere = '';
+		if ($this->projectId !== null)
+		{
+			$outerWhere .= ' AND k.project_id = ?';
+			$outerBindings[] = $this->projectId;
+		}
+		if ($this->dateFrom !== null)
+		{
+			$outerWhere .= ' AND k.entry_day >= ?';
+			$outerBindings[] = $this->dateFrom;
+		}
+		if ($this->dateTo !== null)
+		{
+			$outerWhere .= ' AND k.entry_day <= ?';
+			$outerBindings[] = $this->dateTo;
+		}
+
+		$sql = "
+			SELECT k.*,
+				ROW_NUMBER() OVER (ORDER BY CAST(k.code_mat AS UNSIGNED), k.code_mat, k.code_mst, k.entry_day, k.is_in DESC, k.id_msu, k.id_prm) AS rn
+			FROM ($inner) k
+			WHERE 1 = 1 $outerWhere";
+
+		return [$sql, array_merge($innerBindings, $outerBindings)];
+	}
+
 	public function query()
 	{
-		$query = DB::table('mat_materials_summary as msu')
-			->join('mat_projects_materials as prm', function ($join) {
-				$join->on('prm.materials_summary_id_prm', '=', 'msu.id_msu')
-					->where('prm.deleted_prm', '!=', 1)
-					->whereNull('prm.deleted_at');
-			})
-			->join('mat_materials_summary_types as mqt', 'mqt.id_mqt', '=', 'msu.summary_type_id_msu')
-			->leftJoin('mat_materials as mat', 'mat.id_mat', '=', 'prm.material_id_prm')
-			->leftJoin('wfl_projects as pro', 'pro.id_pro', '=', 'msu.project_id_msu')
-			// estado y tension nulos equivalen a Indefinido (4)
-			->leftJoin('mat_material_status as mst', function ($join) {
-				$join->whereRaw('mst.id_mst = COALESCE(prm.status_id_prm, 4)');
-			})
-			->leftJoin('mat_material_tensions as mte', function ($join) {
-				$join->whereRaw('mte.id_mte = COALESCE(prm.tension_id_prm, 4)');
-			})
-			// Serebo no borra en cascada las lineas de un documento borrado: el filtro de msu es imprescindible
-			->where('msu.deleted_msu', '!=', 1)
-			->whereNull('msu.deleted_at')
-			->whereIn('msu.summary_type_id_msu', array_merge(self::IN_TYPES, self::OUT_TYPES));
+		[$sql, $bindings] = $this->sql();
 
-		if ($this->projectId !== null)
-			$query->where('msu.project_id_msu', $this->projectId);
-		if ($this->materialId !== null)
-			$query->where('prm.material_id_prm', $this->materialId);
-		if ($this->dateFrom !== null)
-			$query->whereDate('msu.entry_date_msu', '>=', $this->dateFrom);
-		if ($this->dateTo !== null)
-			$query->whereDate('msu.entry_date_msu', '<=', $this->dateTo);
-
-		return $query
-			->select(
-				'mat.code_mat',
-				'mat.description_mat',
-				'mat.unit_of_measurement_mat',
-				'msu.entry_date_msu',
-				'pro.code_pro',
-				'mqt.name_mqt',
-				'msu.summary_type_id_msu as type_id',
-				'msu.id_msu',
-				'prm.quantity_prm',
-				'mst.code_mst',
-				'mte.code_mte'
-			)
-			// historial de cada material en orden cronologico (el orden completo es necesario para que la lectura por lotes sea estable)
-			->orderBy('mat.description_mat')
-			->orderBy('mat.id_mat')
-			->orderBy('msu.entry_date_msu')
-			->orderBy('msu.id_msu')
-			->orderBy('prm.id_prm');
+		return DB::query()
+			->fromRaw("($sql) as t", $bindings)
+			->select('t.*')
+			->orderBy('t.rn');
 	}
 
 	public function headings(): array
@@ -99,36 +134,31 @@ class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMap
 			'Código',
 			'Nombre del Material',
 			'U.M.',
+			'Estado',
 			'Fecha',
 			'Proyecto',
+			'ID Mov.',
 			'Movimiento',
 			'Tipo',
-			'ID Mov.',
 			'Cantidad',
-			'Cantidad (+/-)',
-			'Estado',
-			'Tensión',
+			'Saldo',
 		];
 	}
 
 	public function map($row): array
 	{
-		$isIn = in_array((int)$row->type_id, self::IN_TYPES, true);
-		$quantity = (float)$row->quantity_prm;
-
 		return [
 			$row->code_mat,
 			$row->description_mat,
 			$row->unit_of_measurement_mat ?? 'PZA',
-			$row->entry_date_msu ? date('d/m/Y', strtotime($row->entry_date_msu)) : '',
-			$row->code_pro ?? '',
-			$row->name_mqt,
-			$isIn ? 'Entrada' : 'Salida',
-			$row->id_msu,
-			$quantity,
-			$isIn ? $quantity : -$quantity,
 			$row->code_mst ?? '',
-			strtolower((string)$row->code_mte) === 'undefined' ? 'Indefinido' : ($row->code_mte ?? ''),
+			$row->entry_day ? date('d/m/Y', strtotime($row->entry_day)) : '',
+			$row->code_pro ?? '',
+			$row->id_msu,
+			$row->name_mqt,
+			$row->is_in ? 'Entrada' : 'Salida',
+			(float)$row->signed_qty,   // entradas en positivo, salidas en negativo
+			(float)$row->saldo,        // se muestra sin signo negativo (ver formato en styles)
 		];
 	}
 
@@ -137,7 +167,7 @@ class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMap
 		$lastRow = $sheet->getHighestRow();
 
 		// Estilos para encabezados (igual que MaterialPhysicalInventoryExport)
-		$sheet->getStyle('A1:L1')->applyFromArray([
+		$sheet->getStyle('A1:K1')->applyFromArray([
 			'font' => [
 				'bold' => true,
 				'color' => ['rgb' => 'FFFFFF'],
@@ -157,7 +187,7 @@ class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMap
 		$sheet->getRowDimension(1)->setRowHeight(28);
 
 		// Bordes completos para facilitar la lectura
-		$sheet->getStyle("A1:L{$lastRow}")->applyFromArray([
+		$sheet->getStyle("A1:K{$lastRow}")->applyFromArray([
 			'borders' => [
 				'allBorders' => [
 					'borderStyle' => Border::BORDER_THIN,
@@ -169,17 +199,22 @@ class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMap
 			],
 		]);
 
-		$sheet->getStyle("I2:J{$lastRow}")->getNumberFormat()->setFormatCode('#,##0.00');
-		$sheet->getStyle("D2:D{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+		// Columnas centradas como en el modelo: Código, U.M., Estado, Fecha, Proyecto, ID Mov., Tipo
+		foreach (['A', 'C', 'D', 'E', 'F', 'G', 'I'] as $col) {
+			$sheet->getStyle("{$col}2:{$col}{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+		}
+
+		// Cantidad con signo; Saldo sin signo negativo (la segunda seccion del formato muestra los negativos sin "-")
+		$sheet->getStyle("J2:J{$lastRow}")->getNumberFormat()->setFormatCode('#,##0.00');
+		$sheet->getStyle("K2:K{$lastRow}")->getNumberFormat()->setFormatCode('#,##0.00;#,##0.00');
 
 		// Altura de fila cómoda, igual que el inventario fisico
 		for ($r = 2; $r <= $lastRow; $r++) {
 			$sheet->getRowDimension($r)->setRowHeight(22);
 		}
 
-		// Filtros y encabezado fijo para recorrer un historial largo
-		$sheet->setAutoFilter("A1:L{$lastRow}");
-		$sheet->freezePane('A2');
+		// Filtro automático en el encabezado
+		$sheet->setAutoFilter("A1:K{$lastRow}");
 
 		return [];
 	}
