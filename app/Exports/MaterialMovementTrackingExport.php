@@ -33,6 +33,11 @@ class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMap
 	private ?string $dateFrom;
 	private ?string $dateTo;
 
+	// seguimiento de filas para resaltar el inicio de cada grupo material + estado (map() se llama fila por fila, en orden)
+	private int $rowNumber = 1; // la fila 1 es el encabezado
+	private ?string $previousGroup = null;
+	private array $groupStartRows = [];
+
 	/**
 	 * Todos los filtros son opcionales. Fechas en Y-m-d. Sin filtros: todos los proyectos y materiales.
 	 */
@@ -147,6 +152,14 @@ class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMap
 
 	public function map($row): array
 	{
+		$this->rowNumber++;
+		$group = $row->code_mat . '|' . $row->code_mst;
+		if ($group !== $this->previousGroup)
+		{
+			$this->groupStartRows[] = $this->rowNumber;
+			$this->previousGroup = $group;
+		}
+
 		return [
 			$row->code_mat,
 			$row->description_mat,
@@ -199,14 +212,24 @@ class MaterialMovementTrackingExport implements FromQuery, WithHeadings, WithMap
 			],
 		]);
 
+		// Resalta la primera fila de cada grupo material + estado (donde el saldo vuelve a empezar), como en el modelo
+		foreach ($this->groupStartRows as $r) {
+			$sheet->getStyle("A{$r}:K{$r}")->applyFromArray([
+				'fill' => [
+					'fillType' => Fill::FILL_SOLID,
+					'startColor' => ['rgb' => 'DCE6F1'],
+				],
+			]);
+		}
+
 		// Columnas centradas como en el modelo: Código, U.M., Estado, Fecha, Proyecto, ID Mov., Tipo
 		foreach (['A', 'C', 'D', 'E', 'F', 'G', 'I'] as $col) {
 			$sheet->getStyle("{$col}2:{$col}{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 		}
 
-		// Cantidad con signo; Saldo sin signo negativo (la segunda seccion del formato muestra los negativos sin "-")
+		// Cantidad con signo. Saldo sin signo negativo: formato de tres secciones (positivo; negativo sin "-"; cero como 0.00)
 		$sheet->getStyle("J2:J{$lastRow}")->getNumberFormat()->setFormatCode('#,##0.00');
-		$sheet->getStyle("K2:K{$lastRow}")->getNumberFormat()->setFormatCode('#,##0.00;#,##0.00');
+		$sheet->getStyle("K2:K{$lastRow}")->getNumberFormat()->setFormatCode('#,##0.00;#,##0.00;0.00');
 
 		// Altura de fila cómoda, igual que el inventario fisico
 		for ($r = 2; $r <= $lastRow; $r++) {
